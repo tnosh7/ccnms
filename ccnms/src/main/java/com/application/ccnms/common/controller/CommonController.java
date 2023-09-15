@@ -12,8 +12,16 @@ public class CommonController {
 		return new ModelAndView("/common/main");
 	}
 	
-	@GetMapping("/topic") 
-	public ModelAndView topic() {
-		return new ModelAndView("/common/topic");
+	@GetMapping("/blog") 
+	public ModelAndView blog() {
+		return new ModelAndView("/common/blog");
+	}
+	@GetMapping("/register") 
+	public ModelAndView register() {
+		return new ModelAndView("/common/register");
+	}
+	@GetMapping("/login") 
+	public ModelAndView login() {
+		return new ModelAndView("/common/login");
 	}
 }

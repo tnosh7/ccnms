@@ -49,22 +49,19 @@
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <img src="img/language.png" alt="">
-                <div>English</div>
-                <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
-                </ul>
+                <div class="header__top__right__auth">
+                                <a href="#"><button type="button" class="btn btn-outline-dark">login</button></a>
+                            </div>
             </div>
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
-            </div>
+                 <div class="header__top__right__language">
+                                <a href="#"><button type="button" class="btn btn-outline-success">sign up</button></a>
+                            </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
+                <li><a href="./shop-grid.html">Digging</a></li>
+                <li><a href="#">Shop</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Shop Details</a></li>
                         <li><a href="./shoping-cart.html">Shoping Cart</a></li>
@@ -72,8 +69,8 @@
                         <li><a href="./blog-details.html">Blog Details</a></li>
                     </ul>
                 </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="./blog.html">Best</a></li>
+                <li><a href="./contact.html">Rank</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
