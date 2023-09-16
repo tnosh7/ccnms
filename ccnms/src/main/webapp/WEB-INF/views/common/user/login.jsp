@@ -2,6 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<body>
  <section class="checkout spad">
         <div class="container">
             <div class="row">
@@ -22,9 +29,9 @@
                                         <input type="text">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="checkout__input">
-                                        <p><span>[필수]아이디를 입력해주세요</span></p>
+                                        <p><span><input type="hidden">[필수]아이디를 입력해주세요</span></p>
                                         <input type="button" value="아이디중복체크">
                                     </div>
                                 </div>
@@ -35,8 +42,15 @@
                             </div>
                             <div class="checkout__input">
                                 <p>주소<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
-                                <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
+                                  <div class="col-lg-6 col-md-6">
+	                                <div class="checkout__form__input">
+	                                 <input type="text" id="zipcode" name="zipcode" value="${orderer.zipcode }" style="width: 40%;">
+                                    <input type="button" value="주소 검색" onclick="execDaumPostcode();" style="width: 30%; padding-left: 0">
+	                                    <input type="text" name="roadAddress" value="${order.roadAddress }" >
+	                                    <input type="text" name="jibunAddress" value="${order.jibunAddress }" >
+	                                    <input type="text" name="namujiAddress" value="${order.namujiAddress }" >
+	                                </div>
+                           		 </div>
                             </div>
                             <div class="checkout__input">
                                 <p>이름<span>*</span></p>
@@ -46,23 +60,12 @@
                                 <p>생년월일<span>*</span></p>
                                 <input type="text" placeholder="예) 010916 6자리 입력">
                             </div>
-                            <div class="checkout__input">
-								<p>이메일<span>*</span></p>
-									<input type="email" name="email" style="text-align:left; width:300px;">
-									<select name="emailDomain" style="text-align:right">
-										<option selected="selected">직접 입력(위치조정할것?)</option>
-										<option>@ModuDigging.com</option>
-										<option>@daum.net</option>
-										<option>@gmail.com</option>
-									</select>
-                                <input type="button" value="인증요청">
-                            </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-2">
                                     <div class="checkout__input">
                                       <p>국적선택<span>*</span></p>
                                         <select name="hpNationNo"><!--var로 집어넣을것임 너무 만ㅎ음 -->
-                                        	<option>대한민국 +82</option>
+                                        	<option selected="selected">대한민국 +82</option>
                                         	<option>일본 +</option>
                                         	<option>중국 +82</option>
                                         	<option>미국 +1</option>
@@ -70,21 +73,37 @@
                                       
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-10">
                                     <div class="checkout__input">
-                                        <p>핸드폰 번호<span>*</span></p>
+                                        <p>&emsp;핸드폰 번호<span>*</span></p>
 										<input type="text" placeholder="010-0000-0000">
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
-                                    문자 수신 동의
-                                    <input type="checkbox" id="acc">
-                                    <span class="checkmark"></span>
-                                </label>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                      	<p>이메일<span>*</span></p>
+									<span><input type="email" name="email" style="text-align:left; width:350px;"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                    	<p><span>*</span></p>
+                                            <select name="emailDomain"> 
+												<option selected="selected">직접 입력</option>
+												<option>@naver.com</option>
+												<option>@daum.net</option>
+												<option>@gmail.com</option>
+										    </select>
+                                    </div>
+                                </div>
                             </div>
-                            <p>없애면 레이아웃 망가짐 뭐넣을지 생각할것(아마도 프로필이미지)</p>
+                            <div class="checkout__input">
+                            </div>
+                            <div class="checkout__input__checkbox">
+                            </div>
+                            <p></p>
                             <div class="checkout__input">
                                 <p>프로필 소개 설정<span>*</span></p>
                                 <input type="text"
@@ -227,3 +246,5 @@
             </div>
         </div>
     </section>
+</body>
+</html>
