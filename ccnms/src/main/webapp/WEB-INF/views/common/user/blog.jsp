@@ -39,17 +39,17 @@
                             </form>
                         </div>
                         <div class="blog__sidebar__item">
-                            <h4>Categories</h4>
+                            <h4>More Digging</h4>
                             <ul>
-                                <li><a href="#">All</a></li>
-                                <li><a href="#">Beauty (20)</a></li>
-                                <li><a href="#">Food (5)</a></li>
-                                <li><a href="#">Life Style (9)</a></li>
-                                <li><a href="#">Travel (10)</a></li>
+                                <li><a href="#">전체</a></li>
+                                <li><a href="#">야구</a></li>
+                                <li><a href="#">축구</a></li>
+                                <li><a href="#">농구</a></li>
+                                <li><a href="#">etc</a></li>
                             </ul>
                         </div>
                         <div class="blog__sidebar__item">
-                            <h4>Recent News</h4>
+                            <h4>인기많은 게시물</h4>
                             <div class="blog__sidebar__recent">
                                 <a href="#" class="blog__sidebar__recent__item">
                                     <div class="blog__sidebar__recent__item__pic">
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         <div class="blog__sidebar__item">
-                            <h4>Search By</h4>
+                            <h4>관련 태그</h4>
                             <div class="blog__sidebar__item__tags">
                                 <a href="#">Apple</a>
                                 <a href="#">Beauty</a>

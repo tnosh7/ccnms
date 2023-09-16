@@ -21,7 +21,7 @@
 	 		<put-attribute name="title" value="토픽"/>	
 	 	</definition>
 	 	<definition name="/common/login" extends="common">
-	 		<put-attribute name="body" value="/WEB-INF/views/common/user/.jsp"/>
+	 		<put-attribute name="body" value="/WEB-INF/views/common/user/login.jsp"/>
 	 		<put-attribute name="title" value="토픽"/>	
 	 	</definition>
 	 	
