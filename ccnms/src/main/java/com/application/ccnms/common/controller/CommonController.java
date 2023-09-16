@@ -24,4 +24,8 @@ public class CommonController {
 	public ModelAndView login() {
 		return new ModelAndView("/common/login");
 	}
+	@GetMapping("/shop") 
+	public ModelAndView shop() {
+		return new ModelAndView("/common/shop");
+	}
 }

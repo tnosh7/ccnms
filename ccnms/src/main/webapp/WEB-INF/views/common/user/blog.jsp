@@ -83,12 +83,11 @@
                         <div class="blog__sidebar__item">
                             <h4>관련 태그</h4>
                             <div class="blog__sidebar__item__tags">
-                                <a href="#">Apple</a>
-                                <a href="#">Beauty</a>
-                                <a href="#">Vegetables</a>
-                                <a href="#">Fruit</a>
-                                <a href="#">Healthy Food</a>
-                                <a href="#">Lifestyle</a>
+                     			 <button type="button" class="btn btn-outline-info">연예</button>	
+                     			 <button type="button" class="btn btn-outline-info">게임</button>	
+                     			 <button type="button" class="btn btn-outline-info">비즈니스</button>	
+                     			 <button type="button" class="btn btn-outline-info">만화</button>	
+                     			 <button type="button" class="btn btn-outline-info">OTT</button>	
                             </div>
                         </div>
                     </div>
@@ -108,7 +107,10 @@
                                     <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
                                     <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
                                         quaerat </p>
-                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                    <ul>
+                                    	<li><img src="${contextPath }/resources/bootstrap/img/Like.PNG" width="20">Like Cnt추가</li>
+                                    	<li><i class="fa fa-comment-o"></i>댓글 Cnt 추가</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

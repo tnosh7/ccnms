@@ -29,10 +29,10 @@
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><button type="button" class="btn btn-outline-dark">login</button></a>
+                                <a href="${contextPath }/login"><button type="button" class="btn btn-outline-dark">login</button></a>
                             </div>
                             <div class="header__top__right__language">
-                                <a href="#"><button type="button" class="btn btn-outline-success">sign up</button></a>
+                                <a href="${contextPath }/register"><button type="button" class="btn btn-outline-success">sign up</button></a>
                             </div>
                         </div>
                     </div>
@@ -49,9 +49,9 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li><a href="./shop-grid.html">Digging</a></li>
-                            <li><a href="#">Shop</a>
+                            <li><a href="${contextPath }/">Home</a></li>
+                            <li><a href="./shop-grid.html">BEST</a></li>
+                            <li><a href="${contextPath }/shop">Shop</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
                                     <li><a href="./shoping-cart.html">Shoping Cart</a></li>
@@ -59,8 +59,8 @@
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li class="active"><a href="./blog.html">Best</a></li>
-                            <li><a href="./contact.html">Rank</a></li>
+                            <li class="active"><a href="${contextPath }/blog">DIGGING</a></li>
+                            <li><a href="./contact.html">RANK</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -69,8 +69,8 @@
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                             <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                       		<li><a href="#"><img src="${contextPath }/resources/bootstrap/img/message.png"></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
                     </div>
                 </div>
             </div>
