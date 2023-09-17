@@ -49,9 +49,9 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="${contextPath }/">Home</a></li>
-                            <li><a href="./shop-grid.html">BEST</a></li>
-                            <li><a href="${contextPath }/shop">Shop</a>
+                            <li><a href="${contextPath }/">홈</a></li>
+                            <li><a href="./shop-grid.html">베스트</a></li>
+                            <li><a href="${contextPath }/shop">상점</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
                                     <li><a href="./shoping-cart.html">Shoping Cart</a></li>
@@ -59,8 +59,8 @@
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li class="active"><a href="${contextPath }/blog">DIGGING</a></li>
-                            <li><a href="./contact.html">RANK</a></li>
+                            <li class="active"><a href="${contextPath }/blog">디깅</a></li>
+                            <li><a href="${contextPath }/rank">디깅랭킹</a></li>
                         </ul>
                     </nav>
                 </div>

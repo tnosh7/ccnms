@@ -8,21 +8,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <section class="breadcrumb-section set-bg">
+<section class="breadcrumb-section set-bg" data-setbg="${contextPath}/resources/bootstrap/img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                    	<h3>랭킹</h3>
+                        <h2>랭킹</h2>
                         <div class="breadcrumb__option">
-                            <span>넣기</span>
+                            <a href="./index.html"></a>
+                            <span></span>
                         </div>
                     </div>
-          </div>
-          </div>
-          </div>
-          </section>  
-
+                </div>
+            </div>
+        </div>
+    </section>
  <section class="shoping-cart spad">
         <div class="container">
             <div class="row">
@@ -31,7 +31,7 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product">
+                                    <th class="shoping__product" colspan="2">
                                     	<select name="sort">
                                     		<option>정렬</option>
                                     		<option>정렬</option>
@@ -39,7 +39,7 @@
                                     		<option>정렬</option>
                                     	</select>
                                     </th>
-                                    <th width="25">
+                                    <th width="25" align="left">
                                     </th>
                                 </tr>
                             </thead>
@@ -48,13 +48,13 @@
                                 <tr>
                                     <td class="shoping__cart__item">
                                         <h5>${i*2-1}</h5>&emsp;&emsp;
-                                        <img src="${contextPath }/resources/bootstrap/img/cart/cart-1.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
+                                        <a href="#"><img src="${contextPath }/resources/bootstrap/img/cart/cart-1.jpg" alt=""></a>
+                                        <h5><a href="#">Vegetable’s Package</a></h5>
                                     </td>
                                     <td class="shoping__cart__item" colspan="5">
                                         <h5>${i*2 }</h5>&emsp;&emsp;
-                                        <img src="${contextPath }/resources/bootstrap/img/cart/cart-1.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
+                                         <a href="#"><img src="${contextPath }/resources/bootstrap/img/cart/cart-1.jpg" alt=""></a>
+                                        <h5> <a href="#">Vegetable’s Package</a></h5>
                                     </td>
                                 </tr>
                             	</c:forEach>
