@@ -28,4 +28,8 @@ public class CommonController {
 	public ModelAndView shop() {
 		return new ModelAndView("/common/shop");
 	}
+	@GetMapping("/rank") 
+	public ModelAndView rank() {
+		return new ModelAndView("/common/rank");
+	}
 }

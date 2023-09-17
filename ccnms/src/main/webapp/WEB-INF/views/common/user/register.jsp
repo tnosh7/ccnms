@@ -44,6 +44,26 @@
 	        }
 	    }).open();
 	}
+	
+	
+	$('#mail-Check-Btn').click(function() {
+		const eamil = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기!
+		console.log('완성된 이메일 : ' + eamil); // 이메일 오는지 확인
+		const checkInput = $('.mail-check-input') // 인증번호 입력하는곳 
+		
+		$.ajax({
+			type : 'get',
+			url : '<c:url value ="/user/mailCheck?email="/>'+eamil, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+			success : function (data) {
+				console.log("data : " +  data);
+				checkInput.attr('disabled',false);
+				code =data;
+				alert('인증번호가 전송되었습니다.')
+			}			
+		}); // end ajax
+	}); // end send eamil
+	
+	
 </script>
 <body>
 	<section class="breadcrumb-section set-bg" data-setbg="${contextPath}/resources/bootstrap/img/breadcrumb.jpg">
@@ -65,36 +85,36 @@
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-lg-12">
-	                    <h6><span><img src="${contextPath }/resources/bootstrap/img/cap.PNG" width="20"></span> 현재 모두디깅 회원이신가요? <a href="#">로그인하기</a>
+	                    <h6><span><img src="${contextPath }/resources/bootstrap/img/cap.PNG" width="20"></span> 현재 모두디깅 회원이신가요? <a href="${contextPath }/login"><strong>로그인하기</strong></a>
 	                    </h6>
 	                </div>
 	            </div>
 	            <div class="checkout__form">
-	                <h4>Let's Digging!</h4>
-	                <form action="#">
+	                <h4>환영합니다!</h4>
+	                <form>
 	                    <div class="row">
 	                        <div class="col-lg-8 col-md-6">
 	                            <div class="row">
 	                                <div class="col-lg-6">
 	                                    <div class="checkout__input">
 	                                        <p>아이디<span>*</span></p>
-	                                        <input type="text">
+	                                        <input type="text" id="userId" placeholder="5~20자 이내로 적어주세요." required/>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-4">
 	                                    <div class="checkout__input">
-	                                        <p><span><input type="hidden">[필수]아이디를 입력해주세요</span></p>
-	                                        <input type="button" value="아이디중복체크">
+	                                        <p><span id="userIdCheckWarn">[필수]아이디를 입력해주세요</span></p>
+	                                        <input type="button" id="userIdCheck" value="아이디중복체크" onclick=""/>
 	                                    </div>
 	                                </div>
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>비밀번호<span>*</span></p>
-	                                <input type="text" placeholder="8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.">
+	                                <input type="text" id="passwd" placeholder="8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요." required/>
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>주소<span>*</span></p>
-	                                  <div class="col-lg-6 col-md-8">
+	                                  <div class="col-lg-12 col-md-8">
 		                                <div class="checkout__form__input">
 		                                	<p><input type="text" id="zipcode" placeholder="우편번호" name="zipcode" value="${orderer.zipcode }" style="width: 40%;">
 	                                    		<input type="button" value="주소 검색" onclick="javascript:execDaumPostcode()" style="width: 30%; padding-left: 0"></p>
@@ -106,11 +126,11 @@
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>이름<span>*</span></p>
-	                                <input type="text">
+	                                <input type="text" name="userNM"> 
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>생년월일<span>*</span></p>
-	                                <input type="text" placeholder="예) 010916 6자리 입력">
+	                                <input type="text" name="userBirthDT" placeholder="예) 010916 6자리 입력" required>
 	                            </div>
 	                            <div class="row">
 	                                <div class="col-lg-3">
@@ -127,7 +147,7 @@
 	                                <div class="col-lg-9">
 	                                    <div class="checkout__input">
 	                                        <p>핸드폰 번호<span>*</span></p>
-											<p><input type="text" placeholder="010-0000-0000"></p>
+											<p><input type="text" name="hp" placeholder="010-0000-0000" required></p>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -135,12 +155,12 @@
 	                                <div class="col-lg-6">
 	                                    <div class="checkout__input">
 	                                      	<p>이메일<span>*</span></p>
-										<span><input type="email" name="email" style="text-align:left; width:350px;"></span>
+										<span><input type="email" name="email" style="text-align:left; width:350px;" required></span>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-6">
 	                                    <div class="checkout__input">
-	                                    	<p><span>*</span></p>
+	                                    	<p><span id="mail-check-warn">*</span></p>
 	                                            <select name="emailDomain"> 
 													<option selected="selected">직접 입력</option>
 													<option>@naver.com</option>
@@ -150,24 +170,30 @@
 	                                    </div>
 	                                </div>
 	                            </div>
-	                            <div class="checkout__input">
+	                             <div class="row">
+	                                <div class="col-lg-6">
+	                                    <div class="checkout__input">
+										<span><input type="email" name="emailCheck" placeholder="인증번호를 입력하세요" disabled="disabled"></span>
+	                                    </div>
+	                                </div>
+	                                <div class="col-lg-6">
+	                                    <div class="checkout__input">
+	                                   		<input type="button" value="이메일인증하기">
+	                                    </div>
+	                                </div>
 	                            </div>
-	                            <div class="checkout__input__checkbox">
-	                            </div>
-	                            <p></p>
 	                            <div class="checkout__input">
-	                                <p>프로필 소개 설정<span>*</span></p>
-	                                <input type="text"
-	                                    placeholder="자기소개를 입력하세요.">
+	                                <p>[선택] 프로필 소개 입력<span>*</span></p>
+	                                <input type="text" name="profileIntroduce" placeholder="20자이내로 자기소개를 입력하세요." maxlength="20">
 	                            </div>
 	                        </div>
 	                        <div class="col-lg-4 col-md-6">
 	                            <div class="checkout__order">
 	                                <h4>개인 정보 정책</h4>
 	                              	<p> 
-										<input type="checkbox"> 모두디깅 이용약관, 개인정보 수집 및 이용, 개인정보 수집 및 이용(선택), 프로필 공개(선택)에 모두 동의합니다
+										<input type="checkbox" id="allYN" name="agreement" value="Y"> 모두디깅 이용약관, 개인정보 수집 및 이용, 개인정보 수집 및 이용(선택), 프로필 공개(선택)에 모두 동의합니다
 								   	</p>
-										<p><input type="checkbox"> [필수] 모두디깅 이용약관
+										<p><input type="checkbox" id="modudiggingYN" name="agreement" value="Y"> [필수] 모두디깅 이용약관
 											&emsp;<textarea class="form-control" id="exampleTextarea" rows="5" cols="30">여러분을 환영합니다. 모두디깅 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 모두디깅 서비스의 이용과 관련하여 모두디깅 서비스를 제공하는 모두디깅 주식회사(이하 ‘모두디깅’)와 이를 이용하는 모두디깅 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 모두디깅 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
 								모두디깅 서비스를 이용하시거나 모두디깅 서비스 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 확인하거나 동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다. 다양한 모두디깅 서비스를 즐겨보세요. 모두디깅는 www.ModuDigging.com을 비롯한 모두디깅 도메인의 웹사이트 및 응용프로그램(어플리케이션, 앱)을 통해 정보 검색, 다른 이용자와의 커뮤니케이션, 콘텐츠 제공, 상품 쇼핑 등 여러분의 생활에 편리함을 더할 수 있는 다양한 서비스를 제공하고 있습니다.
 								여러분은 PC, 휴대폰 등 인터넷 이용이 가능한 각종 단말기를 통해 각양각색의 모두디깅 서비스를 자유롭게 이용하실 수 있으며, 개별 서비스들의 구체적인 내용은 각 서비스 상의 안내, 공지사항, 모두디깅 웹고객센터(이하 ‘고객센터’) 도움말 등에서 쉽게 확인하실 수 있습니다. 모두디깅는 기본적으로 여러분 모두에게 동일한 내용의 서비스를 제공합니다. 다만, '청소년보호법' 등 관련 법령이나 기타 개별 서비스 제공에서의 특별한 필요에 의해서 연령 또는 일정한 등급을 기준으로 이용자를 구분하여 제공하는 서비스의 내용, 이용 시간, 이용 횟수 등을 다르게 하는 등 일부 이용을 제한하는 경우가 있습니다. 자세한 내용은 역시 각 서비스 상의 안내, 공지사항, 고객센터 도움말 등에서 확인하실 수 있습니다.
@@ -221,7 +247,7 @@
 								공지 일자: 2023년 9월 16일
 								적용 일자: 2023년 9월 16일
 								모두디깅 서비스와 관련하여 궁금하신 사항이 있으시면 고객센터(대표번호: 0000-0000/ 평일 09:00~18:00)로 문의 주시기 바랍니다.</textarea></p> 
-										<p><input type="checkbox"> [필수] 개인정보 수집 및 이용안내
+										<p><input type="checkbox" id="userInfoYN" name="agreement" value="Y"> [필수] 개인정보 수집 및 이용안내
 											&emsp;<textarea class="form-control" id="exampleTextarea" rows="5" cols="30">개인정보보호법에 따라 모두디깅에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 								1. 수집하는 개인정보
 								이용자는 회원가입을 하지 않아도 정보 검색, 뉴스 보기 등 대부분의 모두디깅 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 메일, 캘린더, 카페, 블로그 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 모두디깅는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
@@ -276,8 +302,8 @@
 								이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.</textarea></p> 
 	                                <div class="checkout__input__checkbox">
 	                                    <label for="acc-or">
-	                                        [선택] 개인정보 수집 및 이용
-	                                        <input type="checkbox" id="acc-or">
+	                                        [선택] 이메일 수신 및 이용
+	                                        <input type="checkbox" id="userEmailYN" name="agreement" value="Y">
 	                                        <span class="checkmark"></span>
 	                                    </label>
 	                                </div>
@@ -285,7 +311,7 @@
 	                                <div class="checkout__input__checkbox">
 	                                    <label for="payment">
 	                                        [선택] 프로필 공개 동의하기 
-	                                        <input type="checkbox" id="payment">
+	                                        <input type="checkbox" id="userProfileYN" name="agreement" value="Y">
 	                                        <span class="checkmark"></span>
 	                                    </label>
 	                                </div>
