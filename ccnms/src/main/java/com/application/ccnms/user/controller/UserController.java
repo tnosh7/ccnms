@@ -22,6 +22,10 @@ public class UserController {
 	public ModelAndView registerUser() {
 		return new ModelAndView("/user/registerUser");
 	}
+	@GetMapping("/login")
+	public ModelAndView login() {
+		return new ModelAndView("/user/login");
+	}
 
 	
 	

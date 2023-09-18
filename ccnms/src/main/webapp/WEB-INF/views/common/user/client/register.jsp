@@ -72,7 +72,7 @@
 	        }
 	    }).open();
 	}
-	
+
 	
 
 	
@@ -98,7 +98,7 @@
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-lg-12">
-	                    <h6><span><img src="${contextPath }/resources/bootstrap/img/cap.PNG" width="20"></span> 현재 모두디깅 회원이신가요? <a href="${contextPath }/login"><strong>로그인하기</strong></a>
+	                    <h6><span><img src="${contextPath }/resources/bootstrap/img/cap.PNG" width="20"></span> 현재 모두디깅 회원이신가요? <a href="${contextPath }/user/login"><strong>로그인하기</strong></a>
 	                    </h6>
 	                </div>
 	            </div>
@@ -207,7 +207,7 @@
 	                            <div class="checkout__order">
 	                                <h4>개인 정보 정책</h4>
 	                              	<p> 
-										<input type="checkbox" id="allYN" name="allAgreement" value="Y" > 모두디깅 이용약관, 개인정보 수집 및 이용, 이메일 수신 및 이용 동의(선택)에 모두 동의합니다
+										<input type="checkbox" id="allYN" name="allAgreement" value="Y" > [전체] 모두디깅 이용약관, 개인정보 수집 및 이용, 이메일 수신 및 이용 동의(선택)에 모두 동의합니다
 								   	</p>
 										<p><input type="checkbox" id="modudiggingYN"  name="agreement" value="Y"> [필수] 모두디깅 이용약관
 											&emsp;<textarea class="form-control" name="agreement" id="exampleTextarea" rows="5" cols="30">여러분을 환영합니다. 모두디깅 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 모두디깅 서비스의 이용과 관련하여 모두디깅 서비스를 제공하는 모두디깅 주식회사(이하 ‘모두디깅’)와 이를 이용하는 모두디깅 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 모두디깅 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
