@@ -1,5 +1,7 @@
 package com.application.ccnms.user.dao;
 
-public interface UserDAO {
+import com.application.ccnms.user.dto.UserDTO;
 
+public interface UserDAO {
+	public String selectOneDuplicateId(String userId);
 }
