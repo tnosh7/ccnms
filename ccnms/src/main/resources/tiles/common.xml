@@ -12,27 +12,4 @@
 	 		<put-attribute name="title" value="메인"/>	
 	 	</definition>
 	 	
-	 	<definition name="/common/blog" extends="common">
-	 		<put-attribute name="body" value="/WEB-INF/views/common/user/blog.jsp"/>
-	 		<put-attribute name="title" value="디깅 게시판"/>	
-	 	</definition>
-	 	<definition name="/common/register" extends="common">
-	 		<put-attribute name="body" value="/WEB-INF/views/common/user/register.jsp"/>
-	 		<put-attribute name="title" value="가입"/>	
-	 	</definition>
-	 	<definition name="/common/login" extends="common">
-	 		<put-attribute name="body" value="/WEB-INF/views/common/user/login.jsp"/>
-	 		<put-attribute name="title" value="로그인"/>	
-	 	</definition>
-	 	
-	 	<definition name="/common/shop" extends="common">
-	 		<put-attribute name="body" value="/WEB-INF/views/common/user/shop.jsp"/>
-	 		<put-attribute name="title" value="상점"/>	
-	 	</definition>
-	 	
-	 	<definition name="/common/rank" extends="common">
-	 		<put-attribute name="body" value="/WEB-INF/views/common/user/rank.jsp"/>
-	 		<put-attribute name="title" value="랭킹"/>	
-	 	</definition>
-	 	
 </tiles-definitions>

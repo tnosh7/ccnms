@@ -32,7 +32,7 @@
                                 <a href="${contextPath }/login"><button type="button" class="btn btn-outline-dark">login</button></a>
                             </div>
                             <div class="header__top__right__language">
-                                <a href="${contextPath }/register"><button type="button" class="btn btn-outline-success">sign up</button></a>
+                                <a href="${contextPath }/user/register"><button type="button" class="btn btn-outline-success">sign up</button></a>
                             </div>
                         </div>
                     </div>

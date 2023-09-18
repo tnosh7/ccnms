@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.user.service.UserService;
 
@@ -16,6 +17,13 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@GetMapping("/register")
+	public ModelAndView registerUser() {
+		return new ModelAndView("/user/registerUser");
+	}
+
+	
 	
 	@GetMapping("/checkDuplicateId") 
 	public ResponseEntity<String> checkDuplicateId(@RequestParam("userId") String userId) {
