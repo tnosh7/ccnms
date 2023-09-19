@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="${contextPath}/resources/jquery/jquery-3.5.1.min.js"></script>
 <script>
 	
 	$().ready(function(){
@@ -35,26 +34,46 @@
 				$("#userIdCheckWarn").html("[필수] 아이디를 입력해주세요.");
 				return;
 			}
-			
-			$.ajax({
+			else if (userId.length < 5 || userId.length > 20) {
+				$("#userIdCheckWarn").html("5~20자이내로 적어주세요.");
+				return;
+			} 
+			else {
 				
-				url : "${contextPath}/user/duplicateId",
-				type : "get",
-				data : {"userId" : userId},
-				success : function(IsDuplicateId) {
-					if (IsDuplicateId="") {
-						$("#userIdCheckWarn").html("사용할 수 있는 ID입니다.");
-						validateUserId = true;						
-					}
-					else {
-						$("#userIdCheckWarn").html("사용할 수 없는 ID입니다.");
-						validateUserId = false;						
+				$.ajax({
+					
+					url : "${contextPath}/user/duplicateId",
+					type : "post",
+					data : {"userId" : userId},
+					success : function(IsDuplicateId) {
+						if (IsDuplicateId="") {
+							$("#userIdCheckWarn").html("사용할 수 있는 ID입니다.");
+							validateUserId = true;						
+						}
+						else {
+							$("#userIdCheckWarn").html("사용할 수 없는 ID입니다.");
+							validateUserId = false;						
+						}
 					}
 				}
 			});
 		});
+		
+		$("passwdCheck").click(function(){
+			
+			var passwd = $("#passwd").val();
+			var passwdCheck = $("#passwdCheck").val();
+			if (passwd != null) {
+			   if (passwd != passwdCheck) {
+				   $("#passwdCheckWarn").html("비밀번호가 다릅니다.");
+			   }
+			   else {
+				   $("#passwdCheckWarn").html("비밀번호 확인이 완료되었습니다.");
+			   }
+			}
+		});
 	});
-	
+		
 	
 	function execDaumPostcode() {
 	    new daum.Postcode({
@@ -135,8 +154,8 @@
 	                                <input type="text" id="passwd" placeholder="8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요." required/>
 	                            </div>
 	                            <div class="checkout__input">
-	                                <p>비밀번호 확인<span>*</span></p>
-	                                <input type="text" id="passwd" placeholder="비밀번호를 다시 입력해주세요." required/>
+	                                <p>비밀번호 확인<span id="passwdCheckWarn">*</span></p>
+	                                <input type="text" id="passwdCheck" placeholder="비밀번호를 다시 입력해주세요." required/>
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>주소<span>*</span></p>

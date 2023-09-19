@@ -2,6 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="user">
+	<insert id="insertUser" parameterType="UserDTO">
+		INSERT INTO USER (
+				USERID;
+				USERNM;
+				BIRTHDT,
+				PASSWD,	
+				ZIPCODE,
+				ROADADDRESS,
+				JIBUNADDRESS,
+				NAMUJIADDRESS,
+				SEX,
+				HP,
+				EMAIL,
+				EMAILYN,
+				PROFILEINTRODUCTION,
+				JOINDT
+		
+		VALUES (
+				#{userId},
+				#{userNm},
+				#{birthDT},
+				#{passwd},
+				#{zipcode},
+				#{roadAddress},
+				#{jibunAddress},
+				#{namujiAddress},
+				#{sex},
+				#{hp},
+				#{email},
+				#{emailYN},
+				#{profileIntroduction},
+				NOW()
+		)
+	</insert>
+	<select id="selectOneUser" parameterType="" resultType="">
+		SELECT 
+				*
+		FROM 
+				USER
+		WHERE 
+				USER_ID = #{userId}
+	</select>
+
 	<select id="selectOneDuplicateId" parameterType="String" resultType="String">
 		SELECT 
 				*
