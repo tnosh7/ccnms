@@ -13,9 +13,13 @@ public class UserServiceImpl implements UserService {
 	private UserDAO userDAO;
 
 	@Override
-	public String getCheckDuplicateId(String userId) {
-		if (userDAO.selectOneDuplicateId(userId) == null) return "duplicate";
-		else return "noDuplicate";
+	public String getDuplicateId(String userId) {
+		String isDuplicateId ="Y" ;
+		
+		if (userDAO.selectOneDuplicateId(userId) == null) {
+			isDuplicateId = "N";
+		}
+		return isDuplicateId;
 	}
 	
 	

@@ -4,5 +4,5 @@ import com.application.ccnms.user.dto.UserDTO;
 
 public interface UserService {
 
-	public String getCheckDuplicateId(String userId);
+	public String getDuplicateId(String userId);
 }

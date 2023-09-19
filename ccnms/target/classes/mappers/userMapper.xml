@@ -4,7 +4,7 @@
 <mapper namespace="user">
 	<select id="selectOneDuplicateId" parameterType="String" resultType="String">
 		SELECT 
-				USER_ID
+				*
 		FROM 	
 				USER
 		WHERE 
