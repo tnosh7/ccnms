@@ -1,4 +1,4 @@
-package com.application.ccnms.myPage.controller;
+package com.application.ccnms.shop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.application.ccnms.myPage.service.MyPageService;
+import com.application.ccnms.shop.service.ShopService;
 
 @Controller
-@RequestMapping("/myPage")
-public class MyPageController {
-	
+@RequestMapping("/shop")
+public class ShopController {
+
 	@Autowired
-	private MyPageService myPageService;
+	private ShopService shopService;
 	
-	@GetMapping("/main")
-	public ModelAndView myPage() {
-		return new ModelAndView("/myPage/main");
+	@GetMapping("/")
+	public ModelAndView shop() {
+		return new ModelAndView("/shop/main"); 
 	}
 	
 }
