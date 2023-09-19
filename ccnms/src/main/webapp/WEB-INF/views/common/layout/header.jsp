@@ -15,8 +15,7 @@
                     <div class="col-lg-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> moduDigging@gmail.com</li>
-                                <li><a href="">About ModuDigging</a></li>
+                                <img src="${contextPath }/resources/bootstrap/img/MD.PNG" width="266" height="55"/>
                             </ul>
                         </div>
                     </div>
@@ -49,8 +48,9 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
+                            <li></li>
+                            <li></li>
                             <li><a href="${contextPath }/">홈</a></li>
-                            <li><a href="./shop-grid.html">베스트</a></li>
                             <li><a href="${contextPath }/shop">상점</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
