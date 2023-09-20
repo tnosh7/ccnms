@@ -29,10 +29,10 @@ public class UserController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<Object> register(HttpServletRequest request) {
-		
+		// DTO set 추가;
 		String jsScript = "<script>";
 			   jsScript +="alert('성공')";
-			   jsScript +="location.href='" + request.getContextPath() + "';";
+			   jsScript +="location.href='" + request.getContextPath() + "/';";
 			   jsScript +="</script>";
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
