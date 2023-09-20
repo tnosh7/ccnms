@@ -7,7 +7,7 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias type="com.application.ccnms.user.dto.userDTO" alias="UserDTO"/>
+		<typeAlias type="com.application.ccnms.user.dto.UserDTO" alias="UserDTO"/>
 	</typeAliases>
 
 

@@ -4,8 +4,8 @@
 <mapper namespace="user">
 	<insert id="insertUser" parameterType="UserDTO">
 		INSERT INTO USER (
-				USERID;
-				USERNM;
+				USERID,
+				USERNM,
 				BIRTHDT,
 				PASSWD,	
 				ZIPCODE,
@@ -16,7 +16,6 @@
 				HP,
 				EMAIL,
 				EMAILYN,
-				PROFILEINTRODUCTION,
 				JOINDT
 		
 		VALUES (
@@ -32,26 +31,8 @@
 				#{hp},
 				#{email},
 				#{emailYN},
-				#{profileIntroduction},
 				NOW()
 		)
 	</insert>
-	<select id="selectOneUser" parameterType="" resultType="">
-		SELECT 
-				*
-		FROM 
-				USER
-		WHERE 
-				USER_ID = #{userId}
-	</select>
-
-	<select id="selectOneDuplicateId" parameterType="String" resultType="String">
-		SELECT 
-				*
-		FROM 	
-				USER
-		WHERE 
-				USER_ID = ${userId}
-	</select>
-
+	
 </mapper>

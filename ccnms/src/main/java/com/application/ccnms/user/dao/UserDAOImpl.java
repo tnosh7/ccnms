@@ -12,7 +12,8 @@ public class UserDAOImpl implements UserDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public String selectOneDuplicateId(String userId) {
-		return sqlSession.selectOne("user.selectOneDuplicateId", userId);
+	public void insertUser(UserDTO userDTO) {
+		sqlSession.insert("user.insertUser", userDTO);
 	}
+
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-	 	<definition name="/user/registerUser" extends="common">
+	 	<definition name="/user/register" extends="common">
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/client/register.jsp"/>
 	 		<put-attribute name="title" value="가입"/>	
 	 	</definition>
 	 	
-	 	<definition name="/user/login" extends="common">
+	 	<definition name="/user/loginUser" extends="common">
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/client/login.jsp"/>
 	 		<put-attribute name="title" value="로그인"/>	
 	 	</definition>

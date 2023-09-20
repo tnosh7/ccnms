@@ -26,53 +26,44 @@
 			
 		});
 		
-		$("#userIdCheck").click(function(){
-			
-			var userId = $("#userId").val();
-			
-			if (userId == "") {
-				$("#userIdCheckWarn").html("[필수] 아이디를 입력해주세요.");
-				return;
+		$("#passwd").change(function(){
+			var passwd = $("#passwd").val();
+			if(passwd.length<8) {
+				 $("#passwdCheckWarn").html("비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.");
 			}
-			else if (userId.length < 5 || userId.length > 20) {
-				$("#userIdCheckWarn").html("5~20자이내로 적어주세요.");
-				return;
-			} 
-			else {
-				
-				$.ajax({
-					
-					url : "${contextPath}/user/duplicateId",
-					type : "post",
-					data : {"userId" : userId},
-					success : function(IsDuplicateId) {
-						if (IsDuplicateId="") {
-							$("#userIdCheckWarn").html("사용할 수 있는 ID입니다.");
-							validateUserId = true;						
-						}
-						else {
-							$("#userIdCheckWarn").html("사용할 수 없는 ID입니다.");
-							validateUserId = false;						
-						}
-					}
-				}
-			});
-		});
+		})
 		
-		$("passwdCheck").click(function(){
+		
+		$("#passwdCheck").change(function(){
 			
 			var passwd = $("#passwd").val();
 			var passwdCheck = $("#passwdCheck").val();
+			
 			if (passwd != null) {
 			   if (passwd != passwdCheck) {
-				   $("#passwdCheckWarn").html("비밀번호가 다릅니다.");
+				   $("#passwdCheckWarn").html("비밀번호가 다릅니다. 다시 입력해주세요.");
+			  	   return;
 			   }
 			   else {
 				   $("#passwdCheckWarn").html("비밀번호 확인이 완료되었습니다.");
 			   }
 			}
 		});
-	});
+		
+		$("[name='birthDT']").change(function(){
+			var birthDT = $("[name='birthDT']").val();
+			if(birthDT.length == 0 || birthDT.length < 6 ) {
+			   $("#birthDTWarn").html("다시 입력해주세요.");
+		  	   return;
+			}
+			else $("#birthDTWarn").html("");
+		})
+		$("form").submit(funtion(){
+			
+			
+			
+		});
+	});	
 		
 	
 	function execDaumPostcode() {
@@ -126,20 +117,20 @@
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-lg-12">
-	                    <h6><span><img src="${contextPath }/resources/bootstrap/img/cap.PNG" width="20"></span> 현재 모두디깅 회원이신가요? <a href="${contextPath }/user/login"><strong>로그인하기</strong></a>
+	                    <h6><span><img src="${contextPath }/resources/bootstrap/img/cap.PNG" width="20"></span> 현재 모두디깅 회원이신가요? <a href="${contextPath }/user/loginUser"><strong>로그인하기</strong></a>
 	                    </h6>
 	                </div>
 	            </div>
 	            <div class="checkout__form">
 	                <h4>환영합니다!</h4>
-	                <form action="${contextPath }/user/registerUser" method="post">
+	                <form action="${contextPath }/user/register" method="post">
 	                    <div class="row">
 	                        <div class="col-lg-8 col-md-6">
 	                            <div class="row">
 	                                <div class="col-lg-6">
 	                                    <div class="checkout__input">
 	                                        <p>아이디<span>*</span></p>
-	                                        <input type="text" id="userId" placeholder="5~20자 이내로 적어주세요." required/>
+	                                        <input type="text" id="userId" placeholder="5~20자 이내로 적어주세요." required maxlength="20" />
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-4">
@@ -151,11 +142,12 @@
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>비밀번호<span>*</span></p>
-	                                <input type="text" id="passwd" placeholder="8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요." required/>
+	                                <input type="password" id="passwd" placeholder="8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요." required maxlength="16" />
 	                            </div>
 	                            <div class="checkout__input">
-	                                <p>비밀번호 확인<span id="passwdCheckWarn">*</span></p>
-	                                <input type="text" id="passwdCheck" placeholder="비밀번호를 다시 입력해주세요." required/>
+	                                <p>비밀번호 확인<span>*</span></p>
+	                                <input type="password" id="passwdCheck" placeholder="비밀번호를 한번더 입력해주세요." required maxlength="16" />
+	                            	<p><span id="passwdCheckWarn"></span></p>
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>주소<span>*</span></p>
@@ -171,42 +163,38 @@
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>이름<span>*</span></p>
-	                                <input type="text" name="userNM"> 
+	                                <input type="text" name="userNM" required> 
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>생년월일<span>*</span></p>
 	                                <input type="text" name="birthDT" placeholder="예) 010916 6자리 입력" required>
-	                            </div>
-	                            <div class="row">
-	                                <div class="col-lg-3">
-	                                    <div class="checkout__input">
-	                                      <p>성별<span>*</span></p>
-	                                        <select name="sex">
-	                                        	<option>선택안함</option>
-	                                        	<option>남성</option>
-	                                        	<option>여성</option>
-	                                        </select>
-	                                    </div>
-	                                </div>
-	                                <div class="col-lg-9">
-	                                    <div class="checkout__input">
-	                                        <p>핸드폰 번호<span>*</span></p>
-											<p><input type="text" name="hp" placeholder="010-0000-0000" required></p>
-	                                    </div>
-	                                </div>
+	                                <p><span id="birthDTWarn"></span></p>
 	                            </div>
 	                            <div class="row">
 	                                <div class="col-lg-6">
 	                                    <div class="checkout__input">
+	                                      <p>성별<span>*</span></p>
+	                                        <select name="sex">
+	                                        	<option selected="selected" value="N">선택안함</option>
+	                                        	<option value="M">남성</option>
+	                                        	<option value="W">여성</option>
+	                                        </select>
+	                                    </div>
+	                                </div>
+	                            </div>
+								<br>
+	                            <div class="row">
+	                                <div class="col-lg-6">
+	                                    <div class="checkout__input">
 	                                      	<p>이메일<span>*</span></p>
-										<span><input type="email" name="email" style="text-align:left; width:350px;" required></span>
+										<span><input type="text" name="email" style="text-align:left; width:350px;" required></span>
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-6">
 	                                    <div class="checkout__input">
 	                                    	<p><span id="mail-check-warn">*</span></p>
 	                                            <select name="emailDomain"> 
-													<option selected="selected">직접 입력</option>
+													<option selected="selected" value="">직접 입력</option>
 													<option>@naver.com</option>
 													<option>@daum.net</option>
 													<option>@gmail.com</option>
@@ -225,20 +213,17 @@
 	                                   		<input type="button" value="이메일인증하기">
 	                                    </div>
 	                                </div>
-	                            </div>
-	                            <div class="checkout__input">
-	                                <p>[선택] 프로필 소개 입력<span>*</span></p>
-	                                <input type="text" name="profileIntroduce" placeholder="20자이내로 자기소개를 입력하세요." maxlength="20">
+	                                <p><span id="passwdCheckWarn"></span></p>
 	                            </div>
 	                        </div>
 	                        <div class="col-lg-4 col-md-6">
 	                            <div class="checkout__order">
 	                                <h4>개인 정보 정책</h4>
 	                              	<p> 
-										<input type="checkbox" name="allAgreeYN" value="Y" > [전체] 모두디깅 이용약관, 개인정보 수집 및 이용, 이메일 수신 및 이용 동의(선택)에 모두 동의합니다
+										<input type="checkbox" name="allAgreeYN" value="N"> [전체] 모두디깅 이용약관, 개인정보 수집 및 이용, 이메일 수신 및 이용 동의(선택)에 모두 동의합니다
 								   	</p>
-										<p><input type="checkbox" name="modudiggingYN" value="Y"> [필수] 모두디깅 이용약관
-											&emsp;<textarea class="form-control" name="agreement" id="exampleTextarea" rows="5" cols="30">여러분을 환영합니다. 모두디깅 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 모두디깅 서비스의 이용과 관련하여 모두디깅 서비스를 제공하는 모두디깅 주식회사(이하 ‘모두디깅’)와 이를 이용하는 모두디깅 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 모두디깅 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+										<p><input type="checkbox" name="modudiggingYN" value="N"> [필수] 모두디깅 이용약관
+											&emsp;<textarea class="form-control" id="exampleTextarea" rows="5" cols="30">여러분을 환영합니다. 모두디깅 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 모두디깅 서비스의 이용과 관련하여 모두디깅 서비스를 제공하는 모두디깅 주식회사(이하 ‘모두디깅’)와 이를 이용하는 모두디깅 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 모두디깅 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
 								모두디깅 서비스를 이용하시거나 모두디깅 서비스 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 확인하거나 동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다. 다양한 모두디깅 서비스를 즐겨보세요. 모두디깅는 www.ModuDigging.com을 비롯한 모두디깅 도메인의 웹사이트 및 응용프로그램(어플리케이션, 앱)을 통해 정보 검색, 다른 이용자와의 커뮤니케이션, 콘텐츠 제공, 상품 쇼핑 등 여러분의 생활에 편리함을 더할 수 있는 다양한 서비스를 제공하고 있습니다.
 								여러분은 PC, 휴대폰 등 인터넷 이용이 가능한 각종 단말기를 통해 각양각색의 모두디깅 서비스를 자유롭게 이용하실 수 있으며, 개별 서비스들의 구체적인 내용은 각 서비스 상의 안내, 공지사항, 모두디깅 웹고객센터(이하 ‘고객센터’) 도움말 등에서 쉽게 확인하실 수 있습니다. 모두디깅는 기본적으로 여러분 모두에게 동일한 내용의 서비스를 제공합니다. 다만, '청소년보호법' 등 관련 법령이나 기타 개별 서비스 제공에서의 특별한 필요에 의해서 연령 또는 일정한 등급을 기준으로 이용자를 구분하여 제공하는 서비스의 내용, 이용 시간, 이용 횟수 등을 다르게 하는 등 일부 이용을 제한하는 경우가 있습니다. 자세한 내용은 역시 각 서비스 상의 안내, 공지사항, 고객센터 도움말 등에서 확인하실 수 있습니다.
 								모두디깅 서비스에는 기본적으로 본 약관이 적용됩니다만 모두디깅가 다양한 서비스를 제공하는 과정에서 부득이 본 약관 외 별도의 약관, 운영정책 등을 적용하는 경우(예, 모두디깅페이, V LIVE 등)가 있습니다. 그리고 모두디깅 계열사가 제공하는 특정 서비스의 경우에도(예, LINE, SNOW등) 해당 운영 회사가 정한 고유의 약관, 운영정책 등이 적용될 수 있습니다. 이러한 내용은 각각의 해당 서비스 초기 화면에서 확인해 주시기 바랍니다.
@@ -346,7 +331,7 @@
 								이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.</textarea></p> 
 	                                <div class="checkout__input__checkbox">
 	                                <p> 
-										<input type="checkbox" name="userEmailYN" value="Y"> [선택] 이메일 수신 및 이용 동의 							   
+										<input type="checkbox" name="userEmailYN" value="N"> [선택] 이메일 수신 및 이용 동의 							   
 									</p>
 	                                <button type="submit" class="site-btn">Join</button>
 	                            </div>

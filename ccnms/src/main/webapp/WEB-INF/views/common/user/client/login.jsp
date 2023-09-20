@@ -40,6 +40,15 @@
                            <div align="right">
 	                           <button type="submit" class="site-btn">로그인</button>
                            </div>
+                           <div class="row">
+			                <div class="col-lg-12">
+			                   <ul>
+                            <li>아이디 / 비밀번호 찾기</li>
+                            <li>회원가입하기 정렬해서 넣기</li>
+                            <li><a href="${contextPath }/"></a></li>
+                            	</ul>
+			                </div>
+			            </div>
                        </div>
                    </div>
                </div>
