@@ -4,4 +4,5 @@ import com.application.ccnms.user.dto.UserDTO;
 
 public interface UserService {
 	public void addUser(UserDTO userDTO);
+	public boolean checkValidateUser(String userId);
 }

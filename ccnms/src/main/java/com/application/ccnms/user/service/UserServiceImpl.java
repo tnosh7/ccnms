@@ -22,6 +22,16 @@ public class UserServiceImpl implements UserService {
 		userDAO.insertUser(userDTO);
 	}
 
+	@Override
+	public boolean checkValidateUser(String userId) {
+		boolean isDuplicateId = true;
+		
+		if(userDAO.selectOneValidateUser(userId) == null ) {
+			isDuplicateId = false;
+		}
+		return isDuplicateId;
+	}
+
 	
 	
 }

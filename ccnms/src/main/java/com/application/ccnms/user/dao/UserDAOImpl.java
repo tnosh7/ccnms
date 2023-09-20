@@ -16,4 +16,9 @@ public class UserDAOImpl implements UserDAO {
 		sqlSession.insert("user.insertUser", userDTO);
 	}
 
+	@Override
+	public UserDTO selectOneValidateUser(String userId) {
+		return sqlSession.selectOne("user.selectOneValidateUser", userId);
+	}
+
 }

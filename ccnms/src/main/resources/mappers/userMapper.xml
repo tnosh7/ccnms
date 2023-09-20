@@ -3,21 +3,7 @@
 
 <mapper namespace="user">
 	<insert id="insertUser" parameterType="UserDTO">
-		INSERT INTO USER (
-				USERID,
-				USERNM,
-				BIRTHDT,
-				PASSWD,	
-				ZIPCODE,
-				ROADADDRESS,
-				JIBUNADDRESS,
-				NAMUJIADDRESS,
-				SEX,
-				HP,
-				EMAIL,
-				EMAILYN,
-				JOINDT
-		
+		INSERT INTO USER 
 		VALUES (
 				#{userId},
 				#{userNm},
@@ -35,4 +21,12 @@
 		)
 	</insert>
 	
+	<select id="selectOneValidateUser" parameterType="UserDTO" resultType="String">
+		SELECT 
+			USER_ID
+		FROM
+			USER
+		WHERE
+			USER_ID = #{userId}
+	</select>
 </mapper>

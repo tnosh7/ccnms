@@ -37,7 +37,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="img/logo.png" alt=""></a>
+            <a href="#"><img src="${contextPath }/resources/bootstrap/img/logo.png" alt="로고이미지에러"></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -48,14 +48,14 @@
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
-                <div class="header__top__right__auth">
-                                <a href="#"><button type="button" class="btn btn-outline-dark">login</button></a>
-                            </div>
-            </div>
-                 <div class="header__top__right__language">
-                                <a href="#"><button type="button" class="btn btn-outline-success">sign up</button></a>
-                            </div>
+                <img src="${contextPath }/resources/bootstrap/img/language.png" alt="언어변경이미지에러">
+               		<div class="header__top__right__auth">
+                      	<a href="#"><button type="button" class="btn btn-outline-dark">login</button></a>
+                     </div>
+            	</div>
+             <div class="header__top__right__language">
+                <a href="#"><button type="button" class="btn btn-outline-success">sign up</button></a>
+             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
