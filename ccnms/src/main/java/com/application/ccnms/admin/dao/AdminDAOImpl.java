@@ -15,5 +15,10 @@ public class AdminDAOImpl implements AdminDAO {
 	public AdminDTO selectOneLoginAdmin(AdminDTO adminDTO) {
 		return sqlSession.selectOne("admin.selectOneLoginAdmin", adminDTO);
 	}
+
+	@Override
+	public void insertRegisterAdmin(AdminDTO adminDTO) {
+		sqlSession.insert("admin.insertRegisterAdmin", adminDTO);
+	}
 	
 }

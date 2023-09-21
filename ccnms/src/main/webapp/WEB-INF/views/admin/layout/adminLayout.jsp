@@ -69,7 +69,7 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${contextPath}/resources/admin/assets/js/config.js"></script>
   </head>
-
+  <script src="${contextPath}/resources/bootstrap/js/jquery-3.3.1.min.js"></script>	
   <body>
     <!-- Layout wrapper -->
    	 <div class="layout-wrapper layout-content-navbar">

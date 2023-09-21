@@ -10,7 +10,7 @@ public class AdminDTO {
 	private String adminId;
 	private String passwd;
 	private Date joinDT;
-	
+	private String allAgreeYN;
 	public String getAdminId() {
 		return adminId;
 	}
@@ -29,10 +29,18 @@ public class AdminDTO {
 	public void setJoinDT(Date joinDT) {
 		this.joinDT = joinDT;
 	}
+	public String getAllAgreeYN() {
+		return allAgreeYN;
+	}
+	public void setAllAgreeYN(String allAgreeYN) {
+		this.allAgreeYN = allAgreeYN;
+	}
 	@Override
 	public String toString() {
-		return "AdminDTO [adminId=" + adminId + ", passwd=" + passwd + ", joinDT=" + joinDT + "]";
+		return "AdminDTO [adminId=" + adminId + ", passwd=" + passwd + ", joinDT=" + joinDT + ", allAgreeYN="
+				+ allAgreeYN + "]";
 	}
+	
 	
 	
 }

@@ -26,10 +26,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO loginUser(UserDTO userDTO) throws Exception {
 		UserDTO dbUserDTO = userDAO.selectOneLoginUser(userDTO) ;
-		//회원가입 DB연결X 암호화 비밀번호와 DTO pw 매치하면 오류남
-		//if (bCryptPasswordEncoder.matches(userDTO.getPasswd(), dbUserDTO.getPasswd())) 
-		if(dbUserDTO != null) {
+		if (bCryptPasswordEncoder.matches(userDTO.getPasswd(), dbUserDTO.getPasswd())) 
+			if(dbUserDTO.getPasswd() != null)
 			return userDTO;
+		return null;
+	}
+
+	@Override
+	public String checkDuplicateUserId(UserDTO userId) throws Exception {
+		String duplicateUserId = "";
+		if (userDAO.selectOneDuplicateUserId(userId) != null) {
+			duplicateUserId = "Y";
+			return duplicateUserId;
 		}
 		return null;
 	}

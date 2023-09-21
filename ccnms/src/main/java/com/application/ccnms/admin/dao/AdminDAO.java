@@ -4,4 +4,5 @@ import com.application.ccnms.admin.dto.AdminDTO;
 
 public interface AdminDAO {
 	public AdminDTO selectOneLoginAdmin(AdminDTO adminDTO);
+	public void insertRegisterAdmin(AdminDTO adminDTO);
 }

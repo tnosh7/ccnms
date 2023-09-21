@@ -1,7 +1,6 @@
 package com.application.ccnms.user.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,12 +28,12 @@ public class UserController {
 	private UserService userService;
 	
 	@GetMapping("/register")
-	public ModelAndView registerUser()  {
+	public ModelAndView registerUser() throws Exception {
 		return new ModelAndView("/user/register");
 	}
 	
 	@PostMapping("/register")
-	public @ResponseBody String register(HttpServletRequest request, UserDTO userDTO) {
+	public @ResponseBody String register(HttpServletRequest request, UserDTO userDTO) throws Exception {
 		//email동의 
 		String emailYN = request.getParameter("emailYN");
 		if (emailYN == null) {
@@ -50,18 +49,24 @@ public class UserController {
 			email += emailDomain;
 		}
 		userDTO.setEmail(email);
+		userService.addUser(userDTO);
+
 		
 		String jsScript = "<script>";
-			   jsScript +="alert('wow');";
 			   jsScript +="history.go(-1);";
 			   jsScript +="</script>";
 		
-		//체크용
-		//System.out.println(userDTO);	   
 		return jsScript;
 	}
+	
+	@PostMapping("/duplicateUserId")
+	public String duplicateUserId(@RequestParam("userId") UserDTO userId) throws Exception{
+		return userService.checkDuplicateUserId(userId);
+	}
+	
+	
 	@GetMapping("/loginUser")
-	public ModelAndView loginMember() {
+	public ModelAndView loginMember() throws Exception {
 		return new ModelAndView("/user/loginUser");
 	}
 	

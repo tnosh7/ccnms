@@ -53,4 +53,39 @@ public class AdminController {
 		
 		return jsScript;
 	}
+	
+	@GetMapping("/logout") 
+	public @ResponseBody String logout(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		String jsScript = "<script>";
+			   jsScript +="location.href='" + request.getContextPath() + "/admin/main'";
+		       jsScript +="</script>";
+		return jsScript;
+	}
+	
+	@GetMapping("/registerAdmin")
+	public ModelAndView registerAdmin() {
+		return new ModelAndView("/admin/registerAdmin");
+	}
+	
+	@PostMapping("/registerAdmin")
+	public @ResponseBody String registerAdmin(HttpServletRequest request, AdminDTO adminDTO) {
+		
+		adminService.addRegisterAdmin(adminDTO);
+		HttpSession session = request.getSession();
+		session.setAttribute("adminId", adminDTO.getAdminId());
+		session.setAttribute("role", "admin");
+		
+		String jsScript = "<script>";
+			   jsScript +="location.href='" + request.getContextPath() + "/admin/main'";
+			   jsScript +="</script>";
+	    
+		return jsScript;
+	}
+	
+	
+
 }

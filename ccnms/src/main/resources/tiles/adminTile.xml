@@ -17,4 +17,9 @@
 	 		<put-attribute name="title" value="관리자 로그인"/>	
 	 	</definition>
 	 	
+	 	<definition name="/admin/registerAdmin"  extends="admin">	
+	 		<put-attribute name="body" value="/WEB-INF/views/admin/member/registerAdmin.jsp"/>	
+	 		<put-attribute name="title" value="관리자 회원가입"/>	
+	 	</definition>
+	 	
 </tiles-definitions>

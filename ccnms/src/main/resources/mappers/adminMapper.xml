@@ -10,4 +10,14 @@
 		WHERE 
 				ADMIN_ID = #{adminId}
 	</select>
+	<insert id="insertRegisterAdmin" parameterType="AdminDTO">
+		INSERT INTO 
+				ADMIN
+		VALUES (
+			#{adminId},
+			#{passwd},
+			NOW(),
+			#{allAgreeYN}
+		)
+	</insert>
 </mapper>

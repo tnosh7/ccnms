@@ -28,4 +28,13 @@
 		WHERE 
 				USER_ID = #{userId}
 	</select>
+	<select id="selectOneDuplicateUserId" parameterMap="UserDTO" resultType="UserDTO">
+		SELECT 
+				USER_ID
+		FROM
+				USER
+		WHERE
+				USER_ID = #{userId}
+	</select>
+	
 </mapper>

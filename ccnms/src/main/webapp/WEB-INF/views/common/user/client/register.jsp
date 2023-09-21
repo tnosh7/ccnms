@@ -62,6 +62,37 @@
 				else $("#birthDTWarn").html("");
 			})
 			
+			$("#userIdCheck").click(function(){
+				var userId = $("#userId").val();
+				if (userId == "" || userId.length < 5) {
+					$("#userIdCheckWarn").html(" 아이디를 다시 입력해주세요.");
+					return;
+				}
+				else (
+					$.ajax ({
+							url : "${contextPath}/user/duplicateUserId",
+							type : "post",
+							data : {"userId" : userId},
+							success : function(duplicateUserId) {
+								if(duplicateUserId != null) {
+									$("#userIdCheckWarn").html("사용가능한 아이디입니다.");
+									validateId = true;
+								}								
+								else {
+									$("#userIdCheckWarn").html("다른 아이디를 입력해주세요.");
+									validateId = false;
+								}
+							}
+					})
+				)
+			})
+			
+			$("form").submit(function(){
+				if (!validateId) return;
+				var modudiggingYN = $("[name='modudiggingYN']").val();
+				var userInfoYN = $("[name='userInfoYN']").val();
+				if (modudiggingYN == null || userInfoYN == null) return ;
+			})
 		});	
 			
 		

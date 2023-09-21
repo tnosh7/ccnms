@@ -4,4 +4,5 @@ import com.application.ccnms.admin.dto.AdminDTO;
 
 public interface AdminService {
 	public AdminDTO loginAdmin(AdminDTO adminDTO);
+	public void addRegisterAdmin(AdminDTO adminDTO);
 }

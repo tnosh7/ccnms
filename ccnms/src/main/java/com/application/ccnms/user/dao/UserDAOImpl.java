@@ -22,4 +22,9 @@ public class UserDAOImpl implements UserDAO {
 		return sqlSession.selectOne("user.selectOneLoginUser", userDTO);
 	}
 
+	@Override
+	public String selectOneDuplicateUserId(UserDTO userId) throws Exception {
+		return sqlSession.selectOne("user.selectOneDuplicateUserId", userId);
+	}
+
 }

@@ -31,7 +31,7 @@
             <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-bitcoin"></i> Bitcoin</a>
           </div>
         </div>
-        <a href="javascript:void(0)" class="btn btn-sm btn-outline-danger"><i class="bx bx-log-out-circle me-1"></i>Logout</a>
+        <a href="${contextPath }/" class="btn btn-sm btn-outline-danger"><i class="bx bx-log-out-circle me-1"></i>로그아웃</a>
       </div>
     </div>
 
