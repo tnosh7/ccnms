@@ -11,5 +11,10 @@
 	 		<put-attribute name="body" value="/WEB-INF/views/admin/layout/adminMain.jsp"/>	
 	 		<put-attribute name="title" value="관리자메인"/>	
 	 	</definition>
+
+	 	<definition name="/admin/loginAdmin"  extends="admin">	
+	 		<put-attribute name="body" value="/WEB-INF/views/admin/member/loginAdmin.jsp"/>	
+	 		<put-attribute name="title" value="관리자 로그인"/>	
+	 	</definition>
 	 	
 </tiles-definitions>
