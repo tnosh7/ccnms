@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CommonController {
 	
 	@GetMapping("/")
-	public ModelAndView home() {
+	public ModelAndView home() throws Exception {
 		return new ModelAndView("/common/main");
 	}
 }

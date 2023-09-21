@@ -8,17 +8,18 @@ import com.application.ccnms.user.dto.UserDTO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
+	
 	@Autowired
 	private SqlSession sqlSession;
 
 	@Override
-	public void insertUser(UserDTO userDTO) {
+	public void insertUser(UserDTO userDTO) throws Exception {
 		sqlSession.insert("user.insertUser", userDTO);
 	}
 
 	@Override
-	public UserDTO selectOneValidateUser(String userId) {
-		return sqlSession.selectOne("user.selectOneValidateUser", userId);
+	public UserDTO selectOneLoginUser(UserDTO userDTO) throws Exception {
+		return sqlSession.selectOne("user.selectOneLoginUser", userDTO);
 	}
 
 }

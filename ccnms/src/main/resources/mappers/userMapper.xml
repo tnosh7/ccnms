@@ -3,7 +3,7 @@
 
 <mapper namespace="user">
 	<insert id="insertUser" parameterType="UserDTO">
-		INSERT INTO USER 
+		INSERT INTO USER 		
 		VALUES (
 				#{userId},
 				#{userNm},
@@ -20,13 +20,12 @@
 				NOW()
 		)
 	</insert>
-	
-	<select id="selectOneValidateUser" parameterType="UserDTO" resultType="String">
+	<select id="selectOneLoginUser" parameterType="UserDTO" resultType="UserDTO">
 		SELECT 
-			USER_ID
+				*
 		FROM
-			USER
-		WHERE
-			USER_ID = #{userId}
+				USER
+		WHERE 
+				USER_ID = #{userId}
 	</select>
 </mapper>

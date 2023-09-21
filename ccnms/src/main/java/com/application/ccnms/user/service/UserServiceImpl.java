@@ -17,21 +17,22 @@ public class UserServiceImpl implements UserService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
-	public void addUser(UserDTO userDTO) {
+	public void addUser(UserDTO userDTO) throws Exception{
 		userDTO.setPasswd(bCryptPasswordEncoder.encode(userDTO.getPasswd()));
 		userDAO.insertUser(userDTO);
+		
 	}
 
 	@Override
-	public boolean checkValidateUser(String userId) {
-		boolean isDuplicateId = true;
-		
-		if(userDAO.selectOneValidateUser(userId) == null ) {
-			isDuplicateId = false;
+	public UserDTO loginUser(UserDTO userDTO) throws Exception {
+		UserDTO dbUserDTO = userDAO.selectOneLoginUser(userDTO) ;
+		//회원가입 DB연결X 암호화 비밀번호와 DTO pw 매치하면 오류남
+		//if (bCryptPasswordEncoder.matches(userDTO.getPasswd(), dbUserDTO.getPasswd())) 
+		if(dbUserDTO != null) {
+			return userDTO;
 		}
-		return isDuplicateId;
+		return null;
 	}
 
-	
 	
 }

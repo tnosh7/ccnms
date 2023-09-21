@@ -49,7 +49,7 @@
                         <h6>Join Our Newsletter Now</h6>
                         <p>Get E-mail updates about our latest shop and special offers.</p>
                         <form action="#">
-                            <input type="text" placeholder="Enter your mail">
+                            <input type="text" name="emailSub" placeholder="Enter your mail">
                             <button type="submit" class="site-btn">Subscribe</button>
                         </form>
                         <div class="footer__widget__social">

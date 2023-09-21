@@ -3,6 +3,6 @@ package com.application.ccnms.user.service;
 import com.application.ccnms.user.dto.UserDTO;
 
 public interface UserService {
-	public void addUser(UserDTO userDTO);
-	public boolean checkValidateUser(String userId);
+	public void addUser(UserDTO userDTO)  throws Exception;
+	public UserDTO loginUser (UserDTO userDTO) throws Exception;
 }
