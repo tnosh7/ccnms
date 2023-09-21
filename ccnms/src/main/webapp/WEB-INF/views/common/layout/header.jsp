@@ -27,10 +27,36 @@
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="${contextPath }/user/loginUser"><button type="button" class="btn btn-outline-dark">login</button></a>
-                            </div>
-                            <div class="header__top__right__language">
-                                <a href="${contextPath }/user/register"><button type="button" class="btn btn-outline-success">sign up</button></a>
+                            <c:choose>
+                            	<c:when test="${sessionScope.role eq 'admin'}">
+                            	    <div class="header__top__right__auth">
+	                               		<p><a href="${contextPath }/admin/main"><button type="button" class="btn btn-outline-dark">관리자 페이지</button></a></p>
+                            		</div>
+	 								<div class="header__top__right__language">
+	                               		<p><a href="${contextPath }/admin/logout"><button type="button" class="btn btn-outline-success">로그아웃</button></a></p>
+                            		</div>
+                            	</c:when>
+                            	<c:otherwise>
+									<c:choose>
+										<c:when test="${sessionScope.role eq 'user'}">
+                            	     		<div class="header__top__right__auth">
+		                            			<p><a href="${contextPath }/myPage/main"><button type="button" class="btn btn-outline-dark">내 회원정보</button></a></p>
+                            				</div>
+		                            	  	<div class="header__top__right__language">
+		                            	   		<p><a href="${contextPath }/user/logout"><button type="button" class="btn btn-outline-success">로그아웃</button></a></p>
+                            				</div>
+										</c:when>
+		                            	<c:otherwise>
+	                            	      	<div class="header__top__right__auth">
+												<p><a href="${contextPath }/user/loginUser"><button type="button" class="btn btn-outline-dark">로그인</button></a></p>
+                            				</div>
+		                               	  	<div class="header__top__right__language">
+		                               			<p><a href="${contextPath }/user/register"><button type="button" class="btn btn-outline-success">회원가입</button></a></p>
+	                            			</div>
+		                            	</c:otherwise>
+									</c:choose>                            
+                            	</c:otherwise>
+                            </c:choose>
                             </div>
                         </div>
                     </div>

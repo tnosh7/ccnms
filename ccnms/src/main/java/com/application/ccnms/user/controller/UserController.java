@@ -86,4 +86,16 @@ public class UserController {
 		}
 		return jsScript;
 	}
+	
+	@GetMapping("/logout")
+	public @ResponseBody String logout(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		String jsScript = "<script>";
+			   jsScript +="alert('logout');";
+			   jsScript +="location.href='" + request.getContextPath() + "/'";
+		       jsScript +="</script>";
+	
+		return jsScript;
+	}
 }
