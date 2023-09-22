@@ -33,13 +33,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String checkDuplicateUserId(UserDTO userId) throws Exception {
-		String duplicateUserId = "";
-		if (userDAO.selectOneDuplicateUserId(userId) != null) {
-			duplicateUserId = "Y";
-			return duplicateUserId;
+	public String checkDuplicateUserId(String userId) throws Exception {
+		String duplicateUserId = "Y";
+		if (userDAO.selectOneDuplicateUserId(userId) == null) {
+			duplicateUserId = "N";
 		}
-		return null;
+		return duplicateUserId;
 	}
 
 	

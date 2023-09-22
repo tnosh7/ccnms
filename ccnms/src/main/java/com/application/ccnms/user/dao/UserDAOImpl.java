@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public String selectOneDuplicateUserId(UserDTO userId) throws Exception {
+	public UserDTO selectOneDuplicateUserId(String userId) throws Exception {
 		return sqlSession.selectOne("user.selectOneDuplicateUserId", userId);
 	}
 

@@ -77,9 +77,6 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome to ModuDigging! 👋</h4>
-              <p class="mb-4">관리자 아이디를 입력해주세요.</p>
-
               <form id="formAuthentication" class="mb-3" action="${contextPath }/admin/loginAdmin" method="POST">
                 <div class="mb-3">
                   <label for="email" class="form-label">관리자 아이디</label>

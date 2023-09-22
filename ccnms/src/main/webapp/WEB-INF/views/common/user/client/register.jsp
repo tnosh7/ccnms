@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-		
+	
 		var validateId = false;	
 	
 		
@@ -68,30 +68,33 @@
 					$("#userIdCheckWarn").html(" 아이디를 다시 입력해주세요.");
 					return;
 				}
-				else (
-					$.ajax ({
-							url : "${contextPath}/user/duplicateUserId",
-							type : "post",
-							data : {"userId" : userId},
-							success : function(duplicateUserId) {
-								if(duplicateUserId != null) {
-									$("#userIdCheckWarn").html("사용가능한 아이디입니다.");
-									validateId = true;
-								}								
-								else {
-									$("#userIdCheckWarn").html("다른 아이디를 입력해주세요.");
-									validateId = false;
-								}
-							}
-					})
-				)
-			})
+				$.ajax ({
+					url  : "${contextPath}/user/duplicateUserId",
+					type : "post",
+					data : {"userId" : userId},
+					success : function(duplicateUserId) {
+						if(duplicateUserId == "N") {
+							$("#userIdCheckWarn").html("사용가능한 아이디입니다.");
+							validateId = true;
+						}								
+						else {
+							$("#userIdCheckWarn").html("다른 아이디를 입력해주세요.");
+							validateId = false;
+						}
+					}
+				});
+			});
 			
 			$("form").submit(function(){
-				if (!validateId) return;
-				var modudiggingYN = $("[name='modudiggingYN']").val();
-				var userInfoYN = $("[name='userInfoYN']").val();
-				if (modudiggingYN == null || userInfoYN == null) return ;
+				var modudiggingYN = $("[name='modudiggingYN']:checked").val();
+				var userInfoYN = $("[name='userInfoYN']:checked").val();
+				if (!validateId) {
+					$("#userIdCheckWarn").html("[필수] 아이디중복체크를 해주세요");
+					return false;
+				}
+				if (modudiggingYN == undefined || userInfoYN == undefined) {
+					return false;
+				}
 			})
 		});	
 			
@@ -162,7 +165,7 @@
 	                                </div>
 	                                <div class="col-lg-4">
 	                                    <div class="checkout__input">
-	                                        <p><span id="userIdCheckWarn">*</span></p>
+	                                        <p><span>*</span></p>
 	                                        <input type="button" id="userIdCheck" name="userIdCheck" value="아이디중복체크"/>
 	                                    </div>
 	                                </div>
@@ -174,6 +177,7 @@
 	                            <div class="checkout__input">
 	                                <p>비밀번호 확인<span>*</span></p>
 	                                <input type="password" id="passwdCheck" placeholder="비밀번호를 한번더 입력해주세요." required maxlength="16" />
+	                            	<p><span id="userIdCheckWarn"></span></p>
 	                            	<p><span id="passwdCheckWarn"></span></p>
 	                            </div>
 	                            <div class="checkout__input">
@@ -360,14 +364,14 @@
 								참고로 모두디깅는 ‘개인정보 유효기간제’에 따라 1년간 서비스를 이용하지 않은 회원의 개인정보를 별도로 분리 보관하여 관리하고 있습니다.
 								4. 개인정보 수집 및 이용 동의를 거부할 권리
 								이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.</textarea></p> 
-	                                <div class="checkout__input__checkbox">
+	                                <div class="agreeYNWarn">
 	                                <p> 
 										<input type="checkbox" id="userEmailYN" name="userEmailYN" value="Y"> [선택] 이메일 수신 및 이용 동의 							   
 									</p>
 	                                <button type="submit" class="site-btn">Join</button>
-	                            </div>
-	                        </div>
-	                    </div>
+	                           		</div>
+	                        	</div>
+	                    	</div>
 	                	</div>
 	                </form>
 	            </div>

@@ -6,5 +6,5 @@ public interface UserDAO {
 	
 	public void insertUser(UserDTO userDTO) throws Exception;
 	public UserDTO selectOneLoginUser(UserDTO userDTO)throws Exception;
-	public String selectOneDuplicateUserId(UserDTO userId) throws Exception;
+	public UserDTO selectOneDuplicateUserId(String userId) throws Exception;
 }

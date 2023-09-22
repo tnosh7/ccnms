@@ -60,7 +60,8 @@ public class UserController {
 	}
 	
 	@PostMapping("/duplicateUserId")
-	public String duplicateUserId(@RequestParam("userId") UserDTO userId) throws Exception{
+	public @ResponseBody String duplicateUserId(@RequestParam("userId") String userId) throws Exception{
+		System.out.println(userId);
 		return userService.checkDuplicateUserId(userId);
 	}
 	
