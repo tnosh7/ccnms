@@ -3,7 +3,21 @@
 
 <mapper namespace="user">
 	<insert id="insertUser" parameterType="UserDTO">
-		INSERT INTO USER 		
+		INSERT INTO USER (
+				USER_ID,
+				USER_NM, 
+				BIRTH_DT,
+				PASSWD,
+				ZIPCODE,
+				ROADADDRESS,
+				JIBUNADDRES,
+				NAMUJIADDRESS,
+				SEX,
+				HP,
+				EMAIL,
+				EMAIL_YN,
+				JOIN_DT
+		)
 		VALUES (
 				#{userId},
 				#{userNm},

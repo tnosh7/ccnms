@@ -1,5 +1,8 @@
 package com.application.ccnms.myPage.dao;
 
-public interface MyPageDAO {
+import com.application.ccnms.user.dto.UserDTO;
 
+public interface MyPageDAO {
+	public void insertProfile(UserDTO userDTO) throws Exception;
+	public UserDTO selectOneUserDetail(String userId) throws Exception;
 }

@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
 <header class="header">
@@ -30,6 +32,9 @@
                             <c:choose>
                             	<c:when test="${sessionScope.role eq 'admin'}">
                             	    <div class="header__top__right__auth">
+	                               		<p><a href="${contextPath }/digging/addDigging"><button type="button" class="btn btn-danger">디깅하기</button></a></p>
+                            		</div>
+                            	    <div class="header__top__right__auth">
 	                               		<p><a href="${contextPath }/admin/main"><button type="button" class="btn btn-outline-dark">관리자 페이지</button></a></p>
                             		</div>
 	 								<div class="header__top__right__language">
@@ -39,6 +44,9 @@
                             	<c:otherwise>
 									<c:choose>
 										<c:when test="${sessionScope.role eq 'user'}">
+		                            	  	<div class="header__top__right__auth">
+			                               		<p><a href="${contextPath }/digging/addDigging"><button type="button" class="btn btn-danger">디깅하기</button></a></p>
+        		                    		</div>
                             	     		<div class="header__top__right__auth">
 		                            			<p><a href="${contextPath }/myPage/main"><button type="button" class="btn btn-outline-dark">내 회원정보</button></a></p>
                             				</div>
@@ -84,8 +92,8 @@
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li class="active"><a href="${contextPath }/blog">디깅</a></li>
-                            <li><a href="${contextPath }/rank">디깅랭킹</a></li>
+                            <li class="active"><a href="${contextPath }/digging/main">디깅</a></li>
+                            <li><a href="${contextPath }/digging/ranking">디깅랭킹</a></li>
                         </ul>
                     </nav>
                 </div>

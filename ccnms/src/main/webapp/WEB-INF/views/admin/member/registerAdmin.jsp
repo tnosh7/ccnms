@@ -95,17 +95,18 @@
 	                      </g>
 	                    </svg>
 	                  </span>
-	                  <span class="app-brand-text demo text-body fw-bolder">ModuDigging</span>
+	                  <span class="app-brand-text demo text-body fw-bolder">회원가입</span>
 	                </a>
 	              </div>
 	              <!-- /Logo -->
-	              <h4 class="mb-2">Adventure starts here 🚀</h4>
-	              <p class="mb-4">Make your app management easy and fun!</p>
+	              <br>
+	              <h4 class="mb-2"></h4>
+	              <p class="mb-4"></p>
 	
 	              <form id="formAuthentication" class="mb-3" action="${contextPath }/admin/registerAdmin"
  method="POST">
 	                <div class="mb-3">
-	                  <label for="adminId" class="form-label">관리자 ID</label>
+	                  <label for="adminId" class="form-label"><strong>관리자 ID</strong></label>
 	                  <input
 	                    type="text"
 	                    class="form-control"
@@ -116,7 +117,7 @@
 	                  />
 	                </div>
 	                <div class="mb-3 form-password-toggle">
-	                  <label class="form-label" for="passwd">관리자 비밀번호</label>
+	                  <label class="form-label" for="passwd"><strong>관리자 비밀번호</strong></label>
 	                  <div class="input-group input-group-merge">
 	                    <input
 	                      type="password"

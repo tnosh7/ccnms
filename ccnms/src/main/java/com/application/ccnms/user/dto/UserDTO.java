@@ -21,6 +21,8 @@ public class UserDTO {
 	private String email;
 	private String emailYN;
 	private Date joinDT;
+	private String profile;
+	private int likePoint;
 	public String getUserId() {
 		return userId;
 	}
@@ -99,12 +101,24 @@ public class UserDTO {
 	public void setJoinDT(Date joinDT) {
 		this.joinDT = joinDT;
 	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	public int getLikePoint() {
+		return likePoint;
+	}
+	public void setLikePoint(int likePoint) {
+		this.likePoint = likePoint;
+	}
 	@Override
 	public String toString() {
 		return "UserDTO [userId=" + userId + ", userNm=" + userNm + ", birthDT=" + birthDT + ", passwd=" + passwd
 				+ ", zipcode=" + zipcode + ", roadAddress=" + roadAddress + ", jibunAddress=" + jibunAddress
 				+ ", namujiAddress=" + namujiAddress + ", sex=" + sex + ", hp=" + hp + ", email=" + email + ", emailYN="
-				+ emailYN + ", joinDT=" + joinDT + "]";
+				+ emailYN + ", joinDT=" + joinDT + ", profile=" + profile + ", likePoint=" + likePoint + "]";
 	}
 	
 }

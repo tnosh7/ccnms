@@ -9,7 +9,7 @@
 </head>
 <body>
 	<fieldset>
-	<form action="">
+	<form action="${contextPath }/myPage/modifyProfile" method="post" enctype="multipart/form-data">
 	  <div class="breadcrumb-option">
 	       <div class="container">
 	           <div class="row">
@@ -22,7 +22,6 @@
 	           </div>
 	       </div>
 	   </div>
-	   
 	    <div class="content-wrapper">
 	     <section class="checkout spad">
 	       <div class="container" align="center">
@@ -45,19 +44,37 @@
 	                   </li>
 	                 </ul>
 	                 <div class="card mb-4">
-	                   <h5 class="card-header">${userDTO.userNM } 님</h5>
+	                   <h5 class="card-header">${userDTO.userNm } 님</h5>
 	                   <!-- Account -->
 	                   
 	                   <div class="card-body">
 	                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-	                       <img
-	                         src="${contextPath}/resources/admin/assets/img/avatars/2.png"
-	                         alt="user-avatar"
-	                         class="d-block rounded"
-	                         height="100"
-	                         width="100"
-	                         id="uploadedAvatar"
-	                       />&emsp;&emsp;&emsp;
+						   <c:choose>
+						   	<c:when test="${userDTO.profile eq null}">
+						   		<img
+		                         src="${contextPath}/resources/admin/assets/img/avatars/2.png"
+		                         alt="user-avatar"
+		                         class="d-block rounded"
+		                         height="100"
+		                         width="100"
+		                         id="profile"
+		                         name="profile"
+		                       />
+						   	</c:when>
+						   	<c:otherwise>
+						   		<img
+		                         src="${userDTO.profile }"
+		                         alt="user-avatar"
+		                         class="d-block rounded"
+		                         height="100"
+		                         width="100"
+		                         id="profile"
+		                         name="profile"
+		                       />
+						   	</c:otherwise>
+						   
+						   </c:choose>
+	                       &emsp;&emsp;&emsp;
 	                       <div class="button-wrapper">
 	                        <p class="text-muted mb-0"></p>
 	                         <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
@@ -136,12 +153,13 @@
 	                         <div class="mb-6 col-md-6">
 	                           <label for="state" class="form-label">성별</label>
 	                           <div>
-		                         	<select name="sex">
+		                         	<select name="sex" >
 	                                	<option selected="selected" value="N">선택안함</option>
-	                                	<option value="M">남성</option>
-	                                	<option value="W">여성</option>
+	                                	<option value="M" >남성</option>
+	                                	<option value="W" >여성</option>
 	                                </select>
 		                       </div>
+		                       <input type="hidden" value="${userDTO.sex }">
 	                         </div>
 	                         <div class="mb-3 col-md-12" align="left">
 	                            <legend class="mt-4"><img src="${contextPath}/resources/admin/assets/img/icons/unicons/map.png">배송지 관리</legend>
@@ -152,34 +170,28 @@
 	                         </div>
 	                         <div class="mb-3 col-md-9">
 	                           <label for="address" class="form-label">주소</label>
-	                           <input type="text" class="form-control" id="address" name="address" value="address" readonly/>
+	                           <input type="text" class="form-control" id="fullAddress" name="fullAddress" value="${userDTO.roadAddress} ${userDTO.namujiAddress}" readonly/>
 	                         </div>
 	                       </div>
 	                   		<div class="mb-3 col-md-12" align="left">
 	                   		 <legend class="mt-4"><img src="${contextPath}/resources/admin/assets/img/icons/unicons/user-detail.png">프로모션 정보수신 동의</legend>
 	                   		 <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked="">
-        <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
-      </div>
-	                           <fieldset class="form-group">
-							      <div class="form-check form-switch">
-							        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked="">
-							        <label class="form-check-label" for="flexSwitchCheckChecked">이메일 수신 동의</label>
-							      </div>
-							    </fieldset>
+						        <input class="form-check-input" type="checkbox" id="emailYN" <c:if test="${userDTO.emailYN =='Y'}"> checked</c:if>/>
+						        <label class="form-check-label" for="emailYN">Checked switch checkbox input</label>
+						      </div>
 	                         </div>
 	                         <br>
 	                       <div class="mt-2">
-	                         <button type="submit" class="btn btn-primary me-2">&emsp;수정&emsp;</button>
+	                         <button type="submit" class="btn btn-primary me-2" id="modifyButton">&emsp;수정&emsp;</button>
 	                       </div>
 	                   </div>
 	                   <br>
 	                   <br>
-               <div class="mb-2 col-md-12" align="right">
-	             <div>
-	                <button type="submit" class="btn btn-danger deactivate-account">회원탈퇴</button>
-	             </div>
-	           </div>  
+             		  <div class="mb-2 col-md-12" align="right">
+		             <div>
+		                <button type="submit" class="btn btn-danger deactivate-account">회원탈퇴</button>
+		             </div>
+		           </div>  
 	                   <!-- /Account -->
 	                 </div>
                  </div>
