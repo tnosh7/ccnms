@@ -32,6 +32,7 @@
 </style>
 <script src="${contextPath}/resources/bootstrap/js/jquery-3.3.1.min.js"></script>
 <script src="${contextPath }/resources/ckeditor/ckeditor.js"></script>  
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
     <!-- Page Preloder -->
     <div id="preloder">

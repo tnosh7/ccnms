@@ -10,7 +10,7 @@
 <body>
       <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
       <div>
-        <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/" target="_blank" class="footer-text fw-bold">Sneat</a> ©
+        <a href="https://demos.themeselection.com/ModuDigging-bootstrap-html-admin-template/html/vertical-menu-template/" target="_blank" class="footer-text fw-bold">ModuDigging</a> ©
       </div>
       <div>
         <div class="form-check form-control-sm footer-link me-3">

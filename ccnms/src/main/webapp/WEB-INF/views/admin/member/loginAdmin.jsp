@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div align="center" style="padding-top: 50px">
 <section>
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
@@ -73,13 +74,15 @@
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">ModuDigging</span>
+                  
+                  <span class="app-brand-text demo text-body fw-bolder">로그인</span>
                 </a>
               </div>
               <!-- /Logo -->
+              <div align="left" style="padding-top: 70px">
               <form id="formAuthentication" class="mb-3" action="${contextPath }/admin/loginAdmin" method="POST">
                 <div class="mb-3">
-                  <label for="email" class="form-label">관리자 아이디</label>
+                  <label for="email" class="form-label"><strong>관리자 ID</strong></label>
                   <input
                     type="text"
                     class="form-control"
@@ -89,9 +92,10 @@
                     autofocus
                   />
                 </div>
+                <br>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">비밀번호</label>
+                    <label class="form-label" for="password"><strong>관리자 비밀번호</strong></label>
                     <a href="auth-forgot-password-basic.html">
                       <small>비밀번호 찾기</small>
                     </a>
@@ -114,16 +118,22 @@
                     <label class="form-check-label" for="remember-me"> 아이디 저장 </label>
                   </div>
                 </div>
+                <br>
                 <div class="mb-3">
                   <button class="btn btn-primary d-grid w-100" type="submit">로그인</button>
+                	<br>
                 </div>
+                
               </form>
-
+			</div>
               <p class="text-center">
+				<hr>
+              <div>
                 <span>모두디깅에 처음 오셨나요?</span>
                 <a href="${contextPath }/admin/registerAdmin">
                   <span>아이디 만들기</span>
                 </a>
+              </div>
               </p>
             </div>
           </div>
@@ -131,7 +141,8 @@
         </div>
       </div>
     </div>
-</section>    
+</section> 
+</div>   
 
 </body>
 </html>

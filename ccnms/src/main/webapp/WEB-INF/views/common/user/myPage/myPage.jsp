@@ -6,10 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+</script>
 </head>
 <body>
 	<fieldset>
-	<form action="${contextPath }/myPage/modifyProfile" method="post" enctype="multipart/form-data">
+	<form>
 	  <div class="breadcrumb-option">
 	       <div class="container">
 	           <div class="row">
@@ -115,7 +117,7 @@
 	                         </div>
 	                         <div class="mb-3 col-md-6">
 	                           <label for="userNm" class="form-label">이름</label>
-	                           <input class="form-control" type="text" name="userNm" id="userNm" value="${userDTO.userId }" readonly/>
+	                           <input class="form-control" type="text" name="userNm" id="userNm" value="${userDTO.userNm}" readonly/>
 	                         </div>
 	                         <div class="mb-3 col-md-6">
 	                           <label for="email" class="form-label">이메일</label>
@@ -182,14 +184,14 @@
 	                         </div>
 	                         <br>
 	                       <div class="mt-2">
-	                         <button type="submit" class="btn btn-primary me-2" id="modifyButton">&emsp;수정&emsp;</button>
+	                         <button type="button" class="btn btn-primary me-2" onclick="location.href='${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }'">&emsp;수정&emsp;</button>
 	                       </div>
 	                   </div>
 	                   <br>
 	                   <br>
              		  <div class="mb-2 col-md-12" align="right">
 		             <div>
-		                <button type="submit" class="btn btn-danger deactivate-account">회원탈퇴</button>
+		                <button type="button" class="btn btn-danger deactivate-account" >회원탈퇴</button>
 		             </div>
 		           </div>  
 	                   <!-- /Account -->

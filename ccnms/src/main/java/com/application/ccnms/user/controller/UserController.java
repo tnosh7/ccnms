@@ -49,7 +49,6 @@ public class UserController {
 		userDTO.setEmail(email);
 		userService.addUser(userDTO);
 
-		
 		String jsScript = "<script>";
 			   jsScript +="history.go(-1);";
 			   jsScript +="</script>";
@@ -78,14 +77,12 @@ public class UserController {
 			session.setAttribute("role", "user");
 			
 		    jsScript = "<script>";
-		    jsScript +="alert('login');";
 		    jsScript +="location.href='" + request.getContextPath() + "/'";
 		    jsScript +="</script>";
 		}
 		else {
 			jsScript = "<script>";
 			jsScript +="alert('X');";
-			jsScript +="history.go(-1);";
 		  	jsScript +="</script>";
 		}
 		return jsScript;
@@ -96,7 +93,6 @@ public class UserController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		String jsScript = "<script>";
-			   jsScript +="alert('logout');";
 			   jsScript +="location.href='" + request.getContextPath() + "/'";
 		       jsScript +="</script>";
 	

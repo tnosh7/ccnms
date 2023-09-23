@@ -46,8 +46,7 @@ public class AdminController {
 		}
 		else {
 			jsScript = "<script>";
-		    jsScript +="alert('login');";
-		    jsScript +="histroy.go(-1);";
+		    jsScript +="history.go(-1);";
 		    jsScript +="</script>";
 		}
 		

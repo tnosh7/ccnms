@@ -10,10 +10,6 @@
 		 list-style-type: none;
 	 }
 
-	[type="radio"] {
-	  vertical-align: middle;
-	  appearance: none;
-	}
 </style>
 <body>
 	<div align="center" style="padding-top: 50px">
@@ -69,7 +65,8 @@
 							<li>
 								<div class="input-group">
     			                    <input type="file" class="form-control" id="inputGroupFile02">
-                			        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                			        <label class="input-group-text" for="inputGroupFile02">업로드</label>
+                			        <label class="input-group-text" for="inputGroupFile02">삭제</label>
                  				</div>
 							</li>
 	                   		<li class="nav-item">	

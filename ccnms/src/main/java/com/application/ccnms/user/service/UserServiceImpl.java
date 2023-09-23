@@ -26,11 +26,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO loginUser(UserDTO userDTO) throws Exception {
 		UserDTO dbUserDTO = userDAO.selectOneLoginUser(userDTO) ;
-		if (bCryptPasswordEncoder.matches(userDTO.getPasswd(), dbUserDTO.getPasswd())) 
+		if (bCryptPasswordEncoder.matches(userDTO.getPasswd(), dbUserDTO.getPasswd())){
 			if(dbUserDTO.getPasswd() != null)
 			return userDTO;
+		}
 		return null;
 	}
+	
 
 	@Override
 	public String checkDuplicateUserId(String userId) throws Exception {

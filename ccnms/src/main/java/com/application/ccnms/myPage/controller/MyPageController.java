@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -45,22 +46,14 @@ public class MyPageController {
 		return mv;
 	}
 	
-	@PostMapping("/modifyProfile")
-	public @ResponseBody void uploadProfile(MultipartHttpServletRequest multipartRequest, HttpServletRequest request) throws Exception {
-		
-		Iterator<String> fileList = multipartRequest.getFileNames();
-		String fileName= "";
-		if (fileList.hasNext()) {
-			MultipartFile uploadFile = multipartRequest.getFile(fileList.next());
-			if(!uploadFile.getOriginalFilename().isEmpty()) {
-				SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-				fileName = fmt.format(new Date() +"_"+UUID.randomUUID()+"_"+uploadFile.getOriginalFilename());
-				uploadFile.transferTo(new File(FILE_REPO_PATH + fileName));
-			}
-		}
-		UserDTO userDTO = new UserDTO();
-		userDTO.setProfile(fileName);
-		myPageService.addProfile(userDTO);
+	
+	@GetMapping("/authenticationUser") 
+	public ModelAndView authenticationUser() {
+		return new ModelAndView("/myPage/authenticationUser");
 	}
 	
+	@PostMapping("/authenticationUser") 
+	public @ResponseBody String authenticationUser(@RequestParam("userId")String userId, @RequestParam("passwd") String passwd) {
+		return myPageService.checkAuthenticationUser(userId); 
+	}
 }

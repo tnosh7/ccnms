@@ -61,7 +61,6 @@
     <link rel="stylesheet" href="${contextPath}/resources/admin/assets/vendor/libs/apex-charts/apex-charts.css" />
 
     <!-- Page CSS -->
-
     <!-- Helpers -->
     <script src="${contextPath}/resources/admin/assets/vendor/js/helpers.js"></script>
 

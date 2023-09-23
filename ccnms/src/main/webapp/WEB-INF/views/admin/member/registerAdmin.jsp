@@ -30,6 +30,7 @@
 </script>
 
 <body>
+<div align="center" style="padding-top: 50px">
 	<section>
 	    <div class="container-xxl">
 	      <div class="authentication-wrapper authentication-basic container-p-y">
@@ -99,12 +100,10 @@
 	                </a>
 	              </div>
 	              <!-- /Logo -->
-	              <br>
 	              <h4 class="mb-2"></h4>
 	              <p class="mb-4"></p>
-	
-	              <form id="formAuthentication" class="mb-3" action="${contextPath }/admin/registerAdmin"
- method="POST">
+				   <div align="left" style="padding-top: 50px"> 
+	              <form id="formAuthentication" class="mb-3" action="${contextPath }/admin/registerAdmin" method="POST">
 	                <div class="mb-3">
 	                  <label for="adminId" class="form-label"><strong>관리자 ID</strong></label>
 	                  <input
@@ -116,6 +115,7 @@
 	                    autofocus
 	                  />
 	                </div>
+	                <br>
 	                <div class="mb-3 form-password-toggle">
 	                  <label class="form-label" for="passwd"><strong>관리자 비밀번호</strong></label>
 	                  <div class="input-group input-group-merge">
@@ -133,6 +133,7 @@
 	
 	                <div class="mb-3">
 	                  <div class="form-check">
+						<br>	                    
 	                    <input class="form-check-input" type="checkbox" id="allAgreeYN" name="allAgreeYN" />
 	                    <label class="form-check-label" for="terms-conditions">
 	                      [필수]
@@ -140,9 +141,10 @@
 	                    </label>
 	                  </div>
 	                </div>
+	                <br>
 	                <button class="btn btn-primary d-grid w-100">회원가입하기</button>
 	              </form>
-	
+	              <hr>
 	              <p class="text-center">
 	                <span>이미 모두디깅 관리자이신가요?</span>
 	                <a href="${contextPath }/admin/loginAdmin">
@@ -156,6 +158,6 @@
 	      </div>
 	    </div>
 	</section>
-
+</div>
 </body>
 </html>
