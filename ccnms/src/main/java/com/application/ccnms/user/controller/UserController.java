@@ -82,8 +82,9 @@ public class UserController {
 		    jsScript +="</script>";
 		}
 		else {
+			HttpSession session = request.getSession();
 			jsScript = "<script>";
-			jsScript +="alert('X');";
+			jsScript +="history.go(-1);";
 		  	jsScript +="</script>";
 		}
 		return jsScript;
