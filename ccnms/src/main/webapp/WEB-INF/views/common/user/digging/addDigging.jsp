@@ -42,13 +42,15 @@
 	                  	 	<div >
 	                  	 		<select name="diggingTopic" >
 			  						<option>디깅 토픽 선택</option>
-			  						<option>1</option>
-			  						<option>2</option>
-			  						<option>3</option>
-			  						<option>3</option>
-			  						<option>3</option>
-			  						<option>3</option>
-			  						<option>4</option>
+			  						<option>게임</option>
+			  						<option>K-POP</option>
+			  						<option>OTT</option>
+			  						<option>동물 & 애완동물</option>
+			  						<option>비즈니스</option>
+			  						<option>스포츠</option>
+			  						<option>연예인</option>
+			  						<option>여행</option>
+			  						<option>패션</option>
 		  						</select>
 	                  	 	</div>
 	                  	 	</li>
@@ -70,6 +72,7 @@
                  				</div>
 							</li>
 	                   		<li class="nav-item">	
+	                   		<br>
 	                   		<div class="demo-inline-spacing">
                         		<button type="button" class="btn btn-primary active">작성</button>
                         		<button type="button" class="btn btn-primary" onclick="">새로고침</button>
@@ -83,6 +86,7 @@
     	</div>
   	</form>
 </div>
-
+<br>
+<hr>
 </body>
 </html>

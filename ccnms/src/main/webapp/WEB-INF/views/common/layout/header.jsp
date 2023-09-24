@@ -83,8 +83,8 @@
                         <ul>
                             <li></li>
                             <li></li>
-                            <li><a href="${contextPath }/">홈</a></li>
-                            <li><a href="${contextPath }/shop/">상점</a>
+                            <li><a href="${contextPath }/"><img alt="홈에러" src="${contextPath }/resources/bootstrap/img/home.png"> 홈</a></li>
+                            <li><a href="${contextPath }/shop/"><img alt="상점에러" src="${contextPath }/resources/bootstrap/img/shop.png"> 상점</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
                                     <li><a href="./shoping-cart.html">Shoping Cart</a></li>
@@ -93,7 +93,7 @@
                                 </ul>
                             </li>
                             <li class="active"><a href="${contextPath }/digging/main">디깅</a></li>
-                            <li><a href="${contextPath }/digging/ranking">디깅랭킹</a></li>
+                            <li><a href="${contextPath }/digging/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png">디깅랭킹</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -122,18 +122,18 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>Digging Topic</span>
+                            <span>디깅 토픽</span>
                         </div>
                         <ul>
-                            <li><a href="#">게임</a></li>
-                            <li><a href="#">K-POP</a></li>
-                            <li><a href="#">OTT</a></li>
-                            <li><a href="#">동물 & 애완동물</a></li>
-                            <li><a href="#">비즈니스</a></li>
-                            <li><a href="#">스포츠</a></li>
-                            <li><a href="#">연예인</a></li>
-                            <li><a href="#">정치</a></li>
-                            <li><a href="#">패션</a></li>
+                            <li><a href="#"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/game.png"><strong>&emsp;게임</strong></a></li>
+                            <li><a href="#"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/music.png"><strong>&emsp;K-POP</strong></a></li>
+                            <li><a href="#"><img alt="오티티에러" src="${contextPath }/resources/bootstrap/img/videos.png"><strong>&emsp;OTT</strong></a></li>
+                            <li><a href="#"><img alt="펫에러" src="${contextPath }/resources/bootstrap/img/dog.png"><strong>&emsp;동물 & 애완동물</strong></a></li>
+                            <li><a href="#"><img alt="비즈니스에러" src="${contextPath }/resources/bootstrap/img/buss.png"><strong>&emsp;비즈니스</strong></a></li>
+                            <li><a href="#"><img alt="스포츠에러" src="${contextPath }/resources/bootstrap/img/heal.png"><strong>&emsp;스포츠</strong></a></li>
+                            <li><a href="#"><img alt="연예인에러" src="${contextPath }/resources/bootstrap/img/person.png"><strong>&emsp;연예인</strong></a></li>
+                            <li><a href="#"><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/world.png"><strong>&emsp;여행</strong></a></li>
+                            <li><a href="#"><img alt="패션에러" src="${contextPath }/resources/bootstrap/img/fas.png"><strong>&emsp;패션</strong></a></li>
                         </ul>
                     </div>
                 </div>

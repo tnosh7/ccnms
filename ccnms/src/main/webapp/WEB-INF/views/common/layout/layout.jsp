@@ -38,7 +38,6 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
@@ -54,29 +53,32 @@
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="${contextPath }/resources/bootstrap/img/language.png" alt="언어변경이미지에러">
                		<div class="header__top__right__auth">
-                      	<a href="#"><button type="button" class="btn btn-outline-dark">login</button></a>
+                      	<a href="#"><button type="button" class="btn btn-outline-dark">로그인</button></a>
                      </div>
             	</div>
              <div class="header__top__right__language">
-                <a href="#"><button type="button" class="btn btn-outline-success">sign up</button></a>
+                <a href="#"><button type="button" class="btn btn-outline-success">회원가입</button></a>
              </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Digging</a></li>
-                <li><a href="#">Shop</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
+                <li class="active"><a href="${contextPath }/"><img alt="홈에러" src="${contextPath }/resources/bootstrap/img/home.png"> 홈</a></li>
+                <li><a href="${contextPath }/shop/"><img alt="상점에러" src="${contextPath }/resources/bootstrap/img/shop.png"> 상점</a></li>
+                <li><a href="${contextPath }/digging/main">디깅</a>
+                 <ul class="header__menu__dropdown">
+                     <li><a href="#"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/game.png"><strong> 게임</strong></a></li>
+                     <li><a href="#"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/music.png"><strong> K-POP</strong></a></li>
+                     <li><a href="#"><img alt="오티티에러" src="${contextPath }/resources/bootstrap/img/videos.png"><strong> OTT</strong></a></li>
+                     <li><a href="#"><img alt="펫에러" src="${contextPath }/resources/bootstrap/img/dog.png"><strong> 동물 & 애완동물</strong></a></li>
+                     <li><a href="#"><img alt="비즈니스에러" src="${contextPath }/resources/bootstrap/img/buss.png"><strong> 비즈니스</strong></a></li>
+                     <li><a href="#"><img alt="스포츠에러" src="${contextPath }/resources/bootstrap/img/heal.png"><strong> 스포츠</strong></a></li>
+                     <li><a href="#"><img alt="연예인에러" src="${contextPath }/resources/bootstrap/img/person.png"><strong> 연예인</strong></a></li>
+                     <li><a href="#"><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/world.png"><strong> 여행</strong></a></li>
+                     <li><a href="#"><img alt="패션에러" src="${contextPath }/resources/bootstrap/img/fas.png"><strong> 패션</strong></a></li>
+                  </ul>
                 </li>
-                <li><a href="./blog.html">Best</a></li>
-                <li><a href="./contact.html">Rank</a></li>
+                <li><a href="${contextPath }/digging/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png"> 디깅랭킹</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -84,12 +86,13 @@
             <a href="#"><i class="fa fa-facebook"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+         <a href="#"><i class="fa fa-pinterest-p"></i></a>
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
+                <li><i class="fa fa-envelope"></i> moduDigging@gmail.com</li>
+                <li>Let's Digging!!</li>
+                <li>What you like More digging!</li>
             </ul>
         </div>
     </div>

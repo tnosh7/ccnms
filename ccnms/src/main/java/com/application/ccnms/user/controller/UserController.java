@@ -40,7 +40,6 @@ public class UserController {
 		else emailYN = "Y";
 		userDTO.setEmailYN(emailYN);
 		
-		//email도메인 email값에 추가
 		String emailDomain = request.getParameter("emailDomain");
 		String email = request.getParameter("email");
 		if (emailDomain != "") {
@@ -100,4 +99,5 @@ public class UserController {
 	
 		return jsScript;
 	}
+	
 }

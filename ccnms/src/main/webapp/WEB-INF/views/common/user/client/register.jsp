@@ -49,6 +49,8 @@
 				   }
 				   else {
 					   $("#passwdCheckWarn").html("비밀번호 확인이 완료되었습니다.");
+					   $("#passwdCheckWarn").css("color", "green");
+					   
 				   }
 				}
 			});
@@ -75,6 +77,7 @@
 					success : function(duplicateUserId) {
 						if(duplicateUserId == "N") {
 							$("#userIdCheckWarn").html("사용가능한 아이디입니다.");
+							$("#userIdCheckWarn").css("color", "green");
 							validateId = true;
 						}								
 						else {
@@ -237,6 +240,7 @@
 	                                    </div>
 	                                </div>
 	                            </div>
+	                            <!-- 
 	                             <div class="row">
 	                                <div class="col-lg-6">
 	                                    <div class="checkout__input">
@@ -250,6 +254,7 @@
 	                                </div>
 	                                <p><span id="passwdCheckWarn"></span></p>
 	                            </div>
+	                             -->
 	                        </div>
 	                        <div class="col-lg-4 col-md-6">
 	                            <div class="checkout__order">
