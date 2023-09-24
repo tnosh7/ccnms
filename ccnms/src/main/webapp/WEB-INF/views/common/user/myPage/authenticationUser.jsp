@@ -39,8 +39,9 @@
                            </div>
                            <br>
                            <div align="center">
+                           	   <input type="hidden" name="userId" value="${userDTO.userId }"/>
+                           	   <input type="hidden" name="menu "value="${menu}"/>
 	                           <button type="submit" class="site-btn" width="600">인증</button>
-                           	   <input type="hidden" value="${userDTO.userId }"/>
                            </div>
                            <br>
                            <div class="row">

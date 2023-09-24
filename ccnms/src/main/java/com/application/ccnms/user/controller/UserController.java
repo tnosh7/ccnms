@@ -70,6 +70,7 @@ public class UserController {
 	
 	@PostMapping("/loginUser")
 	public @ResponseBody String loginUser(HttpServletRequest request, UserDTO userDTO) throws Exception {
+	
 		String jsScript = "";
 		if(userService.loginUser(userDTO) != null) {
 			HttpSession session = request.getSession();

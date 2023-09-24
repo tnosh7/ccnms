@@ -21,5 +21,6 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public UserDTO getUserDetail(String userId) throws Exception {
 		return myPageDAO.selectOneUserDetail(userId);
-	} 
+	}
+
 }

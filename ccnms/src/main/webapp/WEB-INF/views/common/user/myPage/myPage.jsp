@@ -179,23 +179,23 @@
 	                   		 <legend class="mt-4"><img src="${contextPath}/resources/admin/assets/img/icons/unicons/user-detail.png">프로모션 정보수신 동의</legend>
 	                   		 <div class="form-check form-switch">
 						        <input class="form-check-input" type="checkbox" id="emailYN" <c:if test="${userDTO.emailYN =='Y'}"> checked</c:if>/>
-						        <label class="form-check-label" for="emailYN">Checked switch checkbox input</label>
+						        <label class="form-check-label" for="emailYN">이메일 수신 여부</label>
 						      </div>
 	                         </div>
 	                         <br>
 	                       <div class="mt-2">
-	                         <button type="button" class="btn btn-primary me-2" onclick="location.href='${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }'">&emsp;수정&emsp;</button>
+	                         <button type="button" class="btn btn-primary me-2" onclick="location.href='${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=update'">&emsp;수정&emsp;</button>
 	                       </div>
 	                   </div>
 	                   <br>
 	                   <br>
              		  <div class="mb-2 col-md-12" align="right">
 		             <div>
-		                <button type="button" class="btn btn-danger deactivate-account" >회원탈퇴</button>
+		                <button type="button" class="btn btn-danger deactivate-account" onclick="location.href='${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=delete'">회원탈퇴</button>
 		             </div>
 		           </div>  
 	                   <!-- /Account -->
-	                 </div>
+	               </div>
                  </div>
                 </div>
                </div>
