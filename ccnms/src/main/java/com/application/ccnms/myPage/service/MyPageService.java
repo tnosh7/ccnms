@@ -7,4 +7,5 @@ public interface MyPageService {
 	public void addProfile(UserDTO userDTO) throws Exception;
 	public UserDTO getUserDetail(String userId) throws Exception;
 	public boolean checkAuthenticationUser(UserDTO userDTO) throws Exception;
+	public void getModify(UserDTO userDTO) throws Exception;
 }

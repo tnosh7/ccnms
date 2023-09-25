@@ -37,4 +37,9 @@ public class MyPageServiceImpl implements MyPageService {
 		return isAuthentication;
 	}
 
+	@Override
+	public void getModify(UserDTO userDTO) throws Exception {
+		myPageDAO.updateUser(userDTO);
+	}
+
 }

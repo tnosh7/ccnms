@@ -19,4 +19,38 @@
 				USER_ID = #{userId}
 	</select>
 	
+	<update id="updateUser" parameterType="UserDTO">
+		UPDATE USER (
+			PROFILE,
+			USER_ID,
+			USER_NM,
+			EMAIL,
+			BIRTH_DT,
+			HP,
+			SEX,
+			ZIPCODE,
+			ROADADDRESS,
+			JIBUNADDRES,
+			NAMUJIADDRESS,
+			EMAIL_YN,
+			JOIN_DT
+		)
+		SET (
+			#{profile},
+			#{userId},
+			#{userNm},
+			#{email},
+			#{birthDT},
+			#{hp},
+			#{sex},
+			#{zipcode},
+			#{roadAddress},
+			#{namujiAddress},
+			#{jibunAddress},
+			#{emailYN},
+			NOW()		
+		)
+		WHERE 
+			USER_ID = #{userId}
+	</update>
 </mapper>

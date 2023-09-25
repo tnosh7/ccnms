@@ -16,7 +16,10 @@ public class AdminUserController {
 	private AdminUserService adminUserService;
 	
 	@GetMapping("/user")
-	public ModelAndView user() {
-		return new ModelAndView("/management/user");
+	public ModelAndView user() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/management/user");
+		mv.addObject("userDTO", adminUserService.getUserList());
+		return mv;
 	}
 }

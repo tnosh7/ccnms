@@ -31,4 +31,9 @@ public class MyPageDAOImpl implements MyPageDAO {
 	public String selectOneAuthenticationUser(String userId) throws Exception {
 		return sqlSession.selectOne("myPage.selectOneAuthenticationUser", userId);
 	}
+
+	@Override
+	public void updateUser(UserDTO userDTO) throws Exception {
+		sqlSession.update("myPage.updateUser", userDTO);
+	}
 }
