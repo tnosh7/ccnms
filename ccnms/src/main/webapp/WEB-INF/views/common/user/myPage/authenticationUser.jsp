@@ -22,7 +22,7 @@
     </div>
      <section class="checkout spad">
         <div class="container" align="center">
-        	<form action="${contextPath }/myPage/authenticationUser" method="post" class="checkout__form">
+        	<form action="${contextPath }/myPage/authenticationUser" method="post">
                <div class="col-lg-8">
                    <img src="${contextPath }/resources/bootstrap/img/logo.png" width="200"/>
 				   <br>
@@ -40,19 +40,15 @@
                            <br>
                            <div align="center">
                            	   <input type="hidden" name="userId" value="${userDTO.userId }"/>
-                           	   <input type="hidden" name="menu "value="${menu}"/>
+                           	   <input type="hidden" name="menu" value="${menu}"/>
 	                           <button type="submit" class="site-btn" width="600">인증</button>
                            </div>
                            <br>
-                           <div class="row">
-			                <div class="col-lg-12">
 			            </div>
                        </div>
-                   </div>
-                 </div>
+               		</div>
+               	</form>
                </div>
-            </form>
-        </div>
     </section>
 
 </body>

@@ -10,4 +10,13 @@
 		WHERE 
 				USER_ID = #{userId}	
 	</select>
+	<select id="selectOneAuthenticationUser" parameterType="String" resultType="String">
+		SELECT 
+				PASSWD AS passwd
+		FROM
+				USER
+		WHERE
+				USER_ID = #{userId}
+	</select>
+	
 </mapper>

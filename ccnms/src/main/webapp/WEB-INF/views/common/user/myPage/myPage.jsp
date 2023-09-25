@@ -7,6 +7,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+	$().ready(function(){
+		var authentication = ${menu};
+		console.log(authentication);
+		if (authentication == "update") {
+			$("#userId").prop("readonly", false);
+		}
+	});
+
 </script>
 </head>
 <body>

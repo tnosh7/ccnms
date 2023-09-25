@@ -49,21 +49,37 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/authenticationUser") 
-	public @ResponseBody String authenticationUser(HttpServletRequest request, @RequestParam("menu")String menu, @ModelAttribute UserDTO userDTO) {
-		
+	public @ResponseBody String authenticationUser(HttpServletRequest request, @RequestParam("menu")String menu, @ModelAttribute UserDTO userDTO) throws Exception {
+		String jsScript="";
+		System.out.println("menu : ");
 		if (myPageService.checkAuthenticationUser(userDTO)) {
-			
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", userDTO.getUserId());
+			session.setAttribute("role", "user");
+			session.setAttribute("menu", "update");
+
 			if(menu.equals("update")) {
-				
+				jsScript = "<script>";
+				jsScript+= "location.href='" + request.getContextPath() + "/myPage/main'";	
+				jsScript+="</script>";
 			}
 			else if (menu.equals("delete")) {
-				
+				jsScript = "<script>";
+				jsScript+= "location.href='" + request.getContextPath() + "/myPage/main'";	
+				jsScript+="</script>";
 			}
 		}
 		else {
-			
+			jsScript = "<script>";
+			jsScript+= "history.go(-1);";
+			jsScript+="</script>";
 		}
-		
-		
+		return jsScript;
 	}
+	
+	
+	
+	
+	
+	
 }

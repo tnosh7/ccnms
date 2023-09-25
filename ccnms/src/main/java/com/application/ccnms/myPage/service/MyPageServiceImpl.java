@@ -29,12 +29,12 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public UserDTO checkAuthenticationUser(UserDTO userDTO) throws Exception {
-		
-		if (bCryptPasswordEncoder.matches(userDTO.getPasswd(), 	myPageDAO.selectOneAuthenticationUser(userDTO.getUserId())) {
-			return userDTO;
+	public boolean checkAuthenticationUser(UserDTO userDTO) throws Exception {
+		boolean isAuthentication = false;
+		if (bCryptPasswordEncoder.matches(userDTO.getPasswd(), 	myPageDAO.selectOneAuthenticationUser(userDTO.getUserId()))) {
+			isAuthentication = true;
 		}
-		return null;
+		return isAuthentication;
 	}
 
 }
