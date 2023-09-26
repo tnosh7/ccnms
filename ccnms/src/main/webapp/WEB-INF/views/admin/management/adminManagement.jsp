@@ -20,7 +20,6 @@ nav {
   margin-left: auto;
 }
 </style>
-</head>
 <script>
 	$().ready(function(){
 		
@@ -56,17 +55,20 @@ nav {
 								$(data).each(function(){
 									adminList +="<tr>"
 									adminList +="<td><input type='checkbox' id='adminCheck' name='adminCheck'></td>"
-									adminList +="<td>${data.adminId }</td>"
-									adminList +="<td>${data.joinDT }</td>"
-									adminList +="<td>${data.allAgreeYN }</td>"
+									adminList +="<td>" + this.adminId+ "</td>"
+									adminList +="<td>" + this.adminNm+ "</td>"
+									adminList +="<td>" + this.adminRank+ "</td>"
+									adminList +="<td>" + this.joinDT+ "</td>"
 									adminList +="</tr>"
-								})
+								});
 							}
+						$("#adminList").html(adminList);
 						}
 					})
 			});		
 		});
 </script>
+</head>
 <body>
 <fieldset>
 <section>
@@ -130,13 +132,12 @@ nav {
 	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="searchKey">
                           <option selected value="">검색선택</option>
                           <option value="adminId">아이디</option>
-                          <option value="joinDT">..</option>
+                          <option value="adminNm">이름</option>
+                          <option value="adminRank">직급</option>
                     </select>
                 	</li>
                 	&emsp;
                 	<li><input id="defaultInput" class="form-control" name="searchKeyword" type="text" placeholder="검색어를 입력하세요"></li>
-                	&emsp;
-                	<li><button type="button" class="btn btn-success" id="searchBtn">조 회</button></li>
                 	&emsp;
                 	<li><button type="button" class="btn btn-outline-success">새로고침</button></li>
                	 </ul>
@@ -147,12 +148,12 @@ nav {
                       <tr height="">
                       	<th width="30"><input type="checkbox" id="allCheck"></th>
                         <th>아이디</th>
+                        <th>이름</th>
+                        <th>직급</th>
                         <th>입사일</th>
-                        <th width="100">개인정보동의</th>
-                        <th>상세조회</th>
                       </tr>
                     </thead>
-                    <tbody align="center">
+                    <tbody id="adminList" align="center">
                      <c:choose>
                       <c:when test="${empty adminList }">
                       <tr>
@@ -164,15 +165,15 @@ nav {
                       </tr>
                       </c:when>
                       <c:otherwise>
-                      <c:forEach var="adminDTO" items="${adminList }"> 
-                      	 <tr>
-	                      	<td><input type="checkbox" id="adminCheck" name="adminCheck"></td>
-	                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminId }</td>
-	                        <td><fmt:formatDate value="${adminDTO.joinDT }" pattern="yyyy-MM-dd"/> </td>
-	                        <td><span class="badge bg-label-success me-1">${adminDTO.allAgreeYN }</span></td>
-                      		<th><input type="button" value="상세조회"></th>
-                      	</tr>
-                      </c:forEach>
+	                      <c:forEach var="adminDTO" items="${adminList }"> 
+	                      	 <tr>
+		                      	<td><input type="checkbox" id="adminCheck" name="adminCheck"></td>
+		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminId }</td>
+		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminNm }</td>
+		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminRank }</td>
+		                        <td><fmt:formatDate value="${adminDTO.joinDT }" pattern="yyyy-MM-dd"/> </td>
+	                      	</tr>
+	                      </c:forEach>
                       </c:otherwise>
                      </c:choose>
                     </tbody>

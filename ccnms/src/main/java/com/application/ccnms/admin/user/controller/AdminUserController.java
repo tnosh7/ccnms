@@ -37,7 +37,7 @@ public class AdminUserController {
 	}
 	
 	@GetMapping("/searchAdmin") 
-	public @ResponseBody List<AdminDTO> searchAdmin (@RequestParam("param") Map<String, String> searchMap) throws Exception {
+	public @ResponseBody List<AdminDTO> searchAdmin (@RequestParam Map<String, String> searchMap) throws Exception {
 		return adminUserService.getSearchAdmin(searchMap); 
 	}
 	

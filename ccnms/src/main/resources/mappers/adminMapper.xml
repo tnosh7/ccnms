@@ -15,9 +15,10 @@
 				ADMIN
 		VALUES (
 			#{adminId},
+			#{adminNm},
 			#{passwd},
-			NOW(),
-			#{allAgreeYN}
+			#{adminRank},
+			NOW()
 		)
 	</insert>
 </mapper>

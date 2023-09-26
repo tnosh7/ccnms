@@ -8,14 +8,21 @@ import org.springframework.stereotype.Component;
 public class AdminDTO {
 
 	private String adminId;
+	private String adminNm;
 	private String passwd;
+	private String adminRank;
 	private Date joinDT;
-	private String allAgreeYN;
 	public String getAdminId() {
 		return adminId;
 	}
 	public void setAdminId(String adminId) {
 		this.adminId = adminId;
+	}
+	public String getAdminNm() {
+		return adminNm;
+	}
+	public void setAdminNm(String adminNm) {
+		this.adminNm = adminNm;
 	}
 	public String getPasswd() {
 		return passwd;
@@ -23,24 +30,23 @@ public class AdminDTO {
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
 	}
+	public String getAdminRank() {
+		return adminRank;
+	}
+	public void setAdminRank(String adminRank) {
+		this.adminRank = adminRank;
+	}
 	public Date getJoinDT() {
 		return joinDT;
 	}
 	public void setJoinDT(Date joinDT) {
 		this.joinDT = joinDT;
 	}
-	public String getAllAgreeYN() {
-		return allAgreeYN;
-	}
-	public void setAllAgreeYN(String allAgreeYN) {
-		this.allAgreeYN = allAgreeYN;
-	}
 	@Override
 	public String toString() {
-		return "AdminDTO [adminId=" + adminId + ", passwd=" + passwd + ", joinDT=" + joinDT + ", allAgreeYN="
-				+ allAgreeYN + "]";
+		return "AdminDTO [adminId=" + adminId + ", adminNm=" + adminNm + ", passwd=" + passwd + ", adminRank="
+				+ adminRank + ", joinDT=" + joinDT + "]";
 	}
-	
 	
 	
 }

@@ -103,7 +103,8 @@ function execDaumPostcode() {
 	                           <i class="bx bx-upload d-block d-sm-none"></i>
 	                           <input
 	                             type="file"
-	                             id="upload"
+	                             id="file"
+	                             name="file"
 	                             class="account-file-input"
 	                             hidden
 	                             accept="image/png, image/jpeg"

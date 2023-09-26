@@ -20,8 +20,14 @@
 		FROM 
 				ADMIN
 		<where>
-			<if test='searchKey == "adminId"'>
-				ADMIN_ID LIKE IN CONCAT ('%', '#{searchKeyword}', '%')
+			<if test='searchKey.equals("adminId")'>
+				ADMIN_ID LIKE CONCAT ('%', #{searchKeyword}, '%')
+			</if>
+			<if test='searchKey.equals("adminNm")'>
+				ADMIN_NM LIKE CONCAT ('%', #{searchKeyword}, '%')
+			</if>
+			<if test='searchKey.equals("adminRank")'>
+				ADMIN_Rank LIKE CONCAT ('%', #{searchKeyword}, '%')
 			</if>
 		</where>
 	</select>

@@ -72,7 +72,7 @@ public class AdminController {
 	
 	@PostMapping("/registerAdmin")
 	public @ResponseBody String registerAdmin(HttpServletRequest request, AdminDTO adminDTO) {
-		
+		System.out.println(adminDTO);
 		adminService.addRegisterAdmin(adminDTO);
 		HttpSession session = request.getSession();
 		session.setAttribute("adminId", adminDTO.getAdminId());

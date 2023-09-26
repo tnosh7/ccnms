@@ -7,28 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script>
-	var allAgreeYN = "";
-	$().ready(function(){
-		
-		$("[name='allAgreeYN']").change(function(){
-			allAgreeYN = $("[name='allAgreeYN']").val();
-			if (allAgreeYN == null) {
-				allAgreeYN = 'N';
-				return;
-			}
- 		})
- 		
- 		$("form").submit(function(){
- 			if (allAgreeYN == 'N')
- 				return;
- 		})
-	});
-	
-	
-
-</script>
-
 <body>
 <div align="center" style="padding-top: 50px">
 	<nav
@@ -139,7 +117,17 @@
 	                    autofocus
 	                  />
 	                </div>
+	                  <label for="adminNm" class="form-label"><strong>관리자 이름</strong></label>
+	                  <input
+	                    type="text"
+	                    class="form-control"
+	                    id="adminNm"
+	                    name="adminNm"
+	                    placeholder="Enter your name"
+	                  />
+	                </div>
 	                <br>
+	                <div align="left">
 	                <div class="mb-3 form-password-toggle">
 	                  <label class="form-label" for="passwd"><strong>관리자 비밀번호</strong></label>
 	                  <div class="input-group input-group-merge">
@@ -154,15 +142,25 @@
 	                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
 	                  </div>
 	                </div>
+					<div>
+	                <div class="mb-3 form-password-toggle">
+	                  <label class="form-label" for="adminRank"><strong>관리자 직급</strong></label>
+	                  <div class="input-group input-group-merge">
+	                    <input
+	                    type="text"
+	                    class="form-control"
+	                    id="adminRank"
+	                    name="adminRank"
+	                    placeholder="Enter your name"
+	                  />
+	                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+	                  </div>
+	                </div>
 	
 	                <div class="mb-3">
 	                  <div class="form-check">
 						<br>	                    
-	                    <input class="form-check-input" type="checkbox" id="allAgreeYN" name="allAgreeYN" />
-	                    <label class="form-check-label" for="terms-conditions">
-	                      [필수]
-	                      <a href="javascript:void(0);">모두디깅 이용약관, 개인정보 수집 및 이용에 모두 동의합니다</a>
-	                    </label>
+						</div>
 	                  </div>
 	                </div>
 	                <br>

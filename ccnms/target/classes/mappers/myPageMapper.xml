@@ -22,49 +22,36 @@
 	<update id="updateUser" parameterType="UserDTO">
 		UPDATE USER
 		<set>
-			<if test='profile != null and profile !=""'>
-			PROFILE,
+			<if test='profile != null and !profile.equals("")'>
+			PROFILE = #{profile},
 			</if >
-			<if test='userId != null and userId !=""'>	
-			USER_ID,
+			<if test='userId != null and !userId.equals("")'>	
+			USER_ID = #{userId},
 			</if>
-			<if test='userNm != null and userNm !=""'>
-			USER_NM,
+			<if test='userNm != null and !userNm.equals("")'>
+			USER_NM  = #{userNm},
 			</if>
-				<if test='email != null and email !=""'>
-			EMAIL,
+				<if test='email != null and !email.equals("")'>
+			EMAIL  = #{email},
 			</if>
-				<if test='birthDt != null and birthDt !=""'>
-			BIRTH_DT,
+				<if test='birthDT != null and !birthDT.equals("")'>
+			BIRTH_DT  = #{birthDT}, 
 			</if>
-				<if test='hp != null and hp !=""'>
-			HP,
+				<if test='hp != null and !hp.equals("")'>
+			HP  = #{hp},
 			</if>
-				<if test='zipcode != null and zipcode !=""'>
-			ZIPCODE,
+				<if test='zipcode != null and !zipcode.equals("")'>
+			ZIPCODE  = #{zipcode},
 			</if>
-				<if test='roadAddress != null and roadAddress !=""'>
-			ROADADDRESS,
+				<if test='roadAddress != null and !roadAddress.equals("")'>
+			ROADADDRESS  = #{roadAddress},
 			</if>
-				<if test='jibunaddress != null and jibunaddress !=""'>
-			JIBUNADDRES,
+				<if test='jibunAddress != null and !jibunAddress.equals("")'>
+			JIBUNADDRES  = #{jibunAddress},
 			</if>
-				<if test='namujiAddress != null and namujiAddress !=""'>
-			NAMUJIADDRESS
+				<if test='namujiAddress != null and !namujiAddress !=""'>
+			NAMUJIADDRESS  = #{namujiAddress},
 			</if>
-		)
-		SET (
-			#{profile},
-			#{userId},
-			#{userNm},
-			#{email},
-			#{birthDT},
-			#{hp},
-			#{zipcode},
-			#{roadAddress},
-			#{jibunAddress},
-			#{namujiAddress}
-		)
 		</set>
 		WHERE 
 			USER_ID = #{userId}
