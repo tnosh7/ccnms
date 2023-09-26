@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.application.ccnms.admin.dto.AdminDTO;
 import com.application.ccnms.admin.user.dao.AdminUserDAO;
 import com.application.ccnms.user.dto.UserDTO;
 
@@ -17,5 +18,10 @@ public class AdminUserServiceImpl implements AdminUserService {
 	@Override
 	public List<UserDTO> getUserList() throws Exception {
 		return adminUserDAO.selectListUser();
+	}
+
+	@Override
+	public List<AdminDTO> getAdminList() throws Exception {
+		return adminUserDAO.selectListAdmin();
 	}
 }

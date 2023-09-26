@@ -5,5 +5,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/management/userManagement.jsp"/>	
  		<put-attribute name="title" value="유저 관리"/>	
 	</definition>
+	<definition name="/management/admin" extends="admin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/management/adminManagement.jsp"/>	
+ 		<put-attribute name="title" value="관리자 관리"/>	
+	</definition>
 
 </tiles-definitions>			

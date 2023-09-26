@@ -7,6 +7,10 @@
 	 	</definition>
 	 	<definition name="/myPage/authenticationUser" extends="common">
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/myPage/authenticationUser.jsp"/>
-	 		<put-attribute name="title" value="내 회원정보"/>	
+	 		<put-attribute name="title" value="회원정보 재인증"/>	
+	 	</definition>
+	 	<definition name="/myPage/modifyMyPage" extends="common">
+	 		<put-attribute name="body" value="/WEB-INF/views/common/user/myPage/modifyMyPage.jsp"/>
+	 		<put-attribute name="title" value="내 회원정보 수정"/>	
 	 	</definition>
 </tiles-definitions>

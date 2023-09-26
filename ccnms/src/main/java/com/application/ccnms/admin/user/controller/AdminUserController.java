@@ -19,7 +19,14 @@ public class AdminUserController {
 	public ModelAndView user() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/management/user");
-		mv.addObject("userDTO", adminUserService.getUserList());
+		mv.addObject("userList", adminUserService.getUserList());
+		return mv;
+	}
+	@GetMapping("/admin")
+	public ModelAndView admin() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/management/admin");
+		mv.addObject("adminList", adminUserService.getAdminList());
 		return mv;
 	}
 }

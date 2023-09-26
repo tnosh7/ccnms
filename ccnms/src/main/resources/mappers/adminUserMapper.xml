@@ -8,4 +8,10 @@
 		FROM 
 				USER	
 	</select>
+	<select id="selectListAdmin" resultType="AdminDTO">
+		SELECT 
+				*
+		FROM 
+				ADMIN
+	</select>
 </mapper>

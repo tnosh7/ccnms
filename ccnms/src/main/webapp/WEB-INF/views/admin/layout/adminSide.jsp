@@ -7,6 +7,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script>
+	$().ready(function(){
+		
+		$("#allCheck").change(function(){
+			if($("#allCheck").prop("checked")) {
+				$("[name='userCheck']").prop("checked", true);			
+			}
+			else if($("#allCheck").prop("checked", false)) {
+				$("[name='userCheck']").prop("checked", false);	
+			}
+		});
+	});
+
+</script>
 <body>
         <!-- Menu -->
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -76,6 +90,7 @@
           </li>
           <li class="menu-header small text-uppercase">
             <span class="menu-header-text">관리자 관리</span>
+            </a>
           </li>
            <li class="menu-item">
             <a href="${contextPath }/admin/loginAdmin" class="menu-link">
@@ -90,7 +105,7 @@
             </a>
           </li>
            <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
+            <a href="${contextPath }/admin/management/admin" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
               <div data-i18n="Basic">관리자 조회</div>
             </a>

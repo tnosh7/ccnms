@@ -20,6 +20,20 @@ nav {
 }
 </style>
 </head>
+<script>
+	$().ready(function(){
+		
+		$("#allCheck").change(function(){
+			if($("#allCheck").prop("checked")) {
+				$("[name='userCheck']").prop("checked", true);			
+			}
+			else if($("#allCheck").prop("checked", false)) {
+				$("[name='userCheck']").prop("checked", false);	
+			}
+		});
+	});
+
+</script>
 <body>
 <fieldset>
 <section>
@@ -81,7 +95,16 @@ nav {
 	               <ul class="nav nav-pills flex-column flex-md-row mb-3">
                 	<li>
 	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                          <option selected="">검색선택</option>
+                          <option selected="">검색선택1</option>
+                          <option value="1">핸드폰 번호</option>
+                          <option value="2">생년월일</option>
+                          <option value="3">이름</option>
+                    </select>
+                	</li>
+                	&emsp;
+                	<li>
+	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                          <option selected="">검색선택2</option>
                           <option value="1">핸드폰 번호</option>
                           <option value="2">생년월일</option>
                           <option value="3">이름</option>
@@ -98,37 +121,59 @@ nav {
                 </div>
                   <table class="table">
                     <thead class="table-light" align="center">
-                      <tr height="">
-                      	<th><input type="checkbox"></th>
+                      <tr>
+                      	<th width="30"><input type="checkbox" id="allCheck"></th>
                         <th>아이디</th>
                         <th>이름</th>
                         <th>생일</th>
                         <th>핸드폰번호</th>
                         <th>이메일</th>
-                        <th>성별</th>
-                        <th>수신동의</th>
-                        <th>프로필</th>
-                        <th>주소</th>
-                        <th>LIKE 포인트</th>
+                        <th width="80">성별</th>
+                        <th width="80">수신 동의</th>
+                        <th width="80">프로필</th>
+                        <th width="200">주소</th>
+                        <th width="80">LIKE</th>
                         <th>가입일</th>
                       </tr>
                     </thead>
                     <tbody align="center">
-                      <tr>
-                      	<td><input type="checkbox"></td>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i><strong>아디</strong></td>
-                        <td>이름</td>
-                        <td>생일</td>
-                        <td>010-1111-1111</td>
-                        <td>어쩌구@이멜</td>
-                        <td><span class="badge bg-label-primary me-1">Y</span></td>
-                        <td><span class="badge bg-label-success me-1">M</span></td>
-                        <td>이미지</td>
-                        <td>주소</td>
-                        <td>포인트</td>
-                        <td>가입일</td>
-                      </tr>
-                    </tbody>
+                    <c:choose>
+	                    <c:when test="${empty userList}">
+		                      <tr>
+		                      	<td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                      </tr>
+		                </c:when>
+	                <c:otherwise>
+	                	<c:forEach var="userDTO"  items="${userList}">
+	                		<tr>
+		                      	<td><input type="checkbox" id="userCheck" name="userCheck"></td>
+		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${userDTO.userId }</td>
+		                        <td>${userDTO.userId }</td>
+		                        <td>${userDTO.userNm }</td>
+		                        <td>${userDTO.birthDT}</td>
+		                        <td>${userDTO.email}</td>
+		                        <td><span class="badge bg-label-primary me-1">${userDTO.sex}</span></td>
+		                        <td><span class="badge bg-label-success me-1">${userDTO.emailYN}</span></td>
+		                        <td>${userDTO.profile}</td>
+		                        <td>${userDTO.zipcode} ${userDTO.roadAddress} ${userDTO.namujiAddress}</td>
+		                        <td>${userDTO.likePoint}</td>
+		                        <td>${userDTO.joinDT}</td>
+	                      	</tr>
+	                	</c:forEach>
+	                </c:otherwise>
+                   </c:choose>
+	              </tbody>
                   </table>
                   <br>
                </form>

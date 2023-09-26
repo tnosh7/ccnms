@@ -30,6 +30,7 @@
     .menu a{cursor:pointer;}
     .menu .hide{display:none;}
 </style>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="${contextPath}/resources/bootstrap/js/jquery-3.3.1.min.js"></script>
 <script src="${contextPath }/resources/ckeditor/ckeditor.js"></script>  
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

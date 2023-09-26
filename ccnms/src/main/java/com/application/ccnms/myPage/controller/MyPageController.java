@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,16 +64,14 @@ public class MyPageController {
 	@PostMapping("/authenticationUser") 
 	public @ResponseBody String authenticationUser(HttpServletRequest request, @RequestParam("menu")String menu, @ModelAttribute UserDTO userDTO) throws Exception {
 		String jsScript="";
-		System.out.println("menu : ");
 		if (myPageService.checkAuthenticationUser(userDTO)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userDTO.getUserId());
 			session.setAttribute("role", "user");
-			session.setAttribute("menu", "update");
 
 			if(menu.equals("update")) {
 				jsScript = "<script>";
-				jsScript+= "location.href='" + request.getContextPath() + "/myPage/main'";	
+				jsScript+= "location.href='" + request.getContextPath() + "/myPage/modifyMyPage'";	
 				jsScript+="</script>";
 			}
 			else if (menu.equals("delete")) {
@@ -88,46 +88,48 @@ public class MyPageController {
 		return jsScript;
 	}
 	
-	@GetMapping("/modifyUser") 
-	public ModelAndView modifyUser(MultipartHttpServletRequest multipartRequest, HttpServletRequest request) throws Exception  {
-		String fileName="";
-		Iterator<String> fileList = multipartRequest.getFileNames();
-		if(fileList.hasNext()) {
-			MultipartFile uploadFile = multipartRequest.getFile(fileList.next());
-			if(!uploadFile.getOriginalFilename().isEmpty()) {
-				SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-				fileName= fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();
-				uploadFile.transferTo(new File(FILE_REPO_PATH + fileName));
-				new File(FILE_REPO_PATH + multipartRequest.getParameter("beforeFileName")).delete(); 
-		}
-			
-		String emailYN = request.getParameter("emailYN");
-		if (emailYN == null) {
-			emailYN = "N";
-		}
-		else emailYN = "Y";
-		.setEmailYN(emailYN);
-		
-		String emailDomain = request.getParameter("emailDomain");
-		String email = request.getParameter("email");
-		if (emailDomain != "") {
-			email += emailDomain;
-		}
-		userDTO.setEmail(email);
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/myPage/authenticationUser");
+	@GetMapping("/modifyMyPage") 
+	public ModelAndView modifyMyPage(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
-		session.setAttribute("userId", myPageService.checkAuthenticationUser(userDTO));
-		session.setAttribute("role", "user");
+		ModelAndView mv= new ModelAndView();
+		mv.setViewName("/myPage/modifyMyPage");
+		mv.addObject("userDTO", myPageService.getUserDetail((String)session.getAttribute("userId")));
+		mv.addObject("role", "user");
 		return mv;
 	}
 	
+	@PostMapping("modifyMyPage") 
+	public ResponseEntity<Object> modifyMyPage(HttpServletRequest request, MultipartHttpServletRequest multipartRequest ) throws Exception {
 		
+		Iterator<String> fileList = multipartRequest.getFileNames();
+		String fileName= "";
+		if (fileList.hasNext()) {
+			MultipartFile uploadFile = multipartRequest.getFile(fileList.next());
+			if(!uploadFile.getOriginalFilename().isEmpty()) {
+				SimpleDateFormat fmt = new SimpleDateFormat("yyyymmdd");
+				fileName= fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();
+				uploadFile.transferTo(new File(FILE_REPO_PATH+fileName));
+				new File(FILE_REPO_PATH + multipartRequest.getParameter("beforeFileName")).delete();
+			}
+		}
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUserId(multipartRequest.getParameter("userId"));
+		userDTO.setUserNm(multipartRequest.getParameter("userNm"));
+		userDTO.setEmail(multipartRequest.getParameter("email"));
+		userDTO.setBirthDT(multipartRequest.getParameter("birthDT"));
+		userDTO.setHp(multipartRequest.getParameter("hp"));
+		userDTO.setZipcode(multipartRequest.getParameter("zipcode"));
+		userDTO.setRoadAddress(multipartRequest.getParameter("roadAddress"));
+		userDTO.setJibunAddress(multipartRequest.getParameter("jibunAddress"));
+		userDTO.setNamujiAddress(multipartRequest.getParameter("namujiAddress"));
+		userDTO.setProfile(fileName);
+		myPageService.getModify(userDTO);
 		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		String jsScript ="<script>";
+				jsScript +="alert('OK');";
+			   jsScript +="</script>";
+		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
 	}
-	
-	
-	
-	
-	
 }

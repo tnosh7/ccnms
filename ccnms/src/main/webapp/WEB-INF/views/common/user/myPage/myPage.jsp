@@ -43,11 +43,9 @@
 	                     >
 	                   </li>
 	                 </ul>
-	                 <div class="card mb-4">
-	                   <h5 class="card-header">${userDTO.userNm } 님</h5>
-	                   <!-- Account -->
-	                   
 	                   <div class="card-body">
+	                   <div align="left"><strong>프로필 이미지</strong></div>
+	                   <hr>
 	                     <div class="d-flex align-items-start align-items-sm-center gap-4">
 						   <c:choose>
 						   	<c:when test="${userDTO.profile eq null}">
@@ -72,26 +70,11 @@
 		                         name="profile"
 		                       />
 						   	</c:otherwise>
-						   
 						   </c:choose>
 	                       &emsp;&emsp;&emsp;
 	                       <div class="button-wrapper">
 	                        <p class="text-muted mb-0"></p>
-	                         <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-	                          <span class="d-none d-sm-block">프로필 사진 업로드</span>
-	                           <i class="bx bx-upload d-block d-sm-none"></i>
-	                           <input
-	                             type="file"
-	                             id="upload"
-	                             class="account-file-input"
-	                             hidden
-	                             accept="image/png, image/jpeg"
-	                           />
-	                         </label>
-	                         <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-	                           <i class="bx bx-reset d-block d-sm-none"></i>
-	                           <span class="d-none d-sm-block">Reset</span>
-	                         </button>
+	                          <header>${userDTO.userNm } 님</header>
 	                       </div>
 	                     </div>
 	                   </div>
@@ -164,16 +147,16 @@
 	                         <div class="mb-3 col-md-12" align="left">
 	                            <legend class="mt-4"><img src="${contextPath}/resources/admin/assets/img/icons/unicons/map.png">배송지 관리</legend>
 	                         </div>
-	                         <div class="mb-3 col-md-3">
+	                          <div class="mb-6 col-md-6">
 	                           <label for="address" class="form-label">우편번호</label>
 	                           <input type="text" class="form-control" id="zipcode" name="zipcode" value="${userDTO.zipcode }" readonly/>
 	                         </div>
-	                         <div class="mb-3 col-md-9">
+	                          <div class="mb-6 col-md-6">
 	                           <label for="address" class="form-label">주소</label>
 	                           <input type="text" class="form-control" id="fullAddress" name="fullAddress" value="${userDTO.roadAddress} ${userDTO.namujiAddress}" readonly/>
 	                         </div>
 	                       </div>
-	                   		<div class="mb-3 col-md-12" align="left">
+	                   		 <div class="mb-6 col-md-6">
 	                   		 <legend class="mt-4"><img src="${contextPath}/resources/admin/assets/img/icons/unicons/user-detail.png">프로모션 정보수신 동의</legend>
 	                   		 <div class="form-check form-switch">
 						        <input class="form-check-input" type="checkbox" id="emailYN" <c:if test="${userDTO.emailYN =='Y'}"> checked</c:if>/>
@@ -189,7 +172,7 @@
 	                   <br>
              		  <div class="mb-2 col-md-12" align="right">
 		             <div>
-		                <button type="button" class="btn btn-danger deactivate-account" onclick="location.href='${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=delete'">회원탈퇴</button>
+		                <button type="button" class="btn btn-danger deactivate-account" id="submit" onclick="location.href='${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=delete'">회원탈퇴</button>
 		             </div>
 		           </div>  
 	                   <!-- /Account -->
