@@ -14,4 +14,15 @@
 		FROM 
 				ADMIN
 	</select>
+	<select id="selectListSearchAdmin" parameterType="AdminDTO" resultType="hashMap">
+		SELECT 
+				*
+		FROM 
+				ADMIN
+		<where>
+			<if test='searchKey == "adminId"'>
+				ADMIN_ID LIKE IN CONCAT ('%', '#{searchKeyword}', '%')
+			</if>
+		</where>
+	</select>
 </mapper>

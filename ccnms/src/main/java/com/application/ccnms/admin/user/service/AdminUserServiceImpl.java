@@ -1,6 +1,7 @@
 package com.application.ccnms.admin.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,10 @@ public class AdminUserServiceImpl implements AdminUserService {
 	@Override
 	public List<AdminDTO> getAdminList() throws Exception {
 		return adminUserDAO.selectListAdmin();
+	}
+
+	@Override
+	public List<AdminDTO> getSearchAdmin(Map<String, String> searchMap) throws Exception {
+		return adminUserDAO.selectListSearchAdmin(searchMap);
 	}
 }

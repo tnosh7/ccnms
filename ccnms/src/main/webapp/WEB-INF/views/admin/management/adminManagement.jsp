@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,40 @@ nav {
 				$("[name='adminCheck']").prop("checked", false);	
 			}
 		});
-	});
+		
+			$("[name='searchKeyword']").keyup(function(){
+					var searchKeyword = $("[name='searchKeyword']").val();
+					var searchKey = $("[name='searchKey']").val();
+					var param = {
+							"searchKeyword" : searchKeyword,
+							"searchKey" : searchKey
+					}
+					$.ajax ({
+						type : "get",
+						url  : "${contextPath}/admin/management/searchAdmin",
+						data : param,
+						success : function(data) {
+							
+							var adminList = "";
+							if(data.length == 0) {
+								adminList +="<tr colspan='5'>"
+								adminList +="<td>검색결과가 없습니다.</td>"
+								adminList +="</tr>"
+						}
+							else {
+								$(data).each(function(){
+									adminList +="<tr>"
+									adminList +="<td><input type='checkbox' id='adminCheck' name='adminCheck'></td>"
+									adminList +="<td>${data.adminId }</td>"
+									adminList +="<td>${data.joinDT }</td>"
+									adminList +="<td>${data.allAgreeYN }</td>"
+									adminList +="</tr>"
+								})
+							}
+						}
+					})
+			});		
+		});
 </script>
 <body>
 <fieldset>
@@ -93,16 +127,16 @@ nav {
                 <div class="table-responsive text-nowrap">
 	               <ul class="nav nav-pills flex-column flex-md-row mb-3">
                 	<li>
-	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                          <option selected="">검색선택</option>
-                          <option value="1">아이디</option>
-                          <option value="2">입사일</option>
+	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="searchKey">
+                          <option selected value="">검색선택</option>
+                          <option value="adminId">아이디</option>
+                          <option value="joinDT">..</option>
                     </select>
                 	</li>
                 	&emsp;
-                	<li><input id="defaultInput" class="form-control" type="text" placeholder="검색어를 입력하세요"></li>
+                	<li><input id="defaultInput" class="form-control" name="searchKeyword" type="text" placeholder="검색어를 입력하세요"></li>
                 	&emsp;
-                	<li><button type="button" class="btn btn-success">조 회</button></li>
+                	<li><button type="button" class="btn btn-success" id="searchBtn">조 회</button></li>
                 	&emsp;
                 	<li><button type="button" class="btn btn-outline-success">새로고침</button></li>
                	 </ul>
@@ -134,7 +168,7 @@ nav {
                       	 <tr>
 	                      	<td><input type="checkbox" id="adminCheck" name="adminCheck"></td>
 	                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminId }</td>
-	                        <td>${adminDTO.joinDT }</td>
+	                        <td><fmt:formatDate value="${adminDTO.joinDT }" pattern="yyyy-MM-dd"/> </td>
 	                        <td><span class="badge bg-label-success me-1">${adminDTO.allAgreeYN }</span></td>
                       		<th><input type="button" value="상세조회"></th>
                       	</tr>
