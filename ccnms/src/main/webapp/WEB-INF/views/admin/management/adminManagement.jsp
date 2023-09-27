@@ -139,7 +139,7 @@ nav {
               	&emsp;
               	<li><input id="defaultInput" class="form-control" name="searchKeyword" type="text" placeholder="검색어를 입력하세요"></li>
               	&emsp;
-              	<li><button type="button" class="btn btn-outline-success">새로고침</button></li>
+              	<li><button type="reset" class="btn btn-outline-success" onclick="window.location.reload()">새로고침</button></li>
              	 </ul>
               </div>
               </div>

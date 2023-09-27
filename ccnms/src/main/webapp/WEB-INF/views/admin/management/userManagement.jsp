@@ -115,7 +115,7 @@ nav {
                 	&emsp;
                 	<li><button type="button" class="btn btn-success">조 회</button></li>
                 	&emsp;
-                	<li><button type="button" class="btn btn-outline-success">새로고침</button></li>
+                	<li><button type="reset" class="btn btn-outline-success" onclick="window.location.reload()">새로고침</button></li>
                	 </ul>
                 </div>
                 </div>
