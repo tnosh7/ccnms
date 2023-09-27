@@ -79,10 +79,10 @@ nav {
          <div class="card-header d-flex justify-content-between align-items-center">
          </div>
          <div class="card-body">
-	<nav
+		<nav
          class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
          id="layout-navbar"
-       >
+       	>
         <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0   d-xl-none ">
        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
          <i class="bx bx-menu bx-sm"></i>
@@ -103,83 +103,83 @@ nav {
            </div>
         </div>
      </nav>
-           <form>
+         <form>
+         <hr>
+           <div class="mb-3">
+           <header>
+              <h5 class="card-header">
+              <img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/id.png"/><strong> 관리자 조회</strong></h5>
+           <nav>
+			<ul class="nav nav-pills flex-md-row mb-3" >
+				<li><a href="${contextPath }/admin/management/adminExcelExport"><img alt="엑셀이미지" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a></li>
+				&emsp;
+				<li><div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow show" data-bs-toggle="dropdown" aria-expanded="true">
+                          <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end show" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 40px, 0px);">
+                          <li><a class="dropdown-item" href="javascript:void(0);">관리자 수정</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);">관리자 삭제</a></li>
+                        </ul>
+                      </div></li>
+			</ul>
+			</nav>               	
+           </header>
            <hr>
-             <div class="mb-3">
-             <header>
-                <h5 class="card-header">
-                <img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/id.png"/><strong> 관리자 조회</strong></h5>
-	            <nav>
-					<ul class="nav nav-pills flex-md-row mb-3" >
-						<li><img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></li>
-						&emsp;
-						<li><div class="btn-group">
-                          <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow show" data-bs-toggle="dropdown" aria-expanded="true">
-                            <i class="bx bx-dots-vertical-rounded"></i>
-                          </button>
-                          <ul class="dropdown-menu dropdown-menu-end show" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 40px, 0px);">
-                            <li><a class="dropdown-item" href="javascript:void(0);">관리자 수정</a></li>
-                            <li><a class="dropdown-item" href="javascript:void(0);">관리자 삭제</a></li>
-                          </ul>
-                        </div></li>
-					</ul>
-				</nav>               	
-             </header>
-             <hr>
-                <div class="table-responsive text-nowrap">
-	               <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                	<li>
-	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="searchKey">
-                          <option selected value="">검색선택</option>
-                          <option value="adminId">아이디</option>
-                          <option value="adminNm">이름</option>
-                          <option value="adminRank">직급</option>
-                    </select>
-                	</li>
-                	&emsp;
-                	<li><input id="defaultInput" class="form-control" name="searchKeyword" type="text" placeholder="검색어를 입력하세요"></li>
-                	&emsp;
-                	<li><button type="button" class="btn btn-outline-success">새로고침</button></li>
-               	 </ul>
-                </div>
-                </div>
-                  <table class="table">
-                    <thead class="table-light" align="center">
-                      <tr height="">
-                      	<th width="30"><input type="checkbox" id="allCheck"></th>
-                        <th>아이디</th>
-                        <th>이름</th>
-                        <th>직급</th>
-                        <th>입사일</th>
-                      </tr>
-                    </thead>
-                    <tbody id="adminList" align="center">
-                     <c:choose>
-                      <c:when test="${empty adminList }">
-                      <tr>
-                      	<td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     	<th></th>
-                      </tr>
-                      </c:when>
-                      <c:otherwise>
-	                      <c:forEach var="adminDTO" items="${adminList }"> 
-	                      	 <tr>
-		                      	<td><input type="checkbox" id="adminCheck" name="adminCheck"></td>
-		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminId }</td>
-		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminNm }</td>
-		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminRank }</td>
-		                        <td><fmt:formatDate value="${adminDTO.joinDT }" pattern="yyyy-MM-dd"/> </td>
-	                      	</tr>
-	                      </c:forEach>
-                      </c:otherwise>
-                     </c:choose>
-                    </tbody>
-                  </table>
-                  <br>
-               </form>
+              <div class="table-responsive text-nowrap">
+              <ul class="nav nav-pills flex-column flex-md-row mb-3">
+              	<li>
+               <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="searchKey">
+                        <option selected value="">검색선택</option>
+                        <option value="adminId">아이디</option>
+                        <option value="adminNm">이름</option>
+                        <option value="adminRank">직급</option>
+                  </select>
+              	</li>
+              	&emsp;
+              	<li><input id="defaultInput" class="form-control" name="searchKeyword" type="text" placeholder="검색어를 입력하세요"></li>
+              	&emsp;
+              	<li><button type="button" class="btn btn-outline-success">새로고침</button></li>
+             	 </ul>
+              </div>
+              </div>
+                <table class="table">
+                  <thead class="table-light" align="center">
+                    <tr height="">
+                    	<th width="30"><input type="checkbox" id="allCheck"></th>
+                      <th>아이디</th>
+                      <th>이름</th>
+                      <th>직급</th>
+                      <th>입사일</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminList" align="center">
+                   <c:choose>
+                    <c:when test="${empty adminList }">
+                    <tr>
+                    	<td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                   	<th></th>
+                    </tr>
+                    </c:when>
+                    <c:otherwise>
+                     <c:forEach var="adminDTO" items="${adminList }"> 
+                     	 <tr>
+                      	<td><input type="checkbox" id="adminCheck" name="adminCheck"></td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminId }</td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminNm }</td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminRank }</td>
+                        <td><fmt:formatDate value="${adminDTO.joinDT }" pattern="yyyy-MM-dd"/> </td>
+                     	</tr>
+                     </c:forEach>
+                    </c:otherwise>
+                   </c:choose>
+                  </tbody>
+                </table>
+                <br>
+             </form>
              </div>
            </div>
          </div>

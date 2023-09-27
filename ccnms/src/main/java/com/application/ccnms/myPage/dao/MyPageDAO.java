@@ -8,4 +8,5 @@ public interface MyPageDAO {
 	public UserDTO selectOneAuthenticationUser(UserDTO userDTO) throws Exception;
 	public String selectOneAuthenticationUser(String userId) throws Exception;
 	public void updateUser(UserDTO userDTO) throws Exception;
+	public void deleteUser(UserDTO userDTO) throws Exception;
 }

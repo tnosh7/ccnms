@@ -75,9 +75,13 @@ public class MyPageController {
 				jsScript+="</script>";
 			}
 			else if (menu.equals("delete")) {
+				myPageService.removeUser(userDTO);
+				session.invalidate();
 				jsScript = "<script>";
+				jsScript+= "Swal.fire({position: 'top-end',icon: 'success',title: '탈퇴완료',showConfirmButton: false,timer: 1500});";
 				jsScript+= "location.href='" + request.getContextPath() + "/myPage/main'";	
 				jsScript+="</script>";
+			
 			}
 		}
 		else {

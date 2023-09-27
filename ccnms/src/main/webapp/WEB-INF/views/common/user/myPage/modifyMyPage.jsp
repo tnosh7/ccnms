@@ -38,6 +38,19 @@ function execDaumPostcode() {
 </head>
 <body>
 	<fieldset>
+	   <div class="content-wrapper">
+	       <div class="container">
+	           <div class="row">
+	               <div class="col-lg-12">
+	                   <div class="breadcrumb__links">
+	                       <a href="${contextPath }/"><i class="fa fa-home"></i> Home > </a>
+	                       <span>내 프로필 > </span>
+	                       <span>프로필 수정</span>
+	                   </div>
+	               </div>
+	           </div>
+	       </div>
+	   </div>
 	<form action="${contextPath }/myPage/modifyMyPage" method="post" enctype="multipart/form-data">
 	  <div class="content-wrapper">
 	   <section class="blog-details spad">
@@ -48,7 +61,7 @@ function execDaumPostcode() {
                         <div class="blog__sidebar__item">
                             <h4>Categories</h4>
                             <ul>
-                                <li><a href="#"><strong>내프로필</strong></a></li>
+                                <li><a href="${contextPath }/myPage/main"><strong>내프로필</strong></a></li>
                                 <li><a href="#"><strong>이력관리</strong></a></li>
                                 <li><a href="#"><strong>설정</strong></a></li>
                             </ul>
@@ -58,7 +71,7 @@ function execDaumPostcode() {
                             <h4>고객센터</h4>
                              <ul>
                                 <li><a href="#"> 문의메시지</a></li>
-                                <li><a href="#"> 탈퇴</a></li>
+                                  <li><a href="${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=delete"> 탈퇴</a></li>
                             </ul>
                         </div>
                     </div>

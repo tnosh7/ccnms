@@ -9,43 +9,49 @@
 </head>
 <body>
 	<fieldset>
-	<form>
-	  <div class="breadcrumb-option">
+	  <div class="content-wrapper" style="padding-top: 50px">
 	       <div class="container">
 	           <div class="row">
 	               <div class="col-lg-12">
 	                   <div class="breadcrumb__links">
 	                       <a href="${contextPath }/"><i class="fa fa-home"></i> Home > </a>
-	                       <span>프로필 수정</span>
+	                       <span>내 프로필</span>
 	                   </div>
 	               </div>
 	           </div>
 	       </div>
 	   </div>
-	    <div class="content-wrapper">
-	     <section class="checkout spad">
-	       <div class="container" align="center">
-	           <!-- Content -->
-	             <div class="row">
-	               <div class="col-md-12">
-	                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
-	                   <li class="nav-item">
-	                     <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i>내프로필</a>
-	                   </li>
-	                   <li class="nav-item">
-	                     <a class="nav-link" href="pages-account-settings-notifications.html"
-	                       ><i class="bx bx-bell me-1"></i> 알림</a
-	                     >
-	                   </li>
-	                   <li class="nav-item">
-	                     <a class="nav-link" href="pages-account-settings-connections.html"
-	                       ><i class="bx bx-link-alt me-1">이력관리</i> </a
-	                     >
-	                   </li>
-	                 </ul>
+	<form action="${contextPath }/myPage/modifyMyPage" method="post" enctype="multipart/form-data">
+	   <section class="blog-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-5 order-md-1 order-2">
+                    <div class="blog__sidebar"  style="padding-top: -10px">
+                        <div class="blog__sidebar__item">
+                            <h4>Categories</h4>
+                            <ul>
+                                <li><a href="${contextPath }/myPage/main"><strong>내프로필</strong></a></li>
+                                <li><a href="#"><strong>이력관리</strong></a></li>
+                                <li><a href="#"><strong>설정</strong></a></li>
+                            </ul>
+                        </div>
+                        <hr>
+                        <div class="blog__sidebar__item">
+                            <h4>고객센터</h4>
+                             <ul>
+                                <li><a href="#"> 문의메시지</a></li>
+                                <li><a href="${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=delete"> 탈퇴</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-7 order-md-1 order-1" align="center">
+                    <div class="blog__details__text">
+                        <div class="card mb-4">
+	                   <h5 class="card-header">${userDTO.userNm } 님</h5>
+	                   <!-- Account -->
+	                   
 	                   <div class="card-body">
-	                   <div align="left"><strong>프로필 이미지</strong></div>
-	                   <hr>
 	                     <div class="d-flex align-items-start align-items-sm-center gap-4">
 						   <c:choose>
 						   	<c:when test="${userDTO.profile eq null}">
@@ -74,7 +80,24 @@
 	                       &emsp;&emsp;&emsp;
 	                       <div class="button-wrapper">
 	                        <p class="text-muted mb-0"></p>
-	                          <header>${userDTO.userNm } 님</header>
+	                         <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+	                          <span class="d-none d-sm-block">사진 변경</span>
+	                           <i class="bx bx-upload d-block d-sm-none"></i>
+	                           <input
+	                             type="file"
+	                             id="file"
+	                             name="file"
+	                             class="account-file-input"
+	                             hidden
+	                             accept="image/png, image/jpeg"
+	                           	 readonly
+	                           />
+	                           <input type="hidden" name="beforeFileName" value="${userDTO.profile }"/>
+	                         </label>
+	                         <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+	                           <i class="bx bx-reset d-block d-sm-none"></i>
+	                           <span class="d-none d-sm-block">삭제</span>
+	                         </button>
 	                       </div>
 	                     </div>
 	                   </div>
@@ -98,7 +121,7 @@
 	                         </div>
 	                         <div class="mb-3 col-md-6">
 	                           <label for="userNm" class="form-label">이름</label>
-	                           <input class="form-control" type="text" name="userNm" id="userNm" value="${userDTO.userNm}" readonly/>
+	                           <input class="form-control" type="text" name="userNm" id="userNm" value="${userDTO.userNm}"  readonly/>
 	                         </div>
 	                         <div class="mb-3 col-md-6">
 	                           <label for="email" class="form-label">이메일</label>
@@ -108,7 +131,7 @@
 	                             id="email"
 	                             name="email"
 	                             value="${userDTO.email }"
-	                             readonly
+	                           	 readonly
 	                           />
 	                         </div>
 	                         <div class="mb-3 col-md-6">
@@ -119,7 +142,7 @@
 	                             id="birthDT"
 	                             name="birthDT"
 	                             value="${userDTO.birthDT }"
-	                             readonly
+	                         	readonly
 	                           />
 	                         </div>
 	                        <div class="mb-3 col-md-6">
@@ -130,59 +153,51 @@
 	                             id="hp"
 	                             name="hp"
 	                             value="${userDTO.hp }"
-	                             readonly
+	                           	readonly
 	                           />
 	                         </div>
 	                         <div class="mb-6 col-md-6">
-	                           <label for="state" class="form-label">성별</label>
+	                           <label for="state" class="form-label">LIKE 포인트</label>
 	                           <div>
-		                         	<select name="sex" >
-	                                	<option selected="selected" value="N">선택안함</option>
-	                                	<option value="M" >남성</option>
-	                                	<option value="W" >여성</option>
-	                                </select>
+			                       <input type="text" id="likePoint" name="likePoint" value="${userDTO.likePoint }" disabled>
 		                       </div>
-		                       <input type="hidden" value="${userDTO.sex }">
 	                         </div>
+	                           <div class="card-body">
 	                         <div class="mb-3 col-md-12" align="left">
-	                            <legend class="mt-4"><img src="${contextPath}/resources/admin/assets/img/icons/unicons/map.png">배송지 관리</legend>
+	                            <legend class="mt-4">
+	                            	<img src="${contextPath}/resources/admin/assets/img/icons/unicons/map.png">배송지 관리
+	                            </legend>
 	                         </div>
-	                          <div class="mb-6 col-md-6">
-	                           <label for="address" class="form-label">우편번호</label>
-	                           <input type="text" class="form-control" id="zipcode" name="zipcode" value="${userDTO.zipcode }" readonly/>
-	                         </div>
-	                          <div class="mb-6 col-md-6">
-	                           <label for="address" class="form-label">주소</label>
-	                           <input type="text" class="form-control" id="fullAddress" name="fullAddress" value="${userDTO.roadAddress} ${userDTO.namujiAddress}" readonly/>
-	                         </div>
-	                       </div>
-	                   		 <div class="mb-6 col-md-6">
-	                   		 <legend class="mt-4"><img src="${contextPath}/resources/admin/assets/img/icons/unicons/user-detail.png">프로모션 정보수신 동의</legend>
-	                   		 <div class="form-check form-switch">
-						        <input class="form-check-input" type="checkbox" id="emailYN" <c:if test="${userDTO.emailYN =='Y'}"> checked</c:if>/>
-						        <label class="form-check-label" for="emailYN">이메일 수신 여부</label>
+	                  			<div class="checkout__input">
+		                                <div class="checkout__form__input">
+		                                   <div class="mb-12 col-md-12">
+	       				                    <input type="text" class="form-control" id="fullAddress" name="fullAddress" value="${userDTO.zipcode } ${userDTO.roadAddress} ${userDTO.namujiAddress}" readonly/>
+				        	                </div>
+				        	                <hr>
+		                                	<p><input type="text" id="zipcode" placeholder="우편번호" name="zipcode" value="${orderer.zipcode }" style="width: 55%;">
+	                                    	<input type="button" value="주소 검색" onclick="javascript:execDaumPostcode()" style="width: 40%; padding-left: 0"></p>
+		                                    <p><input type="text" id="roadAddress"   placeholder="도로명 주소" name="roadAddress"   value="${order.roadAddress }" ></p>
+		                                    <p><input type="text" id="jibunAddress"  placeholder="지번 주소"   name="jibunAddress"  value="${order.jibunAddress }" ></p>
+		                                    <p><input type="text" id="namujiAddress" placeholder="나머지 주소" name="namujiAddress" value="${order.namujiAddress }" ></p>
+		                                </div>
+	                           		 </div>
+	                            </div>
+	                            <div class="mb-3 col-md-12" align="left">
+	                   		 	<div class="form-check form-switch">
 						      </div>
-	                         </div>
-	                         <br>
-	                       <div class="mt-2">
-	                         <button type="button" class="btn btn-primary me-2" onclick="location.href='${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=update'">&emsp;수정&emsp;</button>
-	                       </div>
-	                   </div>
-	                   <br>
-	                   <br>
-             		  <div class="mb-2 col-md-12" align="right">
-		             <div>
-		                <button type="button" class="btn btn-danger deactivate-account" id="submit" onclick="location.href='${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=delete'">회원탈퇴</button>
-		             </div>
-		           </div>  
-	                   <!-- /Account -->
-	               </div>
-                 </div>
-                </div>
-               </div>
-              </section>
-             </div>
-          </form>
-</fieldset>          
+           					 <div align="center">
+							 <button type="button" class="btn btn-primary me-2" onclick="location.href='${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=update'">&emsp;수정&emsp;</button>
+         				</div>
+       				</div>
+   				</div>
+			</div>
+			</div>
+		</div>
+		</div>
+		</div>
+		</div>
+	</section>
+</form>
+</fieldset>
 </body>
 </html>

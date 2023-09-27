@@ -36,4 +36,9 @@ public class MyPageDAOImpl implements MyPageDAO {
 	public void updateUser(UserDTO userDTO) throws Exception {
 		sqlSession.update("myPage.updateUser", userDTO);
 	}
+
+	@Override
+	public void deleteUser(UserDTO userDTO) throws Exception {
+		sqlSession.delete("myPage.deleteUser", userDTO);
+	}
 }

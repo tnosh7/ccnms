@@ -42,4 +42,9 @@ public class MyPageServiceImpl implements MyPageService {
 		myPageDAO.updateUser(userDTO);
 	}
 
+	@Override
+	public void removeUser(UserDTO userDTO) throws Exception {
+		myPageDAO.deleteUser(userDTO);
+	}
+
 }

@@ -76,7 +76,7 @@ nav {
                 <img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/id.png"/><strong> 유저정보 조회</strong></h5>
 	            <nav>
 					<ul class="nav nav-pills flex-md-row mb-3" >
-						<li><img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></li>
+						<li><a href="${contextPath }/admin/management/userExcelExport"><img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a></li>
 						&emsp;
 						<li><div class="btn-group">
                           <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow show" data-bs-toggle="dropdown" aria-expanded="true">
