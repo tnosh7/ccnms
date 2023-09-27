@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<input type="hidden" id="menu" value="${menu }"/>
     <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
@@ -35,6 +36,11 @@
                            <br>
                            <div class="checkout__form__input">
 	     					  <input type="password" class="form-control" id="passwd" name="passwd" placeholder="비밀번호" autocomplete="off" >
+                           	  <br>
+                           	  <c:if test="${menu eq 'miss'}"> 
+                           	  <span style="color:red"><strong>로그인 실패 다시 입력해주세요.</strong></span>
+                           	  </c:if>
+                           	  <span></span>
                            </div>
                            <div align="left">
 	     				   <span id="autoLogin" class="form-text text-muted"><input type="checkbox">&ensp;<small>간편 로그인 사용하기</small></span>

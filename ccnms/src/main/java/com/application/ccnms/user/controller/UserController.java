@@ -67,28 +67,25 @@ public class UserController {
 		return new ModelAndView("/user/loginUser");
 	}
 	
-	@PostMapping("/loginUser")
-	public @ResponseBody String loginUser(HttpServletRequest request, UserDTO userDTO) throws Exception {
 	
-		String jsScript = "";
+	@PostMapping("/loginUser")
+	public ModelAndView loginUser(HttpServletRequest request, UserDTO userDTO) throws Exception {
+	
+		ModelAndView mv = new ModelAndView();
+		
 		if(userService.loginUser(userDTO) != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userDTO.getUserId());
 			session.setAttribute("role", "user");
-			
-		    jsScript = "<script>";
-		    jsScript +="location.href='" + request.getContextPath() + "/'";
-		    jsScript +="</script>";
+			mv.setViewName("/common/main");
 		}
 		else {
-			HttpSession session = request.getSession();
-			jsScript = "<script>";
-			jsScript +="history.go(-1);";
-		  	jsScript +="</script>";
+			mv.setViewName("/user/loginUser");
+			mv.addObject("menu", "miss");
 		}
-		return jsScript;
+		
+		return mv;
 	}
-	
 	@GetMapping("/logout")
 	public @ResponseBody String logout(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();

@@ -62,34 +62,28 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/authenticationUser") 
-	public @ResponseBody String authenticationUser(HttpServletRequest request, @RequestParam("menu")String menu, @ModelAttribute UserDTO userDTO) throws Exception {
-		String jsScript="";
+	public ModelAndView authenticationUser(HttpServletRequest request, @RequestParam("menu")String menu, @ModelAttribute UserDTO userDTO) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
 		if (myPageService.checkAuthenticationUser(userDTO)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userDTO.getUserId());
 			session.setAttribute("role", "user");
 
 			if(menu.equals("update")) {
-				jsScript = "<script>";
-				jsScript+= "location.href='" + request.getContextPath() + "/myPage/modifyMyPage'";	
-				jsScript+="</script>";
+				mv.setViewName("/myPage/authenticationUser");
 			}
 			else if (menu.equals("delete")) {
 				myPageService.removeUser(userDTO);
 				session.invalidate();
-				jsScript = "<script>";
-				jsScript+= "Swal.fire({position: 'top-end',icon: 'success',title: '탈퇴완료',showConfirmButton: false,timer: 1500});";
-				jsScript+= "location.href='" + request.getContextPath() + "/myPage/main'";	
-				jsScript+="</script>";
-			
+				mv.setViewName("/common/main");
+				mv.addObject("menu", "del");
 			}
 		}
 		else {
-			jsScript = "<script>";
-			jsScript+= "history.go(-1);";
-			jsScript+="</script>";
+			mv.setViewName("/myPage/main");
 		}
-		return jsScript;
+		return mv;
 	}
 	
 	@GetMapping("/modifyMyPage") 

@@ -11,6 +11,6 @@
 	 	</definition>
 	 	<definition name="/digging/addDigging" extends="common">
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/digging/addDigging.jsp"/>
-	 		<put-attribute name="title" value="디깅 랭킹"/>	
+	 		<put-attribute name="title" value="디깅 글쓰기"/>	
 	 	</definition>
 </tiles-definitions>

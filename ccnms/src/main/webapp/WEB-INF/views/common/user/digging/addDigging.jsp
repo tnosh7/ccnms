@@ -128,7 +128,7 @@
 								<div class="input-group">
     			                    <input type="file" class="form-control" id="inputGroupFile02">
                 			        <label class="input-group-text" for="inputGroupFile02">업로드</label>
-                			        <label class="input-group-text" for="inputGroupFile02">삭제</label>
+                			        <label class="input-group-text" for="inputGroupFile02" >삭제</label>
                  				</div>
 							</li>
 	                   		<li class="nav-item">	

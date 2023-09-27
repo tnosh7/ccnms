@@ -33,11 +33,9 @@ nav {
 		});
 		
 			$("[name='searchKeyword']").keyup(function(){
-					var searchKeyword = $("[name='searchKeyword']").val();
-					var searchKey = $("[name='searchKey']").val();
 					var param = {
-							"searchKeyword" : searchKeyword,
-							"searchKey" : searchKey
+							"searchKeyword" : $("[name='searchKeyword']").val(),
+							"searchKey" : $("[name='searchKey']").val()
 					}
 					$.ajax ({
 						type : "get",
@@ -55,10 +53,10 @@ nav {
 								$(data).each(function(){
 									adminList +="<tr>"
 									adminList +="<td><input type='checkbox' id='adminCheck' name='adminCheck'></td>"
-									adminList +="<td>" + this.adminId+ "</td>"
-									adminList +="<td>" + this.adminNm+ "</td>"
-									adminList +="<td>" + this.adminRank+ "</td>"
-									adminList +="<td>" + this.joinDT+ "</td>"
+									adminList +="<td>" + data.adminId+ "</td>"
+									adminList +="<td>" + data.adminNm+ "</td>"
+									adminList +="<td>" + data.adminRank+ "</td>"
+									adminList +="<td>" + data.joinDT+ "</td>"
 									adminList +="</tr>"
 								});
 							}

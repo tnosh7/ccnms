@@ -7,6 +7,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script>
+	$().ready(function(){
+		var menu="${menu}";
+		if (menu=='del') {
+			Swal.fire({
+				  position: 'top-end',
+				  icon: 'success',
+				  title: 'Your work has been saved',
+				  showConfirmButton: false,
+				  timer: 1000
+				});
+		}
+	});
+
+</script>
 <body>
     <!-- Categories Section Begin -->
      <section class="breadcrumb-section set-bg" data-setbg="${contextPath}/resources/bootstrap/img/breadcrumb.jpg">
