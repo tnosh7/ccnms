@@ -9,6 +9,7 @@
 	<typeAliases>
 		<typeAlias type="com.application.ccnms.user.dto.UserDTO" alias="UserDTO"/>
 		<typeAlias type="com.application.ccnms.admin.dto.AdminDTO" alias="AdminDTO"/>
+		<typeAlias type="com.application.ccnms.digging.dto.DiggingDTO" alias="DiggingDTO"/>
 	</typeAliases>
 
 

@@ -21,6 +21,19 @@
 	    float: left;
 	}
 </style>
+<script>
+	$().ready(function(){
+		$("#onePageViewCnt").val("${onePageViewCnt}");
+	});
+	
+	function getBoardList(){
+		var url = "${contextPath}/digging/diggingList"
+			url +="?onePageViewCnt=" + $("#onePageViewCnt").val();
+	
+	}
+	
+
+</script>
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
@@ -96,7 +109,7 @@
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
-			              <span align="rigth">
+			              <span align="right">
 			                <ul>
 			                	<li>
 				                    <select>
@@ -106,55 +119,60 @@
 				                    </select>
 			                	</li>
 			                	<li>
-				                    <select name="onePageViewCnt">
+				                    <select name="onePageViewCnt" onchange="getDiggingList()">
 				                    	<option value="2">2개씩</option>
 				                    	<option value="1">1개씩</option>
 				                    </select>
 			                	</li>
 			                </ul>
 			              </span>
+			              <hr>
+                           <c:forEach var="diggingDTO" items="${diggingList }">
                             <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${contextPath}/resources/bootstrap/img/blog/blog-2.jpg" alt="">
-                                </div>
+                            <div>
                                 <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <p><h5><a href="#">6 ways to prepare breakfast for 30</a></h5></p>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <ul>
-                                    	<li><img src="${contextPath }/resources/bootstrap/img/Like.PNG" width="20">Like Cnt추가</li>
-                                    	<li><i class="fa fa-comment-o"></i>댓글 Cnt 추가</li>
-                                    </ul>
+                                	<table border="1" width="300" height="200">
+                                		<thead>
+                                			<tr>
+                                				<td colspan="2">${diggingDTO.writer }</td>
+                                				<td><i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></td>
+                                			</tr>
+                                		</thead>
+										<tbody>
+											<tr>
+												<th colspan="3"><h5><a href="#">${diggingDTO.subject }</a></h5></th>
+											</tr>
+											<tr>
+											<c:if test="${diggingDTO.file != null }">
+												<th colspan="3"><a href="#"><img src="${contextPath}/digging/thumbnails?file=${diggingDTO.file }" width="300" height="100" alt="이미지&동영상"/></a></th>
+											</c:if>
+											</tr>
+											<tr>
+												<th colspan="3"><a href="#">${diggingDTO.content }</a></th>
+											</tr>
+										</tbody>    
+										<tfoot>
+											<tr>
+												<th><i class="fa fa-comment-o"></i> 댓글수</th>
+												<th>likecnt</th>
+											</tr>
+										</tfoot>                            	
+                                	</table>
+                                </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${contextPath}/resources/bootstrap/img/blog/blog-3.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i><fmt:formatDate value="${digging.enrollDT }" pattern="yyyy-MM-dd"/></li>
-                                        <li><i class="fa fa-comment-o"></i> 댓글수</li>
-                                    </ul>
-                                    <h5><a href="#">${digging.subject }</a></h5>
-                                    <p>${digging.content }</p>
-                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
+                       </c:forEach>
                         </div>
                         <div class="col-lg-12">
                             <div class="product__pagination blog__pagination">
-                            <c:if test="${startPage > 2 }">
-                                <a href="${contextPath }/digging/main?currentPageNumber">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                            <c:if test="${startPage > 10 }">
+                                <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i></a>
+                            </c:if>
+                            <c:forEach  var="i" begin="${startPage }" end="${endPage }">
+                                <a href="#">i</a>
+                            </c:forEach>
+                            <c:if test="${endPage != allPageCnt && endPage >= 10 }">  
+                                <a href="${contextPath }/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i></a>
                             </c:if>
                             </div>
                         </div>

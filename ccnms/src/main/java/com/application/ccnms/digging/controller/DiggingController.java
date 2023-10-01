@@ -1,12 +1,15 @@
 package com.application.ccnms.digging.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -22,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.digging.service.DiggingService;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @RequestMapping("/digging")
@@ -32,17 +38,23 @@ public class DiggingController {
 	private final String FILE_REPO_PATH = "C:\\ccnms_content_file_repo\\";
 	
 	@GetMapping("/main")
-	public ModelAndView main(HttpServletRequest request)throws Exception {
+	public ModelAndView main()throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/digging/main");
-		
-		int onePageViewCnt = 10;
-		if(request.getParameter("onePageViewCnt") != null ) {
-			onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
-		}
-		
-		
+		mv.addObject("diggingList", diggingService.getDiggingList());
+	
 		return mv;
+	}
+	@GetMapping("/thumbnails")
+	public void thumbnails(@RequestParam("file") String file, HttpServletResponse response) throws IOException {
+		OutputStream out = response.getOutputStream();
+		File image= new File(FILE_REPO_PATH + file);
+		if (image.exists()) {
+			Thumbnails.of(image).size(1000,1000).outputFormat("png").toOutputStream(out);
+		}
+		byte[] buffer = new byte[1024*8];
+		out.write(buffer);
+		out.close();
 	}
 	
 	@GetMapping("/ranking")

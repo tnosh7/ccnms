@@ -20,4 +20,10 @@
 			NOW()
 		)	
 	</insert>
+	<select id="selectListDiggingList" resultType="DiggingDTO">
+		SELECT 
+				*
+		FROM 
+			DIGGING
+	</select>
 </mapper>

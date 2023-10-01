@@ -1,5 +1,7 @@
 package com.application.ccnms.digging.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,7 +20,7 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	}
 
 	@Override
-	public void selectListDiggingList() throws Exception {
-		sqlSession.selectList("digging.selectListDiggingList");
+	public List<DiggingDTO> selectListDiggingList() throws Exception {
+		return sqlSession.selectList("digging.selectListDiggingList");
 	}
 }
