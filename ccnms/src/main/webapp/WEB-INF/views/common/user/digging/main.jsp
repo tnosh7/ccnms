@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -6,6 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	ul {
+	    list-style:none;
+	    margin:0;
+	    padding:0;
+	}
+	
+	li {
+	    margin: 0 0 0 0;
+	    padding: 0 0 0 0;
+	    border : 0;
+	    float: left;
+	}
+</style>
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
@@ -33,20 +48,6 @@
                 <div class="col-lg-4 col-md-5">
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
-                        <div class="blog__sidebar__item">
-                            <h4>More Digging</h4>
-                            <ul>
-                                <li><a href="#">전체</a></li>
-                                <li><a href="#">야구</a></li>
-                                <li><a href="#">축구</a></li>
-                                <li><a href="#">농구</a></li>
-                                <li><a href="#">etc</a></li>
-                            </ul>
                         </div>
                         <div class="blog__sidebar__item">
                             <h4>인기많은 게시물</h4>
@@ -95,6 +96,23 @@
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
+			              <span align="rigth">
+			                <ul>
+			                	<li>
+				                    <select>
+				                    	<option>인기순</option>
+				                    	<option>댓글순</option>
+				                    	<option>최신순</option>
+				                    </select>
+			                	</li>
+			                	<li>
+				                    <select name="onePageViewCnt">
+				                    	<option value="2">2개씩</option>
+				                    	<option value="1">1개씩</option>
+				                    </select>
+			                	</li>
+			                </ul>
+			              </span>
                             <div class="blog__item">
                                 <div class="blog__item__pic">
                                     <img src="${contextPath}/resources/bootstrap/img/blog/blog-2.jpg" alt="">
@@ -104,7 +122,7 @@
                                         <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                                         <li><i class="fa fa-comment-o"></i> 5</li>
                                     </ul>
-                                    <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
+                                    <p><h5><a href="#">6 ways to prepare breakfast for 30</a></h5></p>
                                     <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
                                         quaerat </p>
                                     <ul>
@@ -121,90 +139,23 @@
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                        <li><i class="fa fa-calendar-o"></i><fmt:formatDate value="${digging.enrollDT }" pattern="yyyy-MM-dd"/></li>
+                                        <li><i class="fa fa-comment-o"></i> 댓글수</li>
                                     </ul>
-                                    <h5><a href="#">Visit the clean farm in the US</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${contextPath}/resources/bootstrap/img/blog/blog-1.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${contextPath}/resources/bootstrap/img/blog/blog-4.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${contextPath}/resources/bootstrap/img/blog/blog-4.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="#">The Moment You Need To Remove Garlic From The Menu</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
-                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="${contextPath}/resources/bootstrap/img/blog/blog-6.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
+                                    <h5><a href="#">${digging.subject }</a></h5>
+                                    <p>${digging.content }</p>
                                     <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="product__pagination blog__pagination">
-                                <a href="#">1</a>
+                            <c:if test="${startPage > 2 }">
+                                <a href="${contextPath }/digging/main?currentPageNumber">1</a>
                                 <a href="#">2</a>
                                 <a href="#">3</a>
                                 <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                            </c:if>
                             </div>
                         </div>
                     </div>

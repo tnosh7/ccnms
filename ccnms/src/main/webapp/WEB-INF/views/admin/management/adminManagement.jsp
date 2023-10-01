@@ -53,11 +53,17 @@ nav {
 								$(data).each(function(){
 									adminList +="<tr>"
 									adminList +="<td><input type='checkbox' id='adminCheck' name='adminCheck'></td>"
-									adminList +="<td>" + data.adminId+ "</td>"
-									adminList +="<td>" + data.adminNm+ "</td>"
-									adminList +="<td>" + data.adminRank+ "</td>"
-									adminList +="<td>" + data.joinDT+ "</td>"
-									adminList +="</tr>"
+									adminList +="<td>" + this.adminId+ "</td>"
+									adminList +="<td>" + this.adminNm+ "</td>"
+									adminList +="<td>" + this.adminRank+ "</td>"
+									   var joinDt = new Date(this.joinDt);
+						    		   var year = joinDt.getFullYear();
+						    		   var month = joinDt.getMonth() + 1;
+						    		   if (month < 10) month = "0" + month;
+						    		   var date = joinDt.getDate();
+						    		   if (date < 10) date = "0" + date;
+						    		   adminList   += "<td>"+ year + "-" + month + "-" + date + "</td>";
+									   adminList +="</tr>"
 								});
 							}
 						$("#adminList").html(adminList);
@@ -155,7 +161,7 @@ nav {
                    <c:choose>
                     <c:when test="${empty adminList }">
                     <tr>
-                    	<td></td>
+                      <td></td>
                       <td></td>
                       <td></td>
                       <td></td>

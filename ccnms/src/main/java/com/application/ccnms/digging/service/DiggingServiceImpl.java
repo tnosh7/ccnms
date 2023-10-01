@@ -15,5 +15,10 @@ public class DiggingServiceImpl implements DiggingService {
 	@Override
 	public void addDigging(DiggingDTO diggingDTO) throws Exception {
 		diggingDAO.insertDigging(diggingDTO);
+	}
+
+	@Override
+	public void getDiggingList() throws Exception {
+		diggingDAO.selectListDiggingList();
 	} 
 }

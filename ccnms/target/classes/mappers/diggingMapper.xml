@@ -4,19 +4,19 @@
 <mapper namespace="digging">
 	<insert id="insertDigging">
 		INSERT INTO DIGGING(
-			DIGGING_ID,
 			WRITER,
 			SUBJECT,
 			CONTENT,
 			DIGGING_TOPIC,
+			FILE,
 			ENROLL_DT
 		)
 		VALUES (
-			#(diggingId),
-			#(writer),
-			#(subject),
-			#(content),
-			#(diggingTopic),
+			#{writer},
+			#{subject},
+			#{content},
+			#{diggingTopic},
+			#{file},
 			NOW()
 		)	
 	</insert>

@@ -14,6 +14,7 @@ public class DiggingDTO {
 	private int readCnt;
 	private String diggingTopic;
 	private Date enrollDT;
+	private String file;
 	public long getDiggingId() {
 		return diggingId;
 	}
@@ -56,10 +57,17 @@ public class DiggingDTO {
 	public void setEnrollDT(Date enrollDT) {
 		this.enrollDT = enrollDT;
 	}
+	public String getFile() {
+		return file;
+	}
+	public void setFile(String file) {
+		this.file = file;
+	}
 	@Override
 	public String toString() {
 		return "DiggingDTO [diggingId=" + diggingId + ", writer=" + writer + ", subject=" + subject + ", content="
-				+ content + ", readCnt=" + readCnt + ", diggingTopic=" + diggingTopic + ", enrollDT=" + enrollDT + "]";
+				+ content + ", readCnt=" + readCnt + ", diggingTopic=" + diggingTopic + ", enrollDT=" + enrollDT
+				+ ", file=" + file + "]";
 	}
 	
 }

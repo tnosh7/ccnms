@@ -16,4 +16,9 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	public void insertDigging(DiggingDTO diggingDTO) throws Exception {
 		sqlSession.insert("digging.insertDigging", diggingDTO);	
 	}
+
+	@Override
+	public void selectListDiggingList() throws Exception {
+		sqlSession.selectList("digging.selectListDiggingList");
+	}
 }

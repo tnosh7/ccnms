@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<!DOCTYPE html><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -12,7 +14,7 @@
 
 </style>
 <body>
-<form>
+<form action="${contextPath }/digging/addDigging" method="post" enctype="multipart/form-data"> 
   <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-5">
@@ -52,9 +54,12 @@
                           class="nav-link active"
                           role="tab"
                           data-bs-toggle="tab"
-                          data-bs-target="#navs-top-home"
-                          aria-controls="navs-top-home"
+                          data-bs-target="#navs-top-write"
+                          aria-controls="navs-top-write"
                           aria-selected="true"
+                          value="write"
+                          id="writeBnt"
+                          name="writeBnt"
                         >
                      	  글쓰기
                         </button>
@@ -65,9 +70,11 @@
                           class="nav-link"
                           role="tab"
                           data-bs-toggle="tab"
-                          data-bs-target="#navs-top-profile"
-                          aria-controls="navs-top-profile"
+                          data-bs-target="#navs-top-img"
+                          aria-controls="navs-top-img"
                           aria-selected="false"
+                          id="imgBnt"
+                          name="imgBnt"
                         >
                           동영상 & 이미지
                         </button>
@@ -78,16 +85,18 @@
                           class="nav-link"
                           role="tab"
                           data-bs-toggle="tab"
-                          data-bs-target="#navs-top-messages"
-                          aria-controls="navs-top-messages"
+                          data-bs-target="#navs-top-map"
+                          aria-controls="navs-top-map"
                           aria-selected="false"
+                          id="mapBnt"
+                          name="mapBnt"	
                         >
                           지도
                         </button>
                       </li>
                     </ul>
                     <div class="tab-content">
-                      <div class="tab-pane fade show active" id="navs-top-home" role="tabpanel">
+                      <div class="tab-pane fade show active" id="navs-top-write" role="tabpanel">
                       <div class="card-body">
                   	 	<ul >
 	                  	 	<li>
@@ -126,9 +135,9 @@
 							</li>
 							<li>
 								<div class="input-group">
-    			                    <input type="file" class="form-control" id="inputGroupFile02">
-                			        <label class="input-group-text" for="inputGroupFile02">업로드</label>
-                			        <label class="input-group-text" for="inputGroupFile02" >삭제</label>
+    			                    <input type="file" class="form-control" id="uploadfile" name="uploadfile">
+                			        <label class="input-group-text" for="inputGroupFile02" id="uploadFileBtn" name="uploadFile"">업로드</label>
+                			        <label class="input-group-text" for="inputGroupFile02" id="deleteFile" name="deleteFile">삭제</label>
                  				</div>
 							</li>
 	                   		<li class="nav-item">	
@@ -142,11 +151,20 @@
                    	</div>
               	 	</div>
                   </div>
-                </div>
-              </div>
-            </div>
-       <div class="card-body">
+                     <div class="tab-pane fade" id="navs-top-img" role="tabpanel">
+                      <div class="card-body">
+                      	<ul>
+                      		<li>
+                      			<input type="text">sdsdsddsdsd
+                      		</li>
+                      	</ul>
+                	 </div>
+              		</div>
+            	</div>
+       	<div class="card-body">
     </div>
+   </div>
+   </div>
    </div>
   </form>
 </body>

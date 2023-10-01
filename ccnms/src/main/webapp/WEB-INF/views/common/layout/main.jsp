@@ -12,15 +12,14 @@
 		var menu="${menu}";
 		if (menu=='del') {
 			Swal.fire({
-				  position: 'top-end',
+				  position: 'center',
 				  icon: 'success',
-				  title: 'Your work has been saved',
+				  title: '회원탈퇴가 완료되었습니다.',
 				  showConfirmButton: false,
-				  timer: 1000
+				  timer: 1500
 				});
 		}
 	});
-
 </script>
 <body>
     <!-- Categories Section Begin -->

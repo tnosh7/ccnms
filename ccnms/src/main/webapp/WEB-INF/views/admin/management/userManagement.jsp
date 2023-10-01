@@ -157,11 +157,11 @@ nav {
 	                <c:otherwise>
 	                	<c:forEach var="userDTO"  items="${userList}">
 	                		<tr>
-		                      	<td><input type="checkbox" id="userCheck" name="userCheck"></td>
+		                      	<td><input type="checkbox" id="userCheck" name="userCheck""></td>
 		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${userDTO.userId }</td>
-		                        <td>${userDTO.userId }</td>
 		                        <td>${userDTO.userNm }</td>
 		                        <td>${userDTO.birthDT}</td>
+		                        <td>${userDTO.hp}</td>
 		                        <td>${userDTO.email}</td>
 		                        <td><span class="badge bg-label-primary me-1">${userDTO.sex}</span></td>
 		                        <td><span class="badge bg-label-success me-1">${userDTO.emailYN}</span></td>
