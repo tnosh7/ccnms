@@ -6,6 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	$().ready(function(){
+		
+		$("#picBtn").click(function(){
+			$("#picWarn").html("비밀번호 인증 후에 변경가능.");
+		});
+	});
+
+
+</script>
 </head>
 <body>
 	<fieldset>
@@ -31,7 +41,7 @@
                             <h4>Categories</h4>
                             <ul>
                                 <li><a href="${contextPath }/myPage/main"><strong>내프로필</strong></a></li>
-                                <li><a href="#"><strong>이력관리</strong></a></li>
+                                <li><a href="${contextPath }/myPage/myLog?userId=${userDTO.userId}"><strong>이력관리</strong></a></li>
                                 <li><a href="#"><strong>설정</strong></a></li>
                             </ul>
                         </div>
@@ -67,7 +77,7 @@
 						   	</c:when>
 						   	<c:otherwise>
 						   		<img
-		                         src="${userDTO.profile }"
+		                         src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }"
 		                         alt="user-avatar"
 		                         class="d-block rounded"
 		                         height="100"
@@ -81,7 +91,7 @@
 	                       <div class="button-wrapper">
 	                        <p class="text-muted mb-0"></p>
 	                         <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-	                          <span class="d-none d-sm-block">사진 변경</span>
+	                          <span class="d-none d-sm-block" id="picBtn">사진 변경</span>
 	                           <i class="bx bx-upload d-block d-sm-none"></i>
 	                           <input
 	                             type="file"
@@ -98,6 +108,7 @@
 	                           <i class="bx bx-reset d-block d-sm-none"></i>
 	                           <span class="d-none d-sm-block">삭제</span>
 	                         </button>
+                           <span id="picWarn" style="color:red"></span>
 	                       </div>
 	                     </div>
 	                   </div>

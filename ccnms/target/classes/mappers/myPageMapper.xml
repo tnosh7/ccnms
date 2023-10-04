@@ -62,4 +62,23 @@
 		WHERE 
 				USER_ID = #{userId}
 	</delete>
+	
+	<select id="selectListDiggingList" parameterType="String" resultType="DiggingDTO">
+		SELECT 
+				*
+		FROM 
+				DIGGING
+		WHERE 
+				WRITER = #{userId}
+	</select>
+	
+	<delete id="deleteDigging" >
+		DELETE FROM
+		 		DIGGING
+		 WHERE 
+		 		DIGGING_ID IN 
+		 <foreach collection="array" item="diggingId" separator="," open="(" close=")">
+		 	#{diggingId}
+		 </foreach>
+	</delete>
 </mapper>

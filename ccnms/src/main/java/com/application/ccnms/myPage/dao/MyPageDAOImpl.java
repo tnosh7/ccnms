@@ -1,9 +1,12 @@
 package com.application.ccnms.myPage.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
 @Repository
@@ -23,11 +26,6 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 
 	@Override
-	public UserDTO selectOneAuthenticationUser(UserDTO userDTO) throws Exception {
-		return sqlSession.selectOne("myPage.selectOneAuthenticationUser", userDTO);
-	}
-
-	@Override
 	public String selectOneAuthenticationUser(String userId) throws Exception {
 		return sqlSession.selectOne("myPage.selectOneAuthenticationUser", userId);
 	}
@@ -40,5 +38,17 @@ public class MyPageDAOImpl implements MyPageDAO {
 	@Override
 	public void deleteUser(UserDTO userDTO) throws Exception {
 		sqlSession.delete("myPage.deleteUser", userDTO);
+	}
+
+	@Override
+	public List<DiggingDTO> selectListDiggingList(String userId) throws Exception {
+		return sqlSession.selectList("myPage.selectListDiggingList", userId);
+	}
+
+	@Override
+	public void deleteDigging(int[] delDiggingIdList) throws Exception {
+		sqlSession.delete("myPage.deleteDigging", delDiggingIdList);
+		
+		
 	}
 }

@@ -2,12 +2,14 @@ package com.application.ccnms.myPage.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +27,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.myPage.service.MyPageService;
 import com.application.ccnms.user.dto.UserDTO;
 import com.application.ccnms.user.service.UserService;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @RequestMapping("/myPage")
@@ -71,7 +76,7 @@ public class MyPageController {
 			session.setAttribute("role", "user");
 
 			if(menu.equals("update")) {
-				mv.setViewName("/myPage/authenticationUser");
+				mv.setViewName("/myPage/modifyMyPage");
 			}
 			else if (menu.equals("delete")) {
 				myPageService.removeUser(userDTO);
@@ -92,6 +97,8 @@ public class MyPageController {
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("/myPage/modifyMyPage");
 		mv.addObject("userDTO", myPageService.getUserDetail((String)session.getAttribute("userId")));
+		System.out.println("-----------------------------------------------------------------");
+		System.out.println(myPageService.getUserDetail((String)session.getAttribute("userId")));
 		mv.addObject("role", "user");
 		return mv;
 	}
@@ -128,6 +135,50 @@ public class MyPageController {
 		String jsScript ="<script>";
 				jsScript +="alert('OK');";
 			   jsScript +="</script>";
+		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
+	}
+	@GetMapping("/thumbnails")
+	public void thumbnails(@RequestParam("fileName") String fileName, HttpServletResponse response) throws Exception {
+	
+		OutputStream out = response.getOutputStream();
+		String filePath = FILE_REPO_PATH + fileName;
+		
+		File image = new File(filePath);
+		if (image.exists()) { 
+			Thumbnails.of(image).size(800,800).outputFormat("png").toOutputStream(out);
+		}
+		byte[] buffer = new byte[1024 * 8];
+		out.write(buffer);
+		out.close();
+	}
+	
+	@GetMapping("/myLog") 
+	public ModelAndView myLog (@RequestParam("userId") String userId)throws Exception  {
+		ModelAndView mv= new ModelAndView();
+		mv.setViewName("/myPage/myLog");
+		mv.addObject("diggingList", myPageService.getDiggingList(userId));
+		return mv;
+	}
+	@GetMapping("/removeDigging")
+	public ResponseEntity<Object> removeDigging(@RequestParam("diggingIdList") String diggingIdList, HttpServletRequest request) throws Exception {
+		
+		String[] temp = diggingIdList.split(",");
+		int[] delDiggingIdList = new int[temp.length];
+		for (int i = 0; i < delDiggingIdList.length; i++) {
+			delDiggingIdList[i] = Integer.parseInt(temp[i]);
+			System.out.println(delDiggingIdList[i]);
+		}
+		myPageService.removeDigging(delDiggingIdList);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("userId", myPageService.getUserDetail((String)session.getAttribute("userId")));
+		session.setAttribute("role", "user");
+		String jsScript ="<script>";
+			   jsScript +="location.href='" + request.getContextPath()+ "/myPage/myLog'";
+			   jsScript +="</script>";
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
 	}
 }

@@ -30,5 +30,11 @@ public class AdminUserDAOImpl implements AdminUserDAO {
 	public List<AdminDTO> selectListSearchAdmin(Map<String, String> searchMap) throws Exception {
 		return sqlSession.selectList("adminUser.selectListSearchAdmin", searchMap);
 	}
+
+	@Override
+	public void deleteUserList(String[] delUserIdList) throws Exception {
+		sqlSession.delete("adminUser.deleteUserList", delUserIdList);
+	}
+
 	
 }

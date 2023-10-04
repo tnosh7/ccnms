@@ -30,4 +30,9 @@ public class AdminUserServiceImpl implements AdminUserService {
 	public List<AdminDTO> getSearchAdmin(Map<String, String> searchMap) throws Exception {
 		return adminUserDAO.selectListSearchAdmin(searchMap);
 	}
+
+	@Override
+	public void deleteUserList(String[] delUserIdList) throws Exception {
+		adminUserDAO.deleteUserList(delUserIdList);
+	}
 }

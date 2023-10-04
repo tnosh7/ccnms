@@ -95,6 +95,16 @@ public class DiggingController {
 			   jsScript +="</script>";
 		return jsScript;
 	}
+	@GetMapping("diggingDetail") 
+	public ModelAndView diggingDetail(@RequestParam("diggingId") long diggingId) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/digging/diggingDetail");
+		System.out.println(diggingId);
+		mv.addObject("diggingDTO", diggingService.getDiggingDetail(diggingId));
+		
+		return mv;
+	}
 	
 	
 }		

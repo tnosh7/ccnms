@@ -19,6 +19,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -237,7 +238,18 @@ public class AdminUserController {
 	    wb.close();
 	}
 	
-	
+	@GetMapping("delUser")
+	public ResponseEntity<Object> delUser(@RequestParam("deluserIdList") String deluserIdList) throws Exception{
+		
+		String[] temp= deluserIdList.split(",");
+		String[] delUserIdList = new String[temp.length];
+		for (int i = 0; i < temp.length; i++) {
+			delUserIdList[i] = temp[i];
+		}
+		adminUserService.deleteUserList(delUserIdList);
+		return null;
+		
+	}
 
 
 

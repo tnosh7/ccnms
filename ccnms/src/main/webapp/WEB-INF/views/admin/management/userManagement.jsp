@@ -25,14 +25,34 @@ nav {
 		
 		$("#allCheck").change(function(){
 			if($("#allCheck").prop("checked")) {
-				$("[name='userCheck']").prop("checked", true);			
+				$("[name='userId']").prop("checked", true);			
 			}
 			else if($("#allCheck").prop("checked", false)) {
-				$("[name='userCheck']").prop("checked", false);	
+				$("[name='userId']").prop("checked", false);	
 			}
 		});
 	});
-
+	function deleteUser(){
+		var deluserIdList = "";
+		$("input[name='userId']:checked").each(function(){
+			deluserIdList = $(this).val() + ",";
+		});
+		Swal.fire({
+			  title: '유저를 삭제하시겠습니까?',
+			  showDenyButton: true,
+			  showCancelButton: true,
+			  confirmButtonText: '네',
+			  denyButtonText: '아니요',
+			}).then((result) {
+			  if (result.isConfirmed) {
+				location.href="${contextPath}//admin/management/delUser?deluserIdList=" + deluserIdList;
+			   	
+			  } else if (result.isDenied) {
+				  return;
+			  }
+		})
+	}
+		
 </script>
 <body>
 <fieldset>
@@ -83,8 +103,8 @@ nav {
                             <i class="bx bx-dots-vertical-rounded"></i>
                           </button>
                           <ul class="dropdown-menu dropdown-menu-end show" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 40px, 0px);">
-                            <li><a class="dropdown-item" href="javascript:void(0);">유저수정</a></li>
-                            <li><a class="dropdown-item" href="javascript:void(0);">유저삭제</a></li>
+                            <li><a class="dropdown-item"  onclick="updateUser();">유저수정</a></li>
+                            <li><a class="dropdown-item"  onclick="deleteUser();">유저삭제</a></li>
                           </ul>
                         </div></li>
 					</ul>
@@ -140,24 +160,13 @@ nav {
                     <c:choose>
 	                    <c:when test="${empty userList}">
 		                      <tr>
-		                      	<td></td>
-		                        <td></td>
-		                        <td></td>
-		                        <td></td>
-		                        <td></td>
-		                        <td></td>
-		                        <td></td>
-		                        <td></td>
-		                        <td></td>
-		                        <td></td>
-		                        <td></td>
-		                        <td></td>
+		                      	<td colspan="12">유저가 없습니다.</td>
 		                      </tr>
 		                </c:when>
 	                <c:otherwise>
 	                	<c:forEach var="userDTO"  items="${userList}">
 	                		<tr>
-		                      	<td><input type="checkbox" id="userCheck" name="userCheck""></td>
+		                      	<td><input type="checkbox" id="userCheck" name="userId" value="${userDTO.userId }"></td>
 		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${userDTO.userId }</td>
 		                        <td>${userDTO.userNm }</td>
 		                        <td>${userDTO.birthDT}</td>

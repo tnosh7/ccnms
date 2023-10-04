@@ -26,4 +26,13 @@
 		FROM 
 			DIGGING
 	</select>
+	
+	<select id="selectDiggingDetail" parameterType="long" resultType="DiggingDTO">
+		SELECT 
+			*
+		FROM 
+			DIGGING
+		WHERE 
+			DIGGING_ID = #{diggingId}
+	</select>
 </mapper>

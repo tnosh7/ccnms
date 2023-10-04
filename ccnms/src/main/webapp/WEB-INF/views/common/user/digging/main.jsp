@@ -20,18 +20,17 @@
 	    border : 0;
 	    float: left;
 	}
+	table {
+    width: 100%;
+    height: 500px;
+  }
 </style>
-<script>
-	$().ready(function(){
-		$("#onePageViewCnt").val("${onePageViewCnt}");
+<script>wC	$().ready(function(){
+		
 	});
 	
-	function getBoardList(){
-		var url = "${contextPath}/digging/diggingList"
-			url +="?onePageViewCnt=" + $("#onePageViewCnt").val();
-	
-	}
-	
+
+nt = $("[name='onePageViewCnt']").val();
 
 </script>
 </head>
@@ -108,8 +107,7 @@
                 </div>
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-			              <span align="right">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
 			                <ul>
 			                	<li>
 				                    <select>
@@ -119,14 +117,12 @@
 				                    </select>
 			                	</li>
 			                	<li>
-				                    <select name="onePageViewCnt" onchange="getDiggingList()">
-				                    	<option value="2">2개씩</option>
-				                    	<option value="1">1개씩</option>
+				                    <select name="onePageViewCnt" >			                   
+				                     	<option value="list"><img src="${contextPath }/resources/bootstrap/img/list.png">리스트</option>
+				                    	<option value=""><img src="${contextPath }/resources/bootstrap/img/detail.png">자세히</option>
 				                    </select>
 			                	</li>
-			                </ul>
-			              </span>
-			              <hr>
+			                </ul>	
                            <c:forEach var="diggingDTO" items="${diggingList }">
                             <div class="blog__item">
                             <div>
@@ -138,9 +134,9 @@
                                 				<td><i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></td>
                                 			</tr>
                                 		</thead>
-										<tbody>
+										<tbody align="center">
 											<tr>
-												<th colspan="3"><h5><a href="#">${diggingDTO.subject }</a></h5></th>
+												<th colspan="3"><h5><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.subject }</a></h5></th>
 											</tr>
 											<tr>
 											<c:if test="${diggingDTO.file != null }">
@@ -148,25 +144,26 @@
 											</c:if>
 											</tr>
 											<tr>
-												<th colspan="3"><a href="#">${diggingDTO.content }</a></th>
+												<th colspan="3"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.content }</a></th>
 											</tr>
 										</tbody>    
 										<tfoot>
 											<tr>
-												<th><i class="fa fa-comment-o"></i> 댓글수</th>
+												<th><i class="fa fa-comment-o"></i> 댓글수 ${replyDTO.replyCnt }</th>
 												<th>likecnt</th>
 											</tr>
 										</tfoot>                            	
                                 	</table>
+                                	<input type="hidden" value="${diggingDTO.diggingId }"/>
                                 </div>
-                                </div>
+							 </div>                                
                             </div>
                        </c:forEach>
-                        </div>
+						</div>		               
                         <div class="col-lg-12">
                             <div class="product__pagination blog__pagination">
                             <c:if test="${startPage > 10 }">
-                                <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i></a>
+                                <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i></a>}"><i class="fa fa-long-arrow-left"></i></a>
                             </c:if>
                             <c:forEach  var="i" begin="${startPage }" end="${endPage }">
                                 <a href="#">i</a>

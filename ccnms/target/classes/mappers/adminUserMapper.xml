@@ -31,4 +31,15 @@
 			</if>
 		</where>
 	</select>
+	
+	<delete id="delUserIdList">
+		DELETE FROM 
+				USER
+		WHERE 
+				USER_ID IN
+		<foreach collection="array" item="userId" separator="," open="(" close=")">
+				#{userId}
+		</foreach>
+	
+	</delete>
 </mapper>

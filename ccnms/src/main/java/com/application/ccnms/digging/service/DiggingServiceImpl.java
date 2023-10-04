@@ -22,5 +22,10 @@ public class DiggingServiceImpl implements DiggingService {
 	@Override
 	public List<DiggingDTO> getDiggingList() throws Exception {
 		return diggingDAO.selectListDiggingList();
+	}
+
+	@Override
+	public DiggingDTO getDiggingDetail(long diggingId) throws Exception {
+		return diggingDAO.selectDiggingDetail(diggingId);
 	} 
 }

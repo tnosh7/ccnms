@@ -23,4 +23,9 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	public List<DiggingDTO> selectListDiggingList() throws Exception {
 		return sqlSession.selectList("digging.selectListDiggingList");
 	}
+
+	@Override
+	public DiggingDTO selectDiggingDetail(long diggingId) throws Exception {
+		return sqlSession.selectOne("digging.selectDiggingDetail", diggingId);
+	}
 }

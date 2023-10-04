@@ -32,8 +32,6 @@ function execDaumPostcode() {
         }
     }).open();
 }
-
-
 </script>
 </head>
 <body>
@@ -62,7 +60,7 @@ function execDaumPostcode() {
                             <h4>Categories</h4>
                             <ul>
                                 <li><a href="${contextPath }/myPage/main"><strong>내프로필</strong></a></li>
-                                <li><a href="#"><strong>이력관리</strong></a></li>
+                                <li><a href="${contextPath }/myPage/myLog?userId=${userDTO.userId}"><strong>이력관리</strong></a></li>
                                 <li><a href="#"><strong>설정</strong></a></li>
                             </ul>
                         </div>
@@ -98,7 +96,7 @@ function execDaumPostcode() {
 						   	</c:when>
 						   	<c:otherwise>
 						   		<img
-		                         src="${userDTO.profile }"
+		                         src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }"
 		                         alt="user-avatar"
 		                         class="d-block rounded"
 		                         height="100"
@@ -109,25 +107,20 @@ function execDaumPostcode() {
 						   	</c:otherwise>
 						   </c:choose>
 	                       &emsp;&emsp;&emsp;
-	                       <div class="button-wrapper">
-	                        <p class="text-muted mb-0"></p>
-	                         <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-	                          <span class="d-none d-sm-block">사진 변경</span>
-	                           <i class="bx bx-upload d-block d-sm-none"></i>
-	                           <input
-	                             type="file"
-	                             id="file"
-	                             name="file"
-	                             class="account-file-input"
-	                             hidden
-	                             accept="image/png, image/jpeg"
-	                           />
-	                           <input type="hidden" name="beforeFileName" value="${userDTO.profile }"/>
-	                         </label>
-	                         <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-	                           <i class="bx bx-reset d-block d-sm-none"></i>
-	                           <span class="d-none d-sm-block">삭제</span>
-	                         </button>
+			                      <div class="d-flex align-items-start align-items-sm-center gap-4">
+		                        <div class="button-wrapper">
+		                          <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+		                            <span class="d-none d-sm-block">사진변경</span>
+		                            <i class="bx bx-upload d-block d-sm-none"></i>
+		                            <input type="file" id="upload" name="profile" class="account-file-input" hidden="" accept="image/png, image/jpeg">
+		                          </label>
+		                           <input type="hidden" name="beforeFileName" value="${userDTO.profile }"/>
+		                         <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+		                           <i class="bx bx-reset d-block d-sm-none"></i>
+		                           <span class="d-none d-sm-block">삭제</span>
+		                         </button>
+		                        </div>
+		                      </div>
 	                       </div>
 	                     </div>
 	                   </div>
@@ -219,9 +212,8 @@ function execDaumPostcode() {
 			</div>
 			</div>
 		</div>
-		</div>
-		</div>
-		</div>
+	</div>
+	</div>
 	</section>
 	</div>
 </form>
