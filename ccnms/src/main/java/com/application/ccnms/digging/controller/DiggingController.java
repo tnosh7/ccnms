@@ -38,11 +38,12 @@ public class DiggingController {
 	private final String FILE_REPO_PATH = "C:\\ccnms_content_file_repo\\";
 	
 	@GetMapping("/main")
-	public ModelAndView main()throws Exception {
+	public ModelAndView main(HttpServletRequest request, @RequestParam("userId") String userId)throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/digging/main");
+		HttpSession session = request.getSession();
+		session.setAttribute("userDTO", diggingService.getProfile(userId));
 		mv.addObject("diggingList", diggingService.getDiggingList());
-	
 		return mv;
 	}
 	@GetMapping("/thumbnails")
@@ -56,6 +57,12 @@ public class DiggingController {
 		out.write(buffer);
 		out.close();
 	}
+	@GetMapping("/addThumbsUp") 
+	public void addThumbsUp(@RequestParam("diggingId") long diggingId, @RequestParam("thumbsUp") int thumbsUp) throws Exception {
+		System.out.println(diggingId); 
+		diggingService.ThumbsUp(diggingId);
+	}
+	
 	
 	@GetMapping("/ranking")
 	public ModelAndView ranking()throws Exception {
@@ -102,7 +109,8 @@ public class DiggingController {
 		mv.setViewName("/digging/diggingDetail");
 		System.out.println(diggingId);
 		mv.addObject("diggingDTO", diggingService.getDiggingDetail(diggingId));
-		
+		mv.addObject("allReplyCnt", diggingService.getallReplyCnt(diggingId));
+		mv.addObject("replyList", diggingService.getReplyList(diggingId));
 		return mv;
 	}
 	

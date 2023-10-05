@@ -7,4 +7,11 @@ import com.application.ccnms.reply.dto.ReplyDTO;
 public interface ReplyService {
 	public int getAllReplyCnt(long diggingId) throws Exception;
 	public void addReply(ReplyDTO replyDTO)throws Exception;
+
+
+
+
+
+
+
 }

@@ -11,18 +11,18 @@
 			DIGGING_ID = #{diggingId}
 	</select>
 
-	<insert id="insertReply" parameterType="ReplyDTO">
+	<insert id="insertReply">
 		INSERT INTO REPLY (
 			WRITER,
-			CONTENT,
 			DIGGING_ID,
+			CONTENT,
 			ENROLL_DT
 		)
 		VALUES (
 			#{writer},
-			#{content},
 			#{diggingId},
-			#NOW()		
+			#{content},
+			NOW()		
 		)
 	</insert>
 </mapper>

@@ -35,4 +35,30 @@
 		WHERE 
 			DIGGING_ID = #{diggingId}
 	</select>
+	
+	<update id="updateThumbsUp">
+		UPDATE DIGGNG
+		SET 
+			THUMBS_UP = THUMBS_UP + 1 
+		WHERE 
+			DIGGING_ID = #{diggingId}
+	</update>
+	
+	<select id="selectOneAllReplyCnt" parameterType="long" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			REPLY
+		WHERE
+			DIGGING_ID = #{diggingId}	
+	</select>
+	
+	<select id="selectListReplyList" parameterType="long" resultType="ReplyDTO">
+		SELECT 
+			*
+		FROM 
+			REPLY
+		WHERE
+			DIGGING_ID = #{diggingId}
+	</select>
 </mapper>

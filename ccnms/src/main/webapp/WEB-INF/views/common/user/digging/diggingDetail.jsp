@@ -119,7 +119,7 @@
                                        <table border="1" >
 		                            	<thead>
 		                            		<tr>
-		                            			<td><img src="${userDTO.profile }" alt="프로필이미지"></td>
+		                            			<td><img src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }" alt="프로필이미지"></td>
 		                            			<th>${diggingDTO.writer }</td>
 		                            			<td align="right"><i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></td>
 		                            		</tr>
@@ -136,14 +136,11 @@
 		                            		<tr>
 	                            				<td colspan="3">${diggingDTO.content }</td>
 		                            		</tr>
-		                            		<tr>
-	                            				<td colspan="3">fff</td>
-		                            		</tr>
                             			</tbody>
                             			<tfoot>
                             				<tr>
-												<th colspan="2"><span>likePoint</span></th>                            				
-                            					<th><span>댓글cnt</span></th>
+												<th colspan="2"><span>여기는 추천${diggingDTO.thumbsUp }</span></th>                            				
+                            					<th><span>댓글수 박스콘 넣을것 ${allReplyCnt }</span></th>
                             				</tr>
 					                         <tr>
 					                         	<th colspan="3"><div class="blog__details__social">

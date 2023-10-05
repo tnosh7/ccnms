@@ -25,12 +25,21 @@
     height: 500px;
   }
 </style>
-<script>wC	$().ready(function(){
-		
+<script>
+	$().ready(function(){
+		$("#thumbsUp").click(function(){
+			
+			$.ajax({
+					var diggingId = parseInt($("#thumbsUp").val());
+					url: "${contextPath}/digging/addThumbsUp",
+					type: "get",
+					data : diggingId
+				});
+			}
+		});	
 	});
 	
 
-nt = $("[name='onePageViewCnt']").val();
 
 </script>
 </head>
@@ -130,7 +139,7 @@ nt = $("[name='onePageViewCnt']").val();
                                 	<table border="1" width="300" height="200">
                                 		<thead>
                                 			<tr>
-                                				<td colspan="2">${diggingDTO.writer }</td>
+                                				<td colspan="2"><img src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }">${diggingDTO.writer }</td>
                                 				<td><i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></td>
                                 			</tr>
                                 		</thead>
@@ -149,8 +158,8 @@ nt = $("[name='onePageViewCnt']").val();
 										</tbody>    
 										<tfoot>
 											<tr>
-												<th><i class="fa fa-comment-o"></i> 댓글수 ${replyDTO.replyCnt }</th>
-												<th>likecnt</th>
+												<th><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</th>
+												<th><i class="fa fa-comment-o"></i> ${replyDTO.replyCnt }</th>
 											</tr>
 										</tfoot>                            	
                                 	</table>

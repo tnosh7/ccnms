@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.application.ccnms.digging.dto.DiggingDTO;
+import com.application.ccnms.reply.dto.ReplyDTO;
 
 @Repository
 public class DiggingDAOImpl implements DiggingDAO  {
@@ -27,5 +28,20 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	@Override
 	public DiggingDTO selectDiggingDetail(long diggingId) throws Exception {
 		return sqlSession.selectOne("digging.selectDiggingDetail", diggingId);
+	}
+
+	@Override
+	public void updateThumbsUp(long diggingId) throws Exception {
+		 sqlSession.update("digging.updateThumbsUp", diggingId);
+	}
+
+	@Override
+	public int selectOneAllReplyCnt(long diggingId) throws Exception {
+		return sqlSession.selectOne("digging.selectOneAllReplyCnt",diggingId);
+	}
+
+	@Override
+	public List<ReplyDTO> selectListReplyList(long diggingId) throws Exception {
+		return sqlSession.selectList("digging.selectListReplyList",diggingId);
 	}
 }
