@@ -38,7 +38,7 @@ import net.coobird.thumbnailator.Thumbnails;
 @RequestMapping("/myPage")
 public class MyPageController {
 	
-	private String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	
 	@Autowired
 	private MyPageService myPageService;

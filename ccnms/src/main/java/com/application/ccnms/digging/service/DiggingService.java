@@ -4,9 +4,12 @@ import java.util.List;
 
 import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.reply.dto.ReplyDTO;
+import com.application.ccnms.user.dto.UserDTO;
 
 public interface DiggingService {
 	public List<DiggingDTO> getDiggingList() throws Exception;
+	public List<UserDTO> getUser()throws Exception;
+	
 	public void addDigging(DiggingDTO diggingDTO) throws Exception;
 	public DiggingDTO getDiggingDetail(long diggingId) throws Exception;
 	public void ThumbsUp(long diggingId)throws Exception;	 

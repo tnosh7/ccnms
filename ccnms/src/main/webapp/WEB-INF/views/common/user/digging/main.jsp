@@ -159,7 +159,7 @@
 										<tfoot>
 											<tr>
 												<th><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</th>
-												<th><i class="fa fa-comment-o"></i> ${replyDTO.replyCnt }</th>
+												<th><i class="fa fa-comment-o"></i> ${allReplyCnt }</th>
 											</tr>
 										</tfoot>                            	
                                 	</table>

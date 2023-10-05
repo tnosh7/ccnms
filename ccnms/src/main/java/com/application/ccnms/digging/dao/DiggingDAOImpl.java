@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.reply.dto.ReplyDTO;
+import com.application.ccnms.user.dto.UserDTO;
 
 @Repository
 public class DiggingDAOImpl implements DiggingDAO  {
@@ -23,6 +24,10 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	@Override
 	public List<DiggingDTO> selectListDiggingList() throws Exception {
 		return sqlSession.selectList("digging.selectListDiggingList");
+	}
+	@Override
+	public List<UserDTO> selectListUser() throws Exception {
+		return sqlSession.selectList("digging.selectListUser");
 	}
 
 	@Override
@@ -44,4 +49,6 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	public List<ReplyDTO> selectListReplyList(long diggingId) throws Exception {
 		return sqlSession.selectList("digging.selectListReplyList",diggingId);
 	}
+
+	
 }

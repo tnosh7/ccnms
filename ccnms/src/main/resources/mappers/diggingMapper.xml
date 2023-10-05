@@ -26,6 +26,12 @@
 		FROM 
 			DIGGING
 	</select>
+	<select id="selectListUser" resultType="UserDTO">
+		SELECT 
+				*
+		FROM 
+			USER
+	</select>
 	
 	<select id="selectDiggingDetail" parameterType="long" resultType="DiggingDTO">
 		SELECT 

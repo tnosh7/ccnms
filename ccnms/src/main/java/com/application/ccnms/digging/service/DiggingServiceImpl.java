@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.application.ccnms.digging.dao.DiggingDAO;
 import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.reply.dto.ReplyDTO;
+import com.application.ccnms.user.dto.UserDTO;
 
 @Service
 public class DiggingServiceImpl implements DiggingService {
@@ -19,7 +20,6 @@ public class DiggingServiceImpl implements DiggingService {
 	public void addDigging(DiggingDTO diggingDTO) throws Exception {
 		diggingDAO.insertDigging(diggingDTO);
 	}
-
 	@Override
 	public List<DiggingDTO> getDiggingList() throws Exception {
 		return diggingDAO.selectListDiggingList();
@@ -27,6 +27,7 @@ public class DiggingServiceImpl implements DiggingService {
 
 	@Override
 	public DiggingDTO getDiggingDetail(long diggingId) throws Exception {
+		
 		return diggingDAO.selectDiggingDetail(diggingId);
 	}
 
@@ -44,5 +45,12 @@ public class DiggingServiceImpl implements DiggingService {
 	public List<ReplyDTO> getReplyList(long diggingId) throws Exception {
 		return diggingDAO.selectListReplyList(diggingId);
 	}
+	@Override
+	public List<UserDTO> getUser() throws Exception {
+		// TODO Auto-generated method stub
+		return diggingDAO.selectListUser();
+	}
+
+
 
 }
