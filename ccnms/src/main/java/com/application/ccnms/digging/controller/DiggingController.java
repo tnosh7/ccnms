@@ -40,8 +40,11 @@ public class DiggingController {
 	public ModelAndView main(HttpServletRequest request)throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/digging/main");
+		String writer= request.getParameter("writer");
 		//mv.addObject("allReplyCnt", diggingService.getallReplyCnt(diggingId);
 		mv.addObject("diggingList", diggingService.getDiggingList());
+		mv.addObject("userList", diggingService.getUser());
+	//	mv.addObject("userDTO", diggingService.getUser(writer));
 		return mv;
 	}
 	@GetMapping("/thumbnails")
@@ -55,17 +58,7 @@ public class DiggingController {
 		out.write(buffer);
 		out.close();
 	}
-	@GetMapping("/addThumbsUp") 
-	public void addThumbsUp(@RequestParam("diggingId") long diggingId, @RequestParam("thumbsUp") int thumbsUp) throws Exception {
-		System.out.println(diggingId); 
-		diggingService.ThumbsUp(diggingId);
-	}
 	
-	
-	@GetMapping("/ranking")
-	public ModelAndView ranking()throws Exception {
-		return new ModelAndView("/digging/ranking");
-	}
 	@GetMapping("/addDigging")
 	public ModelAndView addDigging()throws Exception {
 		return new ModelAndView("/digging/addDigging");
@@ -111,6 +104,12 @@ public class DiggingController {
 		mv.addObject("replyList", diggingService.getReplyList(diggingId));
 		return mv;
 	}
-	
+	@PostMapping("/thumbsUp")
+	public ModelAndView thumbsUp(@RequestParam("diggingId") long diggingId) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("thumbsUp", diggingService.upThumbsUp(diggingId));
+		mv.setViewName("redirect:/digging/diggingDetail");
+		return mv;
+	}
 	
 }		

@@ -2,6 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="common">
-
-
+	<select id="selectListDiggingList" resultType="DiggingDTO">
+		SELECT 
+				*
+		FROM 
+				DIGGING
+		ORDER BY 
+				READ_CNT DESC;
+	</select>
+	
+	<select id="selectListThumbsUpList" resultType="DiggingDTO">
+		SELECT 
+				*
+		FROM 
+				DIGGING
+		ORDER BY 
+				THUMBS_UP DESC;
+	</select>
+	
+	<select id="selectListRecentList" resultType="DiggingDTO">
+		SELECT 
+				*
+		FROM 
+				DIGGING
+		ORDER BY 
+				DIGGING_ID DESC; 
+	</select>
+	
+	<update id="updateThumbsUp" parameterType="long">
+		UPDATE 
+			DIGGING
+		SET
+			THUMBS_UP = THUMBS_UP + 1
+		WHERE 
+			DIGGING_ID = #{diggingId};
+	</update>
 </mapper>

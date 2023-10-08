@@ -38,7 +38,14 @@
 				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
 				})
 		});
-		
+		$("#thumbsUp").click(function(){
+			var diggingId = $("#diggingId").val();
+			$.ajax ({
+				url : "${contextPath}/digging/thumbsUp",
+				type : "post",
+				data : {"diggingId" : diggingId},
+			});	
+		});	
 	});
 </script>
 </head>
@@ -119,9 +126,10 @@
                                        <table border="1" >
 		                            	<thead>
 		                            		<tr>
-		                            			<td><img src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }" alt="프로필이미지"></td>
-		                            			<th>${diggingDTO.writer }</td>
+		                            			<th><img src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }" alt="프로필이미지">
+		                            			${diggingDTO.writer }</th>
 		                            			<td align="right"><i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></td>
+		                            			<td><img src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</td>
 		                            		</tr>
 		                            		<tr align="center">
 	                            				<th colspan="3">${diggingDTO.subject }</th>
@@ -139,8 +147,10 @@
                             			</tbody>
                             			<tfoot>
                             				<tr>
-												<th colspan="2"><span>여기는 추천${diggingDTO.thumbsUp }</span></th>                            				
-                            					<th><span>댓글수 박스콘 넣을것 ${allReplyCnt }</span></th>
+												<th colspan="2"><span id="thumbsUp"><img src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="30" height="30"/>${diggingDTO.thumbsUp }</span></th>                            				
+                            					<th><span>
+                            					<img src="${contextPath }/resources/bootstrap/img/comment.png"/>
+                            					 ${allReplyCnt }</span></th>
                             				</tr>
 					                         <tr>
 					                         	<th colspan="3"><div class="blog__details__social">
@@ -153,10 +163,23 @@
 					                         </tr>   			
                             			</tfoot>
                             			</table>
+                            			<input type="hidden" value="${diggingDTO.writer }">
                                     </div>
                                 </div>
                             </div>
-									<hr>
+							<div>
+							<c:choose>
+								<c:when test="${digging.writer} == ${sessionScope.userId }">
+									<input type="button" value="수정" />
+									<input type="button" value="삭제"/>
+								</c:when>
+							<c:otherwise>
+								<span></span>
+							</c:otherwise>	
+							</c:choose>
+							</div>					
+						 <hr>
+						 
 							<div align="center" style="padding-top: 100px">
 								<form action="${contextPath }/reply/addReply">
 									<br>

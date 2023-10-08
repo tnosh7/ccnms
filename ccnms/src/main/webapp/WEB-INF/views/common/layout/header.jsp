@@ -94,7 +94,7 @@
                                 </ul>
                             </li>
                             <li class="active"><a href="${contextPath }/digging/main">디깅</a></li>
-                            <li><a href="${contextPath }/digging/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png">디깅랭킹</a></li>
+                            <li><a href="${contextPath }/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png">디깅랭킹</a></li>
                         </ul>
                     </nav>
                 </div>

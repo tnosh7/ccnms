@@ -36,8 +36,8 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	}
 
 	@Override
-	public void updateThumbsUp(long diggingId) throws Exception {
-		 sqlSession.update("digging.updateThumbsUp", diggingId);
+	public int updateThumbsUp(long diggingId) throws Exception {
+		return sqlSession.update("digging.updateThumbsUp", diggingId);
 	}
 
 	@Override
@@ -50,5 +50,10 @@ public class DiggingDAOImpl implements DiggingDAO  {
 		return sqlSession.selectList("digging.selectListReplyList",diggingId);
 	}
 
-	
+	@Override
+	public int updateReadCnt(long diggingId) throws Exception {
+		return sqlSession.update("digging.updateReadCnt", diggingId);
+	}
+
+		
 }

@@ -71,6 +71,14 @@
 		WHERE 
 				WRITER = #{userId}
 	</select>
+	<select id="selectListReplyList" parameterType="String" resultType="ReplyDTO">
+		SELECT 
+				*
+		FROM 
+				REPLY
+		WHERE 
+				WRITER = #{userId}
+	</select>
 	
 	<delete id="deleteDigging" >
 		DELETE FROM
@@ -79,6 +87,16 @@
 		 		DIGGING_ID IN 
 		 <foreach collection="array" item="diggingId" separator="," open="(" close=")">
 		 	#{diggingId}
+		 </foreach>
+	</delete>
+	
+	<delete id="deleteReply" >
+		DELETE FROM
+		 		REPLY
+		 WHERE 
+		 		REPLY_ID IN 
+		 <foreach collection="array" item="replyId" separator="," open="(" close=")">
+		 	#{replyId}
 		 </foreach>
 	</delete>
 </mapper>

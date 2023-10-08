@@ -248,7 +248,7 @@
 	                  	 	</li>
 	                   		<li class="nav-item">
 	                  	 	 <div class="form-group">
-							  <input class="form-control form-control-lg" type="text" id="subject" name="subject"  placeholder="제목" id="inputLarge">
+							  <input class="form-control form-control-lg" type="text" id="subject" name="subject" maxlength="30" placeholder="제목" >
 							</div>
 	                   		</li>
 	                   		<li class="nav-item"><textarea name="content" id="editor"></textarea>

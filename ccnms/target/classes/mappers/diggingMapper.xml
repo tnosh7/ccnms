@@ -41,9 +41,16 @@
 		WHERE 
 			DIGGING_ID = #{diggingId}
 	</select>
+	<update id="updateReadCnt">
+		UPDATE DIGGING
+		SET 
+			READ_CNT = READ_CNT + 1
+		WHERE 
+			DIGGING_ID = #{diggingId}
+	</update>
 	
-	<update id="updateThumbsUp">
-		UPDATE DIGGNG
+	<update id="updateThumbsUp" parameterType="long">
+		UPDATE DIGGING
 		SET 
 			THUMBS_UP = THUMBS_UP + 1 
 		WHERE 

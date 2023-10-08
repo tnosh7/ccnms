@@ -12,6 +12,7 @@ public class ReplyDTO {
 	private String content;
 	private Date enrollDT;
 	private long diggingId;
+	private int ThumbsUp;
 	public long getReplyId() {
 		return replyId;
 	}
@@ -42,10 +43,16 @@ public class ReplyDTO {
 	public void setDiggingId(long diggingId) {
 		this.diggingId = diggingId;
 	}
+	public int getThumbsUp() {
+		return ThumbsUp;
+	}
+	public void setThumbsUp(int thumbsUp) {
+		ThumbsUp = thumbsUp;
+	}
 	@Override
 	public String toString() {
 		return "ReplyDTO [replyId=" + replyId + ", writer=" + writer + ", content=" + content + ", enrollDT=" + enrollDT
-				+ ", diggingId=" + diggingId + "]";
+				+ ", diggingId=" + diggingId + ", ThumbsUp=" + ThumbsUp + "]";
 	}
 	
 }

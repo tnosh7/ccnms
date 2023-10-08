@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.myPage.dao.MyPageDAO;
+import com.application.ccnms.reply.dto.ReplyDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
 @Service
@@ -54,10 +55,18 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<DiggingDTO> getDiggingList(String userId) throws Exception {
 		return myPageDAO.selectListDiggingList(userId);
 	}
+	@Override
+	public List<ReplyDTO> getReplyList(String userId) throws Exception {
+		return myPageDAO.selectListReplyList(userId);
+	}
 
 	@Override
 	public void removeDigging(int[] delDiggingIdList) throws Exception {
 		myPageDAO.deleteDigging(delDiggingIdList);
+	}
+	@Override
+	public void removeReply(int[] delReplyIdList) throws Exception {
+		myPageDAO.deleteReply(delReplyIdList);
 	}
 
 }

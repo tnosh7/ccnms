@@ -9,20 +9,38 @@
 <title>Insert title here</title>
 <script>
 	function selectAllDigging(){
-		if ($("#allChoice").prop("checked")) {
+		if ($("#allDiggingChoice").prop("checked")) {
 			$("[name='diggingId']").prop("checked", true);
 		}
 		else {
 			$("[name='diggingId']").prop("checked", false);
 		}
 	}
+	function selectAllDigging(){
+		if ($("#allReplyChoice").prop("checked")) {
+			$("[name='replyId']").prop("checked", true);
+		}
+		else {
+			$("[name='replyId']").prop("checked", false);
+		}
+	}
 	function removeLog(){
 		var diggingIdList ="";
-		$("input[name='diggingId']:checked").each(function(){
-			diggingIdList += $(this).val() + ",";
-		});
-		console.log(diggingIdList);
-		location.href= "${contextPath}/myPage/removeDigging?diggingIdList=" + diggingIdList;
+		var replyIdList = "";
+		if ($("input[name='diggingId']:checked")) {
+			$("input[name='diggingId']:checked").each(function(){
+				diggingIdList += $(this).val() + ",";
+				console.log(diggingIdList);
+				location.href= "${contextPath}/myPage/removeDigging?diggingIdList=" + diggingIdList;
+			});
+		}	
+		else if ($("input[name='replyId']:checked")) {
+			$("input[name='replyId']:checked").each(function(){
+				replyIdList += $(this).val() + ",";
+				console.log(replyIdList);
+				location.href= "${contextPath}/myPage/removeReply?replyIdList=" + replyIdList;
+			});
+		}
 	}
 </script>
 <style>
@@ -73,7 +91,7 @@
                         <table border="1">
                             <thead align="center" border="1">
                                 <tr>
-                                    <th width="10%"><input type="checkbox" id="allChoice" onchange="selectAllDigging()"></th>
+                                    <th width="10%"><input type="checkbox" id="allDiggingChoice" onchange="selectAllDigging()"></th>
                                     <th class="shoping__product" width="50%">제목</th>
                                     <th width="30%">날짜</th>
                                     <th width="10%">추천</th>
@@ -102,6 +120,48 @@
                     </c:choose>
                     </div>
                 </div>
+                    <div class="blog__details__text">
+                    <c:choose>
+                    <c:when test="${replyList eq null }">
+						<table>
+							<tr>
+								<th colspan="5">이력이 없습니다.</th>
+							</tr>
+						</table>
+                    </c:when>
+                    <c:otherwise>
+                    <h5>댓글 목록</h5>
+                        <table border="1">
+                            <thead align="center" border="1">
+                                <tr>
+                                    <th width="10%"><input type="checkbox" id="allReplyChoice" onchange="selectAllDigging()"></th>
+                                    <th class="shoping__product" width="50%">댓글 내용</th>
+                                    <th width="30%">날짜</th>
+                                    <th width="10%">추천</th>
+                                </tr>
+                            </thead>
+                            <c:forEach var="replyDTO" items="${replyList}">
+                            <tbody align="center" width="100%">
+                                <tr>
+                                    <td class="shoping__cart__item__close">
+                                        <input type="checkbox" name="replyId" value="${replyDTO.replyId }">
+                                    </td>
+                                    <td class="shoping__cart__item" >
+                                        <strong>${replyDTO.content}</strong>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                      <fmt:formatDate value="${replyDTO.enrollDT }" pattern="yyyy-MM-dd"/>
+                                    </td>
+                                    <td class="shoping__cart__item" >
+                                    	${replyDTO.thumbsUp }
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </c:forEach>
+                        </table>
+                    </c:otherwise>
+                    </c:choose>
+                    </div>
                 <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
@@ -109,6 +169,7 @@
                    		<input type="hidden" value="${sessionScope.userId }"/>
                     </div>
                 </div>
+                
                </div>
               </div>
         </div>

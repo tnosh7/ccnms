@@ -9,6 +9,17 @@
 </head>
 <script>
 	$().ready(function(){
+		$("#thumbsUp").click(function(){
+			var diggingId = $("#diggingId").val();
+			$.ajax ({
+				url : "${contextPath}/thumbsUp",
+				type : "post",
+				data : {"diggingId" : diggingId},
+				success : function(data){
+					updatethumbsUp();
+				}
+			});	
+		});
 		var menu="${menu}";
 		if (menu=='del') {
 			Swal.fire({
@@ -20,34 +31,28 @@
 				});
 		}
 	});
+	
+	function updatethumbsUp(){
+		
+		var thumbsUp = document.getElementById("thumbsUp").value;
+		thumbsUp += 1;
+		document.getElementById("thumbsUp").innerHTML = thumbsUp;
+		return;
+	}
+	
 </script>
 <body>
     <!-- Categories Section Begin -->
-     <section class="breadcrumb-section set-bg" data-setbg="${contextPath}/resources/bootstrap/img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>홍보물</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.html">여기다</a>
-                            <span>넣기</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <section class="categories">
         <div class="container">
             <div class="row">
-                <div class="categories__slider owl-carousel">
-                    <div class="col-lg-3">
+               <div class="categories__slider owl-carousel">
+                    <div class="col-lg-6 col-md-6">
                         <div class="categories__item set-bg" data-setbg="${contextPath}/resources/bootstrap/img/categories/cat-1.jpg">
                             <h5><a href="#">Fresh Fruit</a></h5>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                         <div class="categories__item set-bg" data-setbg="${contextPath}/resources/bootstrap/img/categories/cat-2.jpg">
                             <h5><a href="#">Dried Fruit</a></h5>
                         </div>
@@ -78,138 +83,107 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>디깅 토픽</h2>
-                    </div>
                     <div class="featured__controls">
+                    	<ul align="right">
+                    		<li><c:if test="${sessionScope.userId eq null }"><button type="button" class="btn btn-primary btn-lg">디깅하기</button></c:if></li>
+                    		
+                    	</ul>
                         <ul>
-                            <li class="active" data-filter="*">전체</li>
-                            <li data-filter=".oranges">인기순</li>
-                            <li data-filter=".fresh-meat">조회순</li>
-                            <li data-filter=".vegetables">최신순</li>
+                            <li class="active" data-filter="*">All</li>
+                            <li data-filter=".oranges">Oranges</li>
+                            <li data-filter=".fresh-meat">Fresh Meat</li>
+                            <li data-filter=".vegetables">Vegetables</li>
+                            <li data-filter=".fastfood">Fastfood</li>
                         </ul>
-                    </div>
-                </div>
-            </div>
+                	</div>
             <div class="row featured__filter">
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                <div class="col-lg-12 col-md-12 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="${contextPath}/resources/bootstrap/img/featured/feature-1.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="${contextPath}/resources/bootstrap/img/featured/feature-2.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="${contextPath}/resources/bootstrap/img/featured/feature-3.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="${contextPath}/resources/bootstrap/img/featured/feature-4.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="${contextPath}/resources/bootstrap/img/featured/feature-5.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="${contextPath}/resources/bootstrap/img/featured/feature-6.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="${contextPath}/resources/bootstrap/img/featured/feature-7.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="${contextPath}/resources/bootstrap/img/featured/feature-8.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
+                    <c:choose>
+                    	<c:when test="${sort eq 'thumbsUp'}">
+		                    <c:forEach var="diggingDTO" items="${thumbsUpList }">
+	                       		<table border="1" width="100%">
+	                       			<thead>
+		                       			<tr>
+		                       				<th>${diggingDTO.writer }</th>
+		                       				<th align="right">${diggingDTO.enrollDT }</th>
+		                       			</tr>
+	                       			</thead>
+									<tbody>
+										<tr>
+											<th colspan="2"><h4>${diggingDTO.subject }</h4></th>
+										</tr>
+										<tr>
+											<td colspan="2">${diggingDTO.content}</td>
+										</tr>
+									</tbody>                       			
+									<tfoot>
+										<tr>
+											<td><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</td>
+											<td>${diggingDTO.readCnt }</td>
+										</tr>
+									</tfoot>                       		
+	                       		</table>
+			                </c:forEach>
+                    	</c:when>
+                    	<c:when test="${sort eq 'recent'}">
+		                    <c:forEach var="diggingDTO" items="${recentList }">
+	                       		<table border="1" width="100%">
+	                       			<thead>
+		                       			<tr>
+		                       				<th>${diggingDTO.writer }</th>
+		                       				<th align="right">${diggingDTO.enrollDT }</th>
+		                       			</tr>
+	                       			</thead>
+									<tbody>
+										<tr>
+											<th colspan="2"><h4>${diggingDTO.subject }</h4></th>
+										</tr>
+										<tr>
+											<td colspan="2">${diggingDTO.content}</td>
+										</tr>
+									</tbody>                       			
+									<tfoot>
+										<tr>
+											<td>${diggingDTO.thumbsUp }</td>
+											<td>${diggingDTO.readCnt }</td>
+										</tr>
+									</tfoot>                       		
+	                       		</table>
+			                </c:forEach>
+                    	</c:when>
+                    	<c:otherwise>
+		                    <c:forEach var="diggingDTO" items="${diggingList }">
+	                       		<input type="hidden" id="diggingId"  value="${diggingDTO.diggingId }"/>
+	                       		<table width="100%">
+	                       			<thead height="50">
+		                       			<tr style="background:lightgray">
+		                       				<th>${diggingDTO.writer }</th>
+		                       				<th align="right">${diggingDTO.enrollDT }</th>
+		                       			</tr>
+	                       			</thead>
+									<tbody>
+										<tr height="70">
+											<th colspan="2"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}"><h5>${diggingDTO.subject }</h5></a></th>
+										</tr>
+										<tr>
+											<td colspan="2">${diggingDTO.content}</td>
+										</tr>
+									</tbody>                       			
+									<tfoot>
+									  	<tr><td>
+									    &emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</a>
+									    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${allReplyCnt }</a>
+									    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
+									   <input type="hidden" value="${diggingDTO.diggingId }"/>
+									  	</td>
+									  	</tr>
+									  	<tr><hr></tr>
+									</tfoot>                       		
+	                       		</table>
+			                </c:forEach>
+                    	</c:otherwise>
+                    </c:choose>
                     </div>
                 </div>
             </div>
@@ -499,5 +473,6 @@
             </div>
         </div>
     </section>
+   
 </body>
 </html>

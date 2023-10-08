@@ -24,20 +24,12 @@
     width: 100%;
     height: 500px;
   }
+  	a {color:black}
+  	a:visited { color:black; }
+	a:hover { color:purple; }   
+
 </style>
 <script>
-	$().ready(function(){
-		$("#thumbsUp").click(function(){
-			
-			$.ajax({
-					var diggingId = parseInt($("#thumbsUp").val());
-					url: "${contextPath}/digging/addThumbsUp",
-					type: "get",
-					data : diggingId
-				});
-			}
-		});	
-	});
 	
 
 
@@ -117,57 +109,48 @@
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-			                <ul>
-			                	<li>
-				                    <select>
-				                    	<option>인기순</option>
-				                    	<option>댓글순</option>
-				                    	<option>최신순</option>
-				                    </select>
-			                	</li>
-			                	<li>
-				                    <select name="onePageViewCnt" >			                   
-				                     	<option value="list"><img src="${contextPath }/resources/bootstrap/img/list.png">리스트</option>
-				                    	<option value=""><img src="${contextPath }/resources/bootstrap/img/detail.png">자세히</option>
-				                    </select>
-			                	</li>
-			                </ul>	
-                           <c:forEach var="diggingDTO" items="${diggingList }">
-                            <div class="blog__item">
-                            <div>
-                                <div class="blog__item__text">
-                                	<table border="1" width="300" height="200">
-                                		<thead>
-                                			<tr>
-                                				<td colspan="2"><img src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }">${diggingDTO.writer }</td>
-                                				<td><i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></td>
-                                			</tr>
-                                		</thead>
-										<tbody align="center">
-											<tr>
-												<th colspan="3"><h5><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.subject }</a></h5></th>
-											</tr>
-											<tr>
-											<c:if test="${diggingDTO.file != null }">
-												<th colspan="3"><a href="#"><img src="${contextPath}/digging/thumbnails?file=${diggingDTO.file }" width="300" height="100" alt="이미지&동영상"/></a></th>
-											</c:if>
-											</tr>
-											<tr>
-												<th colspan="3"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.content }</a></th>
-											</tr>
-										</tbody>    
-										<tfoot>
-											<tr>
-												<th><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</th>
-												<th><i class="fa fa-comment-o"></i> ${allReplyCnt }</th>
-											</tr>
-										</tfoot>                            	
-                                	</table>
-                                	<input type="hidden" value="${diggingDTO.diggingId }"/>
-                                </div>
-							 </div>                                
-                            </div>
-                       </c:forEach>
+			               <div class="card border-light mb-3" >
+							  <div class="card-header" style="background:white">
+				                <ul>
+				                	<li>
+					                    <select>
+					                    	<option>인기순</option>
+					                    	<option>댓글순</option>
+					                    	<option>최신순</option>
+					                    </select>
+				                	</li>
+				                	<li>
+					                    <select name="onePageViewCnt" >			                   
+					                     	<option value="list"><img src="${contextPath }/resources/bootstrap/img/list.png">리스트</option>
+					                    	<option value=""><img src="${contextPath }/resources/bootstrap/img/detail.png">자세히</option>
+					                    </select>
+				                	</li>
+				                </ul>	
+							  </div>
+							</div>
+							<c:forEach var="diggingDTO" items="${diggingList }">
+                 				<div class="card mb-3">
+								  <h6 class="card-header"><c:forEach var="userDTO" items="${userList}"><img src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }" width="30"></c:forEach>${diggingDTO.writer }
+								 	<i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/>
+								  </h6>
+								  <div class="card-body">
+								    <h5 class="card-title" ><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.subject }</a></h5>
+								  </div>
+								  <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+								    <rect width="100%" height="100%" fill="#868e96"></rect>
+								    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+								  </svg>
+								  <div class="card-body">
+								    <p class="card-text"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.content }</a></p>
+								  </div>
+								  <div class="card-footer" style="background:white">
+								    &emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</a>
+								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${allReplyCnt }</a>
+								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
+								   <input type="hidden" value="${diggingDTO.diggingId }"/>
+								  </div>
+								</div>
+                      	 </c:forEach>
 						</div>		               
                         <div class="col-lg-12">
                             <div class="product__pagination blog__pagination">

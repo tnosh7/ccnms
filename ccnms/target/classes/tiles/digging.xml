@@ -5,10 +5,7 @@
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/digging/main.jsp"/>
 	 		<put-attribute name="title" value="디깅 메인"/>	
 	 	</definition>
-	 	<definition name="/digging/ranking" extends="common">
-	 		<put-attribute name="body" value="/WEB-INF/views/common/user/digging/ranking.jsp"/>
-	 		<put-attribute name="title" value="디깅 랭킹"/>	
-	 	</definition>
+	 	
 	 	<definition name="/digging/addDigging" extends="common">
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/digging/addDigging.jsp"/>
 	 		<put-attribute name="title" value="디깅 글쓰기"/>	

@@ -133,7 +133,7 @@ public class MyPageController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		String jsScript ="<script>";
-				jsScript +="alert('OK');";
+			   jsScript +="location.href='" + request.getContextPath() + "/myPage/main'" ;
 			   jsScript +="</script>";
 		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
 	}
@@ -157,6 +157,8 @@ public class MyPageController {
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("/myPage/myLog");
 		mv.addObject("diggingList", myPageService.getDiggingList(userId));
+		mv.addObject("replyList", myPageService.getReplyList(userId));
+		
 		return mv;
 	}
 	@GetMapping("/removeDigging")
@@ -176,6 +178,28 @@ public class MyPageController {
 		String jsScript ="<script>";
 			   jsScript +="location.href='" + request.getContextPath()+ "/myPage/myLog'";
 			   jsScript +="</script>";
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
+	}
+	@GetMapping("/removeReply")
+	public ResponseEntity<Object> removeReply(@RequestParam("replyIdList") String replyIdList, HttpServletRequest request) throws Exception {
+		
+		String[] temp = replyIdList.split(",");
+		int[] delReplyIdList = new int[temp.length];
+		for (int i = 0; i < delReplyIdList .length; i++) {
+			delReplyIdList [i] = Integer.parseInt(temp[i]);
+			System.out.println(delReplyIdList [i]);
+		}
+		myPageService.removeReply(delReplyIdList);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("userId", myPageService.getUserDetail((String)session.getAttribute("userId")));
+		session.setAttribute("role", "user");
+		String jsScript ="<script>";
+		jsScript +="location.href='" + request.getContextPath()+ "/myPage/myLog'";
+		jsScript +="</script>";
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");

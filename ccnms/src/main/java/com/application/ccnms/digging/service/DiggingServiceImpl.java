@@ -27,13 +27,13 @@ public class DiggingServiceImpl implements DiggingService {
 
 	@Override
 	public DiggingDTO getDiggingDetail(long diggingId) throws Exception {
-		
+		diggingDAO.updateReadCnt(diggingId);
 		return diggingDAO.selectDiggingDetail(diggingId);
 	}
 
 	@Override
-	public void ThumbsUp(long diggingId) throws Exception {
-		diggingDAO.updateThumbsUp(diggingId);
+	public int upThumbsUp(long diggingId) throws Exception {
+		return diggingDAO.updateThumbsUp(diggingId);
 	}
 
 	@Override
