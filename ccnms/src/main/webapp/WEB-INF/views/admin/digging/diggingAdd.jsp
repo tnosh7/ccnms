@@ -25,20 +25,13 @@
 </style>
 </head>
 <body>
-<form action="${contextPath }/digging/addDigging" method="post" enctype="multipart/form-data"> 
+<form action="${contextPath }/admin/digging/diggingAdd" method="post" enctype="multipart/form-data"> 
   <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
                             <h4><img src="${contextPath }/resources/bootstrap/img/dig.PNG" width="30" height="30">디깅 포스팅 안내</h4>
-                            <ul>
-                                <li>1. 포스팅 주의사항 어쩌구</li>
-                                <li>2. 포스팅 주의사항 어쩌구</li>
-                                <li>3. 포스팅 주의사항 어쩌구</li>
-                                <li>4. 포스팅 주의사항 어쩌구</li>
-                                <li>5. 포스팅 주의사항 어쩌구</li>
-                            </ul>
                         </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
@@ -94,6 +87,7 @@
 	                  	 	<div >
 	                  	 		<select name="diggingTopic" >
 			  						<option value="">[필수] 디깅 토픽 선택</option>
+			  						<option value="notice">공지</option>
 			  						<option value="game">게임</option>
 			  						<option value="kPop">K-POP</option>
 			  						<option value="ott">OTT</option>
@@ -111,7 +105,7 @@
 	                  	 	<div >
 	                  	 		<select name="writer" >
 	                  	 			<option>choose</option>
-			  						<option>${sessionScope.userId }</option>
+			  						<option>${sessionScope.adminId }</option>
 		  						</select>
 	                  	 	</div>
 	                  	 	</li>

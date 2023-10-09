@@ -7,8 +7,8 @@ import com.application.ccnms.reply.dto.ReplyDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
 public interface DiggingService {
-	public List<DiggingDTO> getDiggingList() throws Exception;
-	public List<UserDTO> getUser()throws Exception;
+	public List<DiggingDTO> getDiggingList(String diggingTopic) throws Exception;
+	public List<UserDTO> getUser(String writer)throws Exception;
 	public void addDigging(DiggingDTO diggingDTO) throws Exception;
 	public DiggingDTO getDiggingDetail(long diggingId) throws Exception;
 	public int upThumbsUp(long diggingId)throws Exception;	 

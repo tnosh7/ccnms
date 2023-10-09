@@ -7,28 +7,40 @@
 				*
 		FROM 
 				DIGGING
-		ORDER BY 
-				READ_CNT DESC;
 	</select>
 	
-	<select id="selectListThumbsUpList" resultType="DiggingDTO">
+	<select id="selectListSortDiggingList" parameterType="String" resultType="DiggingDTO">
 		SELECT 
 				*
 		FROM 
 				DIGGING
 		ORDER BY 
-				THUMBS_UP DESC;
+			<if test='sort == "readCnt"'>
+				READ_CNT DESC;	
+			</if> 
+			<if test='sort== "thumbsUp"'>
+				THUMBS_UP DESC;	
+			</if> 
+			<if test='sort == "recent"'>
+				DIGGING_ID DESC;	
+			</if>
 	</select>
 	
-	<select id="selectListRecentList" resultType="DiggingDTO">
+	<select id="selectOneAllDiggingCnt" resultType="int">
 		SELECT 
-				*
+			COUNT(*)
 		FROM 
-				DIGGING
-		ORDER BY 
-				DIGGING_ID DESC; 
+			DIGGING
 	</select>
 	
+	<select id="selectOneReplyCnt" parameterType="long" resultType="ReplyDTO">
+		SELECT 
+			COUNT(REPLY_ID)
+		FROM
+			REPLY
+		WHERE
+			DIGGING_ID = #{DIGGING_ID};
+	</select>
 	<update id="updateThumbsUp" parameterType="long">
 		UPDATE 
 			DIGGING
@@ -37,4 +49,13 @@
 		WHERE 
 			DIGGING_ID = #{diggingId};
 	</update>
+	
+	<select id="selectOneUserInfo" parameterType="String" resultType="UserDTO">
+		SELECT 
+			*
+		FROM 
+			USER
+		WHERE
+			USER_ID = #{writer}
+	</select>
 </mapper>

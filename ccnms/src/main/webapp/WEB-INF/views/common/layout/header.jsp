@@ -9,6 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css" rel="stylesheet">
 <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 </head>
 <body>
 <header class="header">
@@ -33,7 +34,7 @@
                             <c:choose>
                             	<c:when test="${sessionScope.role eq 'admin'}">
                             	    <div class="header__top__right__auth">
-	                               		<p><a href="${contextPath }/digging/addDigging"><button type="button" class="btn btn-danger">디깅하기</button></a></p>
+	                               		<p><a href="${contextPath }/admin/digging/diggingAdd"><button type="button" class="btn btn-danger">디깅하기</button></a></p>
                             		</div>
                             	    <div class="header__top__right__auth">
 	                               		<p><a href="${contextPath }/admin/main"><button type="button" class="btn btn-outline-dark">관리자 페이지</button></a></p>
@@ -126,15 +127,15 @@
                             <span>디깅 토픽</span>
                         </div>
                         <ul>
-                            <li><a href="#"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/game.png"><strong>&emsp;게임</strong></a></li>
-                            <li><a href="#"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/music.png"><strong>&emsp;K-POP</strong></a></li>
-                            <li><a href="#"><img alt="오티티에러" src="${contextPath }/resources/bootstrap/img/videos.png"><strong>&emsp;OTT</strong></a></li>
-                            <li><a href="#"><img alt="펫에러" src="${contextPath }/resources/bootstrap/img/dog.png"><strong>&emsp;동물 & 애완동물</strong></a></li>
-                            <li><a href="#"><img alt="비즈니스에러" src="${contextPath }/resources/bootstrap/img/buss.png"><strong>&emsp;비즈니스</strong></a></li>
-                            <li><a href="#"><img alt="스포츠에러" src="${contextPath }/resources/bootstrap/img/heal.png"><strong>&emsp;스포츠</strong></a></li>
-                            <li><a href="#"><img alt="연예인에러" src="${contextPath }/resources/bootstrap/img/person.png"><strong>&emsp;연예인</strong></a></li>
-                            <li><a href="#"><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/world.png"><strong>&emsp;여행</strong></a></li>
-                            <li><a href="#"><img alt="패션에러" src="${contextPath }/resources/bootstrap/img/fas.png"><strong>&emsp;패션</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=game"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/game.png"><strong>&emsp;게임</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=kPop"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/music.png"><strong>&emsp;K-POP</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=ott"><img alt="오티티에러" src="${contextPath }/resources/bootstrap/img/videos.png"><strong>&emsp;OTT</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=animal"><img alt="펫에러" src="${contextPath }/resources/bootstrap/img/dog.png"><strong>&emsp;동물 & 애완동물</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=business"><img alt="비즈니스에러" src="${contextPath }/resources/bootstrap/img/buss.png"><strong>&emsp;비즈니스</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=sport"><img alt="스포츠에러" src="${contextPath }/resources/bootstrap/img/heal.png"><strong>&emsp;스포츠</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=celeb"><img alt="연예인에러" src="${contextPath }/resources/bootstrap/img/person.png"><strong>&emsp;연예인</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=trevel"></a><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/world.png"><strong>&emsp;여행</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=fashion"><img alt="패션에러" src="${contextPath }/resources/bootstrap/img/fas.png"><strong>&emsp;패션</strong></a></li>
                         </ul>
                     </div>
                 </div>
@@ -148,11 +149,9 @@
                         </div>
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>광고문의</h5>
-                                <span>support 24/7 time</span>
+                            	<section>
+                            		<p>${sessionScope.userId }</p>
+                            	</section>
                             </div>
                         </div>
                     </div>

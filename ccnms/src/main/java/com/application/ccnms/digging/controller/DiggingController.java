@@ -36,15 +36,13 @@ public class DiggingController {
 	private DiggingService diggingService;
 	
 	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	
 	@GetMapping("/main")
-	public ModelAndView main(HttpServletRequest request)throws Exception {
+	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic)throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/digging/main");
-		String writer= request.getParameter("writer");
 		//mv.addObject("allReplyCnt", diggingService.getallReplyCnt(diggingId);
-		mv.addObject("diggingList", diggingService.getDiggingList());
-		mv.addObject("userList", diggingService.getUser());
-	//	mv.addObject("userDTO", diggingService.getUser(writer));
+		mv.addObject("diggingList", diggingService.getDiggingList(diggingTopic));
 		return mv;
 	}
 	@GetMapping("/thumbnails")

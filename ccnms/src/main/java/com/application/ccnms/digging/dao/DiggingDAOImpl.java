@@ -22,12 +22,12 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	}
 
 	@Override
-	public List<DiggingDTO> selectListDiggingList() throws Exception {
-		return sqlSession.selectList("digging.selectListDiggingList");
+	public List<DiggingDTO> selectListDiggingList(String diggingTopic) throws Exception {
+		return sqlSession.selectList("digging.selectListDiggingList", diggingTopic);
 	}
 	@Override
-	public List<UserDTO> selectListUser() throws Exception {
-		return sqlSession.selectList("digging.selectListUser");
+	public List<UserDTO> selectListUser(String writer) throws Exception {
+		return sqlSession.selectList("digging.selectListUser", writer);
 	}
 
 	@Override

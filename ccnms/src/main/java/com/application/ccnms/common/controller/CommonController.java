@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.common.service.CommonService;
+import com.application.ccnms.user.dto.UserDTO;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -27,29 +30,49 @@ public class CommonController {
 	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	
 	@GetMapping("/")
-	public ModelAndView home() throws Exception {
+	public ModelAndView home(@RequestParam(required =false, value="sort") String sort,HttpServletRequest request) throws Exception {
 	
-		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("diggingList", commonService.getDiggingList());
-		mv.addObject("thumbsUpList", commonService.getThumbsUpList());
-		mv.addObject("recentList", commonService.getRecentList());
+		int onePageViewCnt = 10;
+		String temp = request.getParameter("currentPageNumber");
+		if (temp == null) {
+			temp="1";
+		}
+		int currentPageNumber = Integer.parseInt(temp);
+		int allDiggingCnt = commonService.getAllDiggingCnt();
+		int allPageCnt = allDiggingCnt / onePageViewCnt +1;
+		if (allDiggingCnt % onePageViewCnt == 0) allPageCnt--;
+		int startPage = (currentPageNumber -1)/ 5 * 5 +1;
+		if (startPage == 0) {
+			startPage = 1;
+		}
+		int endPage = startPage + 4;
+		if (endPage >allPageCnt) endPage = allPageCnt;
+		int startDiggingIdx = (currentPageNumber -1) * onePageViewCnt;
+		mv.addObject("startPage", startPage);
+		mv.addObject("endPage", endPage);
+		mv.addObject("allDiggingCnt", allDiggingCnt);
+		mv.addObject("allPageCnt", allPageCnt);
+		mv.addObject("onePageViewCnt", onePageViewCnt);
+		mv.addObject("currentPageNumber", currentPageNumber);
+		mv.addObject("startDiggingIdx",startDiggingIdx);
 		
+		if (sort==null) {
+			mv.addObject("diggingList", commonService.getDiggingList());
+		}
+		else {
+			mv.addObject("diggingList", commonService.getDiggingList(sort));
+		}
 		mv.setViewName("/common/main");
-		
-		
-		/*
-		 * Map<String, String> diggingList = new HashMap<String, String>();
-		 * diggingList.put("sort", "all");
-		 * 
-		 * mv.addObject("newDiggingCnt", commonService.getNewDiggingCnt());
-		 * mv.addObject("allDiggingCnt", commonService.getAllDiggingCnt());
-		 * mv.addObject("replyCnt", commonService.getReplyCnt());
-		 * mv.addObject("thumbsUpCnt", commonService.getThumbsUpCnt()); ///상점 정렬 Cnt
-		 * 추가할것
-		 */		
 		return mv;
 	}
+	@GetMapping("/sortDigging")
+	public ModelAndView sortDigging(@RequestParam Map<String, Object> sortMap) throws Exception {
+		ModelAndView mv= new ModelAndView();
+		mv.setViewName("redirect:/");
+		return mv;
+	}
+
 	@PostMapping("/thumbsUp")
 	public ModelAndView thumbsUp(@RequestParam("diggingId") long diggingId) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -57,12 +80,10 @@ public class CommonController {
 		return mv;
 		
 	}
-	@GetMapping("/sortDigging")
-	public ModelAndView sortDigging(@RequestParam("sort") String sort) {
-		ModelAndView mv= new ModelAndView();
+	@PostMapping("/userInfo")
+	public List<UserDTO> userInfo(@RequestParam("writer")String writer) throws Exception {
 		
-		mv.setViewName("redirect://common");
-		return mv;
+		return commonService.getUserInfo(writer);
 	}
 	
 	

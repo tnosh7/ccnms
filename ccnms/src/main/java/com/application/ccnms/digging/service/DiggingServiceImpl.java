@@ -21,8 +21,12 @@ public class DiggingServiceImpl implements DiggingService {
 		diggingDAO.insertDigging(diggingDTO);
 	}
 	@Override
-	public List<DiggingDTO> getDiggingList() throws Exception {
-		return diggingDAO.selectListDiggingList();
+	public List<DiggingDTO> getDiggingList(String diggingTopic) throws Exception {
+		return diggingDAO.selectListDiggingList(diggingTopic);
+	}
+	@Override
+	public List<UserDTO> getUser(String writer) throws Exception {
+		return diggingDAO.selectListUser(writer);
 	}
 
 	@Override
@@ -44,11 +48,6 @@ public class DiggingServiceImpl implements DiggingService {
 	@Override
 	public List<ReplyDTO> getReplyList(long diggingId) throws Exception {
 		return diggingDAO.selectListReplyList(diggingId);
-	}
-	@Override
-	public List<UserDTO> getUser() throws Exception {
-		// TODO Auto-generated method stub
-		return diggingDAO.selectListUser();
 	}
 
 

@@ -20,17 +20,23 @@
 			NOW()
 		)	
 	</insert>
-	<select id="selectListDiggingList" resultType="DiggingDTO">
+	<select id="selectListDiggingList" parameterType="String"  resultType="DiggingDTO">
 		SELECT 
 				*
 		FROM 
 			DIGGING
+		WHERE 
+			DIGGING_TOPIC = #{diggingTopic}
 	</select>
-	<select id="selectListUser" resultType="UserDTO">
+	
+	
+	<select id="selectListUser" parameterType="String"  resultType="DiggingDTO">
 		SELECT 
 				*
 		FROM 
 			USER
+		WHERE 
+			USER_ID = (SELECT WRITER FROM DIGGING)
 	</select>
 	
 	<select id="selectDiggingDetail" parameterType="long" resultType="DiggingDTO">

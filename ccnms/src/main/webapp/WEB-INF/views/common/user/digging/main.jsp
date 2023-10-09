@@ -128,8 +128,26 @@
 				                </ul>	
 							  </div>
 							</div>
+							<c:choose>
+								<c:when test="${empty diggingList }">
+								<div align="center">
+									<p>등록된 게시글이 없습니다.</p>
+								</div>
+								</c:when>
+							</c:choose>
 							<c:forEach var="diggingDTO" items="${diggingList }">
                  				<div class="card mb-3">
+                 				<c:choose>
+                 					<c:when test="${diggingDTO.diggingTopic eq 'game' }">	<div class="label game">game</div></c:when>	
+                 					<c:when test="${diggingDTO.diggingTopic eq 'kPop' }">	<div class="label kPop">kPop</div></c:when>		
+                 					<c:when test="${diggingDTO.diggingTopic eq 'ott' }">	<div class="label ott">ott</div></c:when>		
+                 					<c:when test="${diggingDTO.diggingTopic eq 'animal' }">	<div class="label animal">animal</div></c:when>	
+                 					<c:when test="${diggingDTO.diggingTopic eq 'business'}"><div class="label business">business</div></c:when>	
+                 					<c:when test="${diggingDTO.diggingTopic eq 'sport' }">	<div class="label sport">sport</div></c:when>	
+                 					<c:when test="${diggingDTO.diggingTopic eq 'celeb' }">	<div class="label celeb">celeb</div></c:when>	
+                 					<c:when test="${diggingDTO.diggingTopic eq 'trevel' }">	<div class="label trevel">trevel</div></c:when>	
+                 					<c:when test="${diggingDTO.diggingTopic eq 'fashion' }"><div class="label game">fashion</div></c:when>		
+                 				</c:choose>
 								  <h6 class="card-header"><c:forEach var="userDTO" items="${userList}"><img src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }" width="30"></c:forEach>${diggingDTO.writer }
 								 	<i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/>
 								  </h6>
@@ -154,14 +172,14 @@
 						</div>		               
                         <div class="col-lg-12">
                             <div class="product__pagination blog__pagination">
-                            <c:if test="${startPage > 10 }">
-                                <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i></a>}"><i class="fa fa-long-arrow-left"></i></a>
+                            <c:if test="${startPage > 5 }">
+                                <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 5}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i></a>}"><i class="fa fa-long-arrow-left"></i></a>
                             </c:if>
                             <c:forEach  var="i" begin="${startPage }" end="${endPage }">
                                 <a href="#">i</a>
                             </c:forEach>
-                            <c:if test="${endPage != allPageCnt && endPage >= 10 }">  
-                                <a href="${contextPath }/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i></a>
+                            <c:if test="${endPage != allPageCnt && endPage >= 5 }">  
+                                <a href="${contextPath }/digging/main?currentPageNumber=${startPage + 5}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i></a>
                             </c:if>
                             </div>
                         </div>

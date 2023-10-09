@@ -6,9 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+  	a {color:black}
+  	a:visited { color:black; }
+	a:hover { color:purple; }   
+   h1 { margin: 50px 0px; }
+</style>
 </head>
+
 <script>
 	$().ready(function(){
+		$( '[data-toggle="popover"]' ).popover();
 		$("#thumbsUp").click(function(){
 			var diggingId = $("#diggingId").val();
 			$.ajax ({
@@ -17,6 +25,19 @@
 				data : {"diggingId" : diggingId},
 				success : function(data){
 					updatethumbsUp();
+				}
+			});	
+		});
+		
+		$("#userInfoBtn").click(function(){
+			var writer= $("#writer").val();
+			console.log(writer);
+			$.ajax ({
+				url : "${contextPath}/userInfo",
+				type : "post",
+				data : {"writer" : writer},
+				success : function(data) {
+					console.log(data.likePoint);
 				}
 			});	
 		});
@@ -31,7 +52,6 @@
 				});
 		}
 	});
-	
 	function updatethumbsUp(){
 		
 		var thumbsUp = document.getElementById("thumbsUp").value;
@@ -39,7 +59,7 @@
 		document.getElementById("thumbsUp").innerHTML = thumbsUp;
 		return;
 	}
-	
+	 
 </script>
 <body>
     <!-- Categories Section Begin -->
@@ -79,136 +99,87 @@
     <!-- Categories Section End -->
 
     <!-- Featured Section Begin -->
-    <section class="featured spad">
+    <section id="digging" class="section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="featured__controls">
-                    	<ul align="right">
-                    		<li><c:if test="${sessionScope.userId eq null }"><button type="button" class="btn btn-primary btn-lg">디깅하기</button></c:if></li>
-                    		
+                    	<hr>
+                    	<ul>
+                    		<li><a href="${contextPath }/digging/addDigging"><button type="button" class="btn btn-primary btn-lg" style="background:gold">디깅하기</button></a></li>
                     	</ul>
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
-                        </ul>
+                    	<ul id="onePageViewCnt">
+							<li><img src="${contextPath}/resources/bootstrap/img/list.png" id=list /></li>
+	                   		<li><img src="${contextPath}/resources/bootstrap/img/detail.png" id=listDetail /></li>
+                    	</ul>
+                    	<ul align="right">
+						    <li class="nav-item dropdown">
+						    <a class="nav-link dropdown-toggle show" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">정 렬</a>
+						    <div class="dropdown-menu show" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 41px);">
+						      <a class="dropdown-item" href="${contextPath }/?sort=readCnt">인기많은순</a>
+						      <a class="dropdown-item" href="${contextPath }/?sort=thumbsUp">추천순</a>
+						      <a class="dropdown-item" href="${contextPath }/?sort=recent">최신순</a>
+						    </div>
+						  </li>
+                    	</ul>
                 	</div>
-            <div class="row featured__filter">
-                <div class="col-lg-12 col-md-12 col-sm-6 mix oranges fresh-meat">
-                    <div class="featured__item">
-                    <c:choose>
-                    	<c:when test="${sort eq 'thumbsUp'}">
-		                    <c:forEach var="diggingDTO" items="${thumbsUpList }">
-	                       		<table border="1" width="100%">
-	                       			<thead>
-		                       			<tr>
-		                       				<th>${diggingDTO.writer }</th>
-		                       				<th align="right">${diggingDTO.enrollDT }</th>
-		                       			</tr>
-	                       			</thead>
-									<tbody>
-										<tr>
-											<th colspan="2"><h4>${diggingDTO.subject }</h4></th>
-										</tr>
-										<tr>
-											<td colspan="2">${diggingDTO.content}</td>
-										</tr>
-									</tbody>                       			
-									<tfoot>
-										<tr>
-											<td><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</td>
-											<td>${diggingDTO.readCnt }</td>
-										</tr>
-									</tfoot>                       		
-	                       		</table>
-			                </c:forEach>
-                    	</c:when>
-                    	<c:when test="${sort eq 'recent'}">
-		                    <c:forEach var="diggingDTO" items="${recentList }">
-	                       		<table border="1" width="100%">
-	                       			<thead>
-		                       			<tr>
-		                       				<th>${diggingDTO.writer }</th>
-		                       				<th align="right">${diggingDTO.enrollDT }</th>
-		                       			</tr>
-	                       			</thead>
-									<tbody>
-										<tr>
-											<th colspan="2"><h4>${diggingDTO.subject }</h4></th>
-										</tr>
-										<tr>
-											<td colspan="2">${diggingDTO.content}</td>
-										</tr>
-									</tbody>                       			
-									<tfoot>
-										<tr>
-											<td>${diggingDTO.thumbsUp }</td>
-											<td>${diggingDTO.readCnt }</td>
-										</tr>
-									</tfoot>                       		
-	                       		</table>
-			                </c:forEach>
-                    	</c:when>
-                    	<c:otherwise>
-		                    <c:forEach var="diggingDTO" items="${diggingList }">
-	                       		<input type="hidden" id="diggingId"  value="${diggingDTO.diggingId }"/>
-	                       		<table width="100%">
-	                       			<thead height="50">
-		                       			<tr style="background:lightgray">
-		                       				<th>${diggingDTO.writer }</th>
-		                       				<th align="right">${diggingDTO.enrollDT }</th>
-		                       			</tr>
-	                       			</thead>
-									<tbody>
-										<tr height="70">
-											<th colspan="2"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}"><h5>${diggingDTO.subject }</h5></a></th>
-										</tr>
-										<tr>
-											<td colspan="2">${diggingDTO.content}</td>
-										</tr>
-									</tbody>                       			
-									<tfoot>
-									  	<tr><td>
-									    &emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</a>
-									    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${allReplyCnt }</a>
-									    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
-									   <input type="hidden" value="${diggingDTO.diggingId }"/>
-									  	</td>
-									  	</tr>
-									  	<tr><hr></tr>
-									</tfoot>                       		
-	                       		</table>
-			                </c:forEach>
-                    	</c:otherwise>
-                    </c:choose>
-                    </div>
-                </div>
+	            <div class="row featured__filter">
+		            <div class="col-lg-12 col-md-12 col-sm-6 readCnt">
+                   	<div class="digging__item" data-type="readCnt">
+	                    <c:forEach var="diggingDTO" items="${diggingList }">
+                       		<input type="hidden" id="diggingId"  value="${diggingDTO.diggingId }"/>
+                       		<table width="100%">
+                       			<thead height="50">
+	                       			<tr style="background:lightgray">
+	                       				<th>
+	                       				<button type="button" class="btn btn-primary text-nowrap" id="userInfoBtn" data-bs-toggle="popover" title="${diggingDTO.writer }" data-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-content="더보기">${diggingDTO.writer }</button>
+                      					<input type="hidden" id="writer" value="${diggingDTO.writer }"/>
+                      					</th>
+	                       				<th align="right">${diggingDTO.enrollDT }</th>
+	                       			</tr>
+                       			</thead>
+								<tbody>
+									<tr height="70">
+										<th colspan="2"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}"><h5>${diggingDTO.subject }</h5></a></th>
+									</tr>
+									<tr>
+										<td colspan="2">${diggingDTO.content}</td>
+									</tr>
+								</tbody>                       			
+								<tfoot>
+								  	<tr><td>
+								    &emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</a>
+								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${allReplyCnt }</a>
+								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
+								   <input type="hidden" value="${diggingDTO.diggingId }"/>
+								  	</td>
+								  	</tr>
+								</tfoot>                       		
+                       		</table>
+		                </c:forEach>
+                   		</div>
+               		</div>
+               	</div>
+               </div>
+             </div>
             </div>
-        </div>
     </section>
+    <br>
+    <br>
+    <div class="product__pagination blog__pagination" align="center">
+        <c:if test="${startPage > 5 }">
+	        <a href="${contextPath }/?currentPageNumber=${startPage - 5}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i></a>
+        </c:if>
+        <c:forEach var="i" begin="${startPage }" end="${endPage }">
+        <a href="${contextPath }/?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}">${i }</a>
+        </c:forEach>
+        <c:if test="${endPage != allPageCnt && endPage >= 5 }">
+        	<a href="${contextPath }/?currentPageNumber=${startPage + 5}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i></a>
+        </c:if>
+     </div>
     <!-- Featured Section End -->
 
     <!-- Banner Begin -->
-    <div class="banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="${contextPath}/resources/bootstrap/img/banner/banner-1.jpg" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="${contextPath}/resources/bootstrap/img/banner/banner-2.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Banner End -->
 
     <!-- Latest Product Section Begin -->
     <section class="latest-product spad">
@@ -414,65 +385,5 @@
     </section>
     <!-- Latest Product Section End -->
 
-    <!-- Blog Section Begin -->
-    <section class="from-blog spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title from-blog__title">
-                        <h2>From The Blog</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="${contextPath}/resources/bootstrap/img/blog/blog-1.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="${contextPath}/resources/bootstrap/img/blog/blog-2.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="${contextPath}/resources/bootstrap/img/blog/blog-3.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Visit the clean farm in the US</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-   
 </body>
 </html>
