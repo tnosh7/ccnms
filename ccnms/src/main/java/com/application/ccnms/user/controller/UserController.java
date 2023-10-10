@@ -77,7 +77,7 @@ public class UserController {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userDTO.getUserId());
 			session.setAttribute("role", "user");
-			mv.setViewName("/common/main");
+			mv.setViewName("redirect:/");
 		}
 		else {
 			mv.setViewName("/user/loginUser");

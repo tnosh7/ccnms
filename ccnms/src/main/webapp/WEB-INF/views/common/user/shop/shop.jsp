@@ -14,18 +14,22 @@
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
-                            <h4>Department</h4>
+                        	<c:if test="${sessionScope.userId != null}">
+                        		<a href="${contextPath }/shop/addProduct"><input type="button" id="addProduct" value="상품 올리기"/></a>
+                        	</c:if>
+                        	<br>
+                            <h4>카테고리</h4>
                             <ul>
-                                <li><a href="#">Fresh Meat</a></li>
-                                <li><a href="#">Vegetables</a></li>
-                                <li><a href="#">Fruit & Nut Gifts</a></li>
-                                <li><a href="#">Fresh Berries</a></li>
-                                <li><a href="#">Ocean Foods</a></li>
-                                <li><a href="#">Butter & Eggs</a></li>
-                                <li><a href="#">Fastfood</a></li>
-                                <li><a href="#">Fresh Onion</a></li>
-                                <li><a href="#">Papayaya & Crisps</a></li>
-                                <li><a href="#">Oatmeal</a></li>
+                                <li><a href="${contextPath }/digging/main?diggingTopic=game"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/game.png"><strong>&emsp;게임</strong></a></li>
+	                            <li><a href="${contextPath }/digging/main?diggingTopic=kPop"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/music.png"><strong>&emsp;K-POP</strong></a></li>
+	                            <li><a href="${contextPath }/digging/main?diggingTopic=ott"><img alt="오티티에러" src="${contextPath }/resources/bootstrap/img/videos.png"><strong>&emsp;OTT</strong></a></li>
+	                            <li><a href="${contextPath }/digging/main?diggingTopic=animal"><img alt="펫에러" src="${contextPath }/resources/bootstrap/img/dog.png"><strong>&emsp;동물 & 애완동물</strong></a></li>
+	                            <li><a href="${contextPath }/digging/main?diggingTopic=business"><img alt="비즈니스에러" src="${contextPath }/resources/bootstrap/img/buss.png"><strong>&emsp;비즈니스</strong></a></li>
+	                            <li><a href="${contextPath }/digging/main?diggingTopic=sport"><img alt="스포츠에러" src="${contextPath }/resources/bootstrap/img/heal.png"><strong>&emsp;스포츠</strong></a></li>
+	                            <li><a href="${contextPath }/digging/main?diggingTopic=celeb"><img alt="연예인에러" src="${contextPath }/resources/bootstrap/img/person.png"><strong>&emsp;연예인</strong></a></li>
+	                            <li><a href="${contextPath }/digging/main?diggingTopic=trevel"></a><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/world.png"><strong>&emsp;여행</strong></a></li>
+	                            <li><a href="${contextPath }/digging/main?diggingTopic=fashion"><img alt="패션에러" src="${contextPath }/resources/bootstrap/img/fas.png"><strong>&emsp;패션</strong></a></li>
+	                            <li><a href="${contextPath }/digging/main?diggingTopic=fashion"><strong>&emsp;ETC</strong></a></li>
                             </ul>
                         </div>
                         <div class="sidebar__item">
@@ -300,10 +304,14 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
-                                    <span>Sort By</span>
+                                    <span>정  렬</span>
                                     <select>
-                                        <option value="0">Default</option>
-                                        <option value="0">Default</option>
+                                        <option value="0">구매순</option>
+                                        <option value="0">인기순</option>
+                                        <option value="0">리뷰순</option>
+                                        <option value="0">최신순</option>
+                                        <option value="0">낮은가격순</option>
+                                        <option value="0">높은가격순</option>
                                     </select>
                                 </div>
                             </div>
@@ -502,7 +510,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product__pagination">
+                    <div class="product__pagination" align="center">
                         <a href="#">1</a>
                         <a href="#">2</a>
                         <a href="#">3</a>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.reply.dao.ReplyDAO;
 import com.application.ccnms.reply.dto.ReplyDTO;
 
@@ -22,5 +23,11 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public void addReply(ReplyDTO replyDTO) throws Exception {
 		replyDAO.insertReply(replyDTO);
+	}
+
+	@Override
+	public void updateReplyCnt(long diggingId) throws Exception {
+		replyDAO.updateReplyCnt(diggingId);
+		
 	}
 }

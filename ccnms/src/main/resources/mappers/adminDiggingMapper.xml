@@ -2,4 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="adminDigging">
+
+	<insert id="insertDigging">
+		INSERT INTO DIGGING(
+			WRITER,
+			SUBJECT,
+			CONTENT,
+			DIGGING_TOPIC,
+			FILE,
+			ENROLL_DT
+		)
+		VALUES (
+			#{writer},
+			#{subject},
+			#{content},
+			#{diggingTopic},
+			#{file},
+			NOW()
+		)	
+	
+	
+	</insert>
 </mapper>

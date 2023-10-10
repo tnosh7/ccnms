@@ -23,9 +23,11 @@ public class ReplyController {
 		replyDTO.setDiggingId(diggingId);
 		replyDTO.setContent(content);
 		replyService.addReply(replyDTO);
+		replyService.updateReplyCnt(diggingId);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("diggingId", diggingId);
 		mv.setViewName("redirect:/digging/diggingDetail");
+		
 		return mv;
 		
 	}

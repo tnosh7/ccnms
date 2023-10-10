@@ -1,5 +1,7 @@
 package com.application.ccnms.shop.dao;
 
-public interface ShopDAO {
+import com.application.ccnms.shop.dto.ShopDTO;
 
+public interface ShopDAO {
+	public void insertProduct(ShopDTO shopDTO);
 }

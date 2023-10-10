@@ -25,4 +25,12 @@
 			NOW()		
 		)
 	</insert>
+	<update id="updateReadCnt" parameterType="long">
+		UPDATE 
+			DIGGING
+		SET 
+			READ_CNT = READ_CNT + 1
+		WHERE 
+			DIGGING_ID = #{diggingId}
+	</update>
 </mapper>

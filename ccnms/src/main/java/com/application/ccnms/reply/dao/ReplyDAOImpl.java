@@ -1,7 +1,5 @@
 package com.application.ccnms.reply.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,6 +20,11 @@ public class ReplyDAOImpl implements ReplyDAO {
 	@Override
 	public void insertReply(ReplyDTO replyDTO) throws Exception {
 		sqlSession.insert("reply.insertReply", replyDTO);
+	}
+
+	@Override
+	public void updateReplyCnt(long diggingId) throws Exception {
+		sqlSession.update("reply.updateReadCnt",diggingId);
 	}
 	
 }

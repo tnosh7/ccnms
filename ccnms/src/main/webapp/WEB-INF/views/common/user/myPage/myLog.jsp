@@ -93,8 +93,9 @@
                                 <tr>
                                     <th width="10%"><input type="checkbox" id="allDiggingChoice" onchange="selectAllDigging()"></th>
                                     <th class="shoping__product" width="50%">제목</th>
-                                    <th width="30%">날짜</th>
+                                    <th width="20%">날짜</th>
                                     <th width="10%">추천</th>
+                                    <th width="10%">댓글</th>     
                                 </tr>
                             </thead>
                             <c:forEach var="diggingDTO" items="${diggingList }">
@@ -104,13 +105,16 @@
                                         <input type="checkbox" name="diggingId" value="${diggingDTO.diggingId }">
                                     </td>
                                     <td class="shoping__cart__item" >
-                                        <strong>${diggingDTO.subject }</strong>
+                                        <strong><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.subject }</a></strong>
                                     </td>
                                     <td class="shoping__cart__price">
                                       <fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/>
                                     </td>
                                     <td class="shoping__cart__item" >
                                     	${diggingDTO.thumbsUp }
+                                    </td>
+                                    <td class="shoping__cart__item" >
+                                    	${replyDTO.replyCnt }
                                     </td>
                                 </tr>
                             </tbody>
@@ -121,6 +125,7 @@
                     </div>
                 </div>
                     <div class="blog__details__text">
+                    <h5>댓글 목록</h5>
                     <c:choose>
                     <c:when test="${replyList eq null }">
 						<table>
@@ -130,17 +135,17 @@
 						</table>
                     </c:when>
                     <c:otherwise>
-                    <h5>댓글 목록</h5>
-                        <table border="1">
-                            <thead align="center" border="1">
-                                <tr>
-                                    <th width="10%"><input type="checkbox" id="allReplyChoice" onchange="selectAllDigging()"></th>
-                                    <th class="shoping__product" width="50%">댓글 내용</th>
-                                    <th width="30%">날짜</th>
-                                    <th width="10%">추천</th>
-                                </tr>
-                            </thead>
+	                        <table border="1">
                             <c:forEach var="replyDTO" items="${replyList}">
+	                            <thead align="center" border="1">
+	                                <tr>
+	                                    <th width="10%"><input type="checkbox" id="allReplyChoice" onchange="selectAllDigging()"></th>
+	                                    <th class="shoping__product" width="50%">댓글 내용</th>
+	                                    <th width="20%">날짜</th>
+	                                    <th width="10%">추천</th>
+	                                    <th width="10%">댓글</th>
+	                                </tr>
+	                            </thead>
                             <tbody align="center" width="100%">
                                 <tr>
                                     <td class="shoping__cart__item__close">

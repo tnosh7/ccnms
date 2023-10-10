@@ -5,4 +5,8 @@
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/shop/shop.jsp"/>
 	 		<put-attribute name="title" value="쇼핑"/>	
 	 	</definition>
+	 	<definition name="/shop/addProduct" extends="common">
+	 		<put-attribute name="body" value="/WEB-INF/views/common/user/shop/addProduct.jsp"/>
+	 		<put-attribute name="title" value="판매상품 등록"/>	
+	 	</definition>
 </tiles-definitions>
