@@ -111,7 +111,7 @@
 							  <input class="form-control form-control-lg" type="text" id="subject" name="subject" maxlength="35" placeholder="제목" >
 							</div>
 	                   		</li>
-	                   		<li class="nav-item"><textarea name="content" id="editor"></textarea>
+	                   		<li class="nav-item"><textarea name="content" id="editor" maxlength="2900"></textarea>
 								<script>
 								  ClassicEditor
 								  .create(document.querySelector('#editor'), {

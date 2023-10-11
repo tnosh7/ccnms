@@ -1,7 +1,11 @@
 package com.application.ccnms.shop.dao;
 
+import java.util.List;
+
 import com.application.ccnms.shop.dto.ShopDTO;
 
 public interface ShopDAO {
-	public void insertProduct(ShopDTO shopDTO);
+	public List<ShopDTO> selectListProductList() throws Exception ;
+	public void insertProduct(ShopDTO shopDTO) throws Exception ;
+	public List<ShopDTO> selectListSortList(String sort) throws Exception ;
 }

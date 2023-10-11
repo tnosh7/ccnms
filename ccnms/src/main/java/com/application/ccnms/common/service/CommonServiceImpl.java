@@ -51,6 +51,10 @@ public class CommonServiceImpl implements CommonService {
 	public int upThumbsUp(long diggingId) throws Exception {
 		return commonDAO.updateThumbsUp(diggingId);
 	}
+	@Override
+	public List<DiggingDTO> getHeadList() throws Exception {
+		return commonDAO.selectListHeadList();
+	}
 
 	
 }

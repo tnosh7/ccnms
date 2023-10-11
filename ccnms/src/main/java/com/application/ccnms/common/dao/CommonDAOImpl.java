@@ -52,5 +52,9 @@ public class CommonDAOImpl implements CommonDAO {
 	public List<UserDTO> selectOneUserInfo(String writer) throws Exception {
 		return sqlSession.selectOne("common.selectOneUserInfo", writer);
 	}
+	@Override
+	public List<DiggingDTO> selectListHeadList() throws Exception {
+		return sqlSession.selectList("common.selectListHeadList");
+	}
 
 }

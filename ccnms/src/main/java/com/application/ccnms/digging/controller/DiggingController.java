@@ -41,7 +41,6 @@ public class DiggingController {
 	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic)throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/digging/main");
-		//mv.addObject("allReplyCnt", diggingService.getallReplyCnt(diggingId);
 		mv.addObject("diggingList", diggingService.getDiggingList(diggingTopic));
 		return mv;
 	}

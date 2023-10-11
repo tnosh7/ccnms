@@ -63,6 +63,7 @@ public class CommonController {
 		else {
 			mv.addObject("diggingList", commonService.getDiggingList(sort));
 		}
+		mv.addObject("headList", commonService.getHeadList());
 		mv.setViewName("/common/main");
 		return mv;
 	}

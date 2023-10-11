@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shop">
+	<select id="selectListProductList" resultType="ShopDTO">
+		SELECT 
+				*
+		FROM 
+				SHOP
+	</select>
+	
 	<insert id="insertProduct" parameterType="ShopDTO">
 		INSERT INTO SHOP (
 			PRODUCT_NM,
@@ -17,17 +24,27 @@
 			ENROLL_DT
 		)
 		VALUES (	
-			#(productNm),
-			#(writer),
-			#(price),
-			#(discountRate),
-			#(stock),
-			#(sort),
-			#(deliveryPrice),
-			#(deliveryMethod),
-			#(content),
-			#(productFile),
+			#{productNm},
+			#{seller},
+			#{price},
+			#{discountRate},
+			#{stock},
+			#{sort},
+			#{deliveryPrice},
+			#{deliveryMethod},
+			#{content},
+			#{productFile},
 			NOW()
 		)
 	</insert>
+	
+	<select id="selectListSortList" parameterType="String" resultType="ShopDTO">
+		SELECT 
+			*
+		FROM
+		 	SHOP
+		WHERE
+			SORT = #{sort}
+	</select>
+	
 </mapper>

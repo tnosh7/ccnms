@@ -23,7 +23,7 @@
 <script>
 	$().ready(function(){
 		$("#uploadFileBtn").click(function(){
-			$("#uploadAppend").appendTo("<label class="input-group-text" for="inputGroupFile02" id="uploadFileBtn" name="uploadFile" onclick="appendFile"></label>");
+			$("#uploadAppend").append('<input type="file" class="form-control" id="uploadfile" name="uploadfile"><label class="input-group-text" for="inputGroupFile02" id="uploadFileBtn" name="uploadFile" onclick="appendFile()">사진 추가</label>');
 		});
 	});
 
@@ -73,87 +73,87 @@
                     <div class="tab-content">
                       <div class="tab-pane fade show active" id="navs-top-write" role="tabpanel">
                       <div class="card-body">
-                  	 	<ul >
-	                  	 	<li>
-	                  	 	<div >
-	                  	 		<select name="sort" >
-			  						<option value="">[필수] 상품판매 분류 선택</option>
-			  						<option value="game">게임</option>
-			  						<option value="kPop">K-POP</option>
-			  						<option value="ott">OTT</option>
-			  						<option value="animal">동물 & 애완동물</option>
-			  						<option value="business">비즈니스</option>
-			  						<option value="sport">스포츠</option>
-			  						<option value="celeb">연예인</option>
-			  						<option value="trevel">여행</option>
-			  						<option value="fashion">패션</option>
-			  						<option value="etc">ETC</option>
-		  						</select>
-	                  	 	</div>
-	                  	 	&emsp;<span id="topicWarn" style="color:red"></span>
-	                  	 	</li>
-	                  	 	<li>
-	                  	 	<div >
-	                  	 		<select name="writer" >
-	                  	 			<option>판매자</option>
-			  						<option>${sessionScope.userId }</option>
-		  						</select>
-	                  	 	</div>
-	                  	 	</li>
-	                   		<li class="nav-item">
 	                  	 	 <div class="form-group">
-							 	<div class="form-product">
-								  <input class="form-control form-control-lg" type="text" id="productNm" name="productNm" maxlength="35" placeholder="상품 이름" >
-								</div>		
-								<div class="form-product">				  
-							 	 <input class="form-control form-control-lg" type="text" id="price" name="price" maxlength="20" placeholder="상품 가격" >
-							  	</div>
-							  	<div class="form-product">
-							  	 <input class="form-control form-control-lg" type="text" id="discountRate" name="discountRate" maxlength="35" placeholder="할인률" >
-							  	</div>
-							  	<div class="form-product">
-							  	 <input class="form-control form-control-lg" type="text" id="stock" name="stock" maxlength="35" placeholder="재고" >
-							  	</div>
-							  	<div class="form-product">
-							  	 <input class="form-control form-control-lg" type="text" id="deliveryMethod" name="deliveryMethod" maxlength="35" placeholder="배송 방법" >
-							  	</div>
-							  	<div class="form-product">
-							  	 <input class="form-control form-control-lg" type="text" id="deliveryPrice" name="deliveryPrice" maxlength="35" placeholder="배송 가격" >
-							  	</div>
-							</div>
-	                   		</li>
-	                   		<li class="nav-item"><textarea name="content" id="editor"></textarea>
-								<script>
-								  ClassicEditor
-								  .create(document.querySelector('#editor'), {
-										ckfinder: {
-											uploadUrl : '/image/upload'
-										}
-									})
-									.then(editor => {
-										console.log('Editor was initialized');
-									})
-								</script>
-								</li>
-							<li>
-							
-							</li>
-							<li>
-								<div class="input-group">
-    			                    <input type="file" class="form-control" id="uploadfile" name="uploadfile">
+	                  	 	 	<table>
+	                  	 	 		<tr>
+	                  	 	 			<th width="30%">상품 이름</th>
+	                  	 	 			<th> <input class="form-control form-control-lg" type="text" id="productNm" name="productNm" maxlength="35" placeholder="상품 이름을 입력하세요." ></th>
+	                  	 	 		</tr>
+	                  	 	 		<tr>
+	                  	 	 			<th>상품 분류</th>
+	                  	 	 			<th> <select name="sort" >
+						  						<option value="">[필수] 상품판매 분류 선택</option>
+						  						<option value="game">게임</option>
+						  						<option value="kPop">K-POP</option>
+						  						<option value="ott">OTT</option>
+						  						<option value="animal">동물 & 애완동물</option>
+						  						<option value="business">비즈니스</option>
+						  						<option value="sport">스포츠</option>
+						  						<option value="celeb">연예인</option>
+						  						<option value="trevel">여행</option>
+						  						<option value="fashion">패션</option>
+						  						<option value="etc">ETC</option>
+					  						</select></th>
+	                  	 	 		</tr>
+	                  	 	 		<tr>
+	                  	 	 			<th>판매자</th>
+	                  	 	 			<th><select name="writer" >
+				                  	 			<option>판매자</option>
+						  						<option>${sessionScope.userId }</option>
+					  						</select></th>
+	                  	 	 		</tr>
+	                  	 	 		<tr>
+	                  	 	 			<th>가격</th>
+	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="price" name="price" maxlength="20" placeholder="가격을 입력하세요(숫자만 입력)." ></th>
+	                  	 	 		</tr>
+	                  	 	 		<tr>
+	                  	 	 			<th>할인률</th>
+	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="discountRate" name="discountRate" maxlength="35" placeholder="할인률을 입력하세요." ></th>
+	                  	 	 		</tr>
+	                  	 	 		<tr>
+	                  	 	 			<th>재고</th>
+	                  	 	 			<th><input class="form-control form-control-lg" type="number" id="stock" name="stock" maxlength="35" placeholder="재고를 입력하세요." ></th>
+	                  	 	 		</tr>
+	                  	 	 		<tr>
+	                  	 	 			<th>배송 방법</th>
+	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="deliveryMethod" name="deliveryMethod" maxlength="35" placeholder="배송 방법을 입력하세요." ></th>
+	                  	 	 		</tr>
+	                  	 	 		<tr>
+	                  	 	 			<th>배송 가격</th>
+	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="deliveryPrice" name="deliveryPrice" maxlength="35" placeholder="배송 가격을 입력하세요(숫자만 입력)."></th>
+	                  	 	 		</tr>
+	                  	 	 		<tr>
+	                  	 	 			<th>상품 소개</th>
+	                  	 	 			<th><textarea name="content" id="editor"></textarea>
+												<script>
+												  ClassicEditor
+												  .create(document.querySelector('#editor'), {
+														ckfinder: {
+															uploadUrl : '/image/upload'
+														}
+													})
+													.then(editor => {
+														console.log('Editor was initialized');
+													})
+												</script>
+	                  	 	 			</th>
+	                  	 	 		</tr>
+	                  	 	 		<tr>
+	                  	 	 			<th>파일 업로드</th>
+	                  	 	 			<th> <input type="file" class="form-control" id="uploadfile" name="uploadfile">
                 			        <label class="input-group-text" for="inputGroupFile02" id="uploadFileBtn" name="uploadFile" onclick="appendFile">사진 추가</label>
                 			        <span id="uploadAppend"></span>
                 			        <label class="input-group-text" for="inputGroupFile02" id="deleteFile" name="deleteFile" onclick="window.location.reload()">삭제</label>
-                 				</div>
-							</li>
-	                   		<li class="nav-item">	
+	                  	 	 			</th>
+	                  	 	 		</tr>
+	                  	 	 		
+	                  	 	 	</table>
+							</div>
 	                   		<br>
 	                   		<div class="demo-inline-spacing" align="center">
                         		<button type="submit" class="btn btn-primary active">작성</button>
                         		<button type="reset" class="btn btn-primary" onclick="window.location.reload()">새로고침</button>
                       		</div>
-							</li>
-                   		</ul>
                    	</div>
               	 	</div>
                   </div>

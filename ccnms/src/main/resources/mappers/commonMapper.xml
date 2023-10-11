@@ -26,6 +26,17 @@
 			</if>
 	</select>
 	
+	<select id="selectListHeadList" resultType="DiggingDTO">
+		SELECT 
+			*
+		FROM 
+			DIGGING
+		WHERE
+			DIGGING_TOPIC = "notice" 
+	</select>
+	
+	
+	
 	<select id="selectOneAllDiggingCnt" resultType="int">
 		SELECT 
 			COUNT(*)

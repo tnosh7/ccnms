@@ -67,16 +67,14 @@
         <div class="container">
             <div class="row">
                <div class="categories__slider owl-carousel">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="categories__item set-bg" data-setbg="${contextPath}/resources/bootstrap/img/categories/cat-1.jpg">
-                            <h5><a href="#">Fresh Fruit</a></h5>
+               	<c:forEach var="headDiggingDTO" items="${headList }">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="categories__item set-bg" data-setbg="${contextPath }/resources/bootstrap/img/notice.PNG">
+                            <h5><a href="${contextPath }/digging/diggingDetail?diggingId=${headDiggingDTO.diggingId}">${headDiggingDTO.subject }</a></h5>
+                            <input type="hidden" value="${headDiggingDTO.diggingId }">
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="categories__item set-bg" data-setbg="${contextPath}/resources/bootstrap/img/categories/cat-2.jpg">
-                            <h5><a href="#">Dried Fruit</a></h5>
-                        </div>
-                    </div>
+               	</c:forEach>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="${contextPath}/resources/bootstrap/img/categories/cat-3.jpg">
                             <h5><a href="#">Vegetables</a></h5>
@@ -419,6 +417,13 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            </div>
+            </section>
+            </div>
+            </div>
+            </div>
+            </div>
             </div>
         </div>
     </section>

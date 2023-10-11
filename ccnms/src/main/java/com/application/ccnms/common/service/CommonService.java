@@ -9,7 +9,7 @@ public interface CommonService {
 	
 	public List<DiggingDTO> getDiggingList()throws Exception;
 	public List<DiggingDTO> getDiggingList(String sort)throws Exception;
-	
+	public List<DiggingDTO> getHeadList() throws Exception;
 	public int upThumbsUp(long diggingId)throws Exception;
 	public List<UserDTO> getUserInfo(String writer)throws Exception;
 	public int getNewDiggingCnt() throws Exception;
