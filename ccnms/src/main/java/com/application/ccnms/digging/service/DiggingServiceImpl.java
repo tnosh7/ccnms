@@ -28,6 +28,10 @@ public class DiggingServiceImpl implements DiggingService {
 	public List<UserDTO> getUser(String writer) throws Exception {
 		return diggingDAO.selectListUser(writer);
 	}
+	@Override
+	public List<DiggingDTO> getPopulerList(String diggingTopic) throws Exception {
+		return diggingDAO.selectListPopulerList(diggingTopic);
+	}
 
 	@Override
 	public DiggingDTO getDiggingDetail(long diggingId) throws Exception {
@@ -48,6 +52,14 @@ public class DiggingServiceImpl implements DiggingService {
 	@Override
 	public List<ReplyDTO> getReplyList(long diggingId) throws Exception {
 		return diggingDAO.selectListReplyList(diggingId);
+	}
+	@Override
+	public int getAllDiggingCnt() throws Exception{
+		return diggingDAO.selectOneDiggingCnt();
+	}
+	@Override
+	public List<DiggingDTO> getRecentList(String diggingTopic) throws Exception {
+		return diggingDAO.selectListRecentList(diggingTopic);
 	}
 
 

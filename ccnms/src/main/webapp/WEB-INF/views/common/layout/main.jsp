@@ -11,39 +11,25 @@
   	a:visited { color:black; }
 	a:hover { color:purple; }   
    h1 { margin: 50px 0px; }
-
-  #detail-content {
-    display: none;
-  }
-
+	
 </style>
 </head>
-
 <script>
-	function openList(){
-		if (document.getElementById('list-content').style.disply==='block'){
-			document.getElementById('list-content').style.disply='none';
-			document.getElementById('detail-content').style.disply='block';
-		}
-		else {
-			
-			document.getElementById('list-content').style.disply='block';
-			document.getElementById('detail-content').style.disply='none';
-		} 
-	}
-	function openDetail() {
-		if (document.getElementById('list-content').style.disply==='block'){
-			document.getElementById('list-content').style.disply='none';
-			document.getElementById('detail-content').style.disply='block';
-		}
-		else {
-			
-			document.getElementById('list-content').style.disply='block';
-			document.getElementById('detail-content').style.disply='none';
-		} 
-	}
+
 	$().ready(function(){
-		$( '[data-toggle="popover"]' ).popover();
+		
+		
+		var popover = new bootstrap.Popover(document.querySelector('.btn-lg'), {
+		  container: 'body'
+		})
+		
+		
+		$(document).ready(function(){
+			  $(".btn-lg").click(function(){
+			    $("[data-bs-toggle='popover']").popover('show');
+			  });
+			});
+		
 		$("#thumbsUp").click(function(){
 			var diggingId = $("#diggingId").val();
 			$.ajax ({
@@ -56,18 +42,6 @@
 			});	
 		});
 		
-		$("#userInfoBtn").click(function(){
-			var writer= $("#writer").val();
-			console.log(writer);
-			$.ajax ({
-				url : "${contextPath}/userInfo",
-				type : "post",
-				data : {"writer" : writer},
-				success : function(data) {
-					console.log(data.likePoint);
-				}
-			});	
-		});
 		var menu="${menu}";
 		if (menu=='del') {
 			Swal.fire({
@@ -134,8 +108,6 @@
                     		<li><a href="${contextPath }/digging/addDigging"><button type="button" class="btn btn-primary btn-lg" style="background:gold">디깅하기</button></a></li>
                     	</ul>
                     	<ul id="onePageViewCnt">
-							<li><a href="javaScript:openList()"><img src="${contextPath}/resources/bootstrap/img/list.png" id=list /></a></li>
-	                   		<li><a href="javaScript:openDetail()"><img src="${contextPath}/resources/bootstrap/img/detail.png" id=listDetail /></a></li>
                     	</ul>
                     	<ul align="right">
 						    <li class="nav-item dropdown">
@@ -148,56 +120,24 @@
 						  </li>
                     	</ul>
                 	</div>
-	            <div class="row featured__filter" >
-		            <div class="col-lg-12 col-md-12 col-sm-6">
-                   	<div class="digging__item" >
-                   	<span id="detail-content">
-	                    <c:forEach var="diggingDTO" items="${diggingList }">
-                       		<input type="hidden" id="diggingId"  value="${diggingDTO.diggingId }"/>
-                       		<table width="100%">
-                       			<thead height="50">
-	                       			<tr style="background:lightgray">
-	                       				<th>
-	                       				<button type="button" class="btn btn-primary text-nowrap" id="userInfoBtn" data-bs-toggle="popover" title="${diggingDTO.writer }" data-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-content="더보기">${diggingDTO.writer }</button>
-                      					<input type="hidden" id="writer" value="${diggingDTO.writer }"/>
-                      					</th>
-	                       				<th align="right">${diggingDTO.enrollDT }</th>
-	                       			</tr>
-                       			</thead>
-								<tbody>
-									<tr height="70">
-										<th colspan="2"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}"><h5>${diggingDTO.subject }</h5></a></th>
-									</tr>
-									<tr>
-										<td colspan="2">${diggingDTO.content}</td>
-									</tr>
-								</tbody>                       			
-								<tfoot>
-								  	<tr><td>
-								    &emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</a>
-								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${diggingDTO.replyCnt}</a>
-								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
-								   <input type="hidden" value="${diggingDTO.diggingId }"/>
-								  	</td>
-								  	</tr>
-								</tfoot>                       		
-                       		</table>
-		                </c:forEach>
-                   	</span>
-     	<section class="shoping-cart spad" >
-        <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__table" id="list-content">
                       <c:forEach var="diggingDTO" items="${diggingList }">
-                      
-                  		<input type="hidden" id="diggingId"  value="${diggingDTO.diggingId }"/>
-                        <table border="1">
+                  		<input type="hidden" id="diggingId"  value="${diggingDTO.userList}"/>
+                        <table>
                            	<thead height="50">
-                       			<tr style="background:lightgray">
-                       				<th colspan="3" width="70%">
-                       				<button type="button" class="btn btn-primary text-nowrap" id="userInfoBtn" data-bs-toggle="popover" title="${diggingDTO.writer }" data-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-content="더보기">${diggingDTO.writer }</button>
-                     					<input type="hidden" id="writer" value="${diggingDTO.writer }"/>
+                       			<tr style="background:whitesmoke">
+                       				<th align="left" colspan="3" width="70%" >
+                       				<c:choose>
+                       					<c:when test="${diggingDTO.profile eq ''}">
+                       						<a href="${contextPath }/client/userDetail?userId=${diggingDTO.userId}"><img src="${contextPath }/resources/bootstrap/img/basic.png" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
+                       					</c:when>
+                       					<c:otherwise>
+		                       				<img src="${contextPath }/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }
+                       					</c:otherwise>
+                       				</c:choose>
+                     					<input type="hidden" id="writer" value="${diggingDTO.userId }"/>
                      					</th>
                        				<th align="right">${diggingDTO.enrollDT }</th>
                        			</tr>
@@ -205,15 +145,20 @@
                             <tbody>
                                 <tr>
 									<th colspan="3" height="100"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}"><h5>${diggingDTO.subject }</h5></a></th>
-                                    <c:if test="${digging.file != null }">
-	                                   <td class="shoping__cart__item">
-	                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}" alt="" width="50" height="50">
-	                                   </td>
-                                    </c:if>
+	                                   <c:choose>
+	                                   	<c:when test="${diggingDTO.file eq ''}">
+	                                   	</c:when>
+	                                   	<c:otherwise>
+		                                   <td class="shoping__cart__item">
+		                                   
+		                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}" width="250" height="200" alt="ㅇㅇㅇㅇ" >
+		                                   </td>
+	                                   	</c:otherwise>
+	                                   </c:choose>
                                 </tr>
                             </tbody>
                             <tfoot>
-							  	<tr><td colspan="4">
+							  	<tr><td colspan="4" align="left">
 							    &emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</a>
 							    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${diggingDTO.replyCnt}</a>
 							    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
@@ -222,12 +167,11 @@
 							  	</tr>
 							</tfoot>     
                         </table>
+                        <hr>
                        </c:forEach>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
     <br>
     <br>
     <div class="product__pagination blog__pagination" align="center">
@@ -450,9 +394,6 @@
             </div>
             </div>
             </div>
-            </div>
-            </div>
-        </div>
     </section>
     <!-- Latest Product Section End -->
 

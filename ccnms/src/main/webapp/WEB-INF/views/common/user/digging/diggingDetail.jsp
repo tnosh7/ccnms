@@ -8,25 +8,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	ul {
-	    list-style:none;
-	    margin:0;
-	    padding:0;
-	}
-	
-	li {
-	    margin: 0 0 0 0;
-	    padding: 0 0 0 0;
-	    border : 0;
-	    float: left;
-	}
-  table, th, td {
-    border: 1px solid #bcbcbc;
-  }
   table {
     width: 100%;
     height: 500px;
   }
+  
 </style>
 <script>
 	$().ready(function(){
@@ -43,10 +29,22 @@
 			$.ajax ({
 				url : "${contextPath}/digging/thumbsUp",
 				type : "post",
-				data : {"diggingId" : diggingId},
+				data : {"diggingId" : diggingId}
 			});	
 		});	
+	var recentList = document.getElementById("recentList"); 
+
+	recentList.addEventListener("mouseover", function (event) {
+	  event.target.style.color = "#fbdd97";
+	}, false);
+
+
+	recentList.addEventListener("mouseout", function(event){
+	  event.target.style.color = "white";
+	}, false)
+
 	});
+	
 </script>
 </head>
 <body>
@@ -56,52 +54,20 @@
             <div class="row">
                 <div class="col-lg-4 col-md-5 order-md-1 order-2">
                     <div class="blog__sidebar">
-                        <div class="blog__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
                         <div class="blog__sidebar__item">
-                            <h4>Categories</h4>
-                            <ul>
-                                <li><a href="#">All</a></li>
-                                <li><a href="#">Beauty (20)</a></li>
-                                <li><a href="#">Food (5)</a></li>
-                                <li><a href="#">Life Style (9)</a></li>
-                                <li><a href="#">Travel (10)</a></li>
-                            </ul>
-                        </div>
-                        <div class="blog__sidebar__item">
-                            <h4>Recent News</h4>
+                            <h4>새로운 디깅</h4>
                             <div class="blog__sidebar__recent">
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="${contextPath }/resources/bootstrap/img/blog/sidebar/sr-1.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="${contextPath }/resources/bootstrap/img/blog/sidebar/sr-2.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
+                            <c:forEach var="recentDTO" items="${recentList }"> 
                                 <a href="#" class="blog__sidebar__recent__item">
                                     <div class="blog__sidebar__recent__item__pic">
                                         <img src="${contextPath }/resources/bootstrap/img/blog/sidebar/sr-3.jpg" alt="">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
-                                        <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
-                                        <span>MAR 05, 2019</span>
+                                        <h6>${recentDTO.writer }<br />${recentDTO.subject }</h6>
+                                        <span>${recentDTO.enrollDT }</span>
                                     </div>
                                 </a>
+                            </c:forEach>
                             </div>
                         </div>
                         <div class="blog__sidebar__item">
@@ -123,63 +89,61 @@
                     			<div class="col-lg-12">
                                 <div class="blog__details__author">
                                     <div class="blog__details__author__text">
-                                       <table border="1" >
+                                       <table >
 		                            	<thead>
-		                            		<tr>
-		                            			<th><img src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }" alt="프로필이미지">
-		                            			${diggingDTO.writer }</th>
+		                            		<tr height="30">
+		                            		<c:choose>
+		                            			<c:when test="${userDTO.profile eq null }">
+		                            				<th><img src="${contextPath }/resources/bootstrap/img/person.png"> ${diggingDTO.writer }</th>
+		                            			</c:when>
+		                            			<c:otherwise>
+			                            			<th><img src="${contextPath }/myPage/thumbnails?file=${userDTO.profile }" alt="프로필이미지">
+			                            			${diggingDTO.writer }</th>
+		                            			</c:otherwise>
+		                            		</c:choose>
 		                            			<td align="right"><i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></td>
-		                            			<td><img src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</td>
+		                            			<td align="right"><img src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</td>
 		                            		</tr>
-		                            		<tr align="center">
-	                            				<th colspan="3">${diggingDTO.subject }</th>
+		                            		<tr height="60">
+	                            				<th colspan="3">&emsp;${diggingDTO.subject }</th>
 		                            		</tr>
 		                            	</thead>
-                            			<tbody align="center">
-                            			<c:if test="${diggingDTO.file != null }">
+                            			<tbody>
 		                            		<tr>
-	                            				<td colspan="3"><img src="${contextPath }/myPage/thumbnails?file=${diggingDTO.file }"/></td>
-		                            		</tr>
-                            			</c:if>
-		                            		<tr>
+                            			<c:choose>
+                            				<c:when test="${diggingDTO.file eq '' }">
 	                            				<td colspan="3">${diggingDTO.content }</td>
+                            				</c:when>
+                            				<c:otherwise>
+                            					<td colspan="3"></td>
+                            				</c:otherwise>
+                            			</c:choose>
 		                            		</tr>
                             			</tbody>
                             			<tfoot>
                             				<tr>
-												<th colspan="2"><span id="thumbsUp"><img src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="30" height="30"/>${diggingDTO.thumbsUp }</span></th>                            				
-                            					<th><span>
-                            					<img src="${contextPath }/resources/bootstrap/img/comment.png"/>
+												<th colspan="2"><span id="thumbsUp"><img src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="30" height="30"/>${diggingDTO.thumbsUp }                        				
+                            					&emsp;<img src="${contextPath }/resources/bootstrap/img/comment.png"/>
                             					 ${allReplyCnt }</span></th>
                             				</tr>
-					                         <tr>
-					                         	<th colspan="3"><div class="blog__details__social">
-			                                        <a href="#"><i class="fa fa-facebook"></i></a>
-			                                        <a href="#"><i class="fa fa-twitter"></i></a>
-			                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-			                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-			                                        <a href="#"><i class="fa fa-envelope"></i></a>
-			                                   		</div></th>
-					                         </tr>   			
                             			</tfoot>
                             			</table>
+                            			<input type="hidden" value="${diggingDTO.diggingTopic }">
                             			<input type="hidden" value="${diggingDTO.writer }">
                                     </div>
                                 </div>
                             </div>
 							<div>
-							<c:choose>
-								<c:when test="${digging.writer} == ${sessionScope.userId }">
-									<input type="button" value="수정" />
-									<input type="button" value="삭제"/>
-								</c:when>
-							<c:otherwise>
-								<span></span>
-							</c:otherwise>	
-							</c:choose>
-							</div>					
-						 <hr>
-						 
+								<c:choose>
+									<c:when test="${digging.writer eq sessionScope.userId }" >
+										<input type="button" value="수정"/>
+										<input type="button" value="삭제"/>
+									</c:when>
+								<c:otherwise>
+								</c:otherwise>	
+								</c:choose>
+								</div>
+						 	<hr>
 							<div align="center" style="padding-top: 100px">
 								<form action="${contextPath }/reply/addReply">
 									<br>
@@ -200,7 +164,7 @@
 										<span id="addReply"></span>
 										</c:when>
 									<c:otherwise>
-										<button type="button" class="btn rounded-pill btn-outline-success" id="addBtn">댓글 입력</button>
+										<button type="button" class="btn rounded-pill btn-outline-success" id="addBtn" >댓글 입력</button>
 									</c:otherwise>
 									</c:choose>
 									<br>
@@ -209,7 +173,7 @@
 									<table border="1">
 										<c:forEach var="replyDTO" items="${replyList }" >
 											<tr>
-												<th>${replyDTO.writer }</th>
+												<th colspan="2">${replyDTO.writer }</th>
 												<th><fmt:formatDate value="${replyDTO.enrollDT }" pattern="yyyy-MM-dd"/></th>
 											</tr>				
 											<tr>

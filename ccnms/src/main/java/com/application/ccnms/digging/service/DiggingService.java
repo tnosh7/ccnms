@@ -8,11 +8,14 @@ import com.application.ccnms.user.dto.UserDTO;
 
 public interface DiggingService {
 	public List<DiggingDTO> getDiggingList(String diggingTopic) throws Exception;
+	public List<DiggingDTO> getPopulerList(String diggingTopic) throws Exception;
 	public List<UserDTO> getUser(String writer)throws Exception;
+	public int getAllDiggingCnt()throws Exception;
 	public void addDigging(DiggingDTO diggingDTO) throws Exception;
 	public DiggingDTO getDiggingDetail(long diggingId) throws Exception;
 	public int upThumbsUp(long diggingId)throws Exception;	 
 	public int getallReplyCnt(long diggingId)throws Exception;	 
 	public List<ReplyDTO> getReplyList(long diggingId)throws Exception;	 
+	public List<DiggingDTO> getRecentList(String diggingTopic) throws Exception;	 
 	
 }

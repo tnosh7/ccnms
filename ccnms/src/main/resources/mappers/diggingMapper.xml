@@ -28,7 +28,27 @@
 		WHERE 
 			DIGGING_TOPIC = #{diggingTopic}
 	</select>
+
+	<select id="selectListPopulerList" parameterType="String"  resultType="DiggingDTO">
+		SELECT 
+				*
+		FROM 
+			DIGGING
+		WHERE 
+			DIGGING_TOPIC = #{diggingTopic} 
+			AND
+			ENROLL_DT >= DATE_SUB(NOW(),INTERVAL 7 DAY)
+		ORDER BY 
+			READ_CNT DESC
+		LIMIT 3
+	</select>
+	<select id="selectOneDiggingCnt" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			DIGGING
 	
+	</select>
 	
 	<select id="selectListUser" parameterType="String"  resultType="DiggingDTO">
 		SELECT 
@@ -79,5 +99,17 @@
 			REPLY
 		WHERE
 			DIGGING_ID = #{diggingId}
+	</select>
+
+	<select id="selectListRecentList" parameterType="String" resultType="DiggingDTO">
+		SELECT 
+			*
+		FROM 
+			DIGGING
+		WHERE
+			DIGGING_TOPIC = #{diggingTopic}
+		ORDER BY
+		 	ENROLL_DT DESC
+		LIMIT 3
 	</select>
 </mapper>

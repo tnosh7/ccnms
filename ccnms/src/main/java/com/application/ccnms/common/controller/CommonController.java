@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.common.service.CommonService;
+import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
 import net.coobird.thumbnailator.Thumbnails;
@@ -67,12 +69,6 @@ public class CommonController {
 		mv.setViewName("/common/main");
 		return mv;
 	}
-	@GetMapping("/sortDigging")
-	public ModelAndView sortDigging(@RequestParam Map<String, Object> sortMap) throws Exception {
-		ModelAndView mv= new ModelAndView();
-		mv.setViewName("redirect:/");
-		return mv;
-	}
 
 	@PostMapping("/thumbsUp")
 	public ModelAndView thumbsUp(@RequestParam("diggingId") long diggingId) throws Exception {
@@ -81,11 +77,6 @@ public class CommonController {
 		return mv;
 		
 	}
-	@PostMapping("/userInfo")
-	public List<UserDTO> userInfo(@RequestParam("writer")String writer) throws Exception {
-		
-		return commonService.getUserInfo(writer);
-	}
 	
 	
 	@GetMapping("/thumbnails")
@@ -93,9 +84,10 @@ public class CommonController {
 		OutputStream out = response.getOutputStream();
 		File image= new File(FILE_REPO_PATH + file);
 		if (image.exists()) {
-			Thumbnails.of(image).size(1000,1000).outputFormat("png").toOutputStream(out);
+			Thumbnails.of(image).size(200,200).outputFormat("png").toOutputStream(out);
 		}
 		byte[] buffer = new byte[1024*8];
+		
 		out.write(buffer);
 		out.close();
 	}

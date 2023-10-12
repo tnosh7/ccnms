@@ -23,7 +23,7 @@ public class MailHandler {
 	public void setSubject(String subject) throws MessagingException {
 		messageHelper.setSubject(subject);
 	}
-	public void setText(String content) throws MessagingException {
+	public void setText(String content, boolean tt) throws MessagingException {
 		messageHelper.setText(content, true);
 	}
 	public void setFrom(String email) throws MessagingException, UnsupportedEncodingException {

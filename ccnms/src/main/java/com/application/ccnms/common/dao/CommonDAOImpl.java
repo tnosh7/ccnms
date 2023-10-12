@@ -16,16 +16,12 @@ public class CommonDAOImpl implements CommonDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<DiggingDTO> selectListDiggingList() throws Exception {
+	public List<Map<String,Object>> selectListDiggingList() throws Exception {
 		return sqlSession.selectList("common.selectListDiggingList");
 	}
 	@Override
-	public List<DiggingDTO> selectListDiggingList(String sort) throws Exception {
+	public List<Map<String,Object>> selectListDiggingList(String sort) throws Exception {
 		return sqlSession.selectList("common.selectListSortDiggingList", sort);
-	}
-	@Override
-	public int selectOneNewDiggingCnt() throws Exception {
-		return sqlSession.selectOne("common.selectOneNewDiggingCnt");
 	}
 
 	@Override
@@ -34,23 +30,8 @@ public class CommonDAOImpl implements CommonDAO {
 	}
 
 	@Override
-	public int selectOneReplyCnt(long diggingId) throws Exception {
-		return sqlSession.selectOne("common.selectOneReplyCnt", diggingId);
-	}
-
-	@Override
-	public int selectOneThumbsUpCnt() throws Exception {
-		return sqlSession.selectOne("common.selectOneThumbsUpCnt");
-	}
-
-
-	@Override
 	public int updateThumbsUp(long diggingId) throws Exception {
 		 return sqlSession.update("common.updateThumbsUp", diggingId);
-	}
-	@Override
-	public List<UserDTO> selectOneUserInfo(String writer) throws Exception {
-		return sqlSession.selectOne("common.selectOneUserInfo", writer);
 	}
 	@Override
 	public List<DiggingDTO> selectListHeadList() throws Exception {

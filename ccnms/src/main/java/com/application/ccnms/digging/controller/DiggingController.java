@@ -41,7 +41,32 @@ public class DiggingController {
 	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic)throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/digging/main");
+		int onePageViewCnt = 10;
+		String temp = request.getParameter("currentPageNumber");
+		if (temp == null) {
+			temp="1";
+		}
+		int currentPageNumber = Integer.parseInt(temp);
+		int allDiggingCnt = diggingService.getAllDiggingCnt();
+		int allPageCnt = allDiggingCnt / onePageViewCnt +1;
+		if (allDiggingCnt % onePageViewCnt == 0) allPageCnt--;
+		int startPage = (currentPageNumber -1)/ 5 * 5 +1;
+		if (startPage == 0) {
+			startPage = 1;
+		}
+		int endPage = startPage + 4;
+		if (endPage >allPageCnt) endPage = allPageCnt;
+		int startDiggingIdx = (currentPageNumber -1) * onePageViewCnt;
+		mv.addObject("startPage", startPage);
+		mv.addObject("endPage", endPage);
+		mv.addObject("allDiggingCnt", allDiggingCnt);
+		mv.addObject("allPageCnt", allPageCnt);
+		mv.addObject("onePageViewCnt", onePageViewCnt);
+		mv.addObject("currentPageNumber", currentPageNumber);
+		mv.addObject("startDiggingIdx",startDiggingIdx);
+		
 		mv.addObject("diggingList", diggingService.getDiggingList(diggingTopic));
+		mv.addObject("populerList", diggingService.getPopulerList(diggingTopic));
 		return mv;
 	}
 	@GetMapping("/thumbnails")
@@ -83,6 +108,7 @@ public class DiggingController {
 		diggingDTO.setContent(request.getParameter("content"));
 		diggingDTO.setFile(fileName);
 		
+		
 		diggingService.addDigging(diggingDTO);
 		
 		String jsScript ="<script>";
@@ -105,8 +131,7 @@ public class DiggingController {
 	public ModelAndView thumbsUp(@RequestParam("diggingId") long diggingId) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("thumbsUp", diggingService.upThumbsUp(diggingId));
-		mv.setViewName("redirect:/digging/diggingDetail");
 		return mv;
+		
 	}
-	
 }		

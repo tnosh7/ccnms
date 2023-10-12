@@ -10,6 +10,22 @@
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css" rel="stylesheet">
 <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<style>
+	.hero__categories__all {
+		background:ghostwhite;
+		border-style: groove;
+	}
+	.site-btn {
+		background:ghostwhite;
+		color:black;
+		border-style: groove;
+	}
+	#search {
+		background:ghostwhite;
+		color:black;
+		focus;
+	}
+</style>
 </head>
 <body>
 <header class="header">
@@ -34,26 +50,26 @@
                             <c:choose>
                             	<c:when test="${sessionScope.role eq 'admin'}">
                             	    <div class="header__top__right__auth">
-	                               		<p><a href="${contextPath }/admin/digging/diggingAdd"><button type="button" class="btn btn-danger">디깅하기</button></a></p>
+	                               		<p><a href="${contextPath }/admin/digging/diggingAdd"><button type="button" class="btn btn-secondary disabled">디깅하기</button></a></p>
                             		</div>
                             	    <div class="header__top__right__auth">
 	                               		<p><a href="${contextPath }/admin/main"><button type="button" class="btn btn-outline-dark">관리자 페이지</button></a></p>
                             		</div>
 	 								<div class="header__top__right__language">
-	                               		<p><a href="${contextPath }/admin/logout"><button type="button" class="btn btn-outline-success">로그아웃</button></a></p>
+	                               		<p><a href="${contextPath }/admin/logout"><button type="button" class="btn btn-outline-danger">로그아웃</button></a></p>
                             		</div>
                             	</c:when>
                             	<c:otherwise>
 									<c:choose>
 										<c:when test="${sessionScope.role eq 'user'}">
 		                            	  	<div class="header__top__right__auth">
-			                               		<p><a href="${contextPath }/digging/addDigging"><button type="button" class="btn btn-danger">디깅하기</button></a></p>
+			                               		<p><a href="${contextPath }/digging/addDigging"><button type="button" class="btn btn-secondary disabled">디깅하기</button></a></p>
         		                    		</div>
                             	     		<div class="header__top__right__auth">
 		                            			<p><a href="${contextPath }/myPage/main"><button type="button" class="btn btn-outline-dark">내 회원정보</button></a></p>
                             				</div>
 		                            	  	<div class="header__top__right__language">
-		                            	   		<p><a href="${contextPath }/user/logout"><button type="button" class="btn btn-outline-success">로그아웃</button></a></p>
+		                            	   		<p><a href="${contextPath }/user/logout"><button type="button" class="btn btn-outline-danger">로그아웃</button></a></p>
                             				</div>
 										</c:when>
 		                            	<c:otherwise>
@@ -82,7 +98,7 @@
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
-                        <ul>
+                        <ul style="b">
                             <li><a href="${contextPath }/"><img alt="홈에러" src="${contextPath }/resources/bootstrap/img/home.png"> 홈</a></li>
                             <li><a href="${contextPath }/shop/"><img alt="상점에러" src="${contextPath }/resources/bootstrap/img/shop.png"> 상점</a>
                                 <ul class="header__menu__dropdown">
@@ -122,9 +138,9 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>디깅 토픽</span>
+                            <span style="color:black">디깅 토픽</span>
                         </div>
-                        <ul>
+                        <ul style="background:ghostwhite">
                             <li><a href="${contextPath }/digging/main?diggingTopic=game"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/game.png"><strong>&emsp;게임</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=kPop"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/music.png"><strong>&emsp;K-POP</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=ott"><img alt="오티티에러" src="${contextPath }/resources/bootstrap/img/videos.png"><strong>&emsp;OTT</strong></a></li>
@@ -140,18 +156,16 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" name="search" placeholder="What do yo u need?">
+                            <form action="#" style="background:ghostwhite">
+                                <input type="text" id="search" name="search" placeholder="What do yo u need?" onclick="onfocus">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                            	<section>
-                            		<p>${sessionScope.userId }</p>
-                            	</section>
-                            </div>
-                        </div>
+                           	<section>
+                           		<div>
+	                               &emsp; &emsp;<button type="submit" class="site-btn">디깅토픽신청</button>
+                           		</div>
+                           	</section>
                     </div>
                 </div>
             </div>

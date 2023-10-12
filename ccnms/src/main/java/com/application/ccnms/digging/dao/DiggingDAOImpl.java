@@ -26,10 +26,18 @@ public class DiggingDAOImpl implements DiggingDAO  {
 		return sqlSession.selectList("digging.selectListDiggingList", diggingTopic);
 	}
 	@Override
+	public List<DiggingDTO> selectListPopulerList(String diggingTopic) throws Exception {
+		return sqlSession.selectList("digging.selectListPopulerList", diggingTopic);
+	}
+	@Override
 	public List<UserDTO> selectListUser(String writer) throws Exception {
 		return sqlSession.selectList("digging.selectListUser", writer);
 	}
-
+	@Override
+	public int selectOneDiggingCnt() throws Exception {
+		return sqlSession.selectOne("digging.selectOneDiggingCnt");
+	}
+	
 	@Override
 	public DiggingDTO selectDiggingDetail(long diggingId) throws Exception {
 		return sqlSession.selectOne("digging.selectDiggingDetail", diggingId);
@@ -54,6 +62,12 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	public int updateReadCnt(long diggingId) throws Exception {
 		return sqlSession.update("digging.updateReadCnt", diggingId);
 	}
+
+	@Override
+	public List<DiggingDTO> selectListRecentList(String diggingTopic) throws Exception {
+		return sqlSession.selectList("digging.selectListRecentList", diggingTopic);
+	}
+
 
 		
 }

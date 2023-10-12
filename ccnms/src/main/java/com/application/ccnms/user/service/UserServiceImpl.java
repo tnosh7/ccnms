@@ -62,17 +62,16 @@ public class UserServiceImpl implements UserService {
 		ranNumber();
 		String setFrom = "modudig@gmail.com";
 		String toEmail = email;
-		System.out.println("띄어쓰기 뭐임?" + toEmail);
 		String subject = "모두디깅의 회원가입 인증 메시지입니다.";
 		String content = "<h4>인증번호는 " + emailAuthentication + "입니다.</h4>";
 			   content += "<br>";
 			   content += "해당 인증번호를 인증번호 확인란에 입력해주세요.";
 		MailHandler mailHandler = new MailHandler(mailSender);	  
-       mailHandler.setFrom(setFrom);
-	   mailHandler.setSubject(subject);
-	   mailHandler.setText(content);
-	   mailHandler.setTo(toEmail);
-	   mailHandler.send();
+        mailHandler.setFrom(setFrom);
+	    mailHandler.setSubject(subject);
+	    mailHandler.setText(content,true);
+	    mailHandler.setTo(toEmail);
+	    mailHandler.send();
 		return Integer.toString(emailAuthentication);
 	}
 
