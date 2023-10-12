@@ -45,5 +45,7 @@
        <beans:property name="defaultEncoding" value="utf-8" />
     </beans:bean>
 	<aop:aspectj-autoproxy/>
+	
+	
 	  
 </beans:beans>

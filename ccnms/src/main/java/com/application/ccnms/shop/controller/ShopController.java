@@ -70,7 +70,7 @@ public class ShopController {
 		}
 		shopDTO.setProductNm(request.getParameter("productNm"));
 		shopDTO.setPrice(Integer.parseInt(request.getParameter("price")));
-		shopDTO.setSeller(String.valueOf(session.getAttribute("userId")));
+		shopDTO.setWriter(String.valueOf(session.getAttribute("userId")));
 		shopDTO.setDiscountRate(Integer.parseInt(request.getParameter("discountRate")));
 		shopDTO.setStock(Integer.parseInt(request.getParameter("stock")));
 		shopDTO.setDeliveryPrice(Integer.parseInt(request.getParameter("deliveryPrice")));

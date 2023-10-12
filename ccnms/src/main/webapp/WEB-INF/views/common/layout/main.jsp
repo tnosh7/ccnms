@@ -11,10 +11,37 @@
   	a:visited { color:black; }
 	a:hover { color:purple; }   
    h1 { margin: 50px 0px; }
+
+  #detail-content {
+    display: none;
+  }
+
 </style>
 </head>
 
 <script>
+	function openList(){
+		if (document.getElementById('list-content').style.disply==='block'){
+			document.getElementById('list-content').style.disply='none';
+			document.getElementById('detail-content').style.disply='block';
+		}
+		else {
+			
+			document.getElementById('list-content').style.disply='block';
+			document.getElementById('detail-content').style.disply='none';
+		} 
+	}
+	function openDetail() {
+		if (document.getElementById('list-content').style.disply==='block'){
+			document.getElementById('list-content').style.disply='none';
+			document.getElementById('detail-content').style.disply='block';
+		}
+		else {
+			
+			document.getElementById('list-content').style.disply='block';
+			document.getElementById('detail-content').style.disply='none';
+		} 
+	}
 	$().ready(function(){
 		$( '[data-toggle="popover"]' ).popover();
 		$("#thumbsUp").click(function(){
@@ -97,7 +124,7 @@
     <!-- Categories Section End -->
 
     <!-- Featured Section Begin -->
-    <section id="digging" class="section">
+    <section class="section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -107,8 +134,8 @@
                     		<li><a href="${contextPath }/digging/addDigging"><button type="button" class="btn btn-primary btn-lg" style="background:gold">디깅하기</button></a></li>
                     	</ul>
                     	<ul id="onePageViewCnt">
-							<li><img src="${contextPath}/resources/bootstrap/img/list.png" id=list /></li>
-	                   		<li><img src="${contextPath}/resources/bootstrap/img/detail.png" id=listDetail /></li>
+							<li><a href="javaScript:openList()"><img src="${contextPath}/resources/bootstrap/img/list.png" id=list /></a></li>
+	                   		<li><a href="javaScript:openDetail()"><img src="${contextPath}/resources/bootstrap/img/detail.png" id=listDetail /></a></li>
                     	</ul>
                     	<ul align="right">
 						    <li class="nav-item dropdown">
@@ -121,9 +148,10 @@
 						  </li>
                     	</ul>
                 	</div>
-	            <div class="row featured__filter">
-		            <div class="col-lg-12 col-md-12 col-sm-6 readCnt">
-                   	<div class="digging__item" data-type="readCnt">
+	            <div class="row featured__filter" >
+		            <div class="col-lg-12 col-md-12 col-sm-6">
+                   	<div class="digging__item" >
+                   	<span id="detail-content">
 	                    <c:forEach var="diggingDTO" items="${diggingList }">
                        		<input type="hidden" id="diggingId"  value="${diggingDTO.diggingId }"/>
                        		<table width="100%">
@@ -155,17 +183,19 @@
 								</tfoot>                       		
                        		</table>
 		                </c:forEach>
-     	<section class="shoping-cart spad">
+                   	</span>
+     	<section class="shoping-cart spad" >
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="shoping__cart__table">
+                    <div class="shoping__cart__table" id="list-content">
                       <c:forEach var="diggingDTO" items="${diggingList }">
+                      
                   		<input type="hidden" id="diggingId"  value="${diggingDTO.diggingId }"/>
                         <table border="1">
                            	<thead height="50">
                        			<tr style="background:lightgray">
-                       				<th colspan="3">
+                       				<th colspan="3" width="70%">
                        				<button type="button" class="btn btn-primary text-nowrap" id="userInfoBtn" data-bs-toggle="popover" title="${diggingDTO.writer }" data-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-content="더보기">${diggingDTO.writer }</button>
                      					<input type="hidden" id="writer" value="${diggingDTO.writer }"/>
                      					</th>
@@ -174,15 +204,12 @@
                       		</thead>
                             <tbody>
                                 <tr>
-									<th colspan="3"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}"><h5>${diggingDTO.subject }</h5></a></th>
+									<th colspan="3" height="100"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}"><h5>${diggingDTO.subject }</h5></a></th>
                                     <c:if test="${digging.file != null }">
 	                                   <td class="shoping__cart__item">
-	                                       <img src="${contextPath }/thumbnails?filename=${diggingDTO.file}" alt="" width="50" height="50">
+	                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}" alt="" width="50" height="50">
 	                                   </td>
                                     </c:if>
-                                    <th>
-                                    	${diggingDTO.content }
-                                    </th>
                                 </tr>
                             </tbody>
                             <tfoot>

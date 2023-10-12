@@ -13,7 +13,29 @@
 	
 		
 		$().ready(function(){
-
+			$("#emailCheckBtn").click(function(){
+				
+				var emailDomain = $("[name='emailDomain']").val();
+				var email = $("#email").val();
+				var emailCheck = $("#emailCheck") 
+				if ( emailDomain != "") {
+					email += emailDomain;
+				}
+				
+				$.ajax ({
+					type :"get",
+					url : "${contextPath}/user/emailCheck",
+					data : {"email" : email},
+					success : function (data) {
+						console.log("data : " +  data);
+						checkInput.attr('disabled',false);
+						code =data;
+						alert('인증번호가 전송되었습니다.');
+					}			
+				});
+				
+ 			});
+			
 			$("[name='allAgreeYN']").change(function(){
 				
 				if ($("[name='allAgreeYN']").prop("checked")) {
@@ -32,7 +54,7 @@
 			$("#passwd").change(function(){
 				var passwd = $("#passwd").val();
 				if(passwd.length<8) {
-					 $("#passwdCheckWarn").html("비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.");
+					 $("#passwdCheckWarn").html("비밀번호는 8~16자를 사용해 주세요.");
 				}
 			})
 			
@@ -233,14 +255,13 @@
 	                                    	<p><span id="mail-check-warn">*</span></p>
 	                                            <select name="emailDomain"> 
 													<option selected="selected" value="">직접 입력</option>
+													<option>@gmail.com</option>
 													<option>@naver.com</option>
 													<option>@daum.net</option>
-													<option>@gmail.com</option>
 											    </select>
 	                                    </div>
 	                                </div>
 	                            </div>
-	                            <!-- 
 	                             <div class="row">
 	                                <div class="col-lg-6">
 	                                    <div class="checkout__input">
@@ -249,12 +270,11 @@
 	                                </div>
 	                                <div class="col-lg-6">
 	                                    <div class="checkout__input">
-	                                   		<input type="button" value="이메일인증하기">
+	                                   		<input type="button" id="emailCheckBtn" value="이메일인증하기">
 	                                    </div>
 	                                </div>
 	                                <p><span id="passwdCheckWarn"></span></p>
 	                            </div>
-	                             -->
 	                        </div>
 	                        <div class="col-lg-4 col-md-6">
 	                            <div class="checkout__order">

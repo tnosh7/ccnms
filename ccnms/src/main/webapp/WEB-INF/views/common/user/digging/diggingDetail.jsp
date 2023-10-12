@@ -138,7 +138,7 @@
                             			<tbody align="center">
                             			<c:if test="${diggingDTO.file != null }">
 		                            		<tr>
-	                            				<td colspan="3">${diggingDTO.file }</td>
+	                            				<td colspan="3"><img src="${contextPath }/myPage/thumbnails?file=${diggingDTO.file }"/></td>
 		                            		</tr>
                             			</c:if>
 		                            		<tr>

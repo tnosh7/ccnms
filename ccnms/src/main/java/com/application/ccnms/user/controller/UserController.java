@@ -61,6 +61,14 @@ public class UserController {
 		return userService.checkDuplicateUserId(userId);
 	}
 	
+	@GetMapping("/emailCheck") 
+	public String emailCheck (@RequestParam("email") String email) throws Exception {
+		System.out.println("email:" +email);
+		return userService.getEmailCheck(email);
+	}
+	
+	
+	
 	
 	@GetMapping("/loginUser")
 	public ModelAndView loginMember() throws Exception {

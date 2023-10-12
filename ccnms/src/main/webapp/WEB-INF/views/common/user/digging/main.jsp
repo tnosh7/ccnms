@@ -148,7 +148,7 @@
                  					<c:when test="${diggingDTO.diggingTopic eq 'trevel' }">	<div class="label trevel">trevel</div></c:when>	
                  					<c:when test="${diggingDTO.diggingTopic eq 'fashion' }"><div class="label game">fashion</div></c:when>		
                  				</c:choose>
-								  <h6 class="card-header"><c:forEach var="userDTO" items="${userList}"><img src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }" width="30"></c:forEach>${diggingDTO.writer }
+								  <h6 class="card-header"><c:forEach var="userDTO" items="${userList}"><img src="${contextPath }/myPage/thumbnails?file=${userDTO.profile }" width="30"></c:forEach>${diggingDTO.writer }
 								 	<i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/>
 								  </h6>
 								  <div class="card-body">

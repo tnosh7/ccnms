@@ -292,6 +292,10 @@
 		                  	<c:forEach var="shopDTO" items="${shopList}">
 	                        <div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
+	                            	<div class="product__seller">
+	                            		<span><strong>${shopDTO.writer }</strong></span>
+	                            		<span align="right">readCnt 보기 </span>
+	                            	</div>
 	                                <div class="product__item__pic set-bg" data-setbg="${contextPath }/shop/thumbnails?file=${shopDTO.productFile}">
 	                                    <ul class="product__item__pic__hover">
 	                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -299,7 +303,7 @@
 	                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
 	                                    </ul>
 	                                </div>
-	                                 <div class="latest-product__item__text">
+	                                 <div class="latest-product__item__text" align="center">
 	                                     <h6>${shopDTO.productNm }</h6>
 	                                     <span>${shopDTO.price } 원</span>
 	                                 </div>

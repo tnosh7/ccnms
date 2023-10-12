@@ -65,7 +65,6 @@ public class DiggingController {
 	public @ResponseBody String addDigging(HttpServletRequest request, MultipartHttpServletRequest multipartRequest) throws Exception{
 		DiggingDTO diggingDTO = new DiggingDTO();
 		HttpSession session = request.getSession();
-		
 		Iterator<String> fileList = multipartRequest.getFileNames();
 		String fileName="";
 		while(fileList.hasNext()) {
@@ -76,13 +75,14 @@ public class DiggingController {
 				uploadFile.transferTo(new File(FILE_REPO_PATH + fileName)); 
 			}
 		}
+		
+		
 		diggingDTO.setDiggingTopic(request.getParameter("diggingTopic"));
 		diggingDTO.setSubject(request.getParameter("subject"));
 		diggingDTO.setWriter(String.valueOf(session.getAttribute("userId")));
 		diggingDTO.setContent(request.getParameter("content"));
 		diggingDTO.setFile(fileName);
 		
-		System.out.println(diggingDTO);
 		diggingService.addDigging(diggingDTO);
 		
 		String jsScript ="<script>";

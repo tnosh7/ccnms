@@ -9,7 +9,7 @@ public class ShopDTO {
 	
 	private long productId;
 	private String productNm;
-	private String seller;
+	private String writer;
 	private int price;
 	private int discountRate;
 	private int stock;
@@ -33,11 +33,11 @@ public class ShopDTO {
 	public void setProductNm(String productNm) {
 		this.productNm = productNm;
 	}
-	public String getSeller() {
-		return seller;
+	public String getWriter() {
+		return writer;
 	}
-	public void setSeller(String seller) {
-		this.seller = seller;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	public int getPrice() {
 		return price;
@@ -107,7 +107,7 @@ public class ShopDTO {
 	}
 	@Override
 	public String toString() {
-		return "ShopDTO [productId=" + productId + ", productNm=" + productNm + ", seller=" + seller + ", price="
+		return "ShopDTO [productId=" + productId + ", productNm=" + productNm + ", writer=" + writer + ", price="
 				+ price + ", discountRate=" + discountRate + ", stock=" + stock + ", sort=" + sort + ", deliveryMethod="
 				+ deliveryMethod + ", deliveryPrice=" + deliveryPrice + ", content=" + content + ", point=" + point
 				+ ", productFile=" + productFile + ", qnaCnt=" + qnaCnt + ", enrollDt=" + enrollDt + "]";

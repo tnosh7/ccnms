@@ -83,8 +83,6 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li></li>
-                            <li></li>
                             <li><a href="${contextPath }/"><img alt="홈에러" src="${contextPath }/resources/bootstrap/img/home.png"> 홈</a></li>
                             <li><a href="${contextPath }/shop/"><img alt="상점에러" src="${contextPath }/resources/bootstrap/img/shop.png"> 상점</a>
                                 <ul class="header__menu__dropdown">
