@@ -10,8 +10,14 @@
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/digging/addDigging.jsp"/>
 	 		<put-attribute name="title" value="디깅 글쓰기"/>	
 	 	</definition>
+
 	 	<definition name="/digging/diggingDetail" extends="common">
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/digging/diggingDetail.jsp"/>
 	 		<put-attribute name="title" value="디깅 디테일"/>	
+	 	</definition>
+
+	 	<definition name="/digging/modifyDigging" extends="common">
+	 		<put-attribute name="body" value="/WEB-INF/views/common/user/digging/modifyDigging.jsp"/>
+	 		<put-attribute name="title" value="디깅 수정"/>	
 	 	</definition>
 </tiles-definitions>

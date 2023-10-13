@@ -12,10 +12,16 @@
     width: 100%;
     height: 500px;
   }
-  
+  #modify {
+  	hide;
+  }
 </style>
 <script>
+	var writer= $("#writer").val();
 	$().ready(function(){
+		 $("#modifyBtn").click(function(){
+			  $("#modify").show();
+			  });
 		
 		$("#addBtn").click(function(){
 			Swal.fire({
@@ -32,19 +38,7 @@
 				data : {"diggingId" : diggingId}
 			});	
 		});	
-	var recentList = document.getElementById("recentList"); 
-
-	recentList.addEventListener("mouseover", function (event) {
-	  event.target.style.color = "#fbdd97";
-	}, false);
-
-
-	recentList.addEventListener("mouseout", function(event){
-	  event.target.style.color = "white";
-	}, false)
-
 	});
-	
 </script>
 </head>
 <body>
@@ -137,14 +131,13 @@
                                 </div>
                             </div>
 							<div>
-								<c:choose>
-									<c:when test="${digging.writer eq sessionScope.userId }" >
-										<input type="button" value="수정"/>
-										<input type="button" value="삭제"/>
-									</c:when>
-								<c:otherwise>
-								</c:otherwise>	
-								</c:choose>
+								<span>
+									<input type="button" id="modifyBtn" value="*">
+									<span id='modify'>
+										<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
+										<a href="${contextPath }/digging/removeDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="삭제"></a>
+									</span>
+								</span>
 								</div>
 						 	<hr>
 							<div align="center" style="padding-top: 100px">
@@ -154,7 +147,9 @@
 										<c:when test="${sessionScope.userId != null }">
 										<table>
 											<tr>
-												<th colspan="2"><small>댓글쓴이 : ${sessionScope.userId}</small></th>
+												<th colspan="2"><small>댓글쓴이 : ${sessionScope.userId}</small>
+												<input type="hidden" id="loginUserId" value="${sessionScope.userId}"/>
+												</th>
 											</tr>
 											<tr>
 												<td><textarea rows="5" cols="60" placeholder="댓글을 입력해주세요." id="content" name="content" maxlength="200" ></textarea></td>

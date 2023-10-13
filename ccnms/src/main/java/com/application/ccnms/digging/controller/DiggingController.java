@@ -134,4 +134,12 @@ public class DiggingController {
 		return mv;
 		
 	}
+	@GetMapping("/modifyDigging")
+	public ModelAndView modify(@RequestParam("diggingId")long diggingId)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("diggingDTO", diggingService.getDiggingDetail(diggingId));
+		mv.setViewName("/digging/modifyDigging");
+		
+		return mv;
+	}
 }		

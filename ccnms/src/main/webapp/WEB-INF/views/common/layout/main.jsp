@@ -115,6 +115,7 @@
                 	</div>
             <div class="row">
                 <div class="col-lg-12">
+                
                     <div class="shoping__cart__table" id="list-content">
                       <c:forEach var="diggingDTO" items="${diggingList }">
                   		<input type="hidden" id="diggingId"  value="${diggingDTO.userList}"/>
