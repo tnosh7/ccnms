@@ -11,7 +11,13 @@
   	a:visited { color:black; }
 	a:hover { color:purple; }   
    h1 { margin: 50px 0px; }
-	
+   .headDigging a{
+		font-family: 'Black Han Sans', sans-serif;
+   		background-color:transparent;
+   		color:white;
+   		text-align:center;
+   		font-size: x-large;
+   }
 </style>
 </head>
 <script>
@@ -70,27 +76,17 @@
                <div class="categories__slider owl-carousel">
                	<c:forEach var="headDiggingDTO" items="${headList }">
                     <div class="col-lg-12 col-md-12">
-                        <div class="categories__item set-bg" data-setbg="${contextPath }/resources/bootstrap/img/notice.PNG">
-                            <h5><a href="${contextPath }/digging/diggingDetail?diggingId=${headDiggingDTO.diggingId}">${headDiggingDTO.subject }</a></h5>
+                        <div class="categories__item set-bg" data-setbg="${contextPath }/thumbnails?file=${headDiggingDTO.file}">
+                            <span class="headDigging">${headDiggingDTO.writer}
+                        	</span>
+                            <br><br><br><br><br><br><br><br>
+                             <span class="headDigging">
+                            <a href="${contextPath }/digging/diggingDetail?diggingId=${headDiggingDTO.diggingId}">
+                             ${headDiggingDTO.subject }</a></span>
                             <input type="hidden" value="${headDiggingDTO.diggingId }">
                         </div>
                     </div>
                	</c:forEach>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="${contextPath}/resources/bootstrap/img/categories/cat-3.jpg">
-                            <h5><a href="#">Vegetables</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="${contextPath}/resources/bootstrap/img/categories/cat-4.jpg">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="${contextPath}/resources/bootstrap/img/categories/cat-5.jpg">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -104,9 +100,6 @@
                 <div class="col-lg-12">
                     <div class="featured__controls">
                     	<hr>
-                    	<ul>
-                    		<li><a href="${contextPath }/digging/addDigging"><button type="button" class="btn btn-primary btn-lg" style="background:gold">디깅하기</button></a></li>
-                    	</ul>
                     	<ul id="onePageViewCnt">
                     	</ul>
                     	<ul align="right">
@@ -131,7 +124,7 @@
                        				<th align="left" colspan="3" width="70%" >
                        				<c:choose>
                        					<c:when test="${diggingDTO.profile eq ''}">
-                       						<a href="${contextPath }/client/userDetail?userId=${diggingDTO.userId}"><img src="${contextPath }/resources/bootstrap/img/basic.png" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
+                       						<a href="${contextPath }/client/userDetail?userId=${diggingDTO.userId}"><img src="${contextPath }/resources/bootstrap/img/user.PNG" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
                        					</c:when>
                        					<c:otherwise>
 		                       				<img src="${contextPath }/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }
@@ -150,7 +143,6 @@
 	                                   	</c:when>
 	                                   	<c:otherwise>
 		                                   <td class="shoping__cart__item">
-		                                   
 		                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}" width="250" height="200" alt="ㅇㅇㅇㅇ" >
 		                                   </td>
 	                                   	</c:otherwise>

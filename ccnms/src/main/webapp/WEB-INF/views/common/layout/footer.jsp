@@ -17,7 +17,7 @@
                             <a href="${contextPath }/"><img src="${contextPath}/resources/bootstrap/img/logo.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Email: moduDigging@gmail.com</li>
+                            <li>Email: modudig@gmail.com</li>
                         </ul>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                     <div class="footer__widget">
                         <ul>
                             <li><a href="#"><strong>모두디깅이란?</strong></a></li>
-                            <li><a href="#">고객센터</a></li>
+                            <li><a href="${contextPath }/contact/user">고객센터</a></li>
                             <li><a href="#">문의하기</a></li>
                             <li><a href="#">ModuDigging Inc</a></li>
                         </ul>

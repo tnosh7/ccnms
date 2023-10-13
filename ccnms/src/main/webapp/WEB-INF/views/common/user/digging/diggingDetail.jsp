@@ -115,7 +115,10 @@
 	                            				<td colspan="3">${diggingDTO.content }</td>
                             				</c:when>
                             				<c:otherwise>
-                            					<td colspan="3"></td>
+                            					<td colspan="3">
+			                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}" width="300" height="300">
+			                                       ${diggingDTO.content }
+                            					</td>
                             				</c:otherwise>
                             			</c:choose>
 		                            		</tr>
