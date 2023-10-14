@@ -134,6 +134,13 @@ public class DiggingController {
 		return mv;
 		
 	}
+	@PostMapping("/likeUp")
+	public ModelAndView likeUp(@RequestParam("writer") String writer) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("likePoint", diggingService.getlikeUp(writer));
+		return mv;
+		
+	}
 	@GetMapping("/modifyDigging")
 	public ModelAndView modify(@RequestParam("diggingId")long diggingId)throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -141,5 +148,30 @@ public class DiggingController {
 		mv.setViewName("/digging/modifyDigging");
 		
 		return mv;
+	}
+	@PostMapping("/modifyDigging")
+	public @ResponseBody String modifyDigging (DiggingDTO diggingDTO, MultipartHttpServletRequest multipartRequest, HttpServletRequest request) throws Exception{
+		Iterator<String> fileList = multipartRequest.getFileNames();
+		String fileName="";
+		while(fileList.hasNext()) {
+			MultipartFile uploadFile = multipartRequest.getFile(fileList.next()); // 하나의 <input type="file">를 반환한다.
+			if (!uploadFile.getOriginalFilename().isEmpty()) {
+				SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+				fileName = fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();
+				uploadFile.transferTo(new File(FILE_REPO_PATH + fileName)); 
+			}
+		}
+		diggingDTO.setFile(fileName);
+		diggingService.updateDigging(diggingDTO); 
+		String jsScript="<script>";
+			   jsScript+="history.go(-1)";
+			   jsScript+="</script>";
+		return jsScript;
+	}
+	
+	@GetMapping("/removeDigging")
+	public @ResponseBody String removeDigging (@RequestParam("diggingId") String diggingId) throws NumberFormatException, Exception {
+		diggingService.removeDigging(Integer.parseInt(diggingId));
+		return "";
 	}
 }		

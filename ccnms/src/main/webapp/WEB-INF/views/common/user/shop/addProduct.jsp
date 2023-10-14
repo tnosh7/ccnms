@@ -40,11 +40,11 @@
                             <h4><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAY5JREFUSEvN1D1I1lEUx/GPRS5BRdDg4JDQJESQkLQGBk2VBBa4RARFDkFzCs46JNoQLkFJiFSDoEtrg5a4tDTUoktvVLQkqBy4z6A893//PfBAZ7pv535/59xzboc2W0eb71cHcAIPcBZnkqA1rGASX6tElgDDmMLRzCXfcROvc5AqwAgeJccFzOBNml/APVxO8xuYawbJAXrwEQdSeiYyCkcxhj84iS/7z+UAofYOXmCoUAhLuIiHGK8L2ERXetT1AmAAy3iHvrqAvziEg9guAI7jG341K4Zcin7iSHIIxyo7hh8InxjvsRwgajzCvYJXBcB1PMdbnK8LuJ+aaBXnKtIUij+k97qLx3UBnXiPXjzB7UwUzxA9EBH3NxNS1WinEF/CYTRTF2vT+I3T+PwvjdY4O4h5bCGabyNtdONTGl/Dy1a+iobPU8SfdAuzabGhPuaxnrXSZxeOjSqJaoqqClvEJVytUh8H6wB2CmVaecd/ASgEUL1dJ4K4IZemon/xQNLXdkDLaaobQcuAXVL1RRnaCiDMAAAAAElFTkSuQmCC"/>
                             &ensp;상품 판매 등록 안내</h4>
                             <ul>
-                                <li><strong>1. 모두디깅은 모든 디깅을 위한 공간입니다. 다른 유저들을 존중해주세요.</strong></li>
+                                <li><strong>1. 상품 등록 시 정확한 정보를 기재해주세요.</strong></li>
                                	<hr>
-                                <li><strong>2. 공지에 있는 디깅 룰을 읽어주세요.</strong></li>
+                                <li><strong>2. 공지에 있는 상품 등록 주의사항을 읽어주세요.</strong></li>
                                	<hr>
-                                <li><strong>3. 디깅 룰을 벗어난 글을 게시할 경우 자동 삭제됩니다.</strong></li>
+                                <li><strong>3. 부적절한 상품 등록시 자동 삭제됩니다.</strong></li>
                                	<hr>
                             </ul>
                         </div>
@@ -80,19 +80,14 @@
 	                  	 	 			<th> <input class="form-control form-control-lg" type="text" id="productNm" name="productNm" maxlength="35" placeholder="상품 이름을 입력하세요." ></th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>
-	                  	 	 			<th>상품 분류</th>
-	                  	 	 			<th> <select name="sort" >
-						  						<option value="">[필수] 상품판매 분류 선택</option>
-						  						<option value="game">게임</option>
-						  						<option value="kPop">K-POP</option>
-						  						<option value="ott">OTT</option>
-						  						<option value="animal">동물 & 애완동물</option>
-						  						<option value="business">비즈니스</option>
-						  						<option value="sport">스포츠</option>
-						  						<option value="celeb">연예인</option>
-						  						<option value="trevel">여행</option>
-						  						<option value="fashion">패션</option>
-						  						<option value="etc">ETC</option>
+	                  	 	 			<th>태그</th>
+	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="tag" name="tag" maxlength="35" placeholder="[필수] 태그를 입력하세요. 예)#000" ></th>
+	                  	 	 		</tr>
+	                  	 	 		<tr>
+	                  	 	 			<th>분류</th>
+	                  	 	 			<th><select name="sort" >
+				                  	 			<option>교환</option>
+						  						<option>판매</option>
 					  						</select></th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>

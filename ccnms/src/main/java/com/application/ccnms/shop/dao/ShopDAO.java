@@ -6,6 +6,9 @@ import com.application.ccnms.shop.dto.ShopDTO;
 
 public interface ShopDAO {
 	public List<ShopDTO> selectListProductList() throws Exception ;
+	public List<ShopDTO> selectListdiscountRateList() throws Exception ;
 	public void insertProduct(ShopDTO shopDTO) throws Exception ;
 	public List<ShopDTO> selectListSortList(String sort) throws Exception ;
+	public ShopDTO selectOneProductDetail(long productId) throws Exception ;
+
 }

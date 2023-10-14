@@ -43,7 +43,10 @@ public class DiggingServiceImpl implements DiggingService {
 	public int upThumbsUp(long diggingId) throws Exception {
 		return diggingDAO.updateThumbsUp(diggingId);
 	}
-
+	@Override
+	public int getlikeUp(String writer) throws Exception {
+		return diggingDAO.updateLikePoint(writer);
+	}
 	@Override
 	public int getallReplyCnt(long diggingId) throws Exception {
 		return diggingDAO.selectOneAllReplyCnt(diggingId);
@@ -61,6 +64,15 @@ public class DiggingServiceImpl implements DiggingService {
 	public List<DiggingDTO> getRecentList(String diggingTopic) throws Exception {
 		return diggingDAO.selectListRecentList(diggingTopic);
 	}
+	@Override
+	public void updateDigging(DiggingDTO diggingDTO) throws Exception {
+		diggingDAO.updateModifyDigging(diggingDTO);
+	}
+	@Override
+	public void removeDigging(long diggingId) throws Exception {
+		diggingDAO.deleteDigging(diggingId);
+	}
+	
 
 
 

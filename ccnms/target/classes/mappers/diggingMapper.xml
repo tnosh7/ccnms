@@ -83,6 +83,14 @@
 			DIGGING_ID = #{diggingId}
 	</update>
 	
+	<update id="updateLikePoint" parameterType="String">
+		UPDATE USER
+		SET 
+			LIKE_POINT = LIKE_POINT + 1 
+		WHERE 
+			USER_ID = #{writer}
+	</update>
+	
 	<select id="selectOneAllReplyCnt" parameterType="long" resultType="int">
 		SELECT 
 			COUNT(*)
@@ -112,4 +120,32 @@
 		 	ENROLL_DT DESC
 		LIMIT 3
 	</select>
+	
+	<update id="updateModifyDigging" parameterType="DiggingDTO">
+		UPDATE 
+			DIGGING
+		<set>
+			<if test='subject != null and subject!=""'>
+				SUBJECT = #{subject},
+			</if>
+			<if test='content != null and content != ""'>
+				CONTENT = #{content},
+			</if>
+			<if test='file != null and file != ""'>
+				file = #{file},
+			</if>
+			<if test='diggingTopic != null and diggingTopic != ""'>
+				DIGGING_TOPIC = #{diggingTopic}
+			</if>
+		</set>
+		WHERE 
+			DIGGING_ID = #{diggingId}			
+	</update>
+	<delete id="deleteDigging" parameterType="long">
+		DELETE FROM 
+				DIGGING
+		WHERE
+			DIGGING_ID = #{diggingId}
+	
+	</delete>
 </mapper>

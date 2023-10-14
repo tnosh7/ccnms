@@ -8,6 +8,16 @@
 		FROM 
 				SHOP
 	</select>
+	<select id="selectListdiscountRateList" resultType="ShopDTO">
+		SELECT 
+				*
+		FROM 
+				SHOP
+		ORDER BY
+				DISCOUNT_RATE DESC
+		LIMIT 	
+				5
+	</select>
 	
 	<insert id="insertProduct" parameterType="ShopDTO">
 		INSERT INTO SHOP (
@@ -45,6 +55,15 @@
 		 	SHOP
 		WHERE
 			SORT = #{sort}
+	</select>
+	
+	<select id="selectOneProductDetai" parameterType="long" resultType="ShopDTO">
+		SELECT 
+			*
+		FROM
+		 	SHOP
+		WHERE 
+			PRODUCT_ID = #{productId}
 	</select>
 	
 </mapper>

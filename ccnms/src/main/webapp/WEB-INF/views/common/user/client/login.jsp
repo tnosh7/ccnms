@@ -43,7 +43,7 @@
                            	  <span></span>
                            </div>
                            <div align="left">
-	     				   <span id="autoLogin" class="form-text text-muted"><input type="checkbox">&ensp;<small>간편 로그인 사용하기</small></span>
+	     				   <span id="autoLogin" class="form-text text-muted"><input type="checkbox" name="useCookie">&ensp;<small>간편 로그인 사용하기</small></span>
                            </div>
                            <br>
                            <div align="center">

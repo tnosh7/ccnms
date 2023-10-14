@@ -105,14 +105,13 @@
                             <li><a href="${contextPath }/"><img alt="홈에러" src="${contextPath }/resources/bootstrap/img/home.png"> 홈</a></li>
                             <li><a href="${contextPath }/shop/"><img alt="상점에러" src="${contextPath }/resources/bootstrap/img/shop.png"> 상점</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href="${contextPath }/shop/">유저마켓</a></li>
+                                    <li><a href="${contextPath }/shop/">디깅마켓</a></li>
+                                    <li><a href="./checkout.html">장바구니 보기</a></li>
                                 </ul>
                             </li>
-                            <li class="active"><a href="${contextPath }/digging/main">디깅</a></li>
                             <li><a href="${contextPath }/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png">디깅랭킹</a></li>
+                            <li class="active"><a href="${contextPath }/contact/user">문의</a></li>
                         </ul>
                     </nav>
                 </div>

@@ -22,9 +22,19 @@ public class ShopServiceImpl implements ShopService {
 	public List<ShopDTO> getProductList() throws Exception {
 		return shopDAO.selectListProductList() ;
 	}
+	
+	@Override
+	public List<ShopDTO> getDiscountRateList() throws Exception {
+		return shopDAO.selectListdiscountRateList();
+	}
 
 	@Override
 	public List<ShopDTO> sortList(String sort) throws Exception {
 		return shopDAO.selectListSortList(sort);
+	}
+
+	@Override
+	public ShopDTO getProductDetail(long productId) throws Exception {
+		return shopDAO.selectOneProductDetail(productId);
 	}
 }

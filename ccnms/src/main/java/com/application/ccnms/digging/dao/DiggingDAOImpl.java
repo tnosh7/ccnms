@@ -49,6 +49,12 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	}
 
 	@Override
+	public int updateLikePoint(String writer) throws Exception {
+		return sqlSession.update("digging.updateLikePoint", writer);
+	}
+
+
+	@Override
 	public int selectOneAllReplyCnt(long diggingId) throws Exception {
 		return sqlSession.selectOne("digging.selectOneAllReplyCnt",diggingId);
 	}
@@ -66,6 +72,16 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	@Override
 	public List<DiggingDTO> selectListRecentList(String diggingTopic) throws Exception {
 		return sqlSession.selectList("digging.selectListRecentList", diggingTopic);
+	}
+
+	@Override
+	public void updateModifyDigging(DiggingDTO diggingDTO) throws Exception {
+		sqlSession.update("digging.updateModifyDigging", diggingDTO);
+	}
+
+	@Override
+	public void deleteDigging(long diggingId) throws Exception {
+		sqlSession.delete("digging.deleteDigging", diggingId);
 	}
 
 

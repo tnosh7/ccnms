@@ -68,8 +68,6 @@ public class UserController {
 	}
 	
 	
-	
-	
 	@GetMapping("/loginUser")
 	public ModelAndView loginMember() throws Exception {
 		return new ModelAndView("/user/loginUser");

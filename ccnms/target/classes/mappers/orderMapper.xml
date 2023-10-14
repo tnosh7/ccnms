@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order">
+	
+	<select id="selectOneShopDTO" parameterType="long" resultType="ShopDTO">
+		SELECT 
+			*
+		FROM 
+			SHOP
+		WHERE
+			PRODUCT_ID = #{productId}
+	</select>
+
+	<select id="selectOneDuplicatedKeep" parameterType="hashmap" resultType="CartDTO">
+		SELECT 
+			*
+		FROM 
+			CART
+		WHERE 
+			USER_ID = #{userId} AND
+			PRODUCT_ID = #{productId}
+	</select>
+	
+	<select id="selectOneMyCartCnt" parameterType="String" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			CART
+		WHERE 
+			USER_ID = #{userId}
+	</select>
+	
+	<insert id="insertMyKeep" parameterType="CartDTO">
+		INSERT INTO 
+			CART (
+				CART_CD,
+				USER_ID,
+				CART_QTY,
+				PRODUCT_ID,
+				ENROLL_DT
+			)
+		VALUE(
+				#{cartCd},
+				#{userId},					
+				#{cartQty},
+				#{productId},					
+				NOW()					
+		)
+	</insert>
+</mapper>

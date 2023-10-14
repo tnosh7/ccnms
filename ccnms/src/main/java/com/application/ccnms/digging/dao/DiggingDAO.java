@@ -15,11 +15,13 @@ public interface DiggingDAO {
 	public int updateReadCnt(long diggingId)throws Exception ;
 	public DiggingDTO selectDiggingDetail(long diggingId)throws Exception ;
 	public int updateThumbsUp(long diggingId)throws Exception ;
+	public int updateLikePoint(String writer) throws Exception ;
 	public int selectOneAllReplyCnt(long diggingId)throws Exception ;
 	public List<ReplyDTO> selectListReplyList(long diggingId)throws Exception ;
 	public List<DiggingDTO> selectListRecentList(String diggingTopic) throws Exception ;
+	public void updateModifyDigging(DiggingDTO diggingDTO) throws Exception ;
+	public void deleteDigging(long diggingId) throws Exception ;
 	
-
 
 
 

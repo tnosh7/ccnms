@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+</style>
 <script>
 	function selectAllDigging(){
 		if ($("#allDiggingChoice").prop("checked")) {
@@ -88,8 +89,8 @@
                     </c:when>
                     <c:otherwise>
                     <h5>디깅 목록</h5>
-                        <table border="1">
-                            <thead align="center" border="1">
+                        <table border="1" >
+                            <thead align="center" >
                                 <tr>
                                     <th width="10%"><input type="checkbox" id="allDiggingChoice" onchange="selectAllDigging()"></th>
                                     <th class="shoping__product" width="50%">제목</th>
@@ -99,7 +100,7 @@
                                 </tr>
                             </thead>
                             <c:forEach var="diggingDTO" items="${diggingList }">
-                            <tbody align="center" width="100%">
+                            <tbody align="center">
                                 <tr>
                                     <td class="shoping__cart__item__close">
                                         <input type="checkbox" name="diggingId" value="${diggingDTO.diggingId }">
@@ -127,7 +128,7 @@
                     <div class="blog__details__text">
                     <h5>댓글 목록</h5>
                     <c:choose>
-                    <c:when test="${replyList eq null }">
+                    <c:when test="${empty replyList}">
 						<table>
 							<tr>
 								<th colspan="5">이력이 없습니다.</th>
@@ -137,7 +138,7 @@
                     <c:otherwise>
 	                        <table border="1">
                             <c:forEach var="replyDTO" items="${replyList}">
-	                            <thead align="center" border="1">
+	                            <thead align="center">
 	                                <tr>
 	                                    <th width="10%"><input type="checkbox" id="allReplyChoice" onchange="selectAllDigging()"></th>
 	                                    <th class="shoping__product" width="50%">댓글 내용</th>
@@ -146,7 +147,7 @@
 	                                    <th width="10%">댓글</th>
 	                                </tr>
 	                            </thead>
-                            <tbody align="center" width="100%">
+                            <tbody align="center" >
                                 <tr>
                                     <td class="shoping__cart__item__close">
                                         <input type="checkbox" name="replyId" value="${replyDTO.replyId }">

@@ -20,7 +20,15 @@
   }
 
 </style>
+
 </head>
+<script>
+	$().ready(function(){
+		var diggingTopic = ${diggingDTO.diggingTopic};
+		$("[name='diggingTopic']").val(diggingTopic).prop("selected", true);
+		
+	});
+</script>
 <body>
 <form action="${contextPath }/digging/modifyDigging" method="post" enctype="multipart/form-data"> 
   <div class="container">

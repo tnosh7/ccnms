@@ -4,7 +4,6 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
@@ -25,14 +24,14 @@
     <link rel="stylesheet" href="${contextPath}/resources/bootstrap/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="${contextPath}/resources/bootstrap/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${contextPath}/resources/bootstrap/css/style.css" type="text/css">
+	<style>
+	    .menu a{cursor:pointer;}
+	    .menu .hide{display:none;}
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="${contextPath}/resources/bootstrap/js/jquery-3.3.1.min.js"></script>
 </head>
-<style>
-    .menu a{cursor:pointer;}
-    .menu .hide{display:none;}
-</style>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="${contextPath}/resources/bootstrap/js/jquery-3.3.1.min.js"></script>
 <body>
     <!-- Page Preloder -->
     <div id="preloder">

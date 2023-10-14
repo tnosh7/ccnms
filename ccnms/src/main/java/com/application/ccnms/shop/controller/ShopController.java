@@ -41,6 +41,7 @@ public class ShopController {
 		ModelAndView mv = new ModelAndView();
 		if (sort == null) {
 			mv.addObject("shopList", shopService.getProductList());
+			mv.addObject("discountRateList", shopService.getDiscountRateList());
 		}
 		else {
 			mv.addObject("shopList", shopService.sortList(sort));
@@ -82,7 +83,7 @@ public class ShopController {
 		shopService.addProduct(shopDTO);
 		
 		String jsScript = "<script>";		
-			   jsScript +="location.href='" + request.getContextPath() + "/shop'"; 
+			   jsScript +="location.href='" + request.getContextPath() + "/shop/'"; 
 			   jsScript +="</script>";
 		return jsScript;
 	}
@@ -96,6 +97,14 @@ public class ShopController {
 		byte[] buffer = new byte[1024*8];
 		out.write(buffer);
 		out.close();
+	}
+	
+	@GetMapping("/shopDetail")
+	public ModelAndView shopDetail (@RequestParam("productId") long productId) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("shopDTO", shopService.getProductDetail(productId));
+		mv.setViewName("/shop/shopDetail");
+		return mv;
 	}
 	
 }

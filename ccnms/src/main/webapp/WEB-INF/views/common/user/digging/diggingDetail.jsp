@@ -38,7 +38,33 @@
 				data : {"diggingId" : diggingId}
 			});	
 		});	
-	});
+		$("likeBtn").click(function(){
+			var writer = $("#writer").val();
+			$.ajax ({
+				url : "${contextPath}/digging/likeUp",
+				type : "post",
+				data : {"writer" : writer}
+			});	
+		});
+		$("#delete").click(function(){
+			Swal.fire({
+				  title: '게시물을 삭제하시겠습니까?',
+				  showCancelButton: true,
+				  confirmButtonText: '삭제',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						$.ajax({
+							type:"get",
+							url:"${contextPath}/digging/removeDigging?diggingId=${diggingDTO.diggingId}",
+							success:function(data) {
+						    	Swal.fire('삭제완료!', '', 'success')
+						    	history.go(-1)
+							}
+						});
+				  	} 
+				  });
+				});			
+		});
 </script>
 </head>
 <body>
@@ -88,7 +114,13 @@
 		                            		<tr height="30">
 		                            		<c:choose>
 		                            			<c:when test="${userDTO.profile eq null }">
-		                            				<th><img src="${contextPath }/resources/bootstrap/img/person.png"> ${diggingDTO.writer }</th>
+		                            				<th><img src="${contextPath }/resources/bootstrap/img/person.png"> ${diggingDTO.writer }
+		                            				<button type="button" class="btn btn-outline-primary" >
+						                              LIKE
+						                              <span class="badge">${likePoint}</span>
+						                            </button>
+						                            <input type="hidden" value="${diggingDTO.writer }">
+		                            				</th>
 		                            			</c:when>
 		                            			<c:otherwise>
 			                            			<th><img src="${contextPath }/myPage/thumbnails?file=${userDTO.profile }" alt="프로필이미지">
@@ -135,50 +167,42 @@
 									<input type="button" id="modifyBtn" value="*">
 									<span id='modify'>
 										<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
-										<a href="${contextPath }/digging/removeDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="삭제"></a>
+										<input type="button" id="delete" value="삭제" >
 									</span>
 								</span>
 								</div>
 						 	<hr>
-							<div align="center" style="padding-top: 100px">
-								<form action="${contextPath }/reply/addReply">
-									<br>
-									<c:choose>
-										<c:when test="${sessionScope.userId != null }">
-										<table>
-											<tr>
-												<th colspan="2"><small>댓글쓴이 : ${sessionScope.userId}</small>
-												<input type="hidden" id="loginUserId" value="${sessionScope.userId}"/>
-												</th>
-											</tr>
-											<tr>
-												<td><textarea rows="5" cols="60" placeholder="댓글을 입력해주세요." id="content" name="content" maxlength="200" ></textarea></td>
-												<td><input type='submit' value='작성' id='addReplyBtn'></td>
-											</tr>
-										</table>
-										<input type="hidden" value="${diggingDTO.diggingId }" id="diggingId" name="diggingId"/>
-										<input type="hidden" value="${sessionScope.userId }" id="writer" name="writer">
+							<div align="center" >
+									<div class="reply-body" style="background:whitesmoke">
+									<c:forEach var="replyDTO" items="${replyList }" >
+				                      <dl class="row mt-2">
+				                        <dt class="col-sm-3"> ${replyDTO.writer }</dt>
+				                        <dd class="col-sm-9">${replyDTO.content }</dd>
+				                        <dt class="col-sm-3"><fmt:formatDate value="${replyDTO.enrollDT }" pattern="yyyy-MM-dd"/></dt>
+				                      </dl>
+				                      <hr>
+									</c:forEach>
+				                    </div>
+									<form action="${contextPath }/reply/addReply">
 										<br>
-										<span id="addReply"></span>
-										</c:when>
-									<c:otherwise>
-										<button type="button" class="btn rounded-pill btn-outline-success" id="addBtn" >댓글 입력</button>
-									</c:otherwise>
-									</c:choose>
-									<br>
+										<c:choose>
+											<c:when test="${sessionScope.userId != null }">
+											<div class="input-group">
+						                        <span class="input-group-text">
+						                        	${sessionScope.userId}
+						                        	<input type="hidden" id="loginUserId" value="${sessionScope.userId}"/>
+						                        </span>
+						                        <textarea class="form-control" aria-label="With textarea" placeholder="댓글을 입력해주세요." id="content" name="content" maxlength="200"></textarea>
+						                      	<input type='submit' value='작성' id='addReplyBtn'>
+						                      	<input type="hidden" value="${diggingDTO.diggingId }" id="diggingId" name="diggingId"/>
+												<input type="hidden" value="${sessionScope.userId }" id="writer" name="writer">
+						                      </div>
+											</c:when>
+										<c:otherwise>
+											<button type="button" class="btn rounded-pill btn-outline-success" id="addBtn" >댓글 입력</button>
+										</c:otherwise>
+										</c:choose>
 									<div>
-									<h4>댓글 리스트 </h4>
-									<table border="1">
-										<c:forEach var="replyDTO" items="${replyList }" >
-											<tr>
-												<th colspan="2">${replyDTO.writer }</th>
-												<th><fmt:formatDate value="${replyDTO.enrollDT }" pattern="yyyy-MM-dd"/></th>
-											</tr>				
-											<tr>
-												<th colspan="2">${replyDTO.content }</th>
-											</tr>
-										</c:forEach>
-									</table>
 									</div>
 								</form>
 							</div>

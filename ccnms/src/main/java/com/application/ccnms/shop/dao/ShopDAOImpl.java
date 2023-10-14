@@ -28,4 +28,14 @@ public class ShopDAOImpl implements ShopDAO {
 	public List<ShopDTO> selectListSortList(String sort) throws Exception {
 		return sqlSession.selectList("shop.selectListSortList", sort);
 	}
+
+	@Override
+	public ShopDTO selectOneProductDetail(long productId) throws Exception {
+		return sqlSession.selectOne("shop.selectOneProductDetai", productId);
+	}
+
+	@Override
+	public List<ShopDTO> selectListdiscountRateList() throws Exception {
+		return sqlSession.selectList("shop.selectListdiscountRateList");
+	}
 }
