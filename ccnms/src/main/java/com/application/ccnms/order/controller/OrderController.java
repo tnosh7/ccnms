@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.order.dto.CartDTO;
+import com.application.ccnms.order.dto.OrderDTO;
 import com.application.ccnms.order.service.OrderService;
 
 @Controller
@@ -22,19 +23,19 @@ public class OrderController {
 	private OrderService orderService;
 	
 	@GetMapping("/myCart")
-	public ModelAndView myCart(@RequestParam("productId") long productId) throws Exception {
+	public ModelAndView myCart(@RequestParam("productCd") long productCd) throws Exception {
 		ModelAndView mv= new ModelAndView();
-		mv.addObject("shopDTO", orderService.getShopDTO(productId));
+		mv.addObject("shopDTO", orderService.getShopDTO(productCd));
 		mv.setViewName("/order/myCart");
 		return mv;
 	}
 	
 	@GetMapping("/addMyKeep")
-	public @ResponseBody String addMyKeep(@RequestParam("productId") long productId, @RequestParam("keepQty") int keepQty, HttpServletRequest request) throws Exception {
+	public @ResponseBody String addMyKeep(@RequestParam("productCd") long productCd, @RequestParam("keepQty") int keepQty, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		String userId = (String)session.getAttribute("userId");
 		CartDTO cartDTO = new CartDTO(); 
-		cartDTO.setProductId(productId);
+		cartDTO.setProductCd(productCd);
 		cartDTO.setUserId(userId);
 		cartDTO.setCartQty(keepQty);
 		
@@ -45,5 +46,14 @@ public class OrderController {
 			result = "notDuple";
 		}
 		return result;
+	}
+	
+	@GetMapping("/orderSheet") 
+	public ModelAndView checkout(@RequestParam("productCd") long productCd, OrderDTO orderDTO) throws Exception {
+		
+		ModelAndView mv= new ModelAndView();
+		mv.addObject("shopDTO", orderService.getShopDTO(productCd));
+		mv.setViewName("/order/orderSheet");
+		return mv;
 	}
 }

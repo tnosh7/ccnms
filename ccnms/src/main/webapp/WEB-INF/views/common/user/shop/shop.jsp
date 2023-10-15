@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-	function myCart(productId) {
+	function myCart(productCd) {
 		if ("${sessionId == null}" == "true") {
 			Swal.fire({
 				  icon: 'info',
@@ -18,10 +18,10 @@
 				})
 		}
 		else {
-			location.href="${contextPath}/order/myCart?productId=" + productId;
+			location.href="${contextPath}/order/myCart?productCd=" + productCd;
 		}
 	}
-	function myKeep(productId) {
+	function myKeep(productCd) {
 		if ("${sessionId == null}" == "true") {
 			Swal.fire({
 				  icon: 'info',
@@ -34,7 +34,7 @@
 				url:"${contextPath}/order/addMyKeep",
 				type:"get",
 				data: {
-					"productId" : productId, 
+					"productCd" : productCd, 
 					"keepQty" : 1	
 				},
 				success:function(result) {
@@ -68,9 +68,9 @@
                         	<br>
                             <h4>카테고리</h4>
                             <ul>
-                                <li><a href="${contextPath }/shop?sort=game"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/game.png"><strong>&emsp;유저마켓</strong></a></li>
-	                            <li><a href="${contextPath }/shop?writer='Modudigging'"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/music.png"><strong>&emsp;디깅마켓</strong></a></li>
-	                            <li><a href="${contextPath }/shop?writer='Modudigging'"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/music.png"><strong>&emsp;교환마켓</strong></a></li>
+                                <li><a href="${contextPath }/shop?sort=sale"><img alt="유저마켓에러" src="${contextPath }/resources/bootstrap/img/shop.png"><strong>&emsp;유저마켓</strong></a></li>
+	                            <li><a href="${contextPath }/shop?sort=Modudigging"><img alt="디깅마켓에러" src="${contextPath }/resources/bootstrap/img/shop.png"><strong>&emsp;디깅마켓</strong></a></li>
+	                            <li><a href="${contextPath }/shop?sort=exchange"><img alt="교환마켓에러" src="${contextPath }/resources/bootstrap/img/horizontal.png"><strong>&emsp;교환마켓</strong></a></li>
                             </ul>
                         </div>
                         <div class="sidebar__item">
@@ -122,7 +122,7 @@
                                 <h4>최신 상품</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
-                                    	<c:forEach var="shopDTO" items="${shopList}">
+                                    	<c:forEach var="shopDTO" items="${shopList}" begin="0" end="2">
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
                                                 <img src="${contextPath }/shop/thumbnails?file=${shopDTO.productFile}" alt="">
@@ -208,17 +208,17 @@
 	                            <div class="product__item">
 	                            	<div class="product__seller">
 	                            		<span><strong>${shopDTO.writer }</strong></span>
-	                            		<span align="right">readCnt 보기 </span>
+	                            		<span><img src="${contextPath }/resources/bootstrap/img/show.png"/>${shopDTO.readCnt }</span>
 	                            	</div>
 	                                <div class="product__item__pic set-bg" data-setbg="${contextPath }/shop/thumbnails?file=${shopDTO.productFile}">
 	                                    <ul class="product__item__pic__hover">
-	                                        <li><a href="javascript:myKeep(${shopDTO.productId})"><i class="fa fa-heart"></i></a></li>
+	                                        <li><a href="javascript:myKeep(${shopDTO.productCd})"><i class="fa fa-heart"></i></a></li>
 	                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-	                                        <li><a href="javascript:myCart(${shopDTO.productId})"><i class="fa fa-shopping-cart"></i></a></li>
+	                                        <li><a href="javascript:myCart(${shopDTO.productCd})"><i class="fa fa-shopping-cart"></i></a></li>
 	                                    </ul>
 	                                </div>
 	                                 <div class="latest-product__item__text" align="center">
-	                                     <a href="${contextPath }/shop/shopDetail?productId=${shopDTO.productId }">
+	                                     <a href="${contextPath }/shop/shopDetail?productCd=${shopDTO.productCd }">
 	                                     <h6>${shopDTO.productNm }</h6>
 	                                     <c:choose>
 	                                     	<c:when test="${shopDTO.discountRate eq '0'}">

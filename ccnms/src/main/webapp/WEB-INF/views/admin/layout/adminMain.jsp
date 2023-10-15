@@ -94,8 +94,8 @@
                               </div>
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Profit</span>
-                          <h3 class="card-title mb-2">$12,628</h3>
+                          <span class="fw-semibold d-block mb-1">디깅 게시물 등록수</span>
+                          <h3 class="card-title mb-2">${todayDigging}</h3>
                           <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
                         </div>
                       </div>
@@ -128,8 +128,8 @@
                               </div>
                             </div>
                           </div>
-                          <span>Sales</span>
-                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
+                          <span>댓글수</span>
+                          <h3 class="card-title text-nowrap mb-1">${todayReply }</h3>
                           <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
                         </div>
                       </div>
@@ -340,8 +340,8 @@
                               </div>
                             </div>
                           </div>
-                          <span class="d-block mb-1">Payments</span>
-                          <h3 class="card-title text-nowrap mb-2">$2,456</h3>
+                          <span class="d-block mb-1">새로운 유저 등록수</span>
+                          <h3 class="card-title text-nowrap mb-2">${todayUser }</h3>
                           <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
                         </div>
                       </div>
@@ -370,8 +370,8 @@
                               </div>
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Transactions</span>
-                          <h3 class="card-title mb-2">$14,857</h3>
+                          <span class="fw-semibold d-block mb-1">새로운 상품 등록수</span>
+                          <h3 class="card-title mb-2">${todayShop }</h3>
                           <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
                         </div>
                       </div>

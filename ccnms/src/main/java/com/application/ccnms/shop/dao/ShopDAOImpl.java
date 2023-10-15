@@ -30,8 +30,8 @@ public class ShopDAOImpl implements ShopDAO {
 	}
 
 	@Override
-	public ShopDTO selectOneProductDetail(long productId) throws Exception {
-		return sqlSession.selectOne("shop.selectOneProductDetai", productId);
+	public ShopDTO selectOneProductDetail(long productCd) throws Exception {
+		return sqlSession.selectOne("shop.selectOneProductDetai", productCd);
 	}
 
 	@Override

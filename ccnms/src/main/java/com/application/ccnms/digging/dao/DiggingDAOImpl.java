@@ -84,6 +84,4 @@ public class DiggingDAOImpl implements DiggingDAO  {
 		sqlSession.delete("digging.deleteDigging", diggingId);
 	}
 
-
-		
 }

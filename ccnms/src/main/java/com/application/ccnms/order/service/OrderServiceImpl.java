@@ -14,8 +14,8 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDAO orderDAO;
 	
 	@Override
-	public ShopDTO getShopDTO(long productId) throws Exception {
-		return orderDAO.selectOneShopDTO(productId);
+	public ShopDTO getShopDTO(long productCd) throws Exception {
+		return orderDAO.selectOneShopDTO(productCd);
 	}
 	
 	@Override

@@ -91,13 +91,13 @@
                             장바구니로 이동</a>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 md-6">
                     <div class="shoping__checkout">
                         <h5>총 금액</h5>
                         <ul>
                             <li>Total <span>$454.98</span></li>
                         </ul>
-                        <a href="#" class="primary-btn" style="background:salmon">구매진행하기</a>
+                        <a href="${contextPath }/order/orderSheet?productCd=${shopDTO.productCd}" class="primary-btn" style="background:salmon">구매진행하기</a>
                     </div>
                 </div>
             </div>

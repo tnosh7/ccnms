@@ -1,9 +1,9 @@
 package com.application.ccnms.digging.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.application.ccnms.digging.dao.DiggingDAO;
 import com.application.ccnms.digging.dto.DiggingDTO;
@@ -34,6 +34,7 @@ public class DiggingServiceImpl implements DiggingService {
 	}
 
 	@Override
+	@Transactional
 	public DiggingDTO getDiggingDetail(long diggingId) throws Exception {
 		diggingDAO.updateReadCnt(diggingId);
 		return diggingDAO.selectDiggingDetail(diggingId);
@@ -72,7 +73,6 @@ public class DiggingServiceImpl implements DiggingService {
 	public void removeDigging(long diggingId) throws Exception {
 		diggingDAO.deleteDigging(diggingId);
 	}
-	
 
 
 

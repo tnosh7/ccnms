@@ -22,17 +22,20 @@ public class AdminController {
 	private AdminService adminService;
 	
 	@GetMapping("/main") 
-	public String main () {
-		return "/admin/main";
+	public ModelAndView main () throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("CntList",  adminService.todayCnt());
+		mv.setViewName("/admin/main");
+		return mv;
 	}
 	
 	@GetMapping("/loginAdmin")
-	public ModelAndView loginAdmin() {
+	public ModelAndView loginAdmin() throws Exception{
 		return new ModelAndView("/admin/loginAdmin");
 	}
 	
 	@PostMapping("/loginAdmin")
-	public @ResponseBody String loginAdmin(HttpServletRequest request, AdminDTO adminDTO) { 
+	public @ResponseBody String loginAdmin(HttpServletRequest request, AdminDTO adminDTO) throws Exception { 
 		String jsScript="";
 		
 		if(adminService.loginAdmin(adminDTO) != null) {
@@ -54,7 +57,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/logout") 
-	public @ResponseBody String logout(HttpServletRequest request) {
+	public @ResponseBody String logout(HttpServletRequest request) throws Exception{
 		
 		HttpSession session = request.getSession();
 		session.invalidate();
@@ -71,7 +74,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/registerAdmin")
-	public @ResponseBody String registerAdmin(HttpServletRequest request, AdminDTO adminDTO) {
+	public @ResponseBody String registerAdmin(HttpServletRequest request, AdminDTO adminDTO) throws Exception {
 		System.out.println(adminDTO);
 		adminService.addRegisterAdmin(adminDTO);
 		HttpSession session = request.getSession();

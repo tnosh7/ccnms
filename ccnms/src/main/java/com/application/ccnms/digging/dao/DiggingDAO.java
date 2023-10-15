@@ -21,7 +21,6 @@ public interface DiggingDAO {
 	public List<DiggingDTO> selectListRecentList(String diggingTopic) throws Exception ;
 	public void updateModifyDigging(DiggingDTO diggingDTO) throws Exception ;
 	public void deleteDigging(long diggingId) throws Exception ;
-	
 
 
 

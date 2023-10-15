@@ -79,6 +79,7 @@ public class ShopController {
 		shopDTO.setSort(request.getParameter("sort"));
 		shopDTO.setContent(request.getParameter("content"));
 		shopDTO.setProductFile(fileName);
+		shopDTO.setTag(request.getParameter("tag"));
 		System.out.println(shopDTO);
 		shopService.addProduct(shopDTO);
 		
@@ -100,9 +101,9 @@ public class ShopController {
 	}
 	
 	@GetMapping("/shopDetail")
-	public ModelAndView shopDetail (@RequestParam("productId") long productId) throws Exception {
+	public ModelAndView shopDetail (@RequestParam("productCd") long productCd) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("shopDTO", shopService.getProductDetail(productId));
+		mv.addObject("shopDTO", shopService.getProductDetail(productCd));
 		mv.setViewName("/shop/shopDetail");
 		return mv;
 	}

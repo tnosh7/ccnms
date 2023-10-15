@@ -34,7 +34,7 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public ShopDTO getProductDetail(long productId) throws Exception {
-		return shopDAO.selectOneProductDetail(productId);
+	public ShopDTO getProductDetail(long productCd) throws Exception {
+		return shopDAO.selectOneProductDetail(productCd);
 	}
 }

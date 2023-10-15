@@ -9,7 +9,7 @@ public class CartDTO {
 	
 	private long cartCd;
 	private String userId;
-	private long productId;
+	private long productCd;
 	private int cartQty;
 	private Date enrollDT;
 	public long getCartCd() {
@@ -24,11 +24,11 @@ public class CartDTO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public long getProductId() {
-		return productId;
+	public long getProductCd() {
+		return productCd;
 	}
-	public void setProductId(long productId) {
-		this.productId = productId;
+	public void setProductCd(long productCd) {
+		this.productCd = productCd;
 	}
 	public int getCartQty() {
 		return cartQty;
@@ -44,11 +44,8 @@ public class CartDTO {
 	}
 	@Override
 	public String toString() {
-		return "OrderDTO [cartCd=" + cartCd + ", userId=" + userId + ", productId=" + productId + ", cartQty=" + cartQty
+		return "CartDTO [cartCd=" + cartCd + ", userId=" + userId + ", productCd=" + productCd + ", cartQty=" + cartQty
 				+ ", enrollDT=" + enrollDT + "]";
 	}
-	
-	
-	
 	
 }

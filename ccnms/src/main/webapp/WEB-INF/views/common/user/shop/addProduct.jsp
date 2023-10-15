@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="sessionId" value="${sessionScope.userId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,14 +21,6 @@
   }
 
 </style>
-<script>
-	$().ready(function(){
-		$("#uploadFileBtn").click(function(){
-			$("#uploadAppend").append('<input type="file" class="form-control" id="uploadfile" name="uploadfile"><label class="input-group-text" for="inputGroupFile02" id="uploadFileBtn" name="uploadFile" onclick="appendFile()">사진 추가</label>');
-		});
-	});
-
-</script>
 </head>
 <body>
 <form action="${contextPath }/shop/addProduct" method="post" enctype="multipart/form-data"> 
@@ -85,10 +78,19 @@
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>분류</th>
-	                  	 	 			<th><select name="sort" >
-				                  	 			<option>교환</option>
-						  						<option>판매</option>
-					  						</select></th>
+	                  	 	 			<c:choose>
+	                  	 	 				<c:when test="${not empty sessionId}">
+			                  	 	 			<th><select name="sort" >
+								  						<option value="sale">판매</option>
+						                  	 			<option value="exchange">교환</option>
+							  						</select></th>
+							  				</c:when>
+					  						<c:otherwise>
+			                  	 	 			<th><select name="sort" >
+								  						<option value="modudigging">모두디깅</option>
+							  						</select></th>
+					  						</c:otherwise>
+	                  	 	 			</c:choose>
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>판매자</th>
@@ -111,7 +113,11 @@
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>배송 방법</th>
-	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="deliveryMethod" name="deliveryMethod" maxlength="35" placeholder="배송 방법을 입력하세요." ></th>
+	                  	 	 			<th><select name="deliveryMethod">
+	                  	 	 				<option>일반배송</option>
+	                  	 	 				<option>편의점택배</option>
+	                  	 	 				<option>반등기우편</option>
+	                  	 	 			</select></th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>배송 가격</th>
@@ -136,9 +142,6 @@
 	                  	 	 		<tr>
 	                  	 	 			<th>파일 업로드</th>
 	                  	 	 			<th> <input type="file" class="form-control" id="uploadfile" name="uploadfile">
-                			        <label class="input-group-text" for="inputGroupFile02" id="uploadFileBtn" name="uploadFile" onclick="appendFile">사진 추가</label>
-                			        <span id="uploadAppend"></span>
-                			        <label class="input-group-text" for="inputGroupFile02" id="deleteFile" name="deleteFile" onclick="window.location.reload()">삭제</label>
 	                  	 	 			</th>
 	                  	 	 		</tr>
 	                  	 	 		

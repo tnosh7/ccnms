@@ -46,20 +46,6 @@
                                     <a href="#"><i class="fa fa-pinterest"></i></a>
                                 </div>
                             </li>
-                            <li><b>종류</b>
-                            	<ul>
-                            		<li>
-		                            	<div class="sort">
-		                            		<select id="defaultSelect" class="form-select">
-					                          <option>Default select</option>
-					                          <option value="1">One</option>
-					                          <option value="2">Two</option>
-					                          <option value="3">Three</option>
-					                        </select>                    
-		                     			</div>
-                            		</li>
-                            	</ul>
-                            </li>
                         </ul>
                         <hr>
                         <div class="product__details__quantity">
@@ -69,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="primary-btn" style="background:royalblue">구매하기</a>
+                        <a href="${contextPath }/order/myCart?productCd=${shopDTO.productCd}" class="primary-btn" style="background:royalblue">구매하기</a>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     </div>
                 </div>

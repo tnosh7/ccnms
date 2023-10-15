@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ShopDTO {
 	
-	private long productId;
+	private long productCd;
 	private String productNm;
 	private String writer;
 	private int price;
@@ -21,11 +21,13 @@ public class ShopDTO {
 	private String productFile;
 	private int qnaCnt;
 	private Date enrollDt;
-	public long getProductId() {
-		return productId;
+	private String tag;
+	private int readCnt;
+	public long getProductCd() {
+		return productCd;
 	}
-	public void setProductId(long productId) {
-		this.productId = productId;
+	public void setProductCd(long productCd) {
+		this.productCd = productCd;
 	}
 	public String getProductNm() {
 		return productNm;
@@ -105,14 +107,25 @@ public class ShopDTO {
 	public void setEnrollDt(Date enrollDt) {
 		this.enrollDt = enrollDt;
 	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	public int getReadCnt() {
+		return readCnt;
+	}
+	public void setReadCnt(int readCnt) {
+		this.readCnt = readCnt;
+	}
 	@Override
 	public String toString() {
-		return "ShopDTO [productId=" + productId + ", productNm=" + productNm + ", writer=" + writer + ", price="
+		return "ShopDTO [productCd=" + productCd + ", productNm=" + productNm + ", writer=" + writer + ", price="
 				+ price + ", discountRate=" + discountRate + ", stock=" + stock + ", sort=" + sort + ", deliveryMethod="
 				+ deliveryMethod + ", deliveryPrice=" + deliveryPrice + ", content=" + content + ", point=" + point
-				+ ", productFile=" + productFile + ", qnaCnt=" + qnaCnt + ", enrollDt=" + enrollDt + "]";
+				+ ", productFile=" + productFile + ", qnaCnt=" + qnaCnt + ", enrollDt=" + enrollDt + ", tag=" + tag
+				+ ", readCnt=" + readCnt + "]";
 	}
-
-	
 	
 }

@@ -14,8 +14,8 @@ public class OrderDAOImpl implements OrderDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public ShopDTO selectOneShopDTO(long productId) throws Exception {
-		return sqlSession.selectOne("order.selectOneShopDTO", productId);
+	public ShopDTO selectOneShopDTO(long productCd) throws Exception {
+		return sqlSession.selectOne("order.selectOneShopDTO", productCd);
 	}
 	
 	@Override

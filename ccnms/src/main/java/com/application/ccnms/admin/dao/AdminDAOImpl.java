@@ -20,5 +20,32 @@ public class AdminDAOImpl implements AdminDAO {
 	public void insertRegisterAdmin(AdminDTO adminDTO) {
 		sqlSession.insert("admin.insertRegisterAdmin", adminDTO);
 	}
+
+	@Override
+	public int selectOneTodayReplyCnt(String today) throws Exception {
+		return sqlSession.selectOne("admin.selectOneTodayReplyCnt", today);
+	}
+
+	@Override
+	public int selectOneTodayDiggingCnt(String today) throws Exception {
+		return sqlSession.selectOne("admin.selectOneTodayDiggingCnt", today);
+	}
+
+	@Override
+	public int selectOneTodayUserCnt(String today) throws Exception {
+		return sqlSession.selectOne("admin.selectOneTodayUserCnt", today);
+	}
+
+	@Override
+	public int selectOneTodayShopCnt(String today) throws Exception {
+		return sqlSession.selectOne("admin.selectOneTodayShopCnt", today);
+	}
+
+	@Override
+	public int selectOneTodaySaleCnt(String today) throws Exception {
+		return sqlSession.selectOne("admin.selectOneTodaySaleCnt", today);
+	}
+
+	
 	
 }

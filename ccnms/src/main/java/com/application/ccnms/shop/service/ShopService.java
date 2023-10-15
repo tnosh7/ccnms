@@ -9,5 +9,5 @@ public interface ShopService {
 	public List<ShopDTO> getDiscountRateList()throws Exception ;
 	public void addProduct(ShopDTO shopDTO) throws Exception ;
 	public List<ShopDTO> sortList(String sort)throws Exception ;
-	public ShopDTO getProductDetail(long productId)throws Exception ;
+	public ShopDTO getProductDetail(long productCd)throws Exception ;
 }
