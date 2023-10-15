@@ -16,7 +16,7 @@
 			totalPrice();
 		});
 	});
-	function modifyCart {
+	function modifyCart(cartCD) {
 		$.ajax({
 			type:"get",
 			url:"${contextPath}/myCart/modifyCartQty",
@@ -65,7 +65,7 @@
                                     	${shopDTO.price}
                                     </td>
                                     <td class="shoping__cart__quantity">
-                                        <div class="quantity" onmoussleave="modifyCartQty(cartCd)">
+                                        <div class="quantity" onmouseleave="modifyCartQty(cartCd)">
                                             <div class="pro-qty">
                                                 <input type="text" id="qty" value="1">
                                             </div>

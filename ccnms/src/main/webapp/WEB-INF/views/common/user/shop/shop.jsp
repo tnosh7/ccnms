@@ -16,7 +16,6 @@
 				  title: '로그인 후에 이용가능합니다.',
 				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
 				})
-			history.go(-1);
 		}
 		else {
 			location.href="${contextPath}/order/myCart?productId=" + productId;
@@ -29,7 +28,6 @@
 				  title: '로그인 후에 이용가능합니다.',
 				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
 				})
-			history.go(-1);
 		}
 		else {
 			$.ajax ({
