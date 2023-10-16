@@ -8,18 +8,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	ul {
-	    list-style:none;
-	    margin:0;
-	    padding:0;
-	}
-	
-	li {
-	    margin: 0 0 0 0;
-	    padding: 0 0 0 0;
-	    border : 0;
-	    float: left;
-	}
 	table {
     width: 100%;
     height: 500px;
@@ -32,6 +20,8 @@
 <script>
 
 	$().ready(function(){
+		$("#onePageViewCnt").val("${onePageViewCnt}");
+		$("#search").val("${search}");
 		
 		$("#thumbsUp").click(function(){
 			var diggingId = $("#diggingId").val();
@@ -40,6 +30,7 @@
 				type : "post",
 				data : {"diggingId" : diggingId},
 				success : function(data){
+					
 					updatethumbsUp();
 				}
 			});	
@@ -55,7 +46,14 @@
 			return;
 	}
 		 
-
+	function getDiggingList() {
+		
+		var url = "${contextPath }/digging/main"
+		    url += "?onePageViewCnt=" + $("#onePageViewCnt").val();
+		  	url += "&search=" + $("#search").val();
+		  	url += "&diggingTopic" + $("#diggingTopic").val();
+		location.href = url;
+	} 
 </script>
 </head>
 <body>
@@ -93,7 +91,11 @@
                             	<c:forEach var="diggingDTO" items="${populerList }">
                                 <a href="#" class="digging__sidebar__populer__List">
                                     <div class="digging__sidebar__populer__List__file">
-                                        <img src="${contextPath}/resources/bootstrap/img/blog/sidebar/sr-1.jpg" alt="">
+                                    <c:choose>
+                                    	<c:when test="${diggingDTO.file != ''}">
+                                        	<img src="${contextPath}/digging//thumbnails?file=${diggingDTO.file}" alt="" width="50" height="50">
+                                    	</c:when>
+                                    </c:choose>
                                     </div>
                                     <div class="digging__sidebar__populer__text">
                                         <h6>${diggingDTO.writer}<br />${diggingDTO.subject } </h6>
@@ -129,13 +131,16 @@
 					                    	<option>최신순</option>
 					                    </select>
 				                	</li>
-				                	<li>
-					                    <select name="onePageViewCnt" >			                   
-					                     	<option value="list"><img src="${contextPath }/resources/bootstrap/img/list.png">리스트</option>
-					                    	<option value=""><img src="${contextPath }/resources/bootstrap/img/detail.png">자세히</option>
-					                    </select>
-				                	</li>
 				                </ul>	
+			                	<ul id="onePageViewCnt"> 
+			                   		<li> 
+										<select id="onePageViewCnt" onchange="getDiggingList()" >
+											<option>5</option>
+											<option>7</option>
+											<option selected>10</option>
+										</select>
+			                   		</li>
+		                    	</ul>
 							  </div>
 							</div>
 							<c:choose>
@@ -162,19 +167,20 @@
 								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${diggingDTO.replyCnt }</a>
 								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
 								   <input type="hidden" value="${diggingDTO.diggingId }"/>
+								   <input type="hidden" id="diggingTopic" value="${diggingDTO.diggingTopic }"/>
 								  </div>
 								</div>
                       	 </c:forEach>
 						</div>		               
                          <div class="product__pagination blog__pagination" align="center">
-					        <c:if test="${startPage > 5 }">
-						        <a href="${contextPath }/?currentPageNumber=${startPage - 5}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i></a>
+					        <c:if test="${startPage > 10 }">
+						        <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&search=${search}"><i class="fa fa-long-arrow-left"></i></a>
 					        </c:if>
-					        <c:forEach var="i" begin="${startPage }" end="${endPage }">
-					        <a href="${contextPath }/?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}">${i }</a>
+					        <c:forEach var="i" begin="${startPage }" end="${endPage -1 }">
+					        <a href="${contextPath }/digging/main?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&search=${search}">${i }</a>
 					        </c:forEach>
-					        <c:if test="${endPage != allPageCnt && endPage >= 5 }">
-					        	<a href="${contextPath }/?currentPageNumber=${startPage + 5}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i></a>
+					        <c:if test="${endPage != allPageCnt && endPage >= 10 }">
+					        	<a href="${contextPath }/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}&search=${search}"><i class="fa fa-long-arrow-right"></i></a>
 					        </c:if>
 					     </div>
                     </div>

@@ -68,9 +68,9 @@
                         	<br>
                             <h4>카테고리</h4>
                             <ul>
-                                <li><a href="${contextPath }/shop?sort=sale"><img alt="유저마켓에러" src="${contextPath }/resources/bootstrap/img/shop.png"><strong>&emsp;유저마켓</strong></a></li>
-	                            <li><a href="${contextPath }/shop?sort=Modudigging"><img alt="디깅마켓에러" src="${contextPath }/resources/bootstrap/img/shop.png"><strong>&emsp;디깅마켓</strong></a></li>
-	                            <li><a href="${contextPath }/shop?sort=exchange"><img alt="교환마켓에러" src="${contextPath }/resources/bootstrap/img/horizontal.png"><strong>&emsp;교환마켓</strong></a></li>
+                                <li><a href="${contextPath }/shop/?sort=sale"><img alt="유저마켓에러" src="${contextPath }/resources/bootstrap/img/shop.png"><strong>&emsp;유저마켓</strong></a></li>
+	                            <li><a href="${contextPath }/shop/?sort=Modudigging"><img alt="디깅마켓에러" src="${contextPath }/resources/bootstrap/img/shop.png"><strong>&emsp;디깅마켓</strong></a></li>
+	                            <li><a href="${contextPath }/shop/?sort=exchange"><img alt="교환마켓에러" src="${contextPath }/resources/bootstrap/img/horizontal.png"><strong>&emsp;교환마켓</strong></a></li>
                             </ul>
                         </div>
                         <div class="sidebar__item">

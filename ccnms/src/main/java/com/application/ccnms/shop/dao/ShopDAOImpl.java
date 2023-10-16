@@ -38,4 +38,9 @@ public class ShopDAOImpl implements ShopDAO {
 	public List<ShopDTO> selectListdiscountRateList() throws Exception {
 		return sqlSession.selectList("shop.selectListdiscountRateList");
 	}
+
+	@Override
+	public void updateReadCnt(long productCd) throws Exception {
+		sqlSession.update("shop.updateReadCnt", productCd);
+	}
 }

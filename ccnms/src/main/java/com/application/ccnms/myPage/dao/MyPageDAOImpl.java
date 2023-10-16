@@ -38,6 +38,11 @@ public class MyPageDAOImpl implements MyPageDAO {
 
 	@Override
 	public void deleteUser(UserDTO userDTO) throws Exception {
+		sqlSession.delete("myPage.deleteUserReply", userDTO);
+		sqlSession.delete("myPage.deleteUserDigging", userDTO);
+		sqlSession.delete("myPage.deleteUserShop", userDTO);
+		sqlSession.delete("myPage.deleteUserOrder", userDTO);
+		sqlSession.delete("myPage.deleteUserCart", userDTO);
 		sqlSession.delete("myPage.deleteUser", userDTO);
 	}
 

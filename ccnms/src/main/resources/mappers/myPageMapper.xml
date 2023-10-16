@@ -56,6 +56,48 @@
 		WHERE 
 			USER_ID = #{userId}
 	</update>
+	
+	
+	<delete id="deleteUserReply" parameterType="UserDTO">
+		DELETE FROM 
+				REPLY
+		WHERE 
+				WRITER = #{userId}
+	</delete>
+	
+	
+	<delete id="deleteUserDigging" parameterType="UserDTO">
+		DELETE FROM 
+				DIGGING
+		WHERE 
+				WRITER = #{userId}
+	</delete>
+	
+	
+	<delete id="deleteUserShop" parameterType="UserDTO">
+		DELETE FROM 
+				SHOP
+		WHERE 
+				WRITER = #{userId}
+	</delete>
+	
+	
+	<delete id="deleteUserOrder" parameterType="UserDTO">
+		DELETE FROM 
+				ORDERED
+		WHERE 
+				USER_ID = #{userId}
+	</delete>
+	
+	
+	<delete id="deleteUserCart" parameterType="UserDTO">
+		DELETE FROM 
+				CART
+		WHERE 
+				USER_ID = #{userId}
+	</delete>
+	
+	
 	<delete id="deleteUser" parameterType="UserDTO">
 		DELETE FROM 
 				USER

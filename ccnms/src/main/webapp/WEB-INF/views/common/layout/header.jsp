@@ -110,7 +110,7 @@
                                     <li><a href="./checkout.html">장바구니 보기</a></li>
                                 </ul>
                             </li>
-                            <li><a href="${contextPath }/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png">디깅랭킹</a></li>
+                            <li><a href="${contextPath }/ranking/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png">디깅랭킹</a></li>
                             <li class="active"><a href="${contextPath }/contact/user">문의</a></li>
                         </ul>
                     </nav>
@@ -150,7 +150,7 @@
                             <li><a href="${contextPath }/digging/main?diggingTopic=business"><img alt="비즈니스에러" src="${contextPath }/resources/bootstrap/img/buss.png"><strong>&emsp;비즈니스</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=sport"><img alt="스포츠에러" src="${contextPath }/resources/bootstrap/img/heal.png"><strong>&emsp;스포츠</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=celeb"><img alt="연예인에러" src="${contextPath }/resources/bootstrap/img/person.png"><strong>&emsp;연예인</strong></a></li>
-                            <li><a href="${contextPath }/digging/main?diggingTopic=trevel"></a><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/world.png"><strong>&emsp;여행</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=trevel"><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/world.png"><strong>&emsp;여행</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=fashion"><img alt="패션에러" src="${contextPath }/resources/bootstrap/img/fas.png"><strong>&emsp;패션</strong></a></li>
                         </ul>
                     </div>
@@ -159,8 +159,8 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="#" style="background:ghostwhite">
-                                <input type="text" id="search" name="search" placeholder="What do yo u need?" onclick="onfocus">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <input type="text" id="search" name="search" value="${search}" placeholder="What do yo u need?" onclick="onfocus">
+                                <button type="submit" class="site-btn" onclick="getDiggingList()">SEARCH</button>
                             </form>
                         </div>
                            	<section>

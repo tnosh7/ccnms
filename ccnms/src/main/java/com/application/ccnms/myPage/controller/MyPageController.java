@@ -81,8 +81,7 @@ public class MyPageController {
 			else if (menu.equals("delete")) {
 				myPageService.removeUser(userDTO);
 				session.invalidate();
-				mv.setViewName("/common/main");
-				mv.addObject("menu", "del");
+				mv.setViewName("redirect:/");
 			}
 		}
 		else {
@@ -97,8 +96,6 @@ public class MyPageController {
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("/myPage/modifyMyPage");
 		mv.addObject("userDTO", myPageService.getUserDetail((String)session.getAttribute("userId")));
-		System.out.println("-----------------------------------------------------------------");
-		System.out.println(myPageService.getUserDetail((String)session.getAttribute("userId")));
 		mv.addObject("role", "user");
 		return mv;
 	}

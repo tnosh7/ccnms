@@ -16,20 +16,14 @@ public class CommonServiceImpl implements CommonService {
 	private CommonDAO commonDAO;
 	
 	@Override
-	public List<Map<String,Object>> getDiggingList() throws Exception {
-		return commonDAO.selectListDiggingList() ;
-	}
-	@Override
-	public List<Map<String,Object>>  getDiggingList(String sort) throws Exception {
-		return commonDAO.selectListDiggingList(sort) ;
+	public List<DiggingDTO> getDiggingList(Map<String, Object> searchMap) throws Exception {
+		return commonDAO.selectListDiggingList(searchMap) ;
 	}
 
 	@Override
-	public int getAllDiggingCnt() throws Exception {
-		return commonDAO.selectOneAllDiggingCnt();
+	public int getAllDiggingCnt(String search) throws Exception {
+		return commonDAO.selectOneAllDiggingCnt(search);
 	}
-
-
 	@Override
 	public int upThumbsUp(long diggingId) throws Exception {
 		return commonDAO.updateThumbsUp(diggingId);

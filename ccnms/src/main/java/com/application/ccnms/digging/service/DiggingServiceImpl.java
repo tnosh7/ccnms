@@ -1,6 +1,8 @@
 package com.application.ccnms.digging.service;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,22 +17,27 @@ public class DiggingServiceImpl implements DiggingService {
 	
 	@Autowired
 	private DiggingDAO diggingDAO;
-
+	
 	@Override
+	@Transactional
 	public void addDigging(DiggingDTO diggingDTO) throws Exception {
 		diggingDAO.insertDigging(diggingDTO);
 	}
 	@Override
-	public List<DiggingDTO> getDiggingList(String diggingTopic) throws Exception {
-		return diggingDAO.selectListDiggingList(diggingTopic);
+	public List<DiggingDTO> getDiggingList(Map<String, Object> searchMap) throws Exception {
+		return diggingDAO.selectListDiggingList(searchMap);
+	}
+	@Override
+	public int getAllDiggingCnt(String search) throws Exception{
+		return diggingDAO.selectOneDiggingCnt(search);
 	}
 	@Override
 	public List<UserDTO> getUser(String writer) throws Exception {
 		return diggingDAO.selectListUser(writer);
 	}
 	@Override
-	public List<DiggingDTO> getPopulerList(String diggingTopic) throws Exception {
-		return diggingDAO.selectListPopulerList(diggingTopic);
+	public List<DiggingDTO> getPopulerList(Map<String, Object> searchMap) throws Exception {
+		return diggingDAO.selectListPopulerList(searchMap);
 	}
 
 	@Override
@@ -58,10 +65,6 @@ public class DiggingServiceImpl implements DiggingService {
 		return diggingDAO.selectListReplyList(diggingId);
 	}
 	@Override
-	public int getAllDiggingCnt() throws Exception{
-		return diggingDAO.selectOneDiggingCnt();
-	}
-	@Override
 	public List<DiggingDTO> getRecentList(String diggingTopic) throws Exception {
 		return diggingDAO.selectListRecentList(diggingTopic);
 	}
@@ -73,7 +76,7 @@ public class DiggingServiceImpl implements DiggingService {
 	public void removeDigging(long diggingId) throws Exception {
 		diggingDAO.deleteDigging(diggingId);
 	}
-
+	
 
 
 }

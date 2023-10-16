@@ -10,5 +10,6 @@ public interface ShopDAO {
 	public void insertProduct(ShopDTO shopDTO) throws Exception ;
 	public List<ShopDTO> selectListSortList(String sort) throws Exception ;
 	public ShopDTO selectOneProductDetail(long productCd) throws Exception ;
+	public void updateReadCnt(long productCd)throws Exception ;
 
 }

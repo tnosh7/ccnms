@@ -35,6 +35,7 @@ public class ShopServiceImpl implements ShopService {
 
 	@Override
 	public ShopDTO getProductDetail(long productCd) throws Exception {
+		shopDAO.updateReadCnt(productCd);
 		return shopDAO.selectOneProductDetail(productCd);
 	}
 }

@@ -62,7 +62,7 @@
                                         <h5>${shopDTO.productNm}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                    	${shopDTO.price}
+                                    	<fmt:formatNumber value="${shopDTO.price - shopDTO.price * shopDTO.discountRate /100}"/>원
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity" onmouseleave="modifyCartQty(cartCd)">
@@ -86,7 +86,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="${contextPath }/shop" class="primary-btn cart-btn">계속 쇼핑하기</a>
+                        <a href="${contextPath }/shop/" class="primary-btn cart-btn">계속 쇼핑하기</a>
                         <a href="${contextPath }/shop/myKeep" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                             장바구니로 이동</a>
                     </div>
@@ -95,7 +95,7 @@
                     <div class="shoping__checkout">
                         <h5>총 금액</h5>
                         <ul>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Total <span><fmt:formatNumber value="${shopDTO.price - shopDTO.price * shopDTO.discountRate /100}"/>원</span></li>
                         </ul>
                         <a href="${contextPath }/order/orderSheet?productCd=${shopDTO.productCd}" class="primary-btn" style="background:salmon">구매진행하기</a>
                     </div>

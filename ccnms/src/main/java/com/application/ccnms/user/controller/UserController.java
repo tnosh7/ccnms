@@ -1,12 +1,10 @@
 package com.application.ccnms.user.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,13 +30,12 @@ public class UserController {
 	
 	@PostMapping("/register")
 	public @ResponseBody String register(HttpServletRequest request, UserDTO userDTO) throws Exception {
-		//email동의 
-		String emailYN = request.getParameter("emailYN");
-		if (emailYN == null) {
-			emailYN = "N";
+		String userEmailYN = request.getParameter("userEmailYN");
+		if (userEmailYN == null) {
+			userEmailYN = "N";
 		}
-		else emailYN = "Y";
-		userDTO.setEmailYN(emailYN);
+		else userEmailYN = "Y";
+		userDTO.setEmailYN(userEmailYN);
 		
 		String emailDomain = request.getParameter("emailDomain");
 		String email = request.getParameter("email");
@@ -49,7 +46,7 @@ public class UserController {
 		userService.addUser(userDTO);
 
 		String jsScript = "<script>";
-			   jsScript +="history.go(-1);";
+			   jsScript +="location.href='" + request.getContextPath() + "/'";
 			   jsScript +="</script>";
 		
 		return jsScript;

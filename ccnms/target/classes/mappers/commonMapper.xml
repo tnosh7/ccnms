@@ -2,6 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="common">
+	<select id="selectOneAllDiggingCnt" parameterType="String"  resultType="int">
+		<choose>
+			<when test='search.equals("")'>
+				SELECT 
+					COUNT(*)
+				FROM 
+					DIGGING
+			</when>
+			<otherwise>
+				SELECT
+				 	COUNT(*)
+				FROM 
+					DIGGING
+				WHERE
+					SUBJECT LIKE CONCATE('%', #{search}, '%') OR
+					WRITER LIKE CONCATE('%', #{search}, '%') OR 
+					CONTENT LIKE CONCATE('%', #{search}, '%')	
+			</otherwise>
+		</choose>
+	</select>
+	
 	<resultMap type="hashmap" id="diggingUserListMap">
 		<result column="DIGGING_ID" property="diggingId"/>
 		<result column="USER_ID" property="userId"/>
@@ -16,71 +37,79 @@
 		<result column="PROFILE" property="profile"/>
 		<result column="LIKE_POINT" property="likePoint"/>
 	</resultMap>
-	<select id="selectListDiggingList" resultMap="diggingUserListMap">
-		SELECT 
-				D.DIGGING_ID	AS DIGGING_ID,
-				D.WRITER		AS USER_ID, 
-				D.SUBJECT		AS SUBJECT,
-				D.CONTENT		AS CONTENT,
-				D.READ_CNT		AS READ_CNT,
-				D.DIGGING_TOPIC	AS DIGGING_TOPIC,
-				D.ENROLL_DT		AS ENROLL_DT,
-				D.REPLY_CNT		AS REPLY_CNT,
-				D.THUMBS_UP		AS THUMBS_UP,
-				D.FILE			AS FILE,
-				U.PROFILE		AS PROFILE
-		FROM 
-				DIGGING AS D
-			JOIN USER	 AS U
-				 ON		D.WRITER = U.USER_ID
-		WHERE 
-				D.DIGGING_TOPIC NOT IN ("NOTICE")		 
-							 	
-	</select>
-	
-	<resultMap type="hashmap" id="sortDiggingUserListMap">
-	<result column="DIGGING_ID" property="diggingId"/>
-	<result column="USER_ID" property="userId"/>
-	<result column="SUBJECT" property="subject"/>
-	<result column="CONTENT" property="content"/>
-	<result column="READ_CNT" property="readCnt"/>
-	<result column="DIGGING_TOPIC" property="diggingTopic"/>
-	<result column="ENROLL_DT" property="enrollDT"/>
-	<result column="REPLY_CNT" property="replyCnt"/>
-	<result column="THUMBS_UP" property="thumbsUp"/>
-	<result column="FILE" property="file"/>
-	<result column="PROFILE" property="profile"/>
-	<result column="LIKE_POINT" property="likePoint"/>
-	</resultMap>
-	<select id="selectListSortDiggingList" parameterType="String" resultMap="sortDiggingUserListMap">
-		SELECT 
-				D.DIGGING_ID	AS DIGGING_ID,
-				D.WRITER		AS USER_ID, 
-				D.SUBJECT		AS SUBJECT,
-				D.CONTENT		AS CONTENT,
-				D.READ_CNT		AS READ_CNT,
-				D.DIGGING_TOPIC	AS DIGGING_TOPIC,
-				D.ENROLL_DT		AS ENROLL_DT,
-				D.REPLY_CNT		AS REPLY_CNT,
-				D.THUMBS_UP		AS THUMBS_UP,
-				D.FILE			AS FILE,
-				U.PROFILE		AS PROFILE
-		FROM 
-				DIGGING AS D
-			JOIN USER	 AS U
-				 ON		D.WRITER = U.USER_ID
-		WHERE 
-			D.DIGGING_TOPIC NOT IN ("NOTICE")		 
-		ORDER BY 
-			<if test='sort == "readCnt"'>
-				D.READ_CNT DESC;	
-			</if> 
-			<if test='sort== "thumbsUp"'>
-				D.THUMBS_UP DESC;	
-			</if> 
-			<if test='sort == "recent"'>
-				D.DIGGING_ID DESC;	
-			</if>
+	<select id="selectListDiggingList" parameterType="hashmap"  resultMap="diggingUserListMap">
+		<choose>
+			<when test='search.equals("")'>
+				SELECT 
+						D.DIGGING_ID	AS DIGGING_ID,
+						D.WRITER		AS USER_ID, 
+						D.SUBJECT		AS SUBJECT,
+						D.CONTENT		AS CONTENT,
+						D.READ_CNT		AS READ_CNT,
+						D.DIGGING_TOPIC	AS DIGGING_TOPIC,
+						D.ENROLL_DT		AS ENROLL_DT,
+						D.REPLY_CNT		AS REPLY_CNT,
+						D.THUMBS_UP		AS THUMBS_UP,
+						D.FILE			AS FILE,
+						U.PROFILE		AS PROFILE
+				FROM 
+						DIGGING AS D
+					JOIN USER	 AS U
+						 ON		D.WRITER = U.USER_ID
+				WHERE 
+					D.DIGGING_TOPIC NOT IN ("NOTICE")
+				ORDER BY 
+				<if test='sort == "readCnt"'>
+					D.READ_CNT DESC	
+				</if> 
+				<if test='sort== "thumbsUp"'>
+					D.THUMBS_UP DESC	
+				</if> 
+				<if test='sort == "recent"'>
+					D.DIGGING_ID DESC	
+				</if>
+				<if test='sort == null'>
+					D.DIGGING_ID DESC	
+				</if>
+				LIMIT 
+					#{startDiggingIdx}, #{onePageViewCnt}		
+			</when>
+			<otherwise>
+				SELECT 
+						D.DIGGING_ID	AS DIGGING_ID,
+						D.WRITER		AS USER_ID, 
+						D.SUBJECT		AS SUBJECT,
+						D.CONTENT		AS CONTENT,
+						D.READ_CNT		AS READ_CNT,
+						D.DIGGING_TOPIC	AS DIGGING_TOPIC,
+						D.ENROLL_DT		AS ENROLL_DT,
+						D.REPLY_CNT		AS REPLY_CNT,
+						D.THUMBS_UP		AS THUMBS_UP,
+						D.FILE			AS FILE,
+						U.PROFILE		AS PROFILE
+				FROM 
+						DIGGING AS D
+					JOIN USER	 AS U
+						 ON		D.WRITER = U.USER_ID
+				WHERE 
+					D.DIGGING_TOPIC NOT IN ("NOTICE") AND
+					SUBJECT LIKE CONCAT('%', #{search}, '%') OR
+					WRITER LIKE CONCAT('%', #{search}, '%') OR
+					CONTENT LIKE CONCAT('%', #{search}, '%') 
+				ORDER BY 
+				<if test='sort == "readCnt"'>
+					D.READ_CNT DESC	
+				</if> 
+				<if test='sort== "thumbsUp"'>
+					D.THUMBS_UP DESC	
+				</if> 
+				<if test='sort == "recent"'>
+					D.DIGGING_ID DESC	
+				</if>	
+				LIMIT 
+					#{startDiggingIdx}, #{onePageViewCnt}
+			</otherwise>
+		</choose>
 	</select>
 	
 	<select id="selectListHeadList" resultType="DiggingDTO">
@@ -90,13 +119,6 @@
 			DIGGING
 		WHERE
 			DIGGING_TOPIC = "notice" 
-	</select>
-	
-	<select id="selectOneAllDiggingCnt" resultType="int">
-		SELECT 
-			COUNT(*)
-		FROM 
-			DIGGING
 	</select>
 	
 	<update id="updateThumbsUp" parameterType="long">

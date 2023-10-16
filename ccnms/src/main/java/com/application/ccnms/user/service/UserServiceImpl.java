@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.application.ccnms.user.dao.UserDAO;
 import com.application.ccnms.user.dto.UserDTO;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	@Transactional
 	public void addUser(UserDTO userDTO) throws Exception{
 		userDTO.setPasswd(bCryptPasswordEncoder.encode(userDTO.getPasswd()));
 		userDAO.insertUser(userDTO);

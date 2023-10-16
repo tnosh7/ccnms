@@ -31,19 +31,19 @@ public class AdminDiggingController {
 
 	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	
-	@GetMapping("diggingAdd")
+	@GetMapping("/diggingAdd")
 	public ModelAndView diggingAdd () {
 		return new ModelAndView("/admin/digging/diggingAdd");
 	}
 	
-	@PostMapping("diggingAdd")
+	@PostMapping("/diggingAdd")
 	public @ResponseBody String diggingAdd(MultipartHttpServletRequest multipartRequest, HttpServletRequest request)throws Exception {
 		HttpSession session = request.getSession();
 		
 		Iterator<String> fileList = multipartRequest.getFileNames();
 		String fileName="";
 		while(fileList.hasNext()) {
-			MultipartFile uploadFile = multipartRequest.getFile(fileList.next()); // 하나의 <input type="file">를 반환한다.
+			MultipartFile uploadFile = multipartRequest.getFile(fileList.next()); 
 			if (!uploadFile.getOriginalFilename().isEmpty()) {
 				SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
 				fileName = fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();
@@ -67,7 +67,7 @@ public class AdminDiggingController {
 	
 	
 	
-	@GetMapping("diggingManagement")
+	@GetMapping("/diggingManagement")
 	public ModelAndView diggingManagement () {
 		return new ModelAndView("/admin/digging/diggingManagement");
 	}

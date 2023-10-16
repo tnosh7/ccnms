@@ -44,17 +44,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            	<c:forEach var="i" begin="1" end="10" >
+                            	<c:forEach var="rankingDTO" items="${rankingList }" >
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <h5>${i*2-1}</h5>&emsp;&emsp;
-                                        <a href="#"><img src="${contextPath }/resources/bootstrap/img/cart/cart-1.jpg" alt=""></a>
-                                        <h5><a href="#">Vegetable’s Package</a></h5>
-                                    </td>
-                                    <td class="shoping__cart__item" colspan="5">
-                                        <h5>${i*2 }</h5>&emsp;&emsp;
-                                         <a href="#"><img src="${contextPath }/resources/bootstrap/img/cart/cart-1.jpg" alt=""></a>
-                                        <h5> <a href="#">Vegetable’s Package</a></h5>
+                                        <h5></h5>&emsp;&emsp;
+                                        <a href="#"><img src="${contextPath }/ranking/thumbnails?file=${rankingDTO.profile}" alt=""width="100" height="100"></a>
+                                        <h5><a href="#">${rankingDTO.userId }</a></h5>
+                                        <h5><a href="#">LIKE : ${rankingDTO.likePoint }</a></h5>
                                     </td>
                                 </tr>
                             	</c:forEach>

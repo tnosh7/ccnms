@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-		<definition name="/ranking" extends="common">
+		<definition name="/ranking/ranking" extends="common">
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/ranking/ranking.jsp"/>
 	 		<put-attribute name="title" value="디깅 랭킹"/>	
 	 	</definition>

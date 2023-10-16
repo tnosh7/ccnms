@@ -18,23 +18,15 @@
    		text-align:center;
    		font-size: x-large;
    }
+   
 </style>
 </head>
 <script>
 
 	$().ready(function(){
 		
-		
-		var popover = new bootstrap.Popover(document.querySelector('.btn-lg'), {
-		  container: 'body'
-		})
-		
-		
-		$(document).ready(function(){
-			  $(".btn-lg").click(function(){
-			    $("[data-bs-toggle='popover']").popover('show');
-			  });
-			});
+		$("#onePageViewCnt").val("${onePageViewCnt}");
+		$("#search").val("${search}");
 		
 		$("#thumbsUp").click(function(){
 			var diggingId = $("#diggingId").val();
@@ -42,22 +34,12 @@
 				url : "${contextPath}/thumbsUp",
 				type : "post",
 				data : {"diggingId" : diggingId},
-				success : function(data){
+				success : function(mv){
 					updatethumbsUp();
 				}
 			});	
 		});
 		
-		var menu="${menu}";
-		if (menu=='del') {
-			Swal.fire({
-				  position: 'center',
-				  icon: 'success',
-				  title: '회원탈퇴가 완료되었습니다.',
-				  showConfirmButton: false,
-				  timer: 1500
-				});
-		}
 	});
 	function updatethumbsUp(){
 		
@@ -66,7 +48,13 @@
 		document.getElementById("thumbsUp").innerHTML = thumbsUp;
 		return;
 	}
-	 
+	function getDiggingList() {
+		
+		var url = "${contextPath }/"
+		    url += "?onePageViewCnt=" + $("#onePageViewCnt").val();
+		  	url += "&search=" + $("#search").val();
+		location.href = url;
+	} 
 </script>
 <body>
     <!-- Categories Section Begin -->
@@ -100,8 +88,6 @@
                 <div class="col-lg-12">
                     <div class="featured__controls">
                     	<hr>
-                    	<ul id="onePageViewCnt">
-                    	</ul>
                     	<ul align="right">
 						    <li class="nav-item dropdown">
 						    <a class="nav-link dropdown-toggle show" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">정 렬</a>
@@ -111,6 +97,15 @@
 						      <a class="dropdown-item" href="${contextPath }/?sort=recent">최신순</a>
 						    </div>
 						  </li>
+                    	</ul>
+                    	<ul id="onePageViewCnt"> 
+	                   		<li> 게시물 보기
+								<select id="onePageViewCnt" onchange="getDiggingList()" >
+									<option>5</option>
+									<option>7</option>
+									<option selected>10</option>
+								</select>
+	                   		</li>
                     	</ul>
                 	</div>
             <div class="row">
@@ -125,7 +120,7 @@
                        				<th align="left" colspan="3" width="70%" >
                        				<c:choose>
                        					<c:when test="${diggingDTO.profile eq ''}">
-                       						<a href="${contextPath }/client/userDetail?userId=${diggingDTO.userId}"><img src="${contextPath }/resources/bootstrap/img/user.PNG" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
+                       						<a href="${contextPath }/client/userDetail?userId=${diggingDTO.userId}"><img src="${contextPath}/resources/admin/assets/img/avatars/2.png" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
                        					</c:when>
                        					<c:otherwise>
 		                       				<img src="${contextPath }/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }
@@ -168,14 +163,14 @@
     <br>
     <br>
     <div class="product__pagination blog__pagination" align="center">
-        <c:if test="${startPage > 5 }">
-	        <a href="${contextPath }/?currentPageNumber=${startPage - 5}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i></a>
+        <c:if test="${startPage > 10 }">
+	        <a href="${contextPath }/?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&search=${search}"><i class="fa fa-long-arrow-left"></i></a>
         </c:if>
-        <c:forEach var="i" begin="${startPage }" end="${endPage }">
-        <a href="${contextPath }/?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}">${i }</a>
+        <c:forEach var="i" begin="${startPage }" end="${endPage -1 }">
+        <a href="${contextPath }/?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&search=${search}">${i }</a>
         </c:forEach>
-        <c:if test="${endPage != allPageCnt && endPage >= 5 }">
-        	<a href="${contextPath }/?currentPageNumber=${startPage + 5}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i></a>
+        <c:if test="${endPage != allPageCnt && endPage >= 10 }">
+        	<a href="${contextPath }/?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}&search=${search}"><i class="fa fa-long-arrow-right"></i></a>
         </c:if>
      </div>
     <!-- Featured Section End -->

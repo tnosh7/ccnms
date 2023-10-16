@@ -1,6 +1,7 @@
 package com.application.ccnms.digging.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,20 +23,20 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	}
 
 	@Override
-	public List<DiggingDTO> selectListDiggingList(String diggingTopic) throws Exception {
-		return sqlSession.selectList("digging.selectListDiggingList", diggingTopic);
+	public List<DiggingDTO> selectListDiggingList(Map<String, Object> searchMap) throws Exception {
+		return sqlSession.selectList("digging.selectListDiggingList", searchMap);
 	}
 	@Override
-	public List<DiggingDTO> selectListPopulerList(String diggingTopic) throws Exception {
-		return sqlSession.selectList("digging.selectListPopulerList", diggingTopic);
+	public List<DiggingDTO> selectListPopulerList(Map<String, Object> searchMap) throws Exception {
+		return sqlSession.selectList("digging.selectListPopulerList", searchMap);
 	}
 	@Override
 	public List<UserDTO> selectListUser(String writer) throws Exception {
 		return sqlSession.selectList("digging.selectListUser", writer);
 	}
 	@Override
-	public int selectOneDiggingCnt() throws Exception {
-		return sqlSession.selectOne("digging.selectOneDiggingCnt");
+	public int selectOneDiggingCnt(String search) throws Exception {
+		return sqlSession.selectOne("digging.selectOneDiggingCnt", search);
 	}
 	
 	@Override

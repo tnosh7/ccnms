@@ -16,17 +16,13 @@ public class CommonDAOImpl implements CommonDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<Map<String,Object>> selectListDiggingList() throws Exception {
-		return sqlSession.selectList("common.selectListDiggingList");
-	}
-	@Override
-	public List<Map<String,Object>> selectListDiggingList(String sort) throws Exception {
-		return sqlSession.selectList("common.selectListSortDiggingList", sort);
+	public List<DiggingDTO> selectListDiggingList(Map<String, Object> search) throws Exception {
+		return sqlSession.selectList("common.selectListDiggingList", search);
 	}
 
 	@Override
-	public int selectOneAllDiggingCnt() throws Exception {
-		return sqlSession.selectOne("common.selectOneAllDiggingCnt");
+	public int selectOneAllDiggingCnt(String search) throws Exception {
+		return sqlSession.selectOne("common.selectOneAllDiggingCnt", search);
 	}
 
 	@Override

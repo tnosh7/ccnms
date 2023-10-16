@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,25 +40,34 @@ public class DiggingController {
 	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	
 	@GetMapping("/main")
-	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic)throws Exception {
+	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic, @RequestParam(required =false, value="sort") String sort)throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/digging/main");
+		String search = request.getParameter("search");
+		if (search == null) search = "";
+		
 		int onePageViewCnt = 10;
+		if (request.getParameter("onePageViewCnt") != null) {
+			onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
+		}
+		
 		String temp = request.getParameter("currentPageNumber");
 		if (temp == null) {
 			temp="1";
 		}
 		int currentPageNumber = Integer.parseInt(temp);
-		int allDiggingCnt = diggingService.getAllDiggingCnt();
+		
+		int allDiggingCnt = diggingService.getAllDiggingCnt(search);
 		int allPageCnt = allDiggingCnt / onePageViewCnt +1;
 		if (allDiggingCnt % onePageViewCnt == 0) allPageCnt--;
-		int startPage = (currentPageNumber -1)/ 5 * 5 +1;
+		int startPage = (currentPageNumber -1)/ 10 * 10 +1;
 		if (startPage == 0) {
 			startPage = 1;
 		}
-		int endPage = startPage + 4;
+		int endPage = startPage + 9;
 		if (endPage >allPageCnt) endPage = allPageCnt;
 		int startDiggingIdx = (currentPageNumber -1) * onePageViewCnt;
+
 		mv.addObject("startPage", startPage);
 		mv.addObject("endPage", endPage);
 		mv.addObject("allDiggingCnt", allDiggingCnt);
@@ -64,9 +75,16 @@ public class DiggingController {
 		mv.addObject("onePageViewCnt", onePageViewCnt);
 		mv.addObject("currentPageNumber", currentPageNumber);
 		mv.addObject("startDiggingIdx",startDiggingIdx);
+		mv.addObject("search", search);
 		
-		mv.addObject("diggingList", diggingService.getDiggingList(diggingTopic));
-		mv.addObject("populerList", diggingService.getPopulerList(diggingTopic));
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("onePageViewCnt", onePageViewCnt);
+		searchMap.put("startDiggingIdx", startDiggingIdx);
+		searchMap.put("search", search);
+		searchMap.put("sort", sort);
+		searchMap.put("diggingTopic", diggingTopic);
+		mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
+		mv.addObject("populerList", diggingService.getPopulerList(searchMap));
 		return mv;
 	}
 	@GetMapping("/thumbnails")
@@ -128,10 +146,8 @@ public class DiggingController {
 		return mv;
 	}
 	@PostMapping("/thumbsUp")
-	public ModelAndView thumbsUp(@RequestParam("diggingId") long diggingId) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("thumbsUp", diggingService.upThumbsUp(diggingId));
-		return mv;
+	public int thumbsUp(@RequestParam("diggingId") long diggingId) throws Exception {
+		return diggingService.upThumbsUp(diggingId);
 		
 	}
 	@PostMapping("/likeUp")

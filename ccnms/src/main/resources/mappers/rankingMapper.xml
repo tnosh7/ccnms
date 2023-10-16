@@ -8,7 +8,8 @@
 		FROM 
 			USER
 		ORDER BY 
-			LIKE_POINT DESC;
+			LIKE_POINT DESC
+		LIMIT 5
 	</select>
 
 </mapper>

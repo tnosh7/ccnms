@@ -10,7 +10,6 @@
 <script>
 	
 		var validateId = false;	
-	
 		
 		$().ready(function(){
 			$("#emailCheckBtn").click(function(){
@@ -68,14 +67,6 @@
 				
 			});
 			
-			$("#passwd").change(function(){
-				var passwd = $("#passwd").val();
-				if(passwd.length<8) {
-					 $("#passwdCheckWarn").html("비밀번호는 8~16자를 사용해 주세요.");
-				}
-			})
-			
-			
 			$("#passwdCheck").change(function(){
 				
 				var passwd = $("#passwd").val();
@@ -93,15 +84,6 @@
 				   }
 				}
 			});
-			
-			$("[name='birthDT']").change(function(){
-				var birthDT = $("[name='birthDT']").val();
-				if(birthDT.length == 0 || birthDT.length < 6 ) {
-				   $("#birthDTWarn").html("다시 입력해주세요.");
-			  	   return;
-				}
-				else $("#birthDTWarn").html("");
-			})
 			
 			$("#userIdCheck").click(function(){
 				var userId = $("#userId").val();
@@ -130,12 +112,18 @@
 			$("form").submit(function(){
 				var modudiggingYN = $("[name='modudiggingYN']:checked").val();
 				var userInfoYN = $("[name='userInfoYN']:checked").val();
+				var passwd = $("#passwd").val();
 				if (!validateId) {
 					$("#userIdCheckWarn").html("[필수] 아이디중복체크를 해주세요");
 					return false;
 				}
 				if (modudiggingYN == undefined || userInfoYN == undefined) {
+					$("#agreeYNWarn").html("[필수] 항목에 동의해야 합니다.")
 					return false;
+				}
+				if(passwd.length<8) {
+					 $("#passwdCheckWarn").html("비밀번호는 8~16자를 사용해 주세요.");
+					 return false;
 				}
 			})
 		});	
@@ -240,7 +228,7 @@
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>핸드폰 번호<span>*</span></p>
-	                                <input type="text" id="hp" name="hp" required placeholder="예) 010-0000-0000" maxlength="13"> 
+	                                <input type="text" id="hp" name="hp" required placeholder="예) 01000000000 숫자만 입력" maxlength="11"> 
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>생년월일<span>*</span></p>
@@ -410,6 +398,7 @@
 	                                <p> 
 										<input type="checkbox" id="userEmailYN" name="userEmailYN" value="Y"> [선택] 이메일 수신 및 이용 동의 							   
 									</p>
+									<span id="agreeYNWarn"></span>
 	                                <button type="submit" class="site-btn">Join</button>
 	                           		</div>
 	                        	</div>

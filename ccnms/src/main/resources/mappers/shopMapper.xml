@@ -69,4 +69,12 @@
 			PRODUCT_CD = #{productCd}
 	</select>
 	
+	<update id="updateReadCnt">
+		UPDATE 
+			SHOP
+		SET 
+		 	READ_CNT = READ_CNT + 1	
+		WHERE
+			PRODUCT_CD = #{productCd}
+	</update>
 </mapper>
