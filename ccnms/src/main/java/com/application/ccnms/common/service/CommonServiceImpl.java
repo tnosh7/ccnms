@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.application.ccnms.common.dao.CommonDAO;
 import com.application.ccnms.digging.dto.DiggingDTO;
+import com.application.ccnms.shop.dto.ShopDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
 @Service
@@ -31,6 +32,11 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public List<DiggingDTO> getHeadList() throws Exception {
 		return commonDAO.selectListHeadList();
+	}
+
+	@Override
+	public List<ShopDTO> getRecentShopList() throws Exception {
+		return commonDAO.selectListRecentShopList();
 	}
 
 	

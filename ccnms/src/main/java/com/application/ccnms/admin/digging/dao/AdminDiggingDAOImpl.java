@@ -1,5 +1,7 @@
 package com.application.ccnms.admin.digging.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,11 @@ public class AdminDiggingDAOImpl implements AdminDiggingDAO {
 	@Override
 	public void insertDigging(DiggingDTO diggingDTO) throws Exception {
 		sqlSession.insert("adminDigging.insertDigging",diggingDTO);
+	}
+
+	@Override
+	public List<DiggingDTO> selectListDiggingList() throws Exception {
+		return sqlSession.selectList("adminDigging.selectListDiggingList");
 	}
 	
 }

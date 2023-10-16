@@ -68,7 +68,10 @@ public class AdminDiggingController {
 	
 	
 	@GetMapping("/diggingManagement")
-	public ModelAndView diggingManagement () {
-		return new ModelAndView("/admin/digging/diggingManagement");
+	public ModelAndView diggingManagement () throws Exception {
+		ModelAndView mv= new ModelAndView();
+		mv.addObject("diggingList", adminDiggingService.getDiggingList());
+		mv.setViewName("/admin/digging/diggingManagement");
+		return mv;
 	}
 }

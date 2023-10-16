@@ -105,9 +105,9 @@
                             <li><a href="${contextPath }/"><img alt="홈에러" src="${contextPath }/resources/bootstrap/img/home.png"> 홈</a></li>
                             <li><a href="${contextPath }/shop/"><img alt="상점에러" src="${contextPath }/resources/bootstrap/img/shop.png"> 상점</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="${contextPath }/shop/">유저마켓</a></li>
-                                    <li><a href="${contextPath }/shop/">디깅마켓</a></li>
-                                    <li><a href="./checkout.html">장바구니 보기</a></li>
+                                    <li><a href="${contextPath }/shop/?sort=sale"">유저마켓</a></li>
+                                    <li><a href="${contextPath }/shop/?sort=Modudigging">디깅마켓</a></li>
+                                    <li><a href="${contextPath }/shop/?sort=exchange">교환마켓</a></li>
                                 </ul>
                             </li>
                             <li><a href="${contextPath }/ranking/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png">디깅랭킹</a></li>

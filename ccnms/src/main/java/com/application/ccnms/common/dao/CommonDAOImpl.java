@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.application.ccnms.digging.dto.DiggingDTO;
+import com.application.ccnms.shop.dto.ShopDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
 @Repository
@@ -32,6 +33,11 @@ public class CommonDAOImpl implements CommonDAO {
 	@Override
 	public List<DiggingDTO> selectListHeadList() throws Exception {
 		return sqlSession.selectList("common.selectListHeadList");
+	}
+
+	@Override
+	public List<ShopDTO> selectListRecentShopList() throws Exception {
+		return sqlSession.selectList("common.selectListRecentShopList");
 	}
 
 }

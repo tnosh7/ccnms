@@ -22,7 +22,7 @@
 		)
 	</insert>
 	
-	<select id="selectOneTodayReplyCnt" parameterType="String">
+	<select id="selectOneTodayReplyCnt" parameterType="String" resultType="int">
 		SELECT 
 			COUNT(REPLY_ID)
 		FROM
@@ -31,7 +31,7 @@
 			LEFT(ENROLL_DT, 10) = #{today}
 	
 	</select>
-	<select id="selectOneTodayDiggingCnt" parameterType="String">
+	<select id="selectOneTodayDiggingCnt" parameterType="String" resultType="int">
 		SELECT 
 			COUNT(DIGGING_ID)
 		FROM
@@ -40,7 +40,7 @@
 			LEFT(ENROLL_DT, 10) = #{today}
 
 	</select>
-	<select id="selectOneTodayUserCnt" parameterType="String">
+	<select id="selectOneTodayUserCnt" parameterType="String" resultType="int">
 		SELECT 
 			COUNT(USER_ID)
 		FROM
@@ -49,7 +49,7 @@
 			LEFT(JOIN_DT, 10) = #{today}
 	
 	</select>
-	<select id="selectOneTodayShopCnt" parameterType="String">
+	<select id="selectOneTodayShopCnt" parameterType="String" resultType="int">
 		SELECT 
 			COUNT(PRODUCT_CD)
 		FROM
@@ -58,7 +58,7 @@
 			LEFT(ENROLL_DT, 10) = #{today}
 	
 	</select>
-	<select id="selectOneTodaySaleCnt" parameterType="String">
+	<select id="selectOneTodaySaleCnt" parameterType="String" resultType="int">
 		SELECT 
 			COUNT(ORDER_CD)
 		FROM

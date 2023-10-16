@@ -129,5 +129,15 @@
 		WHERE 
 			DIGGING_ID = #{diggingId};
 	</update>
+	<select id="selectListRecentShopList" resultType="ShopDTO">
+		SELECT 
+			*
+		FROM 
+			SHOP
+		ORDER BY 
+			ENROLL_DT DESC
+		LIMIT 
+			3 
 	
+	</select>
 </mapper>

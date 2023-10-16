@@ -103,8 +103,8 @@ nav {
                             <i class="bx bx-dots-vertical-rounded"></i>
                           </button>
                           <ul class="dropdown-menu dropdown-menu-end show" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 40px, 0px);">
-                            <li><a class="dropdown-item"  onclick="updateUser();">유저수정</a></li>
-                            <li><a class="dropdown-item"  onclick="deleteUser();">유저삭제</a></li>
+                            <li><a class="dropdown-item"  onclick="updateUser();">디깅수정</a></li>
+                            <li><a class="dropdown-item"  onclick="deleteUser();">디깅삭제</a></li>
                           </ul>
                         </div></li>
 					</ul>
@@ -116,18 +116,18 @@ nav {
                 	<li>
 	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
                           <option selected="">검색선택1</option>
-                          <option value="1">핸드폰 번호</option>
-                          <option value="2">생년월일</option>
-                          <option value="3">이름</option>
+                          <option value="1">디깅 토픽</option>
+                          <option value="2">제목</option>
+                          <option value="3">글쓴이</option>
                     </select>
                 	</li>
                 	&emsp;
                 	<li>
 	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
                           <option selected="">검색선택2</option>
-                          <option value="1">핸드폰 번호</option>
-                          <option value="2">생년월일</option>
-                          <option value="3">이름</option>
+                          <option value="1">디깅 토픽</option>
+                          <option value="2">제목</option>
+                          <option value="3">글쓴이</option>
                     </select>
                 	</li>
                 	&emsp;
@@ -137,48 +137,38 @@ nav {
                 	&emsp;
                 	<li><button type="reset" class="btn btn-outline-success" onclick="window.location.reload()">새로고침</button></li>
                	 </ul>
-                <a href="*"><button type="button">디깅하기</button></a>
+                <a href="${contextPath }/admin/digging/diggingAdd"><button type="button">디깅하기</button></a>
                 </div>
                 </div>
                   <table class="table">
                     <thead class="table-light" align="center">
                       <tr>
                       	<th width="30"><input type="checkbox" id="allCheck"></th>
-                        <th>아이디</th>
-                        <th>이름</th>
-                        <th>생일</th>
-                        <th>핸드폰번호</th>
-                        <th>이메일</th>
-                        <th width="80">성별</th>
-                        <th width="80">수신 동의</th>
-                        <th width="80">프로필</th>
-                        <th width="200">주소</th>
-                        <th width="80">LIKE</th>
-                        <th>가입일</th>
+                        <th>토픽</th>
+                        <th>글쓴이</th>
+                        <th>제목</th>
+                        <th>조회수</th>
+                        <th width="80">추천수</th>
+                        <th>등록일</th>
                       </tr>
                     </thead>
                     <tbody align="center">
                     <c:choose>
-	                    <c:when test="${empty userList}">
+	                    <c:when test="${empty diggingList}">
 		                      <tr>
 		                      	<td colspan="12">유저가 없습니다.</td>
 		                      </tr>
 		                </c:when>
 	                <c:otherwise>
-	                	<c:forEach var="userDTO"  items="${userList}">
+	                	<c:forEach var="diggingDTO"  items="${diggingList}">
 	                		<tr>
-		                      	<td><input type="checkbox" id="userCheck" name="userId" value="${userDTO.userId }"></td>
-		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${userDTO.userId }</td>
-		                        <td>${userDTO.userNm }</td>
-		                        <td>${userDTO.birthDT}</td>
-		                        <td>${userDTO.hp}</td>
-		                        <td>${userDTO.email}</td>
-		                        <td><span class="badge bg-label-primary me-1">${userDTO.sex}</span></td>
-		                        <td><span class="badge bg-label-success me-1">${userDTO.emailYN}</span></td>
-		                        <td>${userDTO.profile}</td>
-		                        <td>${userDTO.zipcode} ${userDTO.roadAddress} ${userDTO.namujiAddress}</td>
-		                        <td>${userDTO.likePoint}</td>
-		                        <td>${userDTO.joinDT}</td>
+		                      	<td><input type="checkbox" id="userCheck" name="userId" value="${diggingDTO.diggingId }"></td>
+		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${diggingDTO.diggingTopic }</td>
+		                        <td>${diggingDTO.writer }</td>
+		                        <td>${diggingDTO.subject}</td>
+		                        <td>${diggingDTO.readCnt}</td>
+		                        <td>${diggingDTO.thumbsUp}</td>
+		                        <td>${diggingDTO.enrollDT}</td>
 	                      	</tr>
 	                	</c:forEach>
 	                </c:otherwise>

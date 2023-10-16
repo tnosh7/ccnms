@@ -152,9 +152,9 @@
                                             data-setbg="${contextPath }/shop/thumbnails?file=${discountList.productFile}">
                                             <div class="product__discount__percent">-${discountList.discountRate }</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="javascript:myKeep(${shopDTO.productCd})"><i class="fa fa-heart"></i></a></li>
                                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li><a href="javascript:myCart(${shopDTO.productCd})"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
                                         <div class="product__discount__item__text">

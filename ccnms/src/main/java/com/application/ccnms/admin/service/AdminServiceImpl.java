@@ -54,7 +54,7 @@ public class AdminServiceImpl implements AdminService {
 		logger.info(today + "의 유저 등록수 : " + adminDAO.selectOneTodayUserCnt(today));
 		logger.info(today + "의 상품 등록수 : " + adminDAO.selectOneTodayShopCnt(today));
 		logger.info(today + "의 판매 등록수 : " + adminDAO.selectOneTodaySaleCnt(today));
-	
+		
 		Map<String, Object> todayCntList = new HashMap<String, Object>();
 		todayCntList.put("todayCnt", adminDAO.selectOneTodayReplyCnt(today));
 		todayCntList.put("todayDigging", adminDAO.selectOneTodayDiggingCnt(today));
