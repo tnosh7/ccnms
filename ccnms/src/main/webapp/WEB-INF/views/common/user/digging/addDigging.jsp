@@ -20,6 +20,19 @@
   }
 
 </style>
+<script>
+	$().ready(function(){
+		
+		$("form").submit(function({
+		
+			var diggingTopic= $("[name='diggingTopic']")val();
+			if (diggingTopic == "") {
+				return false;
+			});
+		}
+	});
+
+</script>
 </head>
 <body>
 <form action="${contextPath }/digging/addDigging" method="post" enctype="multipart/form-data"> 
