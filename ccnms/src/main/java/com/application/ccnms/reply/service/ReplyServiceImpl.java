@@ -1,11 +1,9 @@
 package com.application.ccnms.reply.service;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.reply.dao.ReplyDAO;
 import com.application.ccnms.reply.dto.ReplyDTO;
 

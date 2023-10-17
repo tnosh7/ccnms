@@ -49,7 +49,7 @@ public class OrderController {
 	}
 	
 	@GetMapping("/orderSheet") 
-	public ModelAndView checkout(@RequestParam("productCd") long productCd, OrderDTO orderDTO) throws Exception {
+	public ModelAndView orderSheet(@RequestParam("productCd") long productCd, OrderDTO orderDTO) throws Exception {
 		
 		ModelAndView mv= new ModelAndView();
 		mv.addObject("shopDTO", orderService.getShopDTO(productCd));
