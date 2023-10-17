@@ -143,20 +143,6 @@
 	                  </div>
 	                </div>
 					<div>
-	                <div class="mb-3 form-password-toggle">
-	                  <label class="form-label" for="adminRank"><strong>관리자 직급</strong></label>
-	                  <div class="input-group input-group-merge">
-	                    <input
-	                    type="text"
-	                    class="form-control"
-	                    id="adminRank"
-	                    name="adminRank"
-	                    placeholder="Enter your name"
-	                  />
-	                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-	                  </div>
-	                </div>
-	
 	                <div class="mb-3">
 	                  <div class="form-check">
 						<br>	                    

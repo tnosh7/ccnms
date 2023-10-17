@@ -137,7 +137,6 @@ nav {
                         <option selected value="">검색선택</option>
                         <option value="adminId">아이디</option>
                         <option value="adminNm">이름</option>
-                        <option value="adminRank">직급</option>
                   </select>
               	</li>
               	&emsp;
@@ -153,7 +152,6 @@ nav {
                     	<th width="30"><input type="checkbox" id="allCheck"></th>
                       <th>아이디</th>
                       <th>이름</th>
-                      <th>직급</th>
                       <th>입사일</th>
                     </tr>
                   </thead>
@@ -161,7 +159,6 @@ nav {
                    <c:choose>
                     <c:when test="${empty adminList }">
                     <tr>
-                      <td></td>
                       <td></td>
                       <td></td>
                       <td></td>
@@ -174,7 +171,6 @@ nav {
                       	<td><input type="checkbox" id="adminCheck" name="adminCheck"></td>
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminId }</td>
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminNm }</td>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${adminDTO.adminRank }</td>
                         <td><fmt:formatDate value="${adminDTO.joinDT }" pattern="yyyy-MM-dd"/> </td>
                      	</tr>
                      </c:forEach>

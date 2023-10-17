@@ -166,7 +166,7 @@
         <c:if test="${startPage > 10 }">
 	        <a href="${contextPath }/?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&search=${search}"><i class="fa fa-long-arrow-left"></i></a>
         </c:if>
-        <c:forEach var="i" begin="${startPage }" end="${endPage -1 }">
+        <c:forEach var="i" begin="${startPage }" end="${endPage }">
         <a href="${contextPath }/?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&search=${search}">${i }</a>
         </c:forEach>
         <c:if test="${endPage != allPageCnt && endPage >= 10 }">
