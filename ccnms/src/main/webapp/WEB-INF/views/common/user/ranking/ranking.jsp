@@ -48,9 +48,16 @@
                                 <tr>
                                     <td class="shoping__cart__item">
                                         <h5></h5>&emsp;&emsp;
-                                        <a href="#"><img src="${contextPath }/ranking/thumbnails?file=${rankingDTO.profile}" alt=""width="100" height="100"></a>
+                                      	<c:choose>
+	                       					<c:when test="${diggingDTO.profile eq null}">
+	                       						<a href="${contextPath }/client/userDetail?userId=${diggingDTO.userId}"><img src="${contextPath}/resources/admin/assets/img/avatars/2.png" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
+	                       					</c:when>
+	                       					<c:otherwise>
+			                       				<img src="${contextPath }/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }
+	                       					</c:otherwise>
+                       					</c:choose>
                                         <h5><a href="#">${rankingDTO.userId }</a></h5>
-                                        <h5><a href="#">LIKE : ${rankingDTO.likePoint }</a></h5>
+                                        <h5>LIKE : ${rankingDTO.likePoint }</a></h5>
                                     </td>
                                 </tr>
                             	</c:forEach>
@@ -59,6 +66,7 @@
                     </div>
                 </div>
             </div>
+            
               <div class="col-lg-12" align="center">
                  <div class="product__pagination blog__pagination">
                      <a href="#">1</a>

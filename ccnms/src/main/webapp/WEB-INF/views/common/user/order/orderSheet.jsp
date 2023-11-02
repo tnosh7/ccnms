@@ -8,97 +8,154 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	function setPayMethod(){
+		var method = $("[name='payMethod']").val();
+		if (method == 'card') {
+			$("#cardPayMonth,#cardCompanyNm").show();
+			$("#payOrdererHp").hide();
+			$("#accountCompanyNm,#account").hide();
+		}
+		else if (method =='phone') {
+			$("#payOrdererHp").show();
+			$("#cardPayMonth,#cardCompanyNm").hide();
+			$("#accountCompanyNm,#account").hide();
+		}
+		else {
+			$("#accountCompanyNm,#account").show();
+			$("#cardPayMonth,#cardCompanyNm").hide();
+			$("#payOrdererHp").hide();
+		}
+	}
+</script>
+
 </head>
 <body>
  <section class="checkout spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
-                    </h6>
+                     <div class="checkout__order">
+                        <div class="checkout__order__products">배송지<span>  <input type="button" id="diff-delivery" value="배송지 변경"></span></div>
+                        <hr>
+                        <ul>
+                            <li>${userDTO.userNm}</li>
+                            <li>${userDTO.hp }</li>
+                            <li>주소<span>${userDTO.roadAddress} ${userDTO.namujiAddress } ( ${userDTO.zipcode} )</span></li>
+                        </ul>
+                      </div>
                 </div>
             </div>
+            <br>
+           <form action="${contextPath }/shop/shop" method="post">
+             <input type="hidden" name="goodsCd" value="${shopDTO.productCd }">
+             <input type="hidden" name="productQty" value="${productQty}">
+             <input type="hidden" name="memberId" value="${sessionId}">
             <div class="checkout__form">
                 <h4>주문/결제</h4>
-                <form action="${contextPath }/shop/shop" method="post">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
-                            <div class="col-lg-6">
-                                <label for="delivery">
-                                     <p>배송지 선택<span>*</span></p>
-                                    <input type="radio" name="delivery_place">
-                                    	기본 배송지
-                                    <span class="checkmark"></span>
-                                    <input type="radio" name="delivery_place">
-                                    	신규 배송지
-                                    <span class="checkmark"></span>
-                                    
-                                </label>
-                            </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p style="color:green"><span>*</span>
-                                    	주문자 정보로 결제관련 정보가 제공됩니다. 정확한 정보로 등록되어있는지 확인해주세요.
-                                        </p>
-                                    </div>
-                                </div>
-                            <hr>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>배송지명<span>*</span></p>
+                                        <p>주문자 성함<span>*</span></p>
                                         <input type="text">
-                                    </div>
+                               		</div>
                                 </div>
-                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>주문자 연락처 <span>*</span></p>
-                                    <select>
-                                    	<option>선택</option>
-                                    	<option>010</option>
-                                    </select>
-                                    - <input type="text" name="ordererHp" placeholder="뒷번호 8자리 숫자만 입력">
-                                </div>
-                            </div>
+                                <div class="col-lg-6">
+	                                <div class="checkout__input">
+	                                    <p>주문자 연락처 <span>*</span></p>
+	                                    <input type="text" name="hp" placeholder="숫자만 입력" maxlength="11">
+	                                </div>
+                            	</div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>배송지 주소<span>*</span></p>
+                                        <p>받는분 성함<span>*</span></p>
                                         <input type="text">
-                                    </div>
+                               		</div>
                                 </div>
-                            </div>
-                            <div class="checkout__input">
-                                <p>배송메모<span>*</span></p>
-                                <input type="text" placeholder="요청사항을 직접 입력합니다.">
-                            </div>
-                            <div class="checkout__input">
-                                <p>지불방법<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Postcode / ZIP<span>*</span></p>
-                                <input type="text">
-                            </div>
+                                <div class="col-lg-6">
+	                                <div class="checkout__input">
+	                                    <p>받는분 연락처 <span>*</span></p>
+	                                    <input type="text" name="hp" placeholder="숫자만 입력" maxlength="11">
+	                                </div>
+                            	</div>
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                       <p>지불방법<span>*</span></p>
+		                               	<select name="payMethod" onchange="setPayMethod()">
+		                               		<option value="card">카드결제</option>
+		                               		<option value="account">계좌이체</option>
+		                               		<option value="phone">휴대폰결제</option>
+		                               	</select>
+                               		</div>
+                                </div>
+	                                <div id="cardCompanyNm" class="col-lg-6">
+	                                    <div class="checkout__input">
+	                                       <p>카드회사 <span>*</span></p>
+			                                <select name="cardCompanyNm">
+												<option value="삼성">삼성</option>
+												<option value="하나SK">하나SK</option>
+												<option value="현대">현대</option>
+												<option value="KB">KB</option>
+												<option value="신한">신한</option>
+												<option value="롯데">롯데</option>
+												<option value="BC">BC</option>
+												<option value="시티">시티</option>
+												<option value="NH농협">NH농협</option>
+										   </select>
+	                               		</div>
+	                                </div>
+	                                <div id="cardPayMonth" class="col-lg-6">
+		                                <div class="checkout__input">
+		                                    <p>할부개월 <span>*</span></p>
+		                                    <select name="cardPayMonth">
+												<option value="0">일시불</option>                                    
+												<option value="1">1개월</option>                                    
+												<option value="2">2개월</option>                                    
+												<option value="3">3개월</option>                                    
+												<option value="4">4개월</option>                                    
+												<option value="5">5개월</option>                                    
+												<option value="6">6개월</option>                                    
+		                                    </select>
+		                                </div>
+	                            	</div>
+	                                  <div id="accountCompanyNm" class="col-lg-6 col-md-6 col-sm-6" style="display: none">
+	                                    <div class="checkout__input">
+	                                       <p> 은행 <span>*</span></p>
+			                                <select name="accountCompanyNm">
+												<option value="삼성">삼성</option>
+												<option value="하나SK">하나SK</option>
+												<option value="현대">현대</option>
+												<option value="KB">KB</option>
+												<option value="신한">신한</option>
+												<option value="롯데">롯데</option>
+												<option value="BC">BC</option>
+												<option value="시티">시티</option>
+												<option value="NH농협">NH농협</option>
+										   </select>
+	                               		</div>
+	                                </div>
+	                                  <div id="account" class="col-lg-6 col-md-6 col-sm-6" style="display: none">
+		                                <div class="checkout__input">
+		                                     <p>계좌번호 <span>*</span></p>
+	                                    <input type="text" name="account" placeholder="계좌번호를 입력하세요.">
+		                                </div>
+	                            	</div>
+	                              <div id="payOrdererHp" class="col-lg-6 col-md-6 col-sm-6" style="display: none">
+		                            <div class="checkout__input">
+		                                  <p>결제 휴대폰 번호 <span>*</span></p>
+		                                  <input type="text" name="payOrdererHp" placeholder="숫자만 입력" maxlength="11">
+		                            </div>
+	                            </div>
+		                          </div>  
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="checkout__input">
-                                        <p>Phone<span>*</span></p>
-                                        <input type="text">
+                                        <p>배송 메시지<span>*</span></p>
+                                        <input type="text" placeholder="배송 메시지를 입력하세요." maxlenth="45">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Email<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
-                                    Ship to a different address?
-                                    <input type="checkbox" id="diff-acc">
-                                    <span class="checkmark"></span>
-                                </label>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
@@ -108,18 +165,22 @@
                                 <ul>
                                     <li>${shopDTO.productNm }<span><fmt:formatNumber value="${shopDTO.price - shopDTO.price * shopDTO.discountRate /100}"/>원</span></li>
                                     <li>배송비<span>${shopDTO.deliveryPrice}원</span></li>
+                                	<li>배송방법<span>${shopDTO.deliveryMethod }</span></li>
                                 </ul>
+                                <hr>
                                 <div class="checkout__order__total">총액 <span><fmt:formatNumber value="${shopDTO.deliveryPrice + (shopDTO.price -shopDTO.price * shopDTO.discountRate / 100) }"/>원</span></div>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua.</p>
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                                <p style="color:green"><span>*</span>
+                                 	주문자 정보로 결제관련 정보가 제공됩니다. 정확한 정보로 등록되어있는지 확인해주세요.
+                                </p>
+                                <div align="center">
+	                                <button type="submit" class="site-btn"><span class="icon_check"></span>&emsp;주문</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-        </div>
     </section>
 </body>
 </html>

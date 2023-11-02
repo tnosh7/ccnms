@@ -119,7 +119,7 @@
                        			<tr style="background:whitesmoke">
                        				<th align="left" colspan="3" width="70%" >
                        				<c:choose>
-                       					<c:when test="${diggingDTO.profile eq ''}">
+                       					<c:when test="${diggingDTO.profile eq null}">
                        						<a href="${contextPath }/client/userDetail?userId=${diggingDTO.userId}"><img src="${contextPath}/resources/admin/assets/img/avatars/2.png" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
                        					</c:when>
                        					<c:otherwise>

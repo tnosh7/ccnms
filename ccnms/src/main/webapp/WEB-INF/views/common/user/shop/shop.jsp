@@ -26,7 +26,7 @@
 			Swal.fire({
 				  icon: 'info',
 				  title: '로그인 후에 이용가능합니다.',
-				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
+				  footer: '<a href="${contextPath }/order/myKeep">로그인 페이지로 이동하기</a>'
 				})
 		}
 		else {
@@ -44,7 +44,7 @@
 					else {
 						Swal.fire({
 							  text: '장바구니에 추가되었습니다.',
-							  footer: '<a href="">장바구니로 이동하기</a>'
+							  footer: '<a href="${contextPath }/order/myKeep">장바구니로 이동하기</a>'
 							})
 					}
 				}
@@ -125,7 +125,7 @@
                                     	<c:forEach var="shopDTO" items="${shopList}" begin="0" end="2">
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="${contextPath }/shop/thumbnails?file=${shopDTO.productFile}" alt="">
+                                                <img src="${contextPath }/shop/thumbnails?file=${shopDTO.productFile}" alt="" >
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>${shopDTO.productNm }</h6>
@@ -140,35 +140,6 @@
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
-                    <div class="product__discount">
-                        <div class="section-title product__discount__title">
-                            <h2>Sale Off</h2>
-                        <div class="row">
-                            <div class="product__discount__slider owl-carousel">
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                       <c:forEach var="discountList" items="${discountRateList }">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="${contextPath }/shop/thumbnails?file=${discountList.productFile}">
-                                            <div class="product__discount__percent">-${discountList.discountRate }</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="javascript:myKeep(${shopDTO.productCd})"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="javascript:myCart(${shopDTO.productCd})"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>${discountList.sort}</span>
-                                            <h5><a href="#">${discountList.productNm }</a></h5>
-                                            <div class="product__item__price"><fmt:formatNumber value="${discountList.price - discountList.price * discountList.discountRate / 100}"/> 원<span>${discountList.price } 원</span></div>
-                                        </div>
-                                    </c:forEach>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">

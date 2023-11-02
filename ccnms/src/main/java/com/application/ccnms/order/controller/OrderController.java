@@ -56,4 +56,8 @@ public class OrderController {
 		mv.setViewName("/order/orderSheet");
 		return mv;
 	}
+	@GetMapping("/myKeep")
+	public ModelAndView myKeep() {
+		return new ModelAndView("/order/myKeep");
+	}
 }
