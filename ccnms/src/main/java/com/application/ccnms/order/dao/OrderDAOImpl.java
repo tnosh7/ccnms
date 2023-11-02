@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.application.ccnms.order.dto.CartDTO;
 import com.application.ccnms.shop.dto.ShopDTO;
+import com.application.ccnms.user.dto.UserDTO;
 
 @Repository
 public class OrderDAOImpl implements OrderDAO {
@@ -29,8 +30,14 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
+	public UserDTO selectOneUser(String userId) throws Exception {
+		return sqlSession.selectOne("selectOneUser", userId);
+	}
+	
+	@Override
 	public int selectOneMyCartCnt() throws Exception {
 		return sqlSession.selectOne("order.selectOneMyCartCnt");
 	}
+
 
 }

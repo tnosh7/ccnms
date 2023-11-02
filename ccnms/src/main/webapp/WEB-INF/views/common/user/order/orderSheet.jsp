@@ -9,6 +9,35 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+	function setDelivery() {
+		$("#deliveryInfo").hide();
+		$("#newDelivery").show();
+	}
+	function execDaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	
+	            var fullRoadAddr = data.roadAddress; 
+	            var extraRoadAddr = ''; 	
+	            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                extraRoadAddr += data.bname;
+	            }
+	            if (data.buildingName !== '' && data.apartment === 'Y'){
+	               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	            }
+	            if (extraRoadAddr !== ''){
+	                extraRoadAddr = ' (' + extraRoadAddr + ')';
+	            }
+	            if (fullRoadAddr !== ''){
+	                fullRoadAddr += extraRoadAddr;
+	            }
+	
+	            document.getElementById('zipcode').value = data.zonecode; 
+	            document.getElementById('roadAddress').value = fullRoadAddr;
+	            document.getElementById('jibunAddress').value = data.jibunAddress;
+	        }
+	    }).open();
+	}
 	function setPayMethod(){
 		var method = $("[name='payMethod']").val();
 		if (method == 'card') {
@@ -36,13 +65,22 @@
             <div class="row">
                 <div class="col-lg-12">
                      <div class="checkout__order">
-                        <div class="checkout__order__products">배송지<span>  <input type="button" id="diff-delivery" value="배송지 변경"></span></div>
+                        <div class="checkout__order__products">배송지<span>  <input type="button" id="diff-delivery" value="배송지 변경" onclick="setDelivery()"></span></div>
                         <hr>
                         <ul>
                             <li>${userDTO.userNm}</li>
                             <li>${userDTO.hp }</li>
-                            <li>주소<span>${userDTO.roadAddress} ${userDTO.namujiAddress } ( ${userDTO.zipcode} )</span></li>
                         </ul>
+                        <div id="deliveryInfo">
+                        	${userDTO.roadAddress} ${userDTO.namujiAddress } ( ${userDTO.zipcode} )
+                        </div>
+                        <div id="newDelivery" style="display: none">
+                        	<p><input type="text" id="zipcode" placeholder="우편번호" name="zipcode" value="${orderer.zipcode }" style="width: 40%;">
+                           		<input type="button" value="주소 검색" onclick="javascript:execDaumPostcode()" style="width: 30%; padding-left: 0"></p>
+                            <p><input type="text" id="roadAddress"   placeholder="도로명 주소" name="roadAddress"   value="${order.roadAddress }" style="width: 40%;"></p>
+                            <p><input type="text" id="jibunAddress"  placeholder="지번 주소"   name="jibunAddress"  value="${order.jibunAddress }" style="width: 40%;"></p>
+                            <p><input type="text" id="namujiAddress" placeholder="나머지 주소" name="namujiAddress" value="${order.namujiAddress }" style="width: 40%;"></p>
+                        </div>
                       </div>
                 </div>
             </div>
@@ -59,25 +97,25 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>주문자 성함<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="ordererNm" id="ordererNm">
                                		</div>
                                 </div>
                                 <div class="col-lg-6">
 	                                <div class="checkout__input">
 	                                    <p>주문자 연락처 <span>*</span></p>
-	                                    <input type="text" name="hp" placeholder="숫자만 입력" maxlength="11">
+	                                    <input type="text" name="ordererHp" id="ordererHp" placeholder="숫자만 입력" maxlength="11">
 	                                </div>
                             	</div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>받는분 성함<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="receiverNm" id="receiverNm" >
                                		</div>
                                 </div>
                                 <div class="col-lg-6">
 	                                <div class="checkout__input">
 	                                    <p>받는분 연락처 <span>*</span></p>
-	                                    <input type="text" name="hp" placeholder="숫자만 입력" maxlength="11">
+	                                    <input type="text" name="receiverHp" id="receiverHp" placeholder="숫자만 입력" maxlength="11">
 	                                </div>
                             	</div>
                                 <div class="col-lg-12">
@@ -153,7 +191,7 @@
                                 <div class="col-lg-12">
                                     <div class="checkout__input">
                                         <p>배송 메시지<span>*</span></p>
-                                        <input type="text" placeholder="배송 메시지를 입력하세요." maxlenth="45">
+                                        <input type="text" name="deliveryMessage" id="deliveryMessage" placeholder="배송 메시지를 입력하세요." maxlength="45">
                                     </div>
                                 </div>
                             </div>
@@ -166,6 +204,7 @@
                                     <li>${shopDTO.productNm }<span><fmt:formatNumber value="${shopDTO.price - shopDTO.price * shopDTO.discountRate /100}"/>원</span></li>
                                     <li>배송비<span>${shopDTO.deliveryPrice}원</span></li>
                                 	<li>배송방법<span>${shopDTO.deliveryMethod }</span></li>
+                                	<li>포장 여부<span><input type="radio" name="package" value="Y">예 <input type="radio" name="package" value="N">아니오</span></li>
                                 </ul>
                                 <hr>
                                 <div class="checkout__order__total">총액 <span><fmt:formatNumber value="${shopDTO.deliveryPrice + (shopDTO.price -shopDTO.price * shopDTO.discountRate / 100) }"/>원</span></div>

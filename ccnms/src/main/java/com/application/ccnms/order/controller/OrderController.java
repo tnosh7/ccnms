@@ -1,5 +1,6 @@
 package com.application.ccnms.order.controller;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -49,10 +50,12 @@ public class OrderController {
 	}
 	
 	@GetMapping("/orderSheet") 
-	public ModelAndView orderSheet(@RequestParam("productCd") long productCd, OrderDTO orderDTO) throws Exception {
+	public ModelAndView orderSheet(@RequestParam("productCd") long productCd, OrderDTO orderDTO, HttpServletRequest request) throws Exception {
 		
 		ModelAndView mv= new ModelAndView();
+		HttpSession session = request.getSession();
 		mv.addObject("shopDTO", orderService.getShopDTO(productCd));
+		mv.addObject("userDTO", orderService.getUserDTO((String) session.getAttribute("userId")));
 		mv.setViewName("/order/orderSheet");
 		return mv;
 	}

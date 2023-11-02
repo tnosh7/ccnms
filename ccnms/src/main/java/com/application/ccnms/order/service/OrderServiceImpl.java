@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.application.ccnms.order.dao.OrderDAO;
 import com.application.ccnms.order.dto.CartDTO;
 import com.application.ccnms.shop.dto.ShopDTO;
+import com.application.ccnms.user.dto.UserDTO;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -30,9 +31,15 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public UserDTO getUserDTO(String userId) throws Exception {
+		return orderDAO.selectOneUser(userId);
+	}
+	
+	@Override
 	public int getMyCartCnt(String userId) throws Exception {
 		return orderDAO.selectOneMyCartCnt();
 	}
+
 
 	
 }

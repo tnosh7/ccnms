@@ -22,6 +22,15 @@
 			PRODUCT_CD = #{productCd}
 	</select>
 	
+	<select id="selectOneUser" parameterType="String" resultType="UserDTO">
+		SELECT 
+			*
+		FROM 
+			USER
+		WHERE
+			USER_ID = #{userId}
+	</select>
+	
 	<select id="selectOneMyCartCnt" parameterType="String" resultType="int">
 		SELECT 
 			COUNT(*)

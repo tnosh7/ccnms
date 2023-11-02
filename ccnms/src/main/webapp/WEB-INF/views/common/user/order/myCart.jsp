@@ -31,7 +31,7 @@
 		
 	}
 	function totalPrice() {
-		var totalPrice= Number(${shopDTO.price} * $("#qty").val());
+		var totalPrice= Number(${shopDTO.price - shopDTO.price * shopDTO.discountRate /100} * $("#qty").val());
 		$("#totalPrice").html(totalPrice);		
 	}
 
