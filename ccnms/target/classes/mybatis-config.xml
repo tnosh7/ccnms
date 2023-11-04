@@ -13,6 +13,7 @@
 		<typeAlias type="com.application.ccnms.reply.dto.ReplyDTO" alias="ReplyDTO"/>
 		<typeAlias type="com.application.ccnms.shop.dto.ShopDTO" alias="ShopDTO"/>
 		<typeAlias type="com.application.ccnms.order.dto.CartDTO" alias="CartDTO"/>
+		<typeAlias type="com.application.ccnms.order.dto.KeepDTO" alias="KeepDTO"/>
 	</typeAliases>
 
 

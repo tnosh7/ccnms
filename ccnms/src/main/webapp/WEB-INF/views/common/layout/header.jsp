@@ -119,7 +119,7 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="${contextPath }/order/myKeep"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="${contextPath }/order/cartList"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                        		<li><a href="#"><img src="${contextPath }/resources/bootstrap/img/message.png"></a></li>
                         </ul>
                     </div>

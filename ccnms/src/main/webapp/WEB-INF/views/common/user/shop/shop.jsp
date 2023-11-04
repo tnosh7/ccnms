@@ -18,7 +18,25 @@
 				})
 		}
 		else {
-			location.href="${contextPath}/order/myCart?productCd=" + productCd;
+			$.ajax ({
+				url:"${contextPath}/order/addMyCart",
+				type:"get",
+				data: {
+					"productCd" : productCd,
+					"cartQty" : 1
+				},
+				success:function(result) {
+					if (result =="duple") {
+						Swal.fire('이미 추가된 상품입니다.');
+					}
+					else {
+						Swal.fire({
+							  text: '장바구니에 추가되었습니다.',
+							  footer: '<a href="${contextPath }/order/cartList">장바구니로 이동하기</a>'
+							})
+					}
+				}
+			})
 		}
 	}
 	function myKeep(productCd) {
@@ -26,7 +44,7 @@
 			Swal.fire({
 				  icon: 'info',
 				  title: '로그인 후에 이용가능합니다.',
-				  footer: '<a href="${contextPath }/order/myKeep">로그인 페이지로 이동하기</a>'
+				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
 				})
 		}
 		else {
@@ -43,8 +61,8 @@
 					}
 					else {
 						Swal.fire({
-							  text: '장바구니에 추가되었습니다.',
-							  footer: '<a href="${contextPath }/order/myKeep">장바구니로 이동하기</a>'
+							  text: '찜에 추가되었습니다.',
+							  footer: '<a href="${contextPath }/order/myKeep">찜으로 이동하기</a>'
 							})
 					}
 				}
@@ -184,7 +202,6 @@
 	                                <div class="product__item__pic set-bg" data-setbg="${contextPath }/shop/thumbnails?file=${shopDTO.productFile}">
 	                                    <ul class="product__item__pic__hover">
 	                                        <li><a href="javascript:myKeep(${shopDTO.productCd})"><i class="fa fa-heart"></i></a></li>
-	                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
 	                                        <li><a href="javascript:myCart(${shopDTO.productCd})"><i class="fa fa-shopping-cart"></i></a></li>
 	                                    </ul>
 	                                </div>
