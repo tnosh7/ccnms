@@ -38,4 +38,9 @@ public class ShopServiceImpl implements ShopService {
 		shopDAO.updateReadCnt(productCd);
 		return shopDAO.selectOneProductDetail(productCd);
 	}
+
+	@Override
+	public List<ShopDTO> bestSortList(String bestSort) throws Exception {
+		return shopDAO.selectListbestSort(bestSort);
+	}
 }

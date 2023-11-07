@@ -69,7 +69,11 @@
 			})
 		}
 	}
-
+	
+	function bestSort() {
+		var bestSort = $("[name='bestSort']").val();
+		location.href= "${contextPath}/shop/bestSort?bestSort="+bestSort ;
+	}
 
 </script>
 </head>
@@ -86,27 +90,11 @@
                         	<br>
                             <h4>카테고리</h4>
                             <ul>
+                                <li><a href="${contextPath }/shop/"><img alt="베스트상품에러" src="${contextPath }/resources/bootstrap/img/shop.png"><strong>&emsp;베스트상품</strong></a></li>
                                 <li><a href="${contextPath }/shop/?sort=sale"><img alt="유저마켓에러" src="${contextPath }/resources/bootstrap/img/shop.png"><strong>&emsp;유저마켓</strong></a></li>
 	                            <li><a href="${contextPath }/shop/?sort=ModuDigging"><img alt="디깅마켓에러" src="${contextPath }/resources/bootstrap/img/shop.png"><strong>&emsp;디깅마켓</strong></a></li>
 	                            <li><a href="${contextPath }/shop/?sort=exchange"><img alt="교환마켓에러" src="${contextPath }/resources/bootstrap/img/horizontal.png"><strong>&emsp;교환마켓</strong></a></li>
                             </ul>
-                        </div>
-                        <div class="sidebar__item">
-                            <h4>Price</h4>
-                            <div class="price-range-wrap">
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                    data-min="10" data-max="540">
-                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                </div>
-                                <div class="range-slider">
-                                    <div class="price-input">
-                                        <input type="text" id="minamount">
-                                        <input type="text" id="maxamount">
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="sidebar__item">
                             <h4>인기있는 태그</h4>
@@ -161,15 +149,13 @@
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
-                                <div class="filter__sort">
+                                <div class="filter__sort" >
                                     <span>정  렬</span>
-                                    <select>
-                                        <option value="0">구매순</option>
-                                        <option value="0">인기순</option>
-                                        <option value="0">리뷰순</option>
-                                        <option value="0">최신순</option>
-                                        <option value="0">낮은가격순</option>
-                                        <option value="0">높은가격순</option>
+                                    <select name="bestSort" onchange="javascript:bestSort()">
+                                        <option value="popular">인기순</option>
+                                        <option value="recent">최신순</option>
+                                        <option value="cheap">낮은가격순</option>
+                                        <option value="high">높은가격순</option>
                                     </select>
                                 </div>
                             </div>

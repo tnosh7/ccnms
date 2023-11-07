@@ -108,4 +108,11 @@ public class ShopController {
 		return mv;
 	}
 	
+	@GetMapping("/bestSort")
+	public ModelAndView bestSort(@RequestParam("bestSort") String bestSort) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("shopList", shopService.bestSortList(bestSort));
+		mv.setViewName("/shop/main");
+		return mv;
+	}
 }

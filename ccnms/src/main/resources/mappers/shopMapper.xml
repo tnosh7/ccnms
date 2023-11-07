@@ -7,7 +7,8 @@
 				*
 		FROM 
 				SHOP
-				
+		WHERE 
+				SORT NOT IN ('exchange')		
 	</select>
 	<select id="selectListdiscountRateList" resultType="ShopDTO">
 		SELECT 
@@ -77,4 +78,25 @@
 		WHERE
 			PRODUCT_CD = #{productCd}
 	</update>
+	<select id="selectListbestSort" parameterType="String" resultType="ShopDTO">
+		SELECT 
+				*
+		FROM 
+				SHOP
+		WHERE 
+				SORT NOT IN ('exchange') 
+		ORDER BY 
+			<if test='bestSort == "popular"' >
+				READ_CNT DESC
+			</if>			
+			<if test='bestSort == "recent"' >
+				ENROLL_DT DESC
+			</if>			
+			<if test='bestSort == "cheap"' >
+				PRICE 
+			</if>			
+			<if test='bestSort == "high"' >
+				PRICE DESC
+			</if>			
+	</select>
 </mapper>

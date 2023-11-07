@@ -43,4 +43,9 @@ public class ShopDAOImpl implements ShopDAO {
 	public void updateReadCnt(long productCd) throws Exception {
 		sqlSession.update("shop.updateReadCnt", productCd);
 	}
+
+	@Override
+	public List<ShopDTO> selectListbestSort(String bestSort) throws Exception {
+		return sqlSession.selectList("shop.selectListbestSort", bestSort);
+	}	
 }
