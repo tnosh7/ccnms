@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="sessionId" value="${sessionScope.userId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,33 +64,33 @@
     <!-- Map End -->
 
     <!-- Contact Form Begin -->
-    <div class="contact-form spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="contact__form__title">
-                        <h2>1:1문의</h2>
-                    </div>
-                </div>
-            </div>
-            <form action="#">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="유저 아이디">
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="유저 이메일">
-                    </div>
-                    <div class="col-lg-12 text-center">
-                        <textarea placeholder="내용"></textarea>
-                        <button type="submit" class="site-btn">메시지 보내기</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-	
-	
+    <section>
+	    <div class="contact-form spad">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-lg-12">
+	                    <div class="contact__form__title">
+	                        <h2>1:1문의</h2>
+	                    </div>
+	                </div>
+	            </div>
+	            <form action="${contextPath }/contact/addContact" method="post">
+	                <div class="row">
+	                    <div class="col-lg-6 col-md-6">
+	                        <input type="text" name="userId" placeholder="유저 아이디" value="${sessionId }" readonly>
+	                    </div>
+	                    <div class="col-lg-12">
+	                        <input type="text" name="subject" placeholder="제목">
+	                    </div>
+	                    <div class="col-lg-12 text-center">
+	                        <textarea placeholder="내용" name="content"></textarea>
+	                        <button type="submit" class="site-btn">메시지 보내기</button>
+	                    </div>
+	                </div>
+	            </form>
+	        </div>
+	    </div>
+    </section>
 	
 </body>
 </html>

@@ -7,13 +7,15 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias type="com.application.ccnms.user.dto.UserDTO" alias="UserDTO"/>
-		<typeAlias type="com.application.ccnms.admin.dto.AdminDTO" alias="AdminDTO"/>
-		<typeAlias type="com.application.ccnms.digging.dto.DiggingDTO" alias="DiggingDTO"/>
-		<typeAlias type="com.application.ccnms.reply.dto.ReplyDTO" alias="ReplyDTO"/>
-		<typeAlias type="com.application.ccnms.shop.dto.ShopDTO" alias="ShopDTO"/>
-		<typeAlias type="com.application.ccnms.order.dto.CartDTO" alias="CartDTO"/>
-		<typeAlias type="com.application.ccnms.order.dto.KeepDTO" alias="KeepDTO"/>
+		<typeAlias type="com.application.ccnms.user.dto.UserDTO" 		alias="UserDTO"/>
+		<typeAlias type="com.application.ccnms.admin.dto.AdminDTO" 		alias="AdminDTO"/>
+		<typeAlias type="com.application.ccnms.digging.dto.DiggingDTO"  alias="DiggingDTO"/>
+		<typeAlias type="com.application.ccnms.reply.dto.ReplyDTO" 		alias="ReplyDTO"/>
+		<typeAlias type="com.application.ccnms.shop.dto.ShopDTO" 		alias="ShopDTO"/>
+		<typeAlias type="com.application.ccnms.order.dto.CartDTO" 		alias="CartDTO"/>
+		<typeAlias type="com.application.ccnms.order.dto.KeepDTO" 		alias="KeepDTO"/>
+		<typeAlias type="com.application.ccnms.contact.dto.ContactDTO"	alias="ContactDTO"/>
+	
 	</typeAliases>
 
 

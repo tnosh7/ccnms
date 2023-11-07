@@ -7,4 +7,7 @@ public interface UserService {
 	public UserDTO loginUser (UserDTO userDTO) throws Exception;
 	public String checkDuplicateUserId(String userId)throws Exception;
 	public String getEmailCheck(String email)throws Exception;
+	public int getMyOrderCnt(String userId) throws Exception;
+	public int getMyCartCnt(String userId) throws Exception;
+	
 }

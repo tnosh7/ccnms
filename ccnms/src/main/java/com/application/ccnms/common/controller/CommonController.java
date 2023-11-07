@@ -96,7 +96,7 @@ public class CommonController {
 		OutputStream out = response.getOutputStream();
 		File image= new File(FILE_REPO_PATH + file);
 		if (image.exists()) {
-			Thumbnails.of(image).size(600,600).outputFormat("png").toOutputStream(out);
+			Thumbnails.of(image).size(1000,1000).outputFormat("png").toOutputStream(out);
 		}
 		byte[] buffer = new byte[1024*8];
 		

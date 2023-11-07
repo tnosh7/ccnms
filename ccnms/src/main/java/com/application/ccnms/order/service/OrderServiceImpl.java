@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.application.ccnms.order.dao.OrderDAO;
 import com.application.ccnms.order.dto.CartDTO;
 import com.application.ccnms.order.dto.KeepDTO;
+import com.application.ccnms.order.dto.OrderDTO;
 import com.application.ccnms.shop.dto.ShopDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
@@ -71,6 +72,18 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void removeCart(int[] deleteCartCdList) throws Exception {
 		orderDAO.deleteCart(deleteCartCdList);
+	}
+
+
+	@Override
+	public List<ShopDTO> getProductListByCart(int[] productCdsList) throws Exception {
+		return orderDAO.selectListCartProductList(productCdsList);
+	}
+
+	@Override
+	public void addOrder(OrderDTO orderDTO, int point) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

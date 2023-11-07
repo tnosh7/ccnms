@@ -78,13 +78,13 @@
 			cartQtyList   += cartQty + ",";
 		});
 		
-		if (cartList == "") {
+		if (cartCdList == "") {
 			return false;
 		}
-		var url = "${contextPath}/order/orderCart";
-			url +="?cartCdList=" + cartCd;
-			url +="?productCdList=" + productCd;
-			url +="?cartQtyList=" + cartQty;
+		var url = "${contextPath}/order/cartOrderSheet";
+			url +="?cartCdList=" + cartCdList;
+			url +="?productCdList=" + productCdList;
+			url +="?cartQtyList=" + cartQtyList;
 		location.href = url;
 	}
 </script>
@@ -127,7 +127,7 @@
 			                                    	<a href="${contextPath }/shop/shopDetail?productCd=${myCart.productCd}">
 			                                    		${myCart.productNm }
 			                                    	</a>
-			                                    	<input type="hidden" id="productCd${myCart.productCd }" value="${myCart.cartCd }"/>
+			                                    	<input type="hidden" id="productCd${myCart.cartCd }" value="${myCart.productCd }"/>
 			                                    </td>
 			                                    <td class="shoping__cart__price">
 			                                      	<span style="text-decoration: line-through; color: gray" ><fmt:formatNumber value="${myCart.price }"/></span><br>
@@ -169,7 +169,7 @@
                         <ul>
                             <li>Total <span id="totalPrice"></span></li>
                         </ul>
-                        <a href="javascipt:orderSheet()" class="primary-btn" style="background:salmon">구매진행하기</a>
+                        <a href="javascript:orderSheet()" class="primary-btn" style="background:salmon">구매진행하기</a>
                     </div>
                 </div>
             </div>

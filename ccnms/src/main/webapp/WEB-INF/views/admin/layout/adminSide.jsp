@@ -125,6 +125,12 @@
               <div data-i18n="Boxicons">디깅 관리</div>
             </a>
           </li>
+          <li class="menu-item">
+            <a href="${contextPath }//admin/contact/contactList" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-crown"></i>
+              <div data-i18n="Boxicons">고객문의 관리</div>
+            </a>
+          </li>
 
           <!-- Forms & Tables -->
           <li class="menu-header small text-uppercase"><span class="menu-header-text">상점 관리</span></li>

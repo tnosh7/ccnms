@@ -11,5 +11,16 @@
 			LIKE_POINT DESC
 		LIMIT 5
 	</select>
-
+ 
+ 	<select id="selectListDiggingList" parameterType="String" resultType="DiggingDTO">
+ 		SELECT
+ 			*
+ 		FROM 
+ 			DIGGING
+ 		WHERE
+ 			WRITER = #{userId}
+ 		ORDER BY 
+ 			ENROLL_DT DESC
+ 	</select>
+ 	
 </mapper>

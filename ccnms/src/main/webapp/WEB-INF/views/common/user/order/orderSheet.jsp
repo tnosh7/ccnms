@@ -71,6 +71,8 @@
                             <li>${userDTO.userNm}</li>
                             <li>${userDTO.hp }</li>
                         </ul>
+                        <input type="hidden" value="${userDTO.userNm }"/>
+                        <input type="hidden" value="${userDTO.hp }"/>
                         <div id="deliveryInfo">
                         	${userDTO.roadAddress} ${userDTO.namujiAddress } ( ${userDTO.zipcode} )
                         </div>
@@ -86,9 +88,9 @@
             </div>
             <br>
            <form action="${contextPath }/shop/shop" method="post">
-             <input type="hidden" name="goodsCd" value="${shopDTO.productCd }">
+             <input type="hidden" name="productCd" value="${shopDTO.productCd }">
              <input type="hidden" name="productQty" value="${productQty}">
-             <input type="hidden" name="memberId" value="${sessionId}">
+             <input type="hidden" name="userId" value="${sessionId}">
             <div class="checkout__form">
                 <h4>주문/결제</h4>
                     <div class="row">
@@ -97,25 +99,25 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>주문자 성함<span>*</span></p>
-                                        <input type="text" name="ordererNm" id="ordererNm">
+                                        <input type="text" name="ordererNm" id="ordererNm" value="${userDTO.userNm }"> 
                                		</div>
                                 </div>
                                 <div class="col-lg-6">
 	                                <div class="checkout__input">
 	                                    <p>주문자 연락처 <span>*</span></p>
-	                                    <input type="text" name="ordererHp" id="ordererHp" placeholder="숫자만 입력" maxlength="11">
+	                                    <input type="text" name="ordererHp" id="ordererHp" value="${userDTO.hp }" placeholder="숫자만 입력" maxlength="11">
 	                                </div>
                             	</div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>받는분 성함<span>*</span></p>
-                                        <input type="text" name="receiverNm" id="receiverNm" >
+                                        <input type="text" name="receiverNm" id="receiverNm" value="${userDTO.userNm }" >
                                		</div>
                                 </div>
                                 <div class="col-lg-6">
 	                                <div class="checkout__input">
 	                                    <p>받는분 연락처 <span>*</span></p>
-	                                    <input type="text" name="receiverHp" id="receiverHp" placeholder="숫자만 입력" maxlength="11">
+	                                    <input type="text" name="receiverHp" id="receiverHp" value="${userDTO.hp }" placeholder="숫자만 입력" maxlength="11">
 	                                </div>
                             	</div>
                                 <div class="col-lg-12">

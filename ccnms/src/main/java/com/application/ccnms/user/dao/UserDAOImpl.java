@@ -27,4 +27,14 @@ public class UserDAOImpl implements UserDAO {
 		return sqlSession.selectOne("user.selectOneDuplicateUserId", userId);
 	}
 
+	@Override
+	public int selectOneMyOrderCnt(String userId) throws Exception {
+		return sqlSession.selectOne("user.selectOneMyOrderCnt", userId);
+	}
+
+	@Override
+	public int selectOneMyCartCnt(String userId) throws Exception {
+		return sqlSession.selectOne("user.selectOneMyCartCnt", userId);
+	}
+
 }

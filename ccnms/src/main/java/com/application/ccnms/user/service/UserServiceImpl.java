@@ -77,6 +77,16 @@ public class UserServiceImpl implements UserService {
 		return Integer.toString(emailAuthentication);
 	}
 
+	@Override
+	public int getMyOrderCnt(String userId) throws Exception {
+		return userDAO.selectOneMyOrderCnt(userId);
+	}
+	
+	@Override
+	public int getMyCartCnt(String userId) throws Exception {
+		return userDAO.selectOneMyCartCnt(userId);
+	}
+
 	
 	
 

@@ -21,6 +21,7 @@ import com.application.ccnms.order.dto.CartDTO;
 import com.application.ccnms.order.dto.KeepDTO;
 import com.application.ccnms.order.dto.OrderDTO;
 import com.application.ccnms.order.service.OrderService;
+import com.application.ccnms.user.service.UserService;
 
 @Controller
 @RequestMapping("/order")
@@ -28,6 +29,7 @@ public class OrderController {
 	
 	@Autowired 
 	private OrderService orderService;
+	private UserService userService;
 	
 	@GetMapping("/myCart")
 	public ModelAndView myCart(@RequestParam("productCd") long productCd) throws Exception {
@@ -104,31 +106,30 @@ public class OrderController {
 		
 		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
 	}
-	@GetMapping("/orderCart")
-	public ModelAndView orderCart (@RequestParam("cartCdList") String cartCd , 
-			   @RequestParam("productCdList") String productCd , 
-			   @RequestParam("cartQtyList") String cartQty ,
-			   HttpServletRequest request) throws Exception{
-		String[] temp = cartCd.split(",");
-		int[] cartCdList = new int[temp.length];
+	@GetMapping("/cartOrderSheet")
+	public ModelAndView orderCart (@RequestParam("cartCdList") String cartCdList , 
+								   @RequestParam("productCdList") String productCdList , 
+								   @RequestParam("cartQtyList") String cartQtyList ,
+								   HttpServletRequest request) throws Exception{
+		String[] temp = productCdList.split(",");
+		int[] productCdsList = new int[temp.length];
 		
 		for (int i = 0; i < temp.length; i++) {
-			cartCdList[i] = Integer.parseInt(temp[i]);
+			productCdsList[i] = Integer.parseInt(temp[i]);
 		}
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/order/cartOrderSheet");
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("myOrderCnt", orderService.getMy);
-		session.setAttribute("myOrderCnt", orderService.getMy);
+		session.setAttribute("myOrderCnt", userService.getMyOrderCnt((String)session.getAttribute("userId")));
+		session.setAttribute("myCartCnt", userService.getMyCartCnt((String)session.getAttribute("userId")));
 		
-		mv.addObject("",  orderService.);
-		mv.addObject("",  orderService.);
-		mv.addObject("cartCdList", cartCd);
-		mv.addObject("productCdList", productCd);
-		mv.addObject("cartQtyList", cartQty);
-		
+		mv.addObject("userDTO",  orderService.getUserDTO((String)session.getAttribute("userId")));
+		mv.addObject("productList",  orderService.getProductListByCart(productCdsList));
+		mv.addObject("cartCdList", cartCdList);
+		mv.addObject("productCdsList", productCdList);
+		mv.addObject("cartQtyList", cartQtyList);
 		return mv;
 	}
 	

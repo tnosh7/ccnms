@@ -150,6 +150,21 @@
 		<foreach collection="array" item="cartCd" separator="," open="(" close=")">
 			#{cartCd}
 		</foreach>
-	
 	</delete>
+	
+	<select id="selectListCartProductList" resultType="ShopDTO">
+		SELECT 
+			*
+		FROM 
+			SHOP S
+			JOIN CART C
+					ON S.PRODUCT_CD =C.PRODUCT_CD
+					AND S.PRODUCT_CD IN
+						<foreach collection="array" item="productCd" separator="," open="(" close=")">
+							#{productCd}
+						</foreach>
+		ORDER BY 
+			C.ENROLL_DT DESC
+	</select>
+	
 </mapper>

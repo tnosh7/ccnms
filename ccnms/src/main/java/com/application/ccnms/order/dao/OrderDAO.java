@@ -23,4 +23,6 @@ public interface OrderDAO {
 	public List<Map<String,Object>> selectListCartList (String userId) throws Exception;
 	public void updateCartQty (Map<String,Object> updataMap) throws Exception;
 	public void deleteCart (int[] deleteCartCdList) throws Exception;
+	
+	public List<ShopDTO> selectListCartProductList(int[] productCdsList) throws Exception;
 }

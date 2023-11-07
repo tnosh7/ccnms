@@ -44,20 +44,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            	<c:forEach var="rankingDTO" items="${rankingList }" >
+                            	<c:forEach var="rankingDTO" items="${rankingList }" varStatus="i">
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <h5></h5>&emsp;&emsp;
-                                      	<c:choose>
-	                       					<c:when test="${diggingDTO.profile eq null}">
-	                       						<a href="${contextPath }/client/userDetail?userId=${diggingDTO.userId}"><img src="${contextPath}/resources/admin/assets/img/avatars/2.png" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
+	                                        <h5>&emsp;${i.count }.</h5>&emsp;&emsp;
+	                                      <c:choose>
+	                       					<c:when test="${rankingDTO.profile eq null}">
+	                       						<img src="${contextPath}/resources/admin/assets/img/avatars/2.png" width="40" height="40">
 	                       					</c:when>
 	                       					<c:otherwise>
-			                       				<img src="${contextPath }/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }
+			                       				<img src="${contextPath }/thumbnails?file=${rankingDTO.profile}"  width="40" height="40">
 	                       					</c:otherwise>
-                       					</c:choose>
-                                        <h5><a href="#">${rankingDTO.userId }</a></h5>
-                                        <h5>LIKE : ${rankingDTO.likePoint }</a></h5>
+	                       				  </c:choose>
+                                        <h5><a href="${contextPath }/ranking/otherUserInfo?userId=${rankingDTO.userId }">${rankingDTO.userId }</a></h5>
+                                        <h5>LIKE : ${rankingDTO.likePoint }</h5>
                                     </td>
                                 </tr>
                             	</c:forEach>

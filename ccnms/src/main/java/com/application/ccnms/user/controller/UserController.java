@@ -80,6 +80,8 @@ public class UserController {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userDTO.getUserId());
 			session.setAttribute("role", "user");
+			session.setAttribute("myOrderCnt", userService.getMyOrderCnt((String)session.getAttribute(userDTO.getUserId())));
+			session.setAttribute("myCartCnt", userService.getMyCartCnt((String)session.getAttribute(userDTO.getUserId())));
 			mv.setViewName("redirect:/");
 		}
 		else {

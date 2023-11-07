@@ -62,6 +62,7 @@
 <body>
  <section class="checkout spad">
         <div class="container">
+           <form action="${contextPath }/order/orderCart" method="post">
             <div class="row">
                 <div class="col-lg-12">
                      <div class="checkout__order">
@@ -85,10 +86,9 @@
                 </div>
             </div>
             <br>
-           <form action="${contextPath }/shop/shop" method="post">
-             <input type="hidden" name="goodsCd" value="${shopDTO.productCd }">
+             <input type="hidden" name="productCd" value="${shopDTO.productCd }">
              <input type="hidden" name="productQty" value="${productQty}">
-             <input type="hidden" name="memberId" value="${sessionId}">
+             <input type="hidden" name="userId" value="${sessionId}">
             <div class="checkout__form">
                 <h4>주문/결제</h4>
                     <div class="row">
@@ -97,25 +97,25 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>주문자 성함<span>*</span></p>
-                                        <input type="text" name="ordererNm" id="ordererNm">
+                                        <input type="text" name="ordererNm" id="ordererNm" value="${userDTO.userNm }">
                                		</div>
                                 </div>
                                 <div class="col-lg-6">
 	                                <div class="checkout__input">
 	                                    <p>주문자 연락처 <span>*</span></p>
-	                                    <input type="text" name="ordererHp" id="ordererHp" placeholder="숫자만 입력" maxlength="11">
+	                                    <input type="text" name="ordererHp" id="ordererHp" value="${userDTO.hp }" placeholder="숫자만 입력" maxlength="11">
 	                                </div>
                             	</div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>받는분 성함<span>*</span></p>
-                                        <input type="text" name="receiverNm" id="receiverNm" >
+                                        <input type="text" name="receiverNm" id="receiverNm" value="${userDTO.userNm }">
                                		</div>
                                 </div>
                                 <div class="col-lg-6">
 	                                <div class="checkout__input">
 	                                    <p>받는분 연락처 <span>*</span></p>
-	                                    <input type="text" name="receiverHp" id="receiverHp" placeholder="숫자만 입력" maxlength="11">
+	                                    <input type="text" name="receiverHp" id="receiverHp" value="${userDTO.hp }" placeholder="숫자만 입력" maxlength="11">
 	                                </div>
                             	</div>
                                 <div class="col-lg-12">
@@ -200,14 +200,18 @@
                             <div class="checkout__order">
                                 <h4>결제상세</h4>
                                 <div class="checkout__order__products">상품<span></span></div>
+                                <c:forEach var="productDTO" items="${productList }" varStatus="i">
                                 <ul>
-                                    <li>${shopDTO.productNm }<span><fmt:formatNumber value="${shopDTO.price - shopDTO.price * shopDTO.discountRate /100}"/>원</span></li>
-                                    <li>배송비<span>${shopDTO.deliveryPrice}원</span></li>
-                                	<li>배송방법<span>${shopDTO.deliveryMethod }</span></li>
+                                    <li>${i.index + 1}.&nbsp; ${i.index.productNm }
+                                    <span id="qty${i.index }"></span>
+                                    <span><fmt:formatNumber value="${productDTO.price - productDTO.price * productDTO.discountRate /100}"/>원</span></li>
+                                    <li>배송비<span>${productDTO.deliveryPrice}원</span></li>
+                                	<li>배송방법<span>${productDTO.deliveryMethod }</span></li>
                                 	<li>포장 여부<span><input type="radio" name="package" value="Y">예 <input type="radio" name="package" value="N">아니오</span></li>
                                 </ul>
+                                </c:forEach>
                                 <hr>
-                                <div class="checkout__order__total">총액 <span><fmt:formatNumber value="${shopDTO.deliveryPrice + (shopDTO.price -shopDTO.price * shopDTO.discountRate / 100) }"/>원</span></div>
+                                <div class="checkout__order__total">총액 <span><fmt:formatNumber value="${productDTO.deliveryPrice + (productDTO.price -productDTO.price * productDTO.discountRate / 100) }"/>원</span></div>
                                 </div>
                                 <p style="color:green"><span>*</span>
                                  	주문자 정보로 결제관련 정보가 제공됩니다. 정확한 정보로 등록되어있는지 확인해주세요.

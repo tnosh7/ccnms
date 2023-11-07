@@ -71,6 +71,11 @@ public class OrderDAOImpl implements OrderDAO {
 	public void deleteCart(int[] deleteCartCdList) throws Exception {
 		sqlSession.delete("deleteCart", deleteCartCdList);
 	}
+
+	@Override
+	public List<ShopDTO> selectListCartProductList(int[] productCdsList) throws Exception {
+		return sqlSession.selectList("selectListCartProductList", productCdsList);
+	}
 	
 
 

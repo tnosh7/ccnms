@@ -123,7 +123,10 @@
                        						<a href="${contextPath }/client/userDetail?userId=${diggingDTO.userId}"><img src="${contextPath}/resources/admin/assets/img/avatars/2.png" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
                        					</c:when>
                        					<c:otherwise>
-		                       				<img src="${contextPath }/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }
+		                       				<img src="${contextPath }/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;
+		                       				<a href="${contextPath }/ranking/otherUserInfo?userId=${diggingDTO.userId }">
+		                       					${diggingDTO.userId }&emsp;${diggingDTO.likePoint }
+		                       				</a>
                        					</c:otherwise>
                        				</c:choose>
                      					<input type="hidden" id="writer" value="${diggingDTO.userId }"/>

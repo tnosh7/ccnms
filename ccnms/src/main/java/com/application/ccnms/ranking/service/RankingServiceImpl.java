@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.ranking.dao.RankingDAO;
 import com.application.ccnms.user.dto.UserDTO;
 
@@ -14,7 +15,12 @@ public class RankingServiceImpl implements RankingService {
 	private RankingDAO rankingDAO;
 
 	@Override
-	public List<UserDTO> getRankingList() {
+	public List<UserDTO> getRankingList() throws Exception {
 		return rankingDAO.selectListRankingList();
+	}
+
+	@Override
+	public List<DiggingDTO> getDiggingList(String userId) throws Exception {
+		return rankingDAO.selectListDiggingList(userId);
 	}
 }

@@ -51,4 +51,23 @@
 				USER_ID = #{userId}
 	</select>
 	
+	<select id="selectOneMyOrderCnt" parameterType="String" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM
+			ORDERED
+		WHERE 
+			USER_ID = #{userId}
+	</select>
+	
+	<select id="selectOneMyCartCnt" parameterType="String" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM
+			CART
+		WHERE 
+			USER_ID = #{userId}
+	</select>
+	
+	
 </mapper>
