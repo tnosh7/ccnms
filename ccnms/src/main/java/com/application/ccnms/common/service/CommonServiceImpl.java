@@ -39,5 +39,15 @@ public class CommonServiceImpl implements CommonService {
 		return commonDAO.selectListRecentShopList();
 	}
 
+	@Override
+	public List<ShopDTO> getPopulerShopList() throws Exception {
+		return commonDAO.selectListPopulerShopList();
+	}
+
+	@Override
+	public List<ShopDTO> getExchangeShopList() throws Exception {
+		return commonDAO.selectListgetExchangeShopList();
+	}
+
 	
 }

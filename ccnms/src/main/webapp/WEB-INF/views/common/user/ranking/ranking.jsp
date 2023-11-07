@@ -8,14 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<section class="breadcrumb-section set-bg" data-setbg="${contextPath}/resources/bootstrap/img/breadcrumb.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="${contextPath}/resources/bootstrap/img/banner/promopic.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
                         <h2>랭킹</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html"></a>
+                            <a href="${contextPath }/digging/main?diggingTopic=kPop">BTS 10주년을 KPOP디깅에서 함께 축하해주세요!</a>
                             <span></span>
                         </div>
                     </div>

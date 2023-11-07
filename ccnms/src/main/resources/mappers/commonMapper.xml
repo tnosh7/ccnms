@@ -134,10 +134,36 @@
 			*
 		FROM 
 			SHOP
+		WHERE
+			SORT NOT IN ('exchange')		
 		ORDER BY 
 			ENROLL_DT DESC
 		LIMIT 
 			3 
-	
 	</select>
+	<select id="selectListPopulerShopList" resultType="ShopDTO">
+		SELECT 
+			*
+		FROM 
+			SHOP
+		WHERE
+			SORT NOT IN ('exchange')	
+		ORDER BY 
+			READ_CNT DESC
+		LIMIT
+			3
+	</select>
+	<select id="selectListgetExchangeShopList" resultType="ShopDTO">
+		SELECT 
+			*
+		FROM
+			SHOP
+		WHERE 
+			SORT = "exchange"
+		ORDER BY 
+			READ_CNT DESC
+		LIMIT
+			3
+	</select>
+	
 </mapper>

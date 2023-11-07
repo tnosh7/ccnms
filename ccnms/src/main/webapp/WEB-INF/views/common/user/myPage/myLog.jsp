@@ -22,7 +22,7 @@
 			$("[name='diggingId']").prop("checked", false);
 		}
 	}
-	function selectAllDigging(){
+	function selectAllReply(){
 		if ($("#allReplyChoice").prop("checked")) {
 			$("[name='replyId']").prop("checked", true);
 		}
@@ -38,6 +38,15 @@
 				location.href= "${contextPath}/myPage/removeDigging?diggingIdList=" + diggingIdList;
 			});
 		}	
+	}
+	function removeReply(){
+		var replyIdList = "";
+		if ($("input[name='replyId']:checked")) {
+			$("input[name='replyId']:checked").each(function(){
+				replyIdList += $(this).val() + ",";
+				location.href= "${contextPath}/myPage/removeReply?replyIdList=" + replyIdList;
+			});
+		}
 	}
 </script>
 <style>
@@ -72,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-9 order-md-1 order-1" align="center">
+                <div class="col-lg-8 col-md-7 order-md-1 order-1" align="center">
                       <div class="product__details__tab">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
@@ -134,7 +143,6 @@
                     	  <div class="col-lg-12">
 	                    <div class="shoping__cart__btns">
 	                        <input type="button" class="primary-btn cart-btn cart-btn-center" onclick="removeDigging()" value="삭제">
-	                   		<input type="hidden" value="${sessionScope.userId }"/>
 	                    </div>
 	                </div>
                     	</div>
@@ -151,7 +159,7 @@
 					                  <table class="table">
 					                    <thead class="table-light" align="center">
 					                      <tr>
-					                        <th style="width:5%"><input type="checkbox" id="allDiggingChoice" onchange="selectAllDigging()"></th>
+					                        <th style="width:5%"><input type="checkbox" id="allReplyChoice" onchange="selectAllReply()"></th>
 					                        <th style="width:65%">내용</th>
 					                        <th style="width:20%">날짜</th>
 					                        <th style="width:10%">추천수</th>
@@ -172,7 +180,7 @@
 							                                         <input type="checkbox" name="replyId" value="${replyDTO.replyId }">
 							                                    </td>
 							                                    <td class="shoping__cart__item" >
-							                                         <strong>${replyDTO.content}</strong>
+							                                         <strong><a href="${contextPath }/digging/diggingDetail?diggingId=${replyDTO.diggingId}">${replyDTO.content}</a></strong>
 							                                    </td>
 							                                    <td class="shoping__cart__price">
 							                                      <fmt:formatDate value="${replyDTO.enrollDT }" pattern="yyyy-MM-dd"/>
@@ -190,8 +198,7 @@
 		                    	<hr>
 			                <div class="col-lg-12">
 			                    <div class="shoping__cart__btns">
-			                        <input type="button" class="primary-btn cart-btn cart-btn-center" onclick="removeLog()" value="삭제">
-			                   		<input type="hidden" value="${sessionScope.userId }"/>
+			                        <input type="button" class="primary-btn cart-btn cart-btn-center" onclick="removeReply()" value="삭제">
 			                    </div>
 			                </div>
 	                </div>

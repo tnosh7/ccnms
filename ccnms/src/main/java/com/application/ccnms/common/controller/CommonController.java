@@ -78,6 +78,9 @@ public class CommonController {
 		mv.addObject("diggingList", commonService.getDiggingList(searchMap));
 		mv.addObject("headList", commonService.getHeadList());
 		mv.addObject("recentShopList", commonService.getRecentShopList());
+		mv.addObject("populerShopList", commonService.getPopulerShopList());
+		mv.addObject("exchangeShopList", commonService.getExchangeShopList());
+		
 		mv.setViewName("/common/main");
 		return mv;
 	}
