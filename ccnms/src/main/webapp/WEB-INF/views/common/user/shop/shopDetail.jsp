@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -34,18 +35,17 @@
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span>
                         </div>
-                        <div class="product__details__price">${shopDTO.price } 원</div>
+                        	<span style="text-decoration: line-through; color: gray">${shopDTO.price } 원 </span>
+                        <div class="product__details__price"> 
+                        	<span><fmt:formatNumber value="${shopDTO.price - shopDTO.price * shopDTO.discountRate / 100}"/>원</span>	                                
+                        </div>
                         <ul>
-                            <li><b>재고수량</b> <span>${shopDTO.stock }</span></li>
-                            <li><b>배송</b> <span>${shopDTO.deliveryMethod } <samp>${shopDTO.deliveryPrice }</samp></span></li>
-                            <li><b>공유</b>
-                                <div class="share">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                </div>
-                            </li>
+                            <li><b>할인율</b> <span>${shopDTO.discountRate } %</span></li>
+                            <li><b>포인트</b> <span>${shopDTO.point } point</span></li>
+                            <li><b>판매자</b> <span>${shopDTO.writer }</span></li>
+                            <li><b>재고수량</b> <span>${shopDTO.stock } 개</span></li>
+                            <li><b>배송방법</b> <span>${shopDTO.deliveryMethod }</span></li>
+                            <li><b>배송비</b> <span><samp>${shopDTO.deliveryPrice }</samp>원</span></li>
                         </ul>
                         <hr>
                         <div class="product__details__quantity">
@@ -55,8 +55,10 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="${contextPath }/order/myCart?productCd=${shopDTO.productCd}" class="primary-btn" style="background:royalblue">구매하기</a>
+                        <br>
+                        <a href="${contextPath }/myShop/myCart?productCd=${shopDTO.productCd}" class="primary-btn" style="background:royalblue">구매하기</a>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <a href="${contextPath }/myShop/myCart?productCd=${shopDTO.productCd}" class="primary-btn" style="background:grey">장바구니</a>
                     </div>
                 </div>
                 <div class="col-lg-12">

@@ -1,22 +1,22 @@
-package com.application.ccnms.order.dto;
+package com.application.ccnms.myShop.dto;
 
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class CartDTO {
+public class KeepDTO {
 	
-	private long cartCd;
+	private long keepCd;
 	private String userId;
 	private long productCd;
-	private int cartQty;
+	private int keepQty;
 	private Date enrollDT;
-	public long getCartCd() {
-		return cartCd;
+	public long getKeepCd() {
+		return keepCd;
 	}
-	public void setCartCd(long cartCd) {
-		this.cartCd = cartCd;
+	public void setKeepCd(long keepCd) {
+		this.keepCd = keepCd;
 	}
 	public String getUserId() {
 		return userId;
@@ -30,11 +30,11 @@ public class CartDTO {
 	public void setProductCd(long productCd) {
 		this.productCd = productCd;
 	}
-	public int getCartQty() {
-		return cartQty;
+	public int getKeepQty() {
+		return keepQty;
 	}
-	public void setCartQty(int cartQty) {
-		this.cartQty = cartQty;
+	public void setKeepQty(int keepQty) {
+		this.keepQty = keepQty;
 	}
 	public Date getEnrollDT() {
 		return enrollDT;
@@ -44,8 +44,7 @@ public class CartDTO {
 	}
 	@Override
 	public String toString() {
-		return "CartDTO [cartCd=" + cartCd + ", userId=" + userId + ", productCd=" + productCd + ", cartQty=" + cartQty
+		return "KeepDTO [keepCd=" + keepCd + ", userId=" + userId + ", productCd=" + productCd + ", keepQty=" + keepQty
 				+ ", enrollDT=" + enrollDT + "]";
 	}
-	
 }

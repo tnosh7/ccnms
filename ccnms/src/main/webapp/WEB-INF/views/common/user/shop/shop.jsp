@@ -19,7 +19,7 @@
 		}
 		else {
 			$.ajax ({
-				url:"${contextPath}/order/addMyCart",
+				url:"${contextPath}/myShop/addMyCart",
 				type:"get",
 				data: {
 					"productCd" : productCd,
@@ -32,7 +32,7 @@
 					else {
 						Swal.fire({
 							  text: '장바구니에 추가되었습니다.',
-							  footer: '<a href="${contextPath }/order/cartList">장바구니로 이동하기</a>'
+							  footer: '<a href="${contextPath }/myShop/cartList">장바구니로 이동하기</a>'
 							})
 					}
 				}
@@ -49,7 +49,7 @@
 		}
 		else {
 			$.ajax ({
-				url:"${contextPath}/order/addMyKeep",
+				url:"${contextPath}/myShop/addMyKeep",
 				type:"get",
 				data: {
 					"productCd" : productCd, 
@@ -62,7 +62,7 @@
 					else {
 						Swal.fire({
 							  text: '찜에 추가되었습니다.',
-							  footer: '<a href="${contextPath }/order/myKeep">찜으로 이동하기</a>'
+							  footer: '<a href="${contextPath }/myShop/myKeep">찜으로 이동하기</a>'
 							})
 					}
 				}

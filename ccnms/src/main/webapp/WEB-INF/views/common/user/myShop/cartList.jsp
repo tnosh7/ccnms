@@ -48,7 +48,7 @@
 			$("input[name='cartCd']:checked").each(function(){
 				cartCdList += $(this).val() + ",";
 			});
-			location.href= "${contextPath}/order/removeCart?cartCdList=" + cartCdList;
+			location.href= "${contextPath}/myShop/removeCart?cartCdList=" + cartCdList;
 		}
 	}
 	

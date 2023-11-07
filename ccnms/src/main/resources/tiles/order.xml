@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-		<definition name="/order/myCart" extends="common">
-	 		<put-attribute name="body" value="/WEB-INF/views/common/user/order/myCart.jsp"/>
-	 		<put-attribute name="title" value="장바구니"/>	
-	 	</definition>
+	
 		<definition name="/order/orderSheet" extends="common">
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/order/orderSheet.jsp"/>
 	 		<put-attribute name="title" value="주문폼"/>	
 	 	</definition>
-	 	<definition name="/order/myKeep" extends="common">
-	 		<put-attribute name="body" value="/WEB-INF/views/common/user/order/myKeep.jsp"/>
-	 		<put-attribute name="title" value="찜한 상품"/>
-	 	</definition>
-	 	<definition name="/order/cartList" extends="common">
-	 		<put-attribute name="body" value="/WEB-INF/views/common/user/order/cartList.jsp"/>
-	 		<put-attribute name="title" value="장바구니 목록"/>
-	 	</definition>
-	 	
+	 	 	
 	 	<definition name="/order/cartOrderSheet" extends="common">
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/order/cartOrderSheet.jsp"/>
 	 		<put-attribute name="title" value="주문폼"/>
