@@ -7,6 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.table{
+       table-layout:fixed;
+       width: 100%;
+     }
 </style>
 <script>
 	function selectAllDigging(){
@@ -25,23 +30,14 @@
 			$("[name='replyId']").prop("checked", false);
 		}
 	}
-	function removeLog(){
+	function removeDigging(){
 		var diggingIdList ="";
-		var replyIdList = "";
 		if ($("input[name='diggingId']:checked")) {
 			$("input[name='diggingId']:checked").each(function(){
 				diggingIdList += $(this).val() + ",";
-				console.log(diggingIdList);
 				location.href= "${contextPath}/myPage/removeDigging?diggingIdList=" + diggingIdList;
 			});
 		}	
-		else if ($("input[name='replyId']:checked")) {
-			$("input[name='replyId']:checked").each(function(){
-				replyIdList += $(this).val() + ",";
-				console.log(replyIdList);
-				location.href= "${contextPath}/myPage/removeReply?replyIdList=" + replyIdList;
-			});
-		}
 	}
 </script>
 <style>
@@ -53,6 +49,7 @@
 </head>
 <body>
 <section class="shoping-cart spad">
+		<input type="hidden" name="userId" value="${sessionId }">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-5 order-md-1 order-2">
@@ -60,7 +57,7 @@
                         <div class="blog__sidebar__item">
                             <h4>Categories</h4>
                             <ul>
-                                <li><a href="${contextPath }/myPage/main"><strong>내프로필</strong></a></li>
+                                <li><a href="${contextPath }/myPage/main?userId=${userDTO.userId}"><strong>내프로필</strong></a></li>
                                 <li><a href="${contextPath }/myPage/myLog?userId=${userDTO.userId}"><strong>이력관리</strong></a></li>
                                 <li><a href="#"><strong>설정</strong></a></li>
                             </ul>
@@ -69,117 +66,139 @@
                         <div class="blog__sidebar__item">
                             <h4>고객센터</h4>
                              <ul>
-                                <li><a href="#"> 문의메시지</a></li>
+                                <li><a href="${contextPath }//myPage/myContact"> 문의메시지</a></li>
                                   <li><a href="${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=delete"> 탈퇴</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-9 order-md-1 order-1" align="center">
-        <div class="container">
-            <div class="row">
-                    <div class="blog__details__text">
-                    <c:choose>
-                    <c:when test="${diggingList eq null }">
-						<table>
-							<tr>
-								<th colspan="5">이력이 없습니다.</th>
-							</tr>
-						</table>
-                    </c:when>
-                    <c:otherwise>
-                    <h5>디깅 목록</h5>
-                        <table border="1" >
-                            <thead align="center" >
-                                <tr>
-                                    <th width="10%"><input type="checkbox" id="allDiggingChoice" onchange="selectAllDigging()"></th>
-                                    <th class="shoping__product" width="50%">제목</th>
-                                    <th width="20%">날짜</th>
-                                    <th width="10%">추천</th>
-                                    <th width="10%">댓글</th>     
-                                </tr>
-                            </thead>
-                            <c:forEach var="diggingDTO" items="${diggingList }">
-                            <tbody align="center">
-                                <tr>
-                                    <td class="shoping__cart__item__close">
-                                        <input type="checkbox" name="diggingId" value="${diggingDTO.diggingId }">
-                                    </td>
-                                    <td class="shoping__cart__item" >
-                                        <strong><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.subject }</a></strong>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                      <fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/>
-                                    </td>
-                                    <td class="shoping__cart__item" >
-                                    	${diggingDTO.thumbsUp }
-                                    </td>
-                                    <td class="shoping__cart__item" >
-                                    	${replyDTO.replyCnt }
-                                    </td>
-                                </tr>
-                            </tbody>
-                            </c:forEach>
-                        </table>
-                    </c:otherwise>
-                    </c:choose>
-                    </div>
-                </div>
-                    <div class="blog__details__text">
-                    <h5>댓글 목록</h5>
-                    <c:choose>
-                    <c:when test="${empty replyList}">
-						<table>
-							<tr>
-								<th colspan="5">이력이 없습니다.</th>
-							</tr>
-						</table>
-                    </c:when>
-                    <c:otherwise>
-	                        <table border="1">
-                            <c:forEach var="replyDTO" items="${replyList}">
-	                            <thead align="center">
-	                                <tr>
-	                                    <th width="10%"><input type="checkbox" id="allReplyChoice" onchange="selectAllDigging()"></th>
-	                                    <th class="shoping__product" width="50%">댓글 내용</th>
-	                                    <th width="20%">날짜</th>
-	                                    <th width="10%">추천</th>
-	                                    <th width="10%">댓글</th>
-	                                </tr>
-	                            </thead>
-                            <tbody align="center" >
-                                <tr>
-                                    <td class="shoping__cart__item__close">
-                                        <input type="checkbox" name="replyId" value="${replyDTO.replyId }">
-                                    </td>
-                                    <td class="shoping__cart__item" >
-                                        <strong>${replyDTO.content}</strong>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                      <fmt:formatDate value="${replyDTO.enrollDT }" pattern="yyyy-MM-dd"/>
-                                    </td>
-                                    <td class="shoping__cart__item" >
-                                    	${replyDTO.thumbsUp }
-                                    </td>
-                                </tr>
-                            </tbody>
-                            </c:forEach>
-                        </table>
-                    </c:otherwise>
-                    </c:choose>
-                    </div>
-                <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__btns">
-                        <input type="button" class="primary-btn cart-btn cart-btn-right" onclick="removeLog()" value="삭제">
-                   		<input type="hidden" value="${sessionScope.userId }"/>
-                    </div>
-                </div>
-                
-               </div>
-              </div>
-        </div>
-        </div>
+                      <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                    aria-selected="true">디깅 목록</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                                    aria-selected="false">댓글 목록</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                     <div class="container">
+			            <div class="row">
+			               <div class="card">
+			                <div class="table-responsive text-nowrap">
+			                  <table class="table">
+			                    <thead class="table-light" align="center">
+			                      <tr>
+			                        <th style="width:5%"><input type="checkbox" id="allDiggingChoice" onchange="selectAllDigging()"></th>
+			                        <th style="width:65%">내용</th>
+			                        <th style="width:20%">날짜</th>
+			                        <th style="width:10%">추천수</th>
+			                      </tr>
+			                    </thead>
+			                    <tbody class="table-border-bottom-0">
+			                    	<c:choose>
+			                    		<c:when test="${empty diggingList }">
+			                    			<tr>
+			                    				<th colspan="5">등록된 게시물이 없습니다.</th>
+			                    			</tr>
+			                    		</c:when>
+			                    		<c:otherwise>
+					                       <c:forEach var="diggingDTO" items="${diggingList }">
+					                            <tbody align="center" >
+					                                <tr>
+					                                    <td class="shoping__cart__item__close" >
+					                                        <input type="checkbox" name="diggingId" value="${diggingDTO.diggingId }">
+					                                    </td>
+					                                    <td class="shoping__cart__item" >
+					                                        <strong><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.subject }</a></strong>
+					                                    </td>
+					                                    <td class="shoping__cart__price">
+					                                       <fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/>
+					                                    </td>
+					                                    <td class="shoping__cart__item" style="width:10%" >
+					                                    	${diggingDTO.thumbsUp }
+					                                    </td>
+					                                </tr>
+					                            </tbody>
+					                        </c:forEach>
+			                    		</c:otherwise>
+			                    	</c:choose>
+			                    </tbody>
+		                    </table>
+                    	<hr>
+                    	  <div class="col-lg-12">
+	                    <div class="shoping__cart__btns">
+	                        <input type="button" class="primary-btn cart-btn cart-btn-center" onclick="removeDigging()" value="삭제">
+	                   		<input type="hidden" value="${sessionScope.userId }"/>
+	                    </div>
+	                </div>
+                    	</div>
+                    	</div>
+                    	</div>
+                    	</div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                <div class="product__details__tab__desc">
+					            <div class="row">
+					               <div class="card">
+					                <div class="table-responsive text-nowrap">
+					                  <table class="table">
+					                    <thead class="table-light" align="center">
+					                      <tr>
+					                        <th style="width:5%"><input type="checkbox" id="allDiggingChoice" onchange="selectAllDigging()"></th>
+					                        <th style="width:65%">내용</th>
+					                        <th style="width:20%">날짜</th>
+					                        <th style="width:10%">추천수</th>
+					                      </tr>
+					                    </thead>
+					                    <tbody class="table-border-bottom-0" align="center">
+					                    	<c:choose>
+					                    		<c:when test="${empty replyList }">
+					                    			<tr>
+					                    				<th colspan="5">등록된 댓글이 없습니다.</th>
+					                    			</tr>
+					                    		</c:when>
+					                    		<c:otherwise>
+							                        <c:forEach var="replyDTO" items="${replyList}">
+							                            <tbody align="center">
+							                                <tr>
+							                                    <td class="shoping__cart__item__close">
+							                                         <input type="checkbox" name="replyId" value="${replyDTO.replyId }">
+							                                    </td>
+							                                    <td class="shoping__cart__item" >
+							                                         <strong>${replyDTO.content}</strong>
+							                                    </td>
+							                                    <td class="shoping__cart__price">
+							                                      <fmt:formatDate value="${replyDTO.enrollDT }" pattern="yyyy-MM-dd"/>
+							                                    </td>
+							                                    <td class="shoping__cart__item" >
+							                                    	${replyDTO.thumbsUp }
+							                                    </td>
+							                                </tr>
+							                            </tbody>
+							                        </c:forEach>
+					                    		</c:otherwise>
+					                    	</c:choose>
+					                    </tbody>
+				                    </table>
+		                    	<hr>
+			                <div class="col-lg-12">
+			                    <div class="shoping__cart__btns">
+			                        <input type="button" class="primary-btn cart-btn cart-btn-center" onclick="removeLog()" value="삭제">
+			                   		<input type="hidden" value="${sessionScope.userId }"/>
+			                    </div>
+			                </div>
+	                </div>
+	               </div>
+        	      </div>
+    	    	</div>
+        	</div>
         </div>
     </section>
 </body>

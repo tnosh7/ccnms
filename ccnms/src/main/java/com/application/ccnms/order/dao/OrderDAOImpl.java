@@ -19,14 +19,20 @@ public class OrderDAOImpl implements OrderDAO {
 	private SqlSession sqlSession;
 
 	@Override
+	public ShopDTO selectOneShopDTO(long productCd) throws Exception {
+		return sqlSession.selectOne("order.selectOneShop", productCd);
+	}
+
+	@Override
 	public UserDTO selectOneUser(String userId) throws Exception {
-		return sqlSession.selectOne("selectOneUser", userId);
+		return sqlSession.selectOne("order.selectOneUser", userId);
 	}
 
 	@Override
 	public List<ShopDTO> selectListCartProductList(int[] productCdsList) throws Exception {
-		return sqlSession.selectList("selectListCartProductList", productCdsList);
+		return sqlSession.selectList("order.selectListCartProductList", productCdsList);
 	}
+
 	
 
 

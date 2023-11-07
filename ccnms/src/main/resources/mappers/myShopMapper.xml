@@ -180,7 +180,7 @@
 				KEEP
 		WHERE
 				KEEP_CD IN
-			<foreach collection="array" separator="," open="(" close=")">
+			<foreach collection="array" item="keepCd" separator="," open="(" close=")">
 				#{keepCd}
 			</foreach>
 	</delete>

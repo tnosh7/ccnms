@@ -3,6 +3,24 @@
 
 <mapper namespace="order">
 	
+	<select id="selectOneShop" parameterType="long" resultType="ShopDTO">
+		SELECT 
+				*
+		FROM 
+				SHOP
+		WHERE
+				PRODUCT_CD = #{productCd}
+	</select>
+
+	<select id="selectOneUser" parameterType="String" resultType="UserDTO">
+		SELECT 
+				*
+		FROM 
+				USER
+		WHERE
+				USER_ID = #{userId}	
+	</select>
+	
 	<select id="selectListCartProductList" resultType="ShopDTO">
 		SELECT 
 			*

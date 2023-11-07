@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.application.ccnms.contact.dto.ContactDTO;
 import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.myPage.dao.MyPageDAO;
 import com.application.ccnms.reply.dto.ReplyDTO;
@@ -61,6 +62,11 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
+	public List<ContactDTO> getMyContactList(String userId) throws Exception {
+		return myPageDAO.selectListContactList(userId);
+	}
+	
+	@Override
 	public void removeDigging(int[] delDiggingIdList) throws Exception {
 		myPageDAO.deleteDigging(delDiggingIdList);
 	}
@@ -68,5 +74,6 @@ public class MyPageServiceImpl implements MyPageService {
 	public void removeReply(int[] delReplyIdList) throws Exception {
 		myPageDAO.deleteReply(delReplyIdList);
 	}
+
 
 }

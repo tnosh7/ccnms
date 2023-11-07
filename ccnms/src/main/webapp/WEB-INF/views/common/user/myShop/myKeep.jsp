@@ -50,7 +50,7 @@
 		                           <c:forEach var="keepDTO" items="${myKeepList}" >
 	                                    <a href="${contextPath }/shop/shopDetail?productCd=${keepDTO.productCd } class="list-group-item list-group-item-action flex-column align-items-start">
 				                            <div class="d-flex justify-content-between w-100">
-				                              <h6><input type="checkbox" name="keepCd" value="${keepDTO.productCd }"> &emsp;
+				                              <h6><input type="checkbox" name="keepCd" value="${keepDTO.keepCd }"> &emsp;
 				                              	<img alt="" src="${contextPath }/shop/thumbnails?file=${keepDTO.productFile}" width="50" height="50">
 				                              </h6>
 				                              <br>

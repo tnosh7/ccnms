@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.application.ccnms.contact.dto.ContactDTO;
 import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.reply.dto.ReplyDTO;
 import com.application.ccnms.user.dto.UserDTO;
@@ -57,6 +58,11 @@ public class MyPageDAOImpl implements MyPageDAO {
 	}
 	
 	@Override
+	public List<ContactDTO> selectListContactList(String userId) throws Exception {
+		return sqlSession.selectList("myPage.selectListContactList", userId);
+	}
+	
+	@Override
 	public void deleteDigging(int[] delDiggingIdList) throws Exception {
 		sqlSession.delete("myPage.deleteDigging", delDiggingIdList);
 	}
@@ -65,5 +71,6 @@ public class MyPageDAOImpl implements MyPageDAO {
 	public void deleteReply(int[] delReplyIdList) throws Exception {
 		sqlSession.delete("myPage.deleteReply", delReplyIdList);
 	}
+
 
 }

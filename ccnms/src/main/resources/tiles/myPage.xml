@@ -17,4 +17,8 @@
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user//myPage/myLog.jsp"/>
 	 		<put-attribute name="title" value="내 기록"/>	
 	 	</definition>
+	 	<definition name="/myPage/myContact" extends="common">
+	 		<put-attribute name="body" value="/WEB-INF/views/common/user//myPage/myContact.jsp"/>
+	 		<put-attribute name="title" value="문의메시지"/>	
+	 	</definition>
 </tiles-definitions>

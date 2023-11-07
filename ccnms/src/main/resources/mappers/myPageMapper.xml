@@ -122,6 +122,15 @@
 				WRITER = #{userId}
 	</select>
 	
+	<select id="selectListContactList" parameterType="String" resultType="ContactDTO">
+		SELECT 
+				*
+		FROM 
+				CONTACT
+		WHERE
+				USER_ID = #{userId}
+	</select>
+	
 	<delete id="deleteDigging" >
 		DELETE FROM
 		 		DIGGING

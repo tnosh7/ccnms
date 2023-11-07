@@ -119,11 +119,12 @@ public class MyShopController {
 		String []temp = keepCdList.split(",");
 		int [] removeKeepCdList = new int[temp.length];
 		
+		
 		for (int i = 0; i < temp.length; i++) {
 			removeKeepCdList[i] = Integer.parseInt(temp[i]);
 		}
 		
-		myShopService.removeCart(removeKeepCdList);
+		myShopService.removeKeep(removeKeepCdList);
 		String jsScript = "<script>";
 			   jsScript +="location.href='myKeep'";
 			   jsScript +="</script>";

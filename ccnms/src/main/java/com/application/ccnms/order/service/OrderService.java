@@ -10,8 +10,11 @@ import com.application.ccnms.shop.dto.ShopDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
 public interface OrderService {
+	
+	public ShopDTO getShopDTO(long productCd) throws Exception;
 	public UserDTO getUserDTO(String userId) throws Exception;
-
 	public void addOrder(OrderDTO orderDTO, int point) throws Exception;
 	public List<ShopDTO> getProductListByCart(int[] productCdsList)throws Exception;
+
+
 }

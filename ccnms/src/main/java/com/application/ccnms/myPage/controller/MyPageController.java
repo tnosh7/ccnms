@@ -134,6 +134,7 @@ public class MyPageController {
 			   jsScript +="</script>";
 		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
 	}
+	
 	@GetMapping("/thumbnails")
 	public void thumbnails(@RequestParam("fileName") String fileName, HttpServletResponse response) throws Exception {
 	
@@ -150,53 +151,58 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/myLog") 
-	public ModelAndView myLog (@RequestParam("userId") String userId)throws Exception  {
-		ModelAndView mv= new ModelAndView();
-		mv.setViewName("/myPage/myLog");
+	public ModelAndView myLog (HttpServletRequest request, @RequestParam("userId") String userId) throws Exception {
+		ModelAndView mv= new ModelAndView("/myPage/myLog");
+		HttpSession session = request.getSession();
+		session.setAttribute("userId", userId);
 		mv.addObject("diggingList", myPageService.getDiggingList(userId));
 		mv.addObject("replyList", myPageService.getReplyList(userId));
 		
 		return mv;
 	}
+	
+	@GetMapping("/myContact")
+	public ModelAndView myContact (HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("/myPage/myContact");
+		HttpSession session = request.getSession();
+		mv.addObject("myContactList", myPageService.getMyContactList((String)session.getAttribute("userId")));
+		
+		return mv;
+	}
+	
 	@GetMapping("/removeDigging")
 	public ResponseEntity<Object> removeDigging(@RequestParam("diggingIdList") String diggingIdList, HttpServletRequest request) throws Exception {
 		
 		String[] temp = diggingIdList.split(",");
 		int[] delDiggingIdList = new int[temp.length];
-		for (int i = 0; i < delDiggingIdList.length; i++) {
+		for (int i = 0; i < temp.length; i++) {
 			delDiggingIdList[i] = Integer.parseInt(temp[i]);
-			System.out.println(delDiggingIdList[i]);
 		}
 		myPageService.removeDigging(delDiggingIdList);
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("userId", myPageService.getUserDetail((String)session.getAttribute("userId")));
-		session.setAttribute("role", "user");
 		String jsScript ="<script>";
-			   jsScript +="location.href='" + request.getContextPath()+ "/myPage/myLog'";
+			   jsScript +="location.href='" + request.getContextPath() + "/myPage/main'"; 
 			   jsScript +="</script>";
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
 	}
+
 	@GetMapping("/removeReply")
 	public ResponseEntity<Object> removeReply(@RequestParam("replyIdList") String replyIdList, HttpServletRequest request) throws Exception {
 		
 		String[] temp = replyIdList.split(",");
 		int[] delReplyIdList = new int[temp.length];
-		for (int i = 0; i < delReplyIdList .length; i++) {
+		for (int i = 0; i < temp.length; i++) {
 			delReplyIdList [i] = Integer.parseInt(temp[i]);
 			System.out.println(delReplyIdList [i]);
 		}
 		myPageService.removeReply(delReplyIdList);
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("userId", myPageService.getUserDetail((String)session.getAttribute("userId")));
-		session.setAttribute("role", "user");
 		String jsScript ="<script>";
-		jsScript +="location.href='" + request.getContextPath()+ "/myPage/myLog'";
-		jsScript +="</script>";
+			   jsScript +="location.href='" + request.getContextPath() + "/myPage/main'"; 
+			   jsScript +="</script>";
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");

@@ -9,7 +9,7 @@ import com.application.ccnms.shop.dto.ShopDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
 public interface OrderDAO {
-
+	public ShopDTO selectOneShopDTO(long productCd)throws Exception;
 	public UserDTO selectOneUser(String userId)throws Exception;
 	public List<ShopDTO> selectListCartProductList(int[] productCdsList) throws Exception;
 }

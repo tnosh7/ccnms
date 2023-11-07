@@ -19,6 +19,10 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderDAO orderDAO;
 	
+	@Override
+	public ShopDTO getShopDTO(long productCd) throws Exception {
+		return orderDAO.selectOneShopDTO(productCd);
+	}
 
 	@Override
 	public UserDTO getUserDTO(String userId) throws Exception {
@@ -34,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
 	public void addOrder(OrderDTO orderDTO, int point) throws Exception {
 		// TODO Auto-generated method stub
 	}
+
 	
 
 	
