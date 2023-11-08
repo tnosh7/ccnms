@@ -121,7 +121,7 @@
                         <ul>
                             <li><a href="${contextPath }/myShop/myKeep"><i class="fa fa-heart"></i> <span>1</span></a></li>
                             <li><a href="${contextPath }/myShop/cartList"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                       		<li><a href="#"><img src="${contextPath }/resources/bootstrap/img/message.png"></a></li>
+                       		<li><a href="${contextPath }/myShop/orderList"><img src="${contextPath }/resources/bootstrap/img/purchase.png"></a></li>
                         </ul>
                     </div>
                 </div>

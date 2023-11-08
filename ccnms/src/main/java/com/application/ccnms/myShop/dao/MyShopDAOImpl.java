@@ -78,5 +78,15 @@ public class MyShopDAOImpl implements MyShopDAO {
 		sqlSession.delete("myShop.deleteKeep", removeKeepCdList);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectListOrderList(String userId) throws Exception {
+		return sqlSession.selectList("myShop.selectListOrderList", userId);
+	}
+
+	@Override
+	public Map<String, Object> selectOneOrderDetail(Map<String, Object> orderDetailMap) throws Exception {
+		return sqlSession.selectOne("myShop.selectOneOrderDetail", orderDetailMap);
+	}
+
 
 }

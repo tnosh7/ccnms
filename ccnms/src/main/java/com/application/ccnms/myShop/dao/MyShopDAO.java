@@ -22,4 +22,7 @@ public interface MyShopDAO {
 	public int selectOneMyKeepCnt (String userId) throws Exception;
 	public List<Map<String,Object>> selectListKeepList (String userId) throws Exception;
 	public void deleteKeep (int[] removeKeepCdList) throws Exception;
+	
+	public List<Map<String,Object>> selectListOrderList (String userId) throws Exception;
+	public Map<String,Object> selectOneOrderDetail (Map<String, Object> orderDetailMap) throws Exception;
 }

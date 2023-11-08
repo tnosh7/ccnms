@@ -134,6 +134,22 @@ public class MyShopController {
 		
 		return new ResponseEntity<Object> (jsScript, responseHeaders, HttpStatus.OK);
 	}
-
+	
+	@GetMapping("/orderList")
+	public ModelAndView orderList (HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		ModelAndView mv = new ModelAndView("/myShop/orderList");
+		mv.addObject("orderList", myShopService.getOrderList((String)session.getAttribute("userId")));
+		
+		return mv;
+	}
+	
+	@GetMapping("/orderDetail")
+	public ModelAndView orderDetail (@RequestParam Map<String,Object> orderDetailMap) throws Exception{
+		ModelAndView mv = new ModelAndView("/myShop/orderDetail");
+		mv.addObject("orderDTO", myShopService.getOrderDetail(orderDetailMap));
+		
+		return mv;
+	}
 	
 }

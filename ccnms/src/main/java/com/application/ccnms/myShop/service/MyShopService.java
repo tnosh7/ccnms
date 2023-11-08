@@ -22,9 +22,10 @@ public interface MyShopService {
 	public int getMyKeepCnt (String userId) throws Exception;
 	public List<Map<String,Object>> getMyKeepList (String userId) throws Exception;
 	public void removeKeep (int [] removeKeepCdList) throws Exception;
-
-
-
+	
+	public List<Map<String,Object>> getOrderList(String userId) throws Exception;
+	public Map<String,Object> getOrderDetail(Map<String,Object>orderDetailMap) throws Exception;
+	
 
 
 }

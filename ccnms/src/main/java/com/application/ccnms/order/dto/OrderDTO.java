@@ -21,12 +21,17 @@ public class OrderDTO {
 	private String namujiAddress; 
 	private String deliveryMethod; 
 	private String deliveryMessage; 
+	private String deliveryStatus;
 	private char giftWrapping; 
 	private String payMethod; 
 	private String payOrdererHp; 
 	private String cardCompanyNm; 
 	private String cardPayMonth; 
 	private Date payOrderTime;
+	private int orderQty;
+	private String accountCompanyNm;
+	private String account;
+	
 	public long getOrderCd() {
 		return orderCd;
 	}
@@ -111,6 +116,12 @@ public class OrderDTO {
 	public void setDeliveryMessage(String deliveryMessage) {
 		this.deliveryMessage = deliveryMessage;
 	}
+	public String getDeliveryStatus() {
+		return deliveryStatus;
+	}
+	public void setDeliveryStatus(String deliveryStatus) {
+		this.deliveryStatus = deliveryStatus;
+	}
 	public char getGiftWrapping() {
 		return giftWrapping;
 	}
@@ -147,16 +158,36 @@ public class OrderDTO {
 	public void setPayOrderTime(Date payOrderTime) {
 		this.payOrderTime = payOrderTime;
 	}
+	public int getOrderQty() {
+		return orderQty;
+	}
+	public void setOrderQty(int orderQty) {
+		this.orderQty = orderQty;
+	}
+	public String getAccountCompanyNm() {
+		return accountCompanyNm;
+	}
+	public void setAccountCompanyNm(String accountCompanyNm) {
+		this.accountCompanyNm = accountCompanyNm;
+	}
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
 	@Override
 	public String toString() {
 		return "OrderDTO [orderCd=" + orderCd + ", userId=" + userId + ", productCd=" + productCd + ", paymentAmt="
 				+ paymentAmt + ", ordererNm=" + ordererNm + ", ordererHp=" + ordererHp + ", receiverNm=" + receiverNm
 				+ ", receiverHp=" + receiverHp + ", zipcode=" + zipcode + ", roadAddress=" + roadAddress
 				+ ", jibunAddress=" + jibunAddress + ", namujiAddress=" + namujiAddress + ", deliveryMethod="
-				+ deliveryMethod + ", deliveryMessage=" + deliveryMessage + ", giftWrapping=" + giftWrapping
-				+ ", payMethod=" + payMethod + ", payOrdererHp=" + payOrdererHp + ", cardCompanyNm=" + cardCompanyNm
-				+ ", cardPayMonth=" + cardPayMonth + ", payOrderTime=" + payOrderTime + "]";
-	} 
+				+ deliveryMethod + ", deliveryMessage=" + deliveryMessage + ", deliveryStatus=" + deliveryStatus
+				+ ", giftWrapping=" + giftWrapping + ", payMethod=" + payMethod + ", payOrdererHp=" + payOrdererHp
+				+ ", cardCompanyNm=" + cardCompanyNm + ", cardPayMonth=" + cardPayMonth + ", payOrderTime="
+				+ payOrderTime + ", orderQty=" + orderQty + ", accountCompanyNm=" + accountCompanyNm + ", account="
+				+ account + "]";
+	}
 	
 	
 	

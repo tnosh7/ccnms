@@ -78,4 +78,14 @@ public class MyShopServiceImpl implements MyShopService {
 	public void removeKeep(int[] removeKeepCdList) throws Exception {
 		myShopDAO.deleteKeep(removeKeepCdList);
 	}
+
+	@Override
+	public List<Map<String, Object>> getOrderList(String userId) throws Exception {
+		return myShopDAO.selectListOrderList(userId);
+	}
+
+	@Override
+	public Map<String, Object> getOrderDetail(Map<String, Object> orderDetailMap) throws Exception {
+		return myShopDAO.selectOneOrderDetail(orderDetailMap);
+	}
 }

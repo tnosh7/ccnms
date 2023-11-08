@@ -7,6 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	function orderSheet() {
+		var orderQty = $("[name='orderQty']").val();
+		var shopCd = $("[name='productCd']").val();
+		location.href="${contextPath }/order/orderSheet?shopCd=" + shopCd + "&orderQty=" + orderQty;
+	}
+
+
+</script>
 </head>
 <body>
   <section class="product-details spad">
@@ -47,16 +56,17 @@
                             <li><b>배송방법</b> <span>${shopDTO.deliveryMethod }</span></li>
                             <li><b>배송비</b> <span><samp>${shopDTO.deliveryPrice }</samp>원</span></li>
                         </ul>
+                        <input type="hidden" name="productCd" value="${shopDTO.productCd }">
                         <hr>
                         <div class="product__details__quantity">
                             <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="text" value="1">
+                                <div class="pro-qty" >
+                                    <input type="text" name="orderQty" value="1">
                                 </div>
                             </div>
                         </div>
                         <br>
-                        <a href="${contextPath }/myShop/myCart?productCd=${shopDTO.productCd}" class="primary-btn" style="background:royalblue">구매하기</a>
+                        <a href="javascript:orderSheet()" class="primary-btn" style="background:royalblue">구매하기</a>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <a href="${contextPath }/myShop/myCart?productCd=${shopDTO.productCd}" class="primary-btn" style="background:grey">장바구니</a>
                     </div>
@@ -122,13 +132,10 @@
 					                        <td>
 					                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
 					                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Lilian Fuller">
-					                              <img src="../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
 					                            </li>
 					                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Sophia Wilkerson">
-					                              <img src="../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
 					                            </li>
 					                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Christina Parker">
-					                              <img src="../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
 					                            </li>
 					                          </ul>
 					                        </td>

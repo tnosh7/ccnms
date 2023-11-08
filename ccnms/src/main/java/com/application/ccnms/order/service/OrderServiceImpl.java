@@ -1,10 +1,12 @@
 package com.application.ccnms.order.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.application.ccnms.myShop.dto.CartDTO;
 import com.application.ccnms.myShop.dto.KeepDTO;
@@ -35,11 +37,19 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	@Transactional
 	public void addOrder(OrderDTO orderDTO, int point) throws Exception {
-		// TODO Auto-generated method stub
-	}
-
+		Map<String,Object> orderMap = new HashMap<String,Object>();
+		orderMap.put("point", point);
+		orderMap.put("orderQty", orderDTO.getOrderQty());
+		orderMap.put("productCd", orderDTO.getProductCd());
+		orderMap.put("userId", orderDTO.getUserId());
+			
+		orderDAO.updateShopStockCnt(orderMap);
+		orderDAO.updateUserPoint(orderMap);
+		orderDAO.insertOrder(orderDTO);
 	
+	}
 
 	
 }

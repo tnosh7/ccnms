@@ -16,5 +16,4 @@ public interface OrderService {
 	public void addOrder(OrderDTO orderDTO, int point) throws Exception;
 	public List<ShopDTO> getProductListByCart(int[] productCdsList)throws Exception;
 
-
 }

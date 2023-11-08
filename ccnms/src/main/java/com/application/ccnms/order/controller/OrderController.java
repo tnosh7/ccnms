@@ -4,14 +4,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.order.dto.OrderDTO;
 import com.application.ccnms.order.service.OrderService;
+import com.application.ccnms.shop.dto.ShopDTO;
+import com.application.ccnms.user.dto.UserDTO;
 import com.application.ccnms.user.service.UserService;
 
 @Controller
@@ -51,14 +57,29 @@ public class OrderController {
 	}
 	
 	@GetMapping("/orderSheet") 
-	public ModelAndView orderSheet(@RequestParam("productCd") long productCd, OrderDTO orderDTO, HttpServletRequest request) throws Exception {
-		
+	public ModelAndView orderSheet(@RequestParam("shopCd") String shopCd, OrderDTO orderDTO, HttpServletRequest request, @RequestParam("orderQty") String orderQty) throws Exception {
+		int productCd = Integer.parseInt(shopCd);
 		ModelAndView mv= new ModelAndView();
 		HttpSession session = request.getSession();
 		mv.addObject("shopDTO", orderService.getShopDTO(productCd));
 		mv.addObject("userDTO", orderService.getUserDTO((String) session.getAttribute("userId")));
+		mv.addObject("orderQty", orderQty);
 		mv.setViewName("/order/orderSheet");
 		return mv;
 	}
+	@PostMapping("/orderSheet")
+	public ResponseEntity<Object> orderSheet(UserDTO userDTO, OrderDTO orderDTO, HttpServletRequest request, @RequestParam("point")int point) throws Exception{
+		orderService.addOrder(orderDTO, point);
+		
+		HttpSession session = request.getSession();
+		String jsScript = "<script>";
+			   jsScript+= "location.href='" + request.getContextPath() + "/shop/shopDetail?productCd=" + orderDTO.getProductCd() +"';";
+			   jsScript+= "</script>";
+			   
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
+	}
+	
 	
 }

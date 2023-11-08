@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.application.ccnms.myShop.dto.CartDTO;
 import com.application.ccnms.myShop.dto.KeepDTO;
+import com.application.ccnms.order.dto.OrderDTO;
 import com.application.ccnms.shop.dto.ShopDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
@@ -32,6 +33,22 @@ public class OrderDAOImpl implements OrderDAO {
 	public List<ShopDTO> selectListCartProductList(int[] productCdsList) throws Exception {
 		return sqlSession.selectList("order.selectListCartProductList", productCdsList);
 	}
+
+	@Override
+	public void updateShopStockCnt(Map<String, Object> orderMap) throws Exception {
+		sqlSession.update("order.updateShopStockCnt", orderMap);
+	}
+
+	@Override
+	public void updateUserPoint(Map<String, Object> orderMap) throws Exception {
+		sqlSession.update("order.updateUserPoint", orderMap);
+	}
+
+	@Override
+	public void insertOrder(OrderDTO orderDTO) throws Exception {
+		sqlSession.insert("order.insertOrder", orderDTO);
+	}
+
 
 	
 

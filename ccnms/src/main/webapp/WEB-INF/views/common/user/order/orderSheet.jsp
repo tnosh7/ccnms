@@ -60,8 +60,14 @@
 
 </head>
 <body>
+<c:if test="${sessionScope.userId eq null}">
+	<script>
+		location.href = "${contextPath}/user/loginUser";
+	</script>
+</c:if>
  <section class="checkout spad">
         <div class="container">
+           <form action="${contextPath }/order/orderSheet" method="post">
             <div class="row">
                 <div class="col-lg-12">
                      <div class="checkout__order">
@@ -71,26 +77,28 @@
                             <li>${userDTO.userNm}</li>
                             <li>${userDTO.hp }</li>
                         </ul>
-                        <input type="hidden" value="${userDTO.userNm }"/>
-                        <input type="hidden" value="${userDTO.hp }"/>
                         <div id="deliveryInfo">
                         	${userDTO.roadAddress} ${userDTO.namujiAddress } ( ${userDTO.zipcode} )
+                        	<input type="hidden" name="zipcode" value="${userDTO.zipcode}" />
+                        	<input type="hidden" name="roadAddress" value="${userDTO.roadAddress}" />
+                        	<input type="hidden" name="jibunAddress" value="${userDTO.jibunAddress}" />
+                        	<input type="hidden" name="namujiAddress" value="${userDTO.namujiAddress}" />
                         </div>
-                        <div id="newDelivery" style="display: none">
-                        	<p><input type="text" id="zipcode" placeholder="우편번호" name="zipcode" value="${orderer.zipcode }" style="width: 40%;">
+                        <div id="newDelivery" style="display: none"  >
+                        	<p><input type="text" id="zipcode" placeholder="우편번호"  style="width: 40%;">
                            		<input type="button" value="주소 검색" onclick="javascript:execDaumPostcode()" style="width: 30%; padding-left: 0"></p>
-                            <p><input type="text" id="roadAddress"   placeholder="도로명 주소" name="roadAddress"   value="${order.roadAddress }" style="width: 40%;"></p>
-                            <p><input type="text" id="jibunAddress"  placeholder="지번 주소"   name="jibunAddress"  value="${order.jibunAddress }" style="width: 40%;"></p>
-                            <p><input type="text" id="namujiAddress" placeholder="나머지 주소" name="namujiAddress" value="${order.namujiAddress }" style="width: 40%;"></p>
+                            <p><input type="text" id="roadAddress"   placeholder="도로명 주소"   style="width: 40%;"></p>
+                            <p><input type="text" id="jibunAddress"  placeholder="지번 주소"     style="width: 40%;"></p>
+                            <p><input type="text" id="namujiAddress" placeholder="나머지 주소"   style="width: 40%;"></p>
                         </div>
                       </div>
                 </div>
             </div>
             <br>
-           <form action="${contextPath }/shop/shop" method="post">
              <input type="hidden" name="productCd" value="${shopDTO.productCd }">
-             <input type="hidden" name="productQty" value="${productQty}">
-             <input type="hidden" name="userId" value="${sessionId}">
+             <input type="hidden" name="orderQty" value='<fmt:parseNumber integerOnly="true" value="${orderQty}"/>'/>
+             <input type="hidden" name="userId" value="${userDTO.userId}">
+             <input type="hidden" name="point" value="${shopDTO.point * orderQty}">
             <div class="checkout__form">
                 <h4>주문/결제</h4>
                     <div class="row">
@@ -203,14 +211,19 @@
                                 <h4>결제상세</h4>
                                 <div class="checkout__order__products">상품<span></span></div>
                                 <ul>
-                                    <li>${shopDTO.productNm }<span><fmt:formatNumber value="${shopDTO.price - shopDTO.price * shopDTO.discountRate /100}"/>원</span></li>
+                                    <li>${shopDTO.productNm }<span>${orderQty } 개</span></li>
+                                    <li>가격<span><fmt:formatNumber value="${(shopDTO.price - shopDTO.price * shopDTO.discountRate /100) * orderQty}"/>원</span></li>
                                     <li>배송비<span>${shopDTO.deliveryPrice}원</span></li>
                                 	<li>배송방법<span>${shopDTO.deliveryMethod }</span></li>
-                                	<li>포장 여부<span><input type="radio" name="package" value="Y">예 <input type="radio" name="package" value="N">아니오</span></li>
+                                	<li>포장 여부<span><input type="radio" name="giftWrapping" value="Y">예 <input type="radio" name="giftWrapping" value="N">아니오</span></li>
                                 </ul>
+                                <input type="hidden" name="deliveryMethod" value="${shopDTO.deliveryMethod }"/>
                                 <hr>
-                                <div class="checkout__order__total">총액 <span><fmt:formatNumber value="${shopDTO.deliveryPrice + (shopDTO.price -shopDTO.price * shopDTO.discountRate / 100) }"/>원</span></div>
+                                <div class="checkout__order__total">
+                                	<c:set var="paymentAmt" value="${(shopDTO.price - shopDTO.price * shopDTO.discountRate /100) * orderQty + shopDTO.deliveryPrice}" />
+                                	총액 <span><fmt:formatNumber value="${paymentAmt}"/>원</span></div>
                                 </div>
+                                <input type="hidden" name="paymentAmt" value='<fmt:parseNumber integerOnly="true" value="${paymentAmt }"/>'/> 
                                 <p style="color:green"><span>*</span>
                                  	주문자 정보로 결제관련 정보가 제공됩니다. 정확한 정보로 등록되어있는지 확인해주세요.
                                 </p>
