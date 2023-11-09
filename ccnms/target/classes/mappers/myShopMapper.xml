@@ -26,15 +26,13 @@
 				CART_CD,
 				USER_ID,
 				CART_QTY,
-				PRODUCT_CD,
-				ENROLL_DT
+				PRODUCT_CD
 		)
 		VALUES (
 				#{cartCd},
 				#{userId},
 				#{cartQty},
-				#{productCd},
-				#NOW()				
+				#{productCd}
 		)
 	</insert>
 	

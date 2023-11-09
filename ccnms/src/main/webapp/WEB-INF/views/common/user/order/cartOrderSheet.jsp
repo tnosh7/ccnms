@@ -9,6 +9,38 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+	
+	$().ready(function(){
+		var cartQtyList	= "${cartQtyList}".split(",");
+		
+		var viewPaymentAmt = 0;
+		var paymentAmtList = 0;
+		var totalDeliveryPrice = 0;
+		var totalPoint = 0;
+		for (var i = 0; i < cartQtyList.length-1; i++) {
+			$("#qty"+i).text(cartQtyList[i]+"개");
+			$("orderQty"+i).val(cartQtyList[i]);
+			
+			var price = Number($("#price"+i).val());
+			var discountRate = Number($("#discountRate"+i).val());
+			var orderQty = Number($("#orderQty"+i).val());
+			var deliveryPrice = Number($("#deliveryPrice"+i).val());
+			
+			viewPaymentAmt += (price - parseInt(price * (discountRate / 100)));
+			paymentAmtList += (price -parseInt(price * (discountRate / 100)));
+			paymentAmtList += ",";
+			
+			totalDeliveryPrice += deliveryPrice;
+			totlaPoint += Number($("#point"+i).val() * Number($("#orderQty"+i).val()));
+		}		
+	
+		$("#totalDeliveryPrice").html(totalDeliveryPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " 원");
+		$("#totalPoint").html(totalPoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "P 적립");
+		$("#viewPaymentAmt").html(viewPaymentAmt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " 원");
+		$("[name='paymentAmtList']").val(paymentAmtList);
+		$("[name='totalPoint']").val(totalPoint);
+	});
+	
 	function setDelivery() {
 		$("#deliveryInfo").hide();
 		$("#newDelivery").show();
@@ -56,13 +88,14 @@
 			$("#payOrdererHp").hide();
 		}
 	}
+		
 </script>
 
 </head>
 <body>
  <section class="checkout spad">
         <div class="container">
-           <form action="${contextPath }/order/orderCart" method="post">
+           <form action="${contextPath }/order/cartOrderSheet" method="post">
             <div class="row">
                 <div class="col-lg-12">
                      <div class="checkout__order">
@@ -202,16 +235,25 @@
                                 <div class="checkout__order__products">상품<span></span></div>
                                 <c:forEach var="productDTO" items="${productList }" varStatus="i">
                                 <ul>
-                                    <li>${i.index + 1}.&nbsp; ${i.index.productNm }
-                                    <span id="qty${i.index }"></span>
+                                    <li>${i.index + 1}.&nbsp; ${productDTO.productNm }
+                                    <span id="qty${i}"></span>
                                     <span><fmt:formatNumber value="${productDTO.price - productDTO.price * productDTO.discountRate /100}"/>원</span></li>
+                                    <li>수량<span id="qty${i.index }"></span>
                                     <li>배송비<span>${productDTO.deliveryPrice}원</span></li>
                                 	<li>배송방법<span>${productDTO.deliveryMethod }</span></li>
-                                	<li>포장 여부<span><input type="radio" name="package" value="Y">예 <input type="radio" name="package" value="N">아니오</span></li>
+                                	<input type="hidden" name="userId" value="${sessionId }">
+                                	<input type="hidden" name="deliveryPrice" value="${proucdtDTO.deliveryPrice }">
+                                	<input type="hidden" name="" value="">
+                                	<input type="hidden" name="" value="">
+                                	<input type="hidden" name="" value="">
                                 </ul>
                                 </c:forEach>
                                 <hr>
-                                <div class="checkout__order__total">총액 <span><fmt:formatNumber value="${productDTO.deliveryPrice + (productDTO.price -productDTO.price * productDTO.discountRate / 100) }"/>원</span></div>
+                                <p>포장 여부<span></span><input type="radio" name="package" value="Y">예 <input type="radio" name="package" value="N">아니오</span></p>
+                              	<div class="checkout__order__total">
+                                	<c:set var="paymentAmt" value="${(productDTO.price- productDTO.price * productDTO.discountRate /100) * orderQty + productDTO.deliveryPrice *i}" />
+                                	총액 <span id="paymentAmt"><fmt:formatNumber value="${paymentAmt }"/></span></div>
+                                	
                                 </div>
                                 <p style="color:green"><span>*</span>
                                  	주문자 정보로 결제관련 정보가 제공됩니다. 정확한 정보로 등록되어있는지 확인해주세요.

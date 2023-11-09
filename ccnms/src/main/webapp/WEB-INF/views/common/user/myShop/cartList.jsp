@@ -19,9 +19,15 @@
 
 	function getTotalPrice(){
 		var totalPrice = 0;
+		var cdPrice = 0;
+		
 		$("[name='cartCd']:checked").each(function(){
 			var tempCartCd = $(this).val();
 			totalPrice += Number($("#price" + tempCartCd).val()) * Number($("#cartQty" + tempCartCd).val());
+			for (var i = 0; i < this.length; i++) {
+				cdPrice[i] += Number($("#price" + tempCartCd).val()) * Number($("#cartQty" + tempCartCd).val());
+			}
+			
 		});
 		totalPrice = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " 원";
 		$("#totalPrice").html(totalPrice);
@@ -83,8 +89,8 @@
 		}
 		var url = "${contextPath}/order/cartOrderSheet";
 			url +="?cartCdList=" + cartCdList;
-			url +="?productCdList=" + productCdList;
-			url +="?cartQtyList=" + cartQtyList;
+			url +="&productCdList=" + productCdList;
+			url +="&cartQtyList=" + cartQtyList;
 		location.href = url;
 	}
 </script>

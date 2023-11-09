@@ -26,6 +26,8 @@ public class OrderController {
 	
 	@Autowired 
 	private OrderService orderService;
+	
+	@Autowired
 	private UserService userService;
 	
 	
@@ -45,6 +47,9 @@ public class OrderController {
 		mv.setViewName("/order/cartOrderSheet");
 		
 		HttpSession session = request.getSession();
+		System.out.println("==================================");
+		System.out.println(request.getParameter("userId"));
+		System.out.println("==================================");
 		session.setAttribute("myOrderCnt", userService.getMyOrderCnt((String)session.getAttribute("userId")));
 		session.setAttribute("myCartCnt", userService.getMyCartCnt((String)session.getAttribute("userId")));
 		
@@ -54,6 +59,19 @@ public class OrderController {
 		mv.addObject("productCdsList", productCdList);
 		mv.addObject("cartQtyList", cartQtyList);
 		return mv;
+	}
+	
+	@PostMapping("/cartOrderSheet")
+	public ResponseEntity<Object> cartOrderSheet (UserDTO userDTO, OrderDTO orderDTO, HttpServletRequest request, @RequestParam("point")int point){
+		orderService.addCartOrder(orderDTO,point);
+		
+		HttpSession session = request.getSession();
+		String jsScript = "<script>";
+			   jsScript+= "location.href='" + request.getContextPath() + "/shop/shopDetail?productCd=" + orderDTO.getProductCd() +"';";
+			   jsScript+= "</script>";
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		return new ResponseEntity<Object> (jsScript, responseHeaders, HttpHeaders.OK);
 	}
 	
 	@GetMapping("/orderSheet") 

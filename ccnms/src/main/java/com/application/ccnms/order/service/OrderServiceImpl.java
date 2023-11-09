@@ -51,5 +51,10 @@ public class OrderServiceImpl implements OrderService {
 	
 	}
 
+	@Override
+	public void addCartOrder(OrderDTO orderDTO, int point) throws Exception {
+		
+	}
+
 	
 }

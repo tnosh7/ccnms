@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="sessionId" value="${sessionScope.userId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,37 @@
 		location.href="${contextPath }/order/orderSheet?shopCd=" + shopCd + "&orderQty=" + orderQty;
 	}
 
-
+	
+	function myCart(productCd) {
+		if ("${sessionId == null}" == "true") {
+			Swal.fire({
+				  icon: 'info',
+				  title: '로그인 후에 이용가능합니다.',
+				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
+				})
+		}
+		else {
+			$.ajax ({
+				url:"${contextPath}/myShop/addMyCart",
+				type:"get",
+				data: {
+					"productCd" : productCd,
+					"cartQty" : 1
+				},
+				success: function(result) {
+					if(result == "duple") {
+						Swal.fire('이미 추가된 상품입니다.');
+					}
+					else {
+						Swal.fire({
+						 	text: '장바구니에 추가되었습니다.',
+						  	footer: '<a href="${contextPath }/myShop/myCart">장바구니로 이동하기</a>'
+						})
+					}
+				}
+			})
+		}
+	}
 </script>
 </head>
 <body>
@@ -68,7 +99,7 @@
                         <br>
                         <a href="javascript:orderSheet()" class="primary-btn" style="background:royalblue">구매하기</a>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
-                        <a href="${contextPath }/myShop/myCart?productCd=${shopDTO.productCd}" class="primary-btn" style="background:grey">장바구니</a>
+                        <a href="javascript:myCart(${shopDTO.productCd })" class="primary-btn" style="background:grey">장바구니</a>
                     </div>
                 </div>
                 <div class="col-lg-12">

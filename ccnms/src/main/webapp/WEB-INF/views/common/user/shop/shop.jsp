@@ -84,6 +84,7 @@
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
+                        	<input type="hidden" name="userId" value="${sessionScope.userId }"> 
                         	<c:if test="${sessionScope.userId != null}">
                         		<a href="${contextPath }/shop/addProduct"><input type="button" id="addProduct" value="상품 올리기"/></a>
                         	</c:if>
