@@ -9,4 +9,5 @@ public interface RankingService {
 	
 	public List<UserDTO> getRankingList() throws Exception;
 	public List<DiggingDTO> getDiggingList(String userId) throws Exception;
+	public List<DiggingDTO> getDiggingRankList()throws Exception;
 }

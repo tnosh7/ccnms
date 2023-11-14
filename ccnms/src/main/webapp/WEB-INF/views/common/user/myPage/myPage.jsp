@@ -42,7 +42,14 @@
                             <ul>
                                 <li><a href="${contextPath }/myPage/main"><strong>내프로필</strong></a></li>
                                 <li><a href="${contextPath }/myPage/myLog?userId=${userDTO.userId}"><strong>이력관리</strong></a></li>
-                                <li><a href="#"><strong>내 상점</strong></a></li>
+                                <li><a href="#"><strong>내 상점</strong></a>
+                                	<ul>
+                                		<li><a href="${contextPath }/myShop/cartList">&emsp;장바구니</a></li>
+                                		<li><a href="${contextPath }/myShop/myKeep">&emsp;찜한 상품</a></li>
+                                		<li><a href="${contextPath }/myShop/orderList">&emsp;주문내역</a></li>
+                                		<li><a href="${contextPath }/myShop/saleList">&emsp;판매내역</a></li>
+                                	</ul>
+                                </li>
                             </ul>
                         </div>
                         <hr>

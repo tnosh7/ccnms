@@ -9,12 +9,52 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+	function setQna() {
+		if("${sessionId==null}"=="true") {
+			Swal.fire({
+				  icon: 'info',
+				  title: '로그인 후에 이용가능합니다.',
+				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
+			})
+		}
+		else {
+			$("#qnaForm").show();	
+		}
+	}
+	
+	function addQna(productCd){
+		var qna = $('#qna').val();
+		$.ajax({
+			url:"${contextPath}/qna/addQna",
+			type:"get",
+			data: {
+				"productCd" : productCd,
+				"qna" : qna
+			},
+			success:function(){
+				confirm("추가됬음.");
+			}
+		})
+	}
+	
+	function replyQna(qnaCd){
+		var qnaReply = $("#qnaReply").val();
+		console.log(qnaReply);
+		$.ajax ({
+			url:"${contextPath}/qna/replyQna",
+			type:"get",
+			data: {
+				"qnaCd" : qnaCd,
+				"qnaReply" : qnaReply 
+			}
+		})		
+	}
+	
 	function orderSheet() {
 		var orderQty = $("[name='orderQty']").val();
 		var shopCd = $("[name='productCd']").val();
 		location.href="${contextPath }/order/orderSheet?shopCd=" + shopCd + "&orderQty=" + orderQty;
 	}
-
 	
 	function myCart(productCd) {
 		if ("${sessionId == null}" == "true") {
@@ -46,9 +86,20 @@
 			})
 		}
 	}
+	function showReply(qnaYn){
+		if (qnaYn == 'Y') {
+			$("#reply").show();
+		}
+		else {
+			$("#replyForm").show();
+		}
+	}
 </script>
 </head>
 <body>
+---------------------
+<h1>사용자아이디:${sessionId }</h1>
+-----------------
   <section class="product-details spad">
         <div class="container">
             <div class="row">
@@ -68,12 +119,7 @@
                     <div class="product__details__text">
                         <h3>${shopDTO.productNm }</h3>
                         <div class="product__details__rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <span>(18 reviews)</span>
+                            <span>(${reviewCnt } reviews)</span>
                         </div>
                         	<span style="text-decoration: line-through; color: gray">${shopDTO.price } 원 </span>
                         <div class="product__details__price"> 
@@ -111,7 +157,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                                    aria-selected="false">리뷰</a>
+                                    aria-selected="false">리뷰<span>(${reviewCnt })</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
@@ -127,7 +173,7 @@
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>리뷰</h6>
+                                    <h6>리뷰 (${reviewCnt })</h6>
                                     <a href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start">
 			                            <div class="d-flex justify-content-between w-100">
 			                              <h6>List group item heading</h6>
@@ -144,34 +190,87 @@
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Q&A<span>(${shopDTO.qnaCnt })</span></h6>
-                                    	<input type="button" value="Q&A 작성">
+                                    <p>구매하시는 상품에 대해 궁금한 점이 있으신 경우 문의해주세요.</p>
+                                    <div align="right">
+                                    	<input type="button" value="Q&A 작성" onclick="setQna();" >
+                                    </div>
+                                    <div id="qnaForm" style="display:none">
+				                        <span class="input-group-text">
+				                        	${sessionId}
+				                        	<input type="hidden" id="loginUserId" value="${sessionId}"/>
+				                        </span>
+				                        <textarea class="form-control" aria-label="With textarea" placeholder="질문을 입력해주세요." id="qna" name="qna" maxlength="200"></textarea>
+				                      	<input type='submit' value='작성' onclick="addQna(${shopDTO.productCd});">
+                                    </div>
+                                    <br>	
                                    <div class="card">
 					                <div class="table-responsive text-nowrap">
 					                  <table class="table">
 					                    <thead>
 					                      <tr>
 					                        <th>답변상태</th>
-					                        <th>제목</th>
+					                        <th>내용</th>
 					                        <th>작성자</th>
 					                        <th>작성일</th>
 					                      </tr>
 					                    </thead>
-					                    <tbody>
-					                      <tr>
-					                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Angular Project</strong></td>
-					                        <td>Albert Cook</td>
-					                        <td>
-					                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-					                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Lilian Fuller">
-					                            </li>
-					                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Sophia Wilkerson">
-					                            </li>
-					                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Christina Parker">
-					                            </li>
-					                          </ul>
-					                        </td>
-					                        <td><span class="badge bg-label-primary me-1">Active</span></td>
-					                      </tr>
+					                    <tbody >
+					                    <c:forEach var="qnaDTO" items="${qnaList}" varStatus="">
+					                    <c:choose>
+					                    	<c:when test="${qnaDTO eq null }">
+					                    		<tr>
+				                    				<td colspan="4">게시글이 없습니다.</td>
+					                    		</tr>
+					                    	</c:when>
+					                    	<c:otherwise>
+							                      <tr>
+							                      <td>
+							                        <c:choose>
+							                        	<c:when test="${qnaDTO.qnaYn eq 'F'}">
+									                        <strong>
+									                        		답변중
+									                        </strong>
+							                        	</c:when>
+							                        	<c:otherwise>
+									                        <strong>
+									                        		답변완료
+									                        </strong>
+							                        	</c:otherwise>
+							                        </c:choose>
+							                        </td>
+							                        <td>
+							                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+							                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" >
+							                            	<span onclick="showReply(${qnaDTO.qnaYn})">${qnaDTO.content }</span>
+							                            </li>
+							                          </ul>
+							                        </td>
+							                        <td><span class="badge bg-label-primary me-1">${qnaDTO.writer }</span></td>
+							                        <td><fmt:formatDate value="${qnaDTO.enrollDt }" pattern="yyyy-MM-dd"/></td>
+							                      </tr>
+							                      <tr id="reply" style="background-color:lightgrey">
+							                      		
+							                      		<td colspan="2">
+							                      			${qnaDTO.qnaReply }
+							                      	 	</td>
+							                      	 	<td>
+							                      	 		판매자
+							                      	 	</td>
+								                        <td><fmt:formatDate value="${qnaDTO.enrollDt }" pattern="yyyy-MM-dd"/></td>
+							                      </tr>
+							                      <tr id="replyForm" style="display:show">
+					                            	<c:if test="${shopDTO.writer eq sessionId }">
+								                      	<td colspan="3">
+								                        	<textarea rows="4" cols="80%" id="qnaReply" name="qnaReply"></textarea>
+								                      	</td>
+								                      	<td>
+								                      		<input type="submit" value="답변등록" onclick="replyQna(${qnaDTO.qnaCd})">
+								                      	</td>
+								                      </c:if>
+							                      </tr>
+					                    	</c:otherwise>
+					                    </c:choose>
+				                    </c:forEach>
 					                    </tbody>
 					                  </table>
 					                </div>

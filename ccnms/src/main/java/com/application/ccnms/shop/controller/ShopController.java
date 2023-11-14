@@ -39,16 +39,12 @@ public class ShopController {
 	@GetMapping("/")
 	public ModelAndView shop(@RequestParam(required =false, value="sort") String sort, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		HttpSession session = request.getSession();
-		session.getAttribute("userId");
 		if (sort == null) {
 			mv.addObject("shopList", shopService.getProductList());
 			mv.addObject("discountRateList", shopService.getDiscountRateList());
-			mv.addObject("userId", (String)session.getAttribute("userId"));
 		}
 		else {
 			mv.addObject("shopList", shopService.sortList(sort));
-			mv.addObject("userId", (String)session.getAttribute("userId"));
 		}
 		mv.setViewName("/shop/main");
 		return mv; 
@@ -107,10 +103,13 @@ public class ShopController {
 	@GetMapping("/shopDetail")
 	public ModelAndView shopDetail (@RequestParam("productCd") long productCd, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		HttpSession session = request.getSession();
-		session.setAttribute("userId", request.getParameter("userId"));
+		
 		mv.addObject("shopDTO", shopService.getProductDetail(productCd));
+		mv.addObject("qnaList", shopService.getQnaList(productCd));
+		mv.addObject("reviewList", shopService.getReviewList(productCd));
+		mv.addObject("reviewCnt", shopService.getReviewCnt(productCd));
 		mv.setViewName("/shop/shopDetail");
+		
 		return mv;
 	}
 	

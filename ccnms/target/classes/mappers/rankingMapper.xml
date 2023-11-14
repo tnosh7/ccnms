@@ -23,4 +23,18 @@
  			ENROLL_DT DESC
  	</select>
  	
+ 	<select id="selectListDiggingRank" resultType="DiggingDTO">
+ 		SELECT 
+ 			DIGGING_TOPIC, 
+ 			COUNT(READ_CNT) AS READ_CNT, 
+ 			COUNT(REPLY_CNT)AS REPLY_CNT 
+ 		FROM
+ 			DIGGING
+ 		GROUP BY 
+ 			DIGGING_TOPIC
+ 		ORDER BY
+ 			READ_CNT DESC,
+ 			REPLY_CNT DESC
+ 		LIMIT 5
+ 	</select>
 </mapper>

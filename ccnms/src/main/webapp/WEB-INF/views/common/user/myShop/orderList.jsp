@@ -18,6 +18,7 @@
                         <table>
                             <thead align="center">
                                 <tr>
+                                	<th>배송조회</th>
                                     <th colspan="2">상품</th>
                                     <th>상품수량</th>
                                     <th>주문가격</th>
@@ -34,11 +35,14 @@
 									<c:otherwise>
 										<c:forEach var="myOrder" items="${orderList }">
 			                                <tr>
+			                                	<td>
+			                                		<span>${myOrder.deliveryStatus}</span>
+			                                	</td>
 			                                    <td class="shoping__cart__product__pic">
 			                                    	<img src="${contextPath }/shop/thumbnails?file=${myOrder.productFile}" width="50" height="50"/>
 			                                    </td>
 			                                    <td class="shoping__cart__product" align="left">
-			                                    	<a href="${contextPath }/myPage/myOrderDetail/shopDetail?productCd=${myOrder.orderCd}&userId==${myOrder.userId}">
+			                                    	<a href="${contextPath }/myShop/orderDetail?orderCd=${myOrder.orderCd}&userId=${myOrder.userId}">
 			                                    		${myOrder.productNm }
 			                                    	</a>
 			                                    </td>

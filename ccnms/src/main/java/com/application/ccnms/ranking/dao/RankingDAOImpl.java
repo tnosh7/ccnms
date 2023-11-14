@@ -23,5 +23,10 @@ public class RankingDAOImpl implements RankingDAO {
 	public List<DiggingDTO> selectListDiggingList(String userId) throws Exception {
 		return sqlSession.selectList("ranking.selectListDiggingList", userId);
 	}
+
+	@Override
+	public List<DiggingDTO> selectListDiggingRank() throws Exception {
+		return sqlSession.selectList("ranking.selectListDiggingRank");
+	}
 	
 }

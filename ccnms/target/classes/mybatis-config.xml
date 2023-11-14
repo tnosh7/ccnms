@@ -16,6 +16,8 @@
 		<typeAlias type="com.application.ccnms.myShop.dto.KeepDTO" 		alias="KeepDTO"/>
 		<typeAlias type="com.application.ccnms.contact.dto.ContactDTO"	alias="ContactDTO"/>
 		<typeAlias type="com.application.ccnms.order.dto.OrderDTO"		alias="OrderDTO"/>
+		<typeAlias type="com.application.ccnms.qna.dto.QnaDTO"			alias="QnaDTO"/>
+		<typeAlias type="com.application.ccnms.review.dto.ReviewDTO"	alias="ReviewDTO"/>
 	
 	</typeAliases>
 

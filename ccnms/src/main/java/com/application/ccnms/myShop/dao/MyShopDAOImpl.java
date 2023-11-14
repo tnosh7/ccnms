@@ -88,5 +88,10 @@ public class MyShopDAOImpl implements MyShopDAO {
 		return sqlSession.selectOne("myShop.selectOneOrderDetail", orderDetailMap);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectListSaleList(String userId) throws Exception {
+		return sqlSession.selectList("myShop.selectListSaleList", userId);
+	}
+
 
 }

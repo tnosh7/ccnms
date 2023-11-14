@@ -15,4 +15,8 @@ public interface CommonDAO {
 	public List<ShopDTO> selectListgetExchangeShopList() throws Exception ;
 	public int updateThumbsUp(long diggingId) throws Exception ;
 	public int selectOneAllDiggingCnt(String search) throws Exception ;
+	public List<DiggingDTO> selectListDiggingSearch(String search) throws Exception ;
+	public List<ShopDTO> selectListShopSearch(String search)throws Exception ;
+
+
 }

@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-lg-12">
                      <div class="checkout__order">
-                        <div class="checkout__order__products">배송지<span></span></div>
+                        <div class="checkout__order__products">배송지<span><fmt:formatDate value="${orderDTO.payOrderTime }" pattern="yyyy-MM-dd"/></span></div>
                         <hr>
                         <ul>
                             <li>${orderDTO.ordererNm}</li>
@@ -54,16 +54,28 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
+                             <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>주문자 성함<span>*</span></p>
+                                        <input type="text" name="ordererNm" id="ordererNm" value="${orderDTO.ordererNm }" disabled> 
+                               		</div>
+                                </div>
+                                <div class="col-lg-6">
+	                                <div class="checkout__input">
+	                                    <p>주문자 연락처 <span>*</span></p>
+	                                    <input type="text" name="ordererHp" id="ordererHp" value="${orderDTO.ordererHp }" disabled>
+	                                </div>
+                            	</div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>받는분 성함<span>*</span></p>
-                                        <input type="text" name="receiverNm" id="receiverNm" value="${orderDTO.receiverNm }" >
+                                        <input type="text" name="receiverNm" id="receiverNm" value="${orderDTO.receiverNm }" disabled>
                                		</div>
                                 </div>
                                 <div class="col-lg-6">
 	                                <div class="checkout__input">
 	                                    <p>받는분 연락처 <span>*</span></p>
-	                                    <input type="text" name="receiverHp" id="receiverHp" value="${orderDTO.receiverHp }" placeholder="숫자만 입력" maxlength="11">
+	                                    <input type="text" name="receiverHp" id="receiverHp" value="${orderDTO.receiverHp }" disabled>
 	                                </div>
                             	</div>
                                 <div class="col-lg-12">
@@ -117,6 +129,7 @@
 	                           	 </div>
 	                            </c:otherwise>
 	                           	</c:choose>
+                           	</div>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="checkout__input">

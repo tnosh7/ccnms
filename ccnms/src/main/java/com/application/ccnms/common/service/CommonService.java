@@ -15,5 +15,7 @@ public interface CommonService {
 	public List<ShopDTO> getExchangeShopList() throws Exception;
 	public int upThumbsUp(long diggingId)throws Exception;
 	public int getAllDiggingCnt(String search) throws Exception;
-
+	public List<DiggingDTO> getDiggingSearch(String search)throws Exception;
+	public List<ShopDTO> getShopSearch(String search)throws Exception;
+	
 }

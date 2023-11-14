@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.application.ccnms.qna.dto.QnaDTO;
+import com.application.ccnms.review.dto.ReviewDTO;
 import com.application.ccnms.shop.dao.ShopDAO;
 import com.application.ccnms.shop.dto.ShopDTO;
 
@@ -42,5 +44,20 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public List<ShopDTO> bestSortList(String bestSort) throws Exception {
 		return shopDAO.selectListbestSort(bestSort);
+	}
+
+	@Override
+	public List<QnaDTO> getQnaList(long productCd) throws Exception {
+		return shopDAO.selectListQnaList(productCd);
+	}
+
+	@Override
+	public List<ReviewDTO> getReviewList(long productCd) throws Exception {
+		return shopDAO.selectListReviewList(productCd);
+	}
+
+	@Override
+	public int getReviewCnt(long productCd) throws Exception {
+		return shopDAO.selectOneReviewCnt(productCd);
 	}
 }

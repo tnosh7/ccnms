@@ -49,5 +49,17 @@ public class CommonServiceImpl implements CommonService {
 		return commonDAO.selectListgetExchangeShopList();
 	}
 
+	@Override
+	public List<DiggingDTO> getDiggingSearch(String search) throws Exception {
+		return commonDAO.selectListDiggingSearch(search);
+	}
+
+	@Override
+	public List<ShopDTO> getShopSearch(String search) throws Exception {
+		return commonDAO.selectListShopSearch(search);
+	}
+
+	
+
 	
 }

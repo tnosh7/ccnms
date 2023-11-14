@@ -8,4 +8,5 @@ import com.application.ccnms.user.dto.UserDTO;
 public interface RankingDAO {
 	public List<UserDTO> selectListRankingList() throws Exception;
 	public List<DiggingDTO> selectListDiggingList(String userId) throws Exception;
+	public List<DiggingDTO> selectListDiggingRank() throws Exception;
 }

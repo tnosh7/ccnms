@@ -23,4 +23,9 @@ public class RankingServiceImpl implements RankingService {
 	public List<DiggingDTO> getDiggingList(String userId) throws Exception {
 		return rankingDAO.selectListDiggingList(userId);
 	}
+
+	@Override
+	public List<DiggingDTO> getDiggingRankList() throws Exception {
+		return rankingDAO.selectListDiggingRank();
+	}
 }

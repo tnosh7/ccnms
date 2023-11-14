@@ -25,4 +25,6 @@ public interface MyShopDAO {
 	
 	public List<Map<String,Object>> selectListOrderList (String userId) throws Exception;
 	public Map<String,Object> selectOneOrderDetail (Map<String, Object> orderDetailMap) throws Exception;
+
+	public List<Map<String,Object>> selectListSaleList(String userId)throws Exception;
 }

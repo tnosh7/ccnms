@@ -2,6 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="sessionId" value="${sessionScope.userId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,15 +163,18 @@
                                     </div>
                                 </div>
                             </div>
-							<div>
-								<span>
-									<input type="button" id="modifyBtn" value="*">
-									<span id='modify'>
-										<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
-										<input type="button" id="delete" value="삭제" >
+                            <c:choose>
+                            	<c:when test="${diggingDTO.writer eq sessionId }">
+									<span>
+										<span id='modify'>
+											<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
+											<input type="button" id="delete" value="삭제" >
+										</span>
 									</span>
-								</span>
-								</div>
+                            	</c:when>
+                            	<c:otherwise>
+                            	</c:otherwise>
+                            </c:choose>
 						 	<hr>
 							<div align="center" >
 									<div class="reply-body" style="background:whitesmoke">
@@ -179,6 +183,14 @@
 				                        <dt class="col-sm-3"> ${replyDTO.writer }</dt>
 				                        <dd class="col-sm-9">${replyDTO.content }</dd>
 				                        <dt class="col-sm-3"><fmt:formatDate value="${replyDTO.enrollDT }" pattern="yyyy-MM-dd"/></dt>
+				                      	<c:if test="${replyDTO.writer eq sessionId }">
+				                      		<dd class="col-sm-9">
+				                      		<span id='modify' >
+												<input type="button" value="수정">
+												<input type="button" id="delete" value="삭제" >
+											</span>
+											</dd>
+				                      	</c:if>
 				                      </dl>
 				                      <hr>
 									</c:forEach>

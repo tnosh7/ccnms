@@ -11,8 +11,8 @@
 <script>
 	
 	$().ready(function(){
-		var cartQtyList	= "${cartQtyList}".split(",");
 		
+		var cartQtyList	= "${cartQtyList}".split(",");
 		var viewPaymentAmt = 0;
 		var paymentAmtList = 0;
 		var totalDeliveryPrice = 0;
@@ -236,24 +236,25 @@
                                 <c:forEach var="productDTO" items="${productList }" varStatus="i">
                                 <ul>
                                     <li>${i.index + 1}.&nbsp; ${productDTO.productNm }
-                                    <span id="qty${i}"></span>
                                     <span><fmt:formatNumber value="${productDTO.price - productDTO.price * productDTO.discountRate /100}"/>원</span></li>
-                                    <li>수량<span id="qty${i.index }"></span>
+                                    <li>수량<span id="qty${i.index}"></span>
                                     <li>배송비<span>${productDTO.deliveryPrice}원</span></li>
                                 	<li>배송방법<span>${productDTO.deliveryMethod }</span></li>
-                                	<input type="hidden" name="userId" value="${sessionId }">
-                                	<input type="hidden" name="deliveryPrice" value="${proucdtDTO.deliveryPrice }">
-                                	<input type="hidden" name="" value="">
-                                	<input type="hidden" name="" value="">
-                                	<input type="hidden" name="" value="">
                                 </ul>
+                               	<input type="hidden" name="userId" value="${sessionId }">
+                               	<input type="hidden" name="price" value="${productDTO.price}">
+                               	<input type="hidden" name="deliveryPrice" value="${productDTO.deliveryPrice}">
+                               	<input type="hidden" name="discountRate" value="${productDTO.discountRate}">
+                               	<input type="hidden" name="orderQtyList" value="${proucdtDTO.deliveryPrice }">
+                               	<input type="hidden" name="cartCdList" value="${cartCdList }">
+                               	<input type="hidden" name="productCdList" value="${productCdList }">
+                               	<input type="hidden" name="paymentAmtList" value="${paymentAmtList }">
+                               	<input type="hidden" name="totalPoint" value="${totalPoint }">
                                 </c:forEach>
                                 <hr>
                                 <p>포장 여부<span></span><input type="radio" name="package" value="Y">예 <input type="radio" name="package" value="N">아니오</span></p>
                               	<div class="checkout__order__total">
-                                	<c:set var="paymentAmt" value="${(productDTO.price- productDTO.price * productDTO.discountRate /100) * orderQty + productDTO.deliveryPrice *i}" />
-                                	총액 <span id="paymentAmt"><fmt:formatNumber value="${paymentAmt }"/></span></div>
-                                	
+                                	총액 <span id="viewPaymentAmt"></span></div>
                                 </div>
                                 <p style="color:green"><span>*</span>
                                  	주문자 정보로 결제관련 정보가 제공됩니다. 정확한 정보로 등록되어있는지 확인해주세요.

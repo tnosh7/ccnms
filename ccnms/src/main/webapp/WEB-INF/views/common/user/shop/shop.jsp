@@ -78,7 +78,10 @@
 </script>
 </head>
 <body>
-<section class="product spad">
+---------------------
+<h1>사용자아이디:${sessionId }</h1>
+-----------------
+<section class="product spad">	
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-5">

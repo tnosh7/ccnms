@@ -12,4 +12,9 @@
 	 		<put-attribute name="title" value="메인"/>	
 	 	</definition>
 	 	
+	 	<definition name="/search"  extends="common">	
+	 		<put-attribute name="body" value="/WEB-INF/views/common/user/digging/search.jsp"/>	
+	 		<put-attribute name="title" value="메인"/>	
+	 	</definition>
+	 	
 </tiles-definitions>

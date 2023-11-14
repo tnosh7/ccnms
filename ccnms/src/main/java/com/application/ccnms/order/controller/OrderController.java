@@ -47,9 +47,6 @@ public class OrderController {
 		mv.setViewName("/order/cartOrderSheet");
 		
 		HttpSession session = request.getSession();
-		System.out.println("==================================");
-		System.out.println(request.getParameter("userId"));
-		System.out.println("==================================");
 		session.setAttribute("myOrderCnt", userService.getMyOrderCnt((String)session.getAttribute("userId")));
 		session.setAttribute("myCartCnt", userService.getMyCartCnt((String)session.getAttribute("userId")));
 		
@@ -62,7 +59,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("/cartOrderSheet")
-	public ResponseEntity<Object> cartOrderSheet (UserDTO userDTO, OrderDTO orderDTO, HttpServletRequest request, @RequestParam("point")int point){
+	public ResponseEntity<Object> cartOrderSheet (UserDTO userDTO, OrderDTO orderDTO, HttpServletRequest request, @RequestParam("point")int point) throws Exception{
 		orderService.addCartOrder(orderDTO,point);
 		
 		HttpSession session = request.getSession();
@@ -71,7 +68,7 @@ public class OrderController {
 			   jsScript+= "</script>";
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
-		return new ResponseEntity<Object> (jsScript, responseHeaders, HttpHeaders.OK);
+		return new ResponseEntity<Object> (jsScript, responseHeaders, HttpStatus.OK);
 	}
 	
 	@GetMapping("/orderSheet") 
@@ -90,6 +87,9 @@ public class OrderController {
 		orderService.addOrder(orderDTO, point);
 		
 		HttpSession session = request.getSession();
+		System.out.println("==================================");
+		System.out.println(session.getAttribute("userId"));
+		System.out.println("==================================");
 		String jsScript = "<script>";
 			   jsScript+= "location.href='" + request.getContextPath() + "/shop/shopDetail?productCd=" + orderDTO.getProductCd() +"';";
 			   jsScript+= "</script>";

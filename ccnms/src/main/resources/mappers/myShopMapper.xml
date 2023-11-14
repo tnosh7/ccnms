@@ -189,6 +189,7 @@
 		<result column="ORDER_QTY" 			property="orderQty"/>	
 		<result column="PAYMENT_AMT" 		property="paymentAmt"/>	
 		<result column="PAY_ORDER_TIME" 	property="payOrderTime"/>	
+		<result column="DELIVERY_STATUS" 	property="deliveryStatus"/>	
 		<result column="PRODUCT_CD" 		property="productCd"/>	
 		<result column="PRODUCT_NM" 		property="productNm"/>	
 		<result column="PRICE" 				property="price"/>	
@@ -201,6 +202,7 @@
 				O.ORDER_QTY 		AS ORDER_QTY,
 				O.PAYMENT_AMT 		AS PAYMENT_AMT,
 				O.PAY_ORDER_TIME 	AS PAY_ORDER_TIME,
+				O.DELIVERY_STATUS 	AS DELIVERY_STATUS,
 				S.PRODUCT_CD 		AS PRODUCT_CD, 
 				S.PRODUCT_NM 		AS PRODUCT_NM,
 				S.PRICE 			AS PRICE,
@@ -250,7 +252,7 @@
 				O.ORDERER_HP 			AS ORDERER_HP,
 				O.RECEIVER_NM 			AS RECEIVER_NM,
 				O.RECEIVER_HP 			AS RECEIVER_HP,
-				O.ZIPCODE 				AS ZIPCODE
+				O.ZIPCODE 				AS ZIPCODE,
 				O.ROAD_ADDRESS 			AS ROAD_ADDRESS,
 				O.JIBUN_ADDRESS 		AS JIBUN_ADDRESS,
 				O.NAMUJI_ADDRESS 		AS NAMUJI_ADDRESS,
@@ -264,12 +266,12 @@
 				O.PAY_ORDERER_HP 		AS PAY_ORDERER_HP,
 				O.ACCOUNT_COMPANY_NM 	AS ACCOUNT_COMPANY_NM,
 				O.ACCOUNT 				AS ACCOUNT,
-				G.PRODUCT_CD 			AS PRODUCT_CD,
-				G.PRODUCT_NM 			AS PRODUCT_NM,
-				G.PRICE 				AS PRICE,
-				G.DISCOUNT_RATE 		AS DISCOUNT_RATE,
-				G.DELIVERY_PRICE 		AS DELIVERY_PRICE,
-				G.POINT 				AS POINT
+				S.PRODUCT_CD 			AS PRODUCT_CD,
+				S.PRODUCT_NM 			AS PRODUCT_NM,
+				S.PRICE 				AS PRICE,
+				S.DISCOUNT_RATE 		AS DISCOUNT_RATE,
+				S.DELIVERY_PRICE 		AS DELIVERY_PRICE,
+				S.POINT 				AS POINT
 		FROM 
 				ORDERED O 
 			JOIN USER U 
@@ -279,7 +281,40 @@
 			ON	S.PRODUCT_CD = O.PRODUCT_CD
 			AND O.ORDER_CD = #{orderCd}
 	</select>
-
-
-
+		<resultMap type="hashmap" id="saleListMap">
+		<result column="ORDER_CD" 			property="orderCd"/>	
+		<result column="USER_ID" 			property="userId"/>	
+		<result column="ORDER_QTY" 			property="orderQty"/>	
+		<result column="PAYMENT_AMT" 		property="paymentAmt"/>	
+		<result column="PAY_ORDER_TIME" 	property="payOrderTime"/>	
+		<result column="DELIVERY_STATUS" 	property="deliveryStatus"/>	
+		<result column="GIFT_WRAPPING" 		property="giftWrapping"/>	
+		<result column="PRODUCT_CD" 		property="productCd"/>	
+		<result column="PRODUCT_NM" 		property="productNm"/>	
+		<result column="PRICE" 				property="price"/>	
+		<result column="PRODUCT_FILE" 		property="productFile"/>	
+		<result column="WRITER" 			property="writer"/>	
+		<result column="QNA_CNT" 			property="qnaCnt"/>	
+	</resultMap>
+	<select id="selectListSaleList" parameterType="String" resultMap="saleListMap">
+		SELECT 
+				O.ORDER_CD 			AS ORDER_CD,
+				O.USER_ID			AS USER_ID,
+				O.ORDER_QTY 		AS ORDER_QTY,
+				O.PAYMENT_AMT 		AS PAYMENT_AMT,
+				O.PAY_ORDER_TIME 	AS PAY_ORDER_TIME,
+				O.DELIVERY_STATUS 	AS DELIVERY_STATUS,
+				O.GIFT_WRAPPING		AS GIFT_WRAPPING,
+				S.PRODUCT_CD 		AS PRODUCT_CD, 
+				S.PRODUCT_NM 		AS PRODUCT_NM,
+				S.PRICE 			AS PRICE,
+				S.PRODUCT_FILE		AS PRODUCT_FILE,
+				S.WRITER			AS WRITER,
+				S.QNA_CNT			AS QNA_CNT
+		FROM 
+				ORDERED O
+			JOIN SHOP S 
+			ON	O.PRODUCT_CD = S.PRODUCT_CD
+			AND S.WRITER = #{userId}	
+	</select>
 </mapper>

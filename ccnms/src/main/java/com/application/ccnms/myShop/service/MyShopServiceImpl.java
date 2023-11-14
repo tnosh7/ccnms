@@ -88,4 +88,9 @@ public class MyShopServiceImpl implements MyShopService {
 	public Map<String, Object> getOrderDetail(Map<String, Object> orderDetailMap) throws Exception {
 		return myShopDAO.selectOneOrderDetail(orderDetailMap);
 	}
+
+	@Override
+	public List<Map<String, Object>> getSaleList(String userId) throws Exception {
+		return myShopDAO.selectListSaleList(userId);
+	}
 }

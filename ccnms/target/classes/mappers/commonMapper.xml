@@ -16,9 +16,9 @@
 				FROM 
 					DIGGING
 				WHERE
-					SUBJECT LIKE CONCATE('%', #{search}, '%') OR
-					WRITER LIKE CONCATE('%', #{search}, '%') OR 
-					CONTENT LIKE CONCATE('%', #{search}, '%')	
+					SUBJECT LIKE CONCATE('%',#{search},'%') OR
+					WRITER LIKE CONCATE('%',#{search},'%') OR 
+					CONTENT LIKE CONCATE('%',#{search},'%')	
 			</otherwise>
 		</choose>
 	</select>
@@ -93,9 +93,9 @@
 						 ON		D.WRITER = U.USER_ID
 				WHERE 
 					D.DIGGING_TOPIC NOT IN ("NOTICE") AND
-					SUBJECT LIKE CONCAT('%', #{search}, '%') OR
-					WRITER LIKE CONCAT('%', #{search}, '%') OR
-					CONTENT LIKE CONCAT('%', #{search}, '%') 
+					SUBJECT LIKE CONCAT('%',#{search},'%') OR
+					WRITER LIKE CONCAT('%',#{search},'%') OR
+					CONTENT LIKE CONCAT('%',#{search},'%') 
 				ORDER BY 
 				<if test='sort == "readCnt"'>
 					D.READ_CNT DESC	
@@ -165,5 +165,29 @@
 		LIMIT
 			3
 	</select>
-	
+	<select id="selectListDiggingSearch" parameterType="String" resultType="DiggingDTO">
+		SELECT 
+				*
+		FROM 
+				DIGGING
+		WHERE
+				SUBJECT LIKE CONCAT('%',#{search},'%') OR
+				CONTENT LIKE CONCAT('%',#{search},'%') OR
+				WRITER	LIKE CONCAT('%',#{search},'%')
+		ORDER BY 
+				READ_CNT DESC
+	</select>	
+	<select id="selectListShopSearch" parameterType="String" resultType="ShopDTO">
+		SELECT 
+				*
+		FROM 
+				SHOP
+		WHERE
+				PRODUCT_NM LIKE CONCAT('%',#{search},'%') OR
+				WRITER LIKE CONCAT('%',#{search},'%') OR
+				CONTENT LIKE CONCAT('%',#{search},'%') OR
+				TAG LIKE CONCAT('%',#{search},'%')
+		ORDER BY 
+				READ_CNT DESC		
+	</select>	
 </mapper>

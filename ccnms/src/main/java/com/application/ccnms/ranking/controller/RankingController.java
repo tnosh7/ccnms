@@ -22,6 +22,7 @@ public class RankingController {
 	public ModelAndView ranking()throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("rankingList", rankingService.getRankingList());
+		mv.addObject("diggingRankList", rankingService.getDiggingRankList());
 		mv.setViewName("/ranking/ranking");
 		return mv;
 	
@@ -34,6 +35,7 @@ public class RankingController {
 		mv.addObject("otherUserId", userId);
 		return mv;
 	}
-
+	
+	
 
 }

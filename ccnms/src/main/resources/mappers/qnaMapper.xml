@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qna">
+	<insert id="insertQna" parameterType="QnaDTO">
+		INSERT INTO QNA (
+			WRITER,
+			CONTENT,
+			PRODUCT_CD
+		)
+		VALUES (
+			#{writer},
+			#{content},
+			#{productCd}
+		)
+	</insert>
+	
+	<update id="updateQnaCnt" parameterType="long">
+		UPDATE
+			SHOP 
+		SET
+			QNA_CNT = QNA_CNT +1	
+		WHERE 
+			PRODUCT_CD = #{productCd}
+	</update>
+	
+	<update id="updateReply" parameterType="QnaDTO">
+		UPDATE 
+			QNA
+		SET
+			<if test='qnaReply != null and qnaReply != ""'>	
+				QNA_REPLY = #{qnaReply},
+				QNA_YN = "Y"
+			</if>
+		WHERE
+			QNA_CD = #{qnaCd}	
+	</update>
+</mapper>

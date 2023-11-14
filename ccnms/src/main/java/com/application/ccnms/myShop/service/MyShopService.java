@@ -26,6 +26,7 @@ public interface MyShopService {
 	public List<Map<String,Object>> getOrderList(String userId) throws Exception;
 	public Map<String,Object> getOrderDetail(Map<String,Object>orderDetailMap) throws Exception;
 	
-
+	public List<Map<String,Object>>getSaleList (String userId)throws Exception;
+	
 
 }

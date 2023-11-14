@@ -89,7 +89,7 @@
                             <br>
                             <div class="blog__sidebar__recent">
                             	<c:forEach var="diggingDTO" items="${populerList }">
-                                <a href="#" class="digging__sidebar__populer__List">
+                                <class="digging__sidebar__populer__List">
                                     <div class="digging__sidebar__populer__List__file">
                                     <c:choose>
                                     	<c:when test="${diggingDTO.file != ''}">
@@ -98,10 +98,12 @@
                                     </c:choose>
                                     </div>
                                     <div class="digging__sidebar__populer__text">
-                                        <h6>${diggingDTO.writer}<br />${diggingDTO.subject } </h6>
-                                        <span>${diggingDTO.enrollDT }</span>
+                                        <a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">
+	                                        <p>${diggingDTO.writer}</p>
+	                                        <p>${diggingDTO.subject }</p>
+	                                        <span><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>
+                                        </a>
                                     </div>
-                                </a>
                                 <br>
                             	</c:forEach>
                             </div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="sessionId" value="${sessionScope.userId}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,6 +58,9 @@
 	} 
 </script>
 <body>
+---------------------
+<h1>사용자아이디:${sessionId }</h1>
+-----------------
     <!-- Categories Section Begin -->
     <section class="categories">
         <div class="container">
@@ -239,15 +243,16 @@
                                     </div>
                                 </a>
                             </c:forEach>
+                            <input type="hidden" name="userId" value="${sessionId }">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             </section>
-            </div>
-            </div>
-            </div>
+           </div>
+          </div>
+         </div>
     </section>
     <!-- Latest Product Section End -->
 

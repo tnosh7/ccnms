@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -107,4 +108,13 @@ public class CommonController {
 		out.close();
 	}
 	
+	@GetMapping("/search")
+	public ModelAndView search (@RequestParam("search") String search) throws Exception {
+		ModelAndView mv = new ModelAndView("/search");
+		mv.addObject("diggingList", commonService.getDiggingSearch(search));
+		mv.addObject("shopList", commonService.getShopSearch(search));
+		
+		return mv;
+		
+	}
 }

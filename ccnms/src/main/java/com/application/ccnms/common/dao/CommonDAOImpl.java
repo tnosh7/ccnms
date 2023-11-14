@@ -50,4 +50,15 @@ public class CommonDAOImpl implements CommonDAO {
 		return sqlSession.selectList("common.selectListgetExchangeShopList");
 	}
 
+	@Override
+	public List<DiggingDTO> selectListDiggingSearch(String search) throws Exception {
+		return sqlSession.selectList("common.selectListDiggingSearch", search);
+	}
+
+	@Override
+	public List<ShopDTO> selectListShopSearch(String search) throws Exception {
+		return sqlSession.selectList("common.selectListShopSearch", search);
+	}
+
+
 }
