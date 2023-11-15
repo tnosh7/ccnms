@@ -21,57 +21,27 @@
 		)	
 	</insert>
 	<select id="selectListDiggingList" parameterType="hashmap"  resultType="DiggingDTO">
-		<choose>
-			<when test='search.equals("")'>
-				SELECT 
-						*
-				FROM 
-					DIGGING
-				WHERE 
-					DIGGING_TOPIC = #{diggingTopic}
-				ORDER BY 
-				<if test='sort == "readCnt"'>
-					READ_CNT DESC	
-				</if> 
-				<if test='sort== "thumbsUp"'>
-					THUMBS_UP DESC	
-				</if> 
-				<if test='sort == "recent"'>
-					DIGGING_ID DESC	
-				</if>
-				<if test='sort == null'>
-					DIGGING_ID DESC	
-				</if>	
-				LIMIT 
-					#{startDiggingIdx}, #{onePageViewCnt}	
-			</when>
-			<otherwise>
-				SELECT 
-						*
-				FROM 
-					DIGGING
-				WHERE 
-					DIGGING_TOPIC = #{diggingTopic} AND
-					SUBJECT LIKE CONCAT('%', #{search}, '%') OR
-					WRITER LIKE CONCAT('%', #{search}, '%') OR
-					CONTENT LIKE CONCAT('%', #{search}, '%')
-				ORDER BY 
-				<if test='sort == "readCnt"'>
-					READ_CNT DESC	
-				</if> 
-				<if test='sort== "thumbsUp"'>
-					THUMBS_UP DESC	
-				</if> 
-				<if test='sort == "recent"'>
-					DIGGING_ID DESC	
-				</if>
-				<if test='sort == null'>
-					DIGGING_ID DESC	
-				</if>	 
-				LIMIT 
-					#{startDiggingIdx}, #{onePageViewCnt}
-			</otherwise>
-			</choose>
+		SELECT 
+				*
+		FROM 
+			DIGGING
+		WHERE 
+			DIGGING_TOPIC = #{diggingTopic}
+		ORDER BY 
+		<if test='sort == "readCnt"'>
+			READ_CNT DESC	
+		</if> 
+		<if test='sort== "thumbsUp"'>
+			THUMBS_UP DESC	
+		</if> 
+		<if test='sort == "recent"'>
+			DIGGING_ID DESC	
+		</if>
+		<if test='sort == null'>
+			DIGGING_ID DESC	
+		</if>	
+		LIMIT 
+			#{startDiggingIdx}, #{onePageViewCnt}	
 	</select>
 
 	<select id="selectListPopulerList" parameterType="hashmap"  resultType="DiggingDTO">
@@ -88,24 +58,12 @@
 		LIMIT 3
 	</select>
 	<select id="selectOneDiggingCnt" parameterType="String" resultType="int">
-		<choose>
-			<when test='search.equals("")'>
-				SELECT 
-					COUNT(*)
-				FROM 
-					DIGGING
-			</when>
-			<otherwise>
-				SELECT 
-					COUNT(*)
-				FROM 
-					DIGGING
-				WHERE 
-					SUBJECT LIKE CONCATE('%', #{search}, '%') OR
-					WRITER LIKE CONCATE('%', #{search}, '%') OR 
-					CONTENT LIKE CONCATE('%', #{search}, '%')			
-			</otherwise>
-		</choose>
+		SELECT 
+			COUNT(*)
+		FROM 
+			DIGGING
+		WHERE 
+			DIGGING_TOPIC = #{diggingTopic} 
 	</select>
 	
 	<select id="selectListUser" parameterType="String"  resultType="DiggingDTO">

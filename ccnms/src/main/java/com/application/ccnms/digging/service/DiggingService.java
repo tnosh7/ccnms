@@ -10,7 +10,7 @@ import com.application.ccnms.user.dto.UserDTO;
 public interface DiggingService {
 	public List<DiggingDTO> getDiggingList(Map<String, Object> searchMap) throws Exception;
 	public List<DiggingDTO> getPopulerList(Map<String, Object> searchMap) throws Exception;
-	public int getAllDiggingCnt(String search)throws Exception;
+	public int getAllDiggingCnt(String diggingTopic)throws Exception;
 	public List<UserDTO> getUser(String writer)throws Exception;
 	public void addDigging(DiggingDTO diggingDTO) throws Exception;
 	public DiggingDTO getDiggingDetail(long diggingId) throws Exception;

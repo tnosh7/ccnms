@@ -15,45 +15,45 @@
   	a {color:black}
   	a:visited { color:black; }
 	a:hover { color:purple; }   
-
+	ul{
+   list-style:none;
+   }
+	
 </style>
 <script>
 
 	$().ready(function(){
 		$("#onePageViewCnt").val("${onePageViewCnt}");
-		$("#search").val("${search}");
-		
-		$("#thumbsUp").click(function(){
-			var diggingId = $("#diggingId").val();
-			$.ajax ({
-				url : "${contextPath}/thumbsUp",
-				type : "post",
-				data : {"diggingId" : diggingId},
-				success : function(data){
-					
-					updatethumbsUp();
-				}
-			});	
-		});
-		
 	});
 	
-	function updatethumbsUp(){
-			
-			var thumbsUp = document.getElementById("thumbsUp").value;
-			thumbsUp += 1;
-			document.getElementById("thumbsUp").innerHTML = thumbsUp;
-			return;
-	}
-		 
 	function getDiggingList() {
 		
 		var url = "${contextPath }/digging/main"
 		    url += "?onePageViewCnt=" + $("#onePageViewCnt").val();
-		  	url += "&search=" + $("#search").val();
-		  	url += "&diggingTopic" + $("#diggingTopic").val();
+		  	url += "&diggingTopic=" + $("#diggingTopic").val();
 		location.href = url;
 	} 
+	
+	function updateThumb(diggingId) {
+		$.ajax({
+			url: "${contextPath}/updateThumbsUp",
+			type:"get",
+			data: {
+				"diggingId" : diggingId
+			},
+			success: function(data){
+				$("#updateThumbs").html(data);
+			}
+		});
+	}
+	function changeSort() {
+		var sort = $("#sort").val();
+		var diggingTopic = $("#diggingTopic").val();
+		var url ="${contextPath}/digging/main"
+		 	url+="?sort=" + sort;
+			url+="&diggingTopic=" + diggingTopic
+		location.href= url;
+	}
 </script>
 </head>
 <body>
@@ -84,8 +84,7 @@
                         <div class="blog__sidebar__search">
                         </div>
                         <div class="blog__sidebar__item" style="background:ghostwhite">
-                            <strong>인기많은 게시물</strong>
-                            <br>
+                            <h4>인기많은 게시물</h4>
                             <br>
                             <div class="blog__sidebar__recent">
                             	<c:forEach var="diggingDTO" items="${populerList }">
@@ -93,18 +92,17 @@
                                     <div class="digging__sidebar__populer__List__file">
                                     <c:choose>
                                     	<c:when test="${diggingDTO.file != ''}">
-                                        	<img src="${contextPath}/digging//thumbnails?file=${diggingDTO.file}" alt="" width="50" height="50">
+                                        	<img src="${contextPath}/digging/thumbnails?file=${diggingDTO.file}" alt="" width="50" height="50">
                                     	</c:when>
                                     </c:choose>
                                     </div>
                                     <div class="digging__sidebar__populer__text">
                                         <a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">
-	                                        <p>${diggingDTO.writer}</p>
-	                                        <p>${diggingDTO.subject }</p>
-	                                        <span><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>
+	                                        ${diggingDTO.writer}<span><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>
+	                                        <h5>${diggingDTO.subject }</h5>
                                         </a>
                                     </div>
-                                <br>
+                                <hr>
                             	</c:forEach>
                             </div>
                         </div>
@@ -127,19 +125,19 @@
 							  <div class="card-header" style="background:white">
 				                <ul>
 				                	<li>
-					                    <select>
-					                    	<option>인기순</option>
-					                    	<option>댓글순</option>
-					                    	<option>최신순</option>
+					                    <select id="sort" onchange="changeSort()">
+					                    	<option value="readCnt">인기많은순</option>
+					                    	<option value="thumbsUp">추천순</option>
+					                    	<option value="recent">최신순</option>
 					                    </select>
 				                	</li>
 				                </ul>	
-			                	<ul id="onePageViewCnt"> 
+			                	<ul> 
 			                   		<li> 
 										<select id="onePageViewCnt" onchange="getDiggingList()" >
 											<option>5</option>
 											<option>7</option>
-											<option selected>10</option>
+											<option>10</option>
 										</select>
 			                   		</li>
 		                    	</ul>
@@ -153,8 +151,10 @@
 								</c:when>
 							</c:choose>
 							<c:forEach var="diggingDTO" items="${diggingList }">
+							<c:set var="startDiggingIdx" value="${startDiggingIdx = startDiggingIdx + 1}"/>
                  				<div class="card mb-3" style="background:whitesmoke">
 								  <div class="card-body">
+									<span>${startDiggingIdx }. </span>
                  					 <h5 align="center"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.subject }</a></h5>
 									  <hr>
 									  <h6 class="card-title">${diggingDTO.writer }
@@ -165,7 +165,8 @@
 								    <p class="card-text"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.content }</a></p>
 								  </div>
 								  <div class="card-footer" style="background:white">
-								    &emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</a>
+								    &emsp;<a href="javascript:updateThumb(${diggingDTO.diggingId })" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp"/>
+								    	<span id="updateThumbs">${diggingDTO.thumbsUp }</span></a>
 								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${diggingDTO.replyCnt }</a>
 								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
 								   <input type="hidden" value="${diggingDTO.diggingId }"/>
@@ -173,18 +174,19 @@
 								  </div>
 								</div>
                       	 </c:forEach>
-						</div>		               
-                         <div class="product__pagination blog__pagination" align="center">
+						</div>		       
+						<br>
+                        <div class="product__pagination blog__pagination" align="center">
 					        <c:if test="${startPage > 10 }">
-						        <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&search=${search}"><i class="fa fa-long-arrow-left"></i></a>
+						        <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i>이전</a>
 					        </c:if>
-					        <c:forEach var="i" begin="${startPage }" end="${endPage}">
-					        <a href="${contextPath }/digging/main?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&search=${search}">${i }</a>
+					        <c:forEach var="i" begin="${startPage }" end="${endPage }">
+					       		<a href="${contextPath }/digging/main?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}">${i }</a>
 					        </c:forEach>
 					        <c:if test="${endPage != allPageCnt && endPage >= 10 }">
-					        	<a href="${contextPath }/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}&search=${search}"><i class="fa fa-long-arrow-right"></i></a>
+					        	<a href="${contextPath }/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i>다음</a>
 					        </c:if>
-					     </div>
+						</div>        
                     </div>
                 </div>
             </div>

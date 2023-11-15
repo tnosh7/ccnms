@@ -28,8 +28,8 @@ public class DiggingServiceImpl implements DiggingService {
 		return diggingDAO.selectListDiggingList(searchMap);
 	}
 	@Override
-	public int getAllDiggingCnt(String search) throws Exception{
-		return diggingDAO.selectOneDiggingCnt(search);
+	public int getAllDiggingCnt(String diggingTopic) throws Exception{
+		return diggingDAO.selectOneDiggingCnt(diggingTopic);
 	}
 	@Override
 	public List<UserDTO> getUser(String writer) throws Exception {

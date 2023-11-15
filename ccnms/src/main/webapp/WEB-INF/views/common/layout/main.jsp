@@ -151,7 +151,8 @@
                             </tbody>
                             <tfoot>
 							  	<tr><td colspan="4" align="left">
-							    &emsp;<a href="javascript:updateThumb(${diggingDTO.diggingId })" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp"/><span id="updateThumbs">${diggingDTO.thumbsUp }</span></a>
+							    &emsp;<a href="javascript:updateThumb(${diggingDTO.diggingId })" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp"/>
+							   		<span id="updateThumbs">${diggingDTO.thumbsUp }</span></a>
 							    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${diggingDTO.replyCnt}</a>
 							    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
 							   <input type="hidden" value="${diggingDTO.diggingId }"/>
@@ -176,11 +177,6 @@
         	<a href="${contextPath }/?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i>다음</a>
         </c:if>
      </div>
-    <!-- Featured Section End -->
-
-    <!-- Banner Begin -->
-
-    <!-- Latest Product Section Begin -->
     <section class="latest-product spad">
         <div class="container">
             <div class="row">

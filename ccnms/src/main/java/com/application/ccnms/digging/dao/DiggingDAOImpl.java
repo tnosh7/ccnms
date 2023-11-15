@@ -35,8 +35,8 @@ public class DiggingDAOImpl implements DiggingDAO  {
 		return sqlSession.selectList("digging.selectListUser", writer);
 	}
 	@Override
-	public int selectOneDiggingCnt(String search) throws Exception {
-		return sqlSession.selectOne("digging.selectOneDiggingCnt", search);
+	public int selectOneDiggingCnt(String diggingTopic) throws Exception {
+		return sqlSession.selectOne("digging.selectOneDiggingCnt", diggingTopic);
 	}
 	
 	@Override
