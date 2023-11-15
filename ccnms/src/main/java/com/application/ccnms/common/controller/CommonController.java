@@ -36,30 +36,33 @@ public class CommonController {
 	public ModelAndView home(@RequestParam(required =false, value="sort") String sort, HttpServletRequest request) throws Exception {
 	
 		ModelAndView mv = new ModelAndView();
-		String search = request.getParameter("search");
-		if (search == null) search = "";
-		
 		int onePageViewCnt = 10;
 		if (request.getParameter("onePageViewCnt") != null) {
 			onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
 		}
-		
+
 		String temp = request.getParameter("currentPageNumber");
 		if (temp == null) {
 			temp="1";
 		}
 		int currentPageNumber = Integer.parseInt(temp);
+
+		int allDiggingCnt = commonService.getAllDiggingCnt();
 		
-		int allDiggingCnt = commonService.getAllDiggingCnt(search);
-		int allPageCnt = allDiggingCnt / onePageViewCnt +1;
-		if (allDiggingCnt % onePageViewCnt == 0) allPageCnt--;
-		int startPage = (currentPageNumber -1)/ 10 * 10 +1;
+		int allPageCnt = allDiggingCnt / onePageViewCnt + 1;
+		if (allDiggingCnt % allPageCnt == 0) {
+			allPageCnt--;
+		}
+		
+		int startPage = (currentPageNumber - 1) / 10 * 10 + 1;
 		if (startPage == 0) {
 			startPage = 1;
 		}
 		int endPage = startPage + 9;
-		if (endPage >allPageCnt) endPage = allPageCnt;
+		if (endPage > allPageCnt) endPage = allPageCnt;
+		
 		int startDiggingIdx = (currentPageNumber -1) * onePageViewCnt;
+		
 
 		mv.addObject("startPage", startPage);
 		mv.addObject("endPage", endPage);
@@ -68,15 +71,13 @@ public class CommonController {
 		mv.addObject("onePageViewCnt", onePageViewCnt);
 		mv.addObject("currentPageNumber", currentPageNumber);
 		mv.addObject("startDiggingIdx",startDiggingIdx);
-		mv.addObject("search", search);
 		
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("onePageViewCnt", onePageViewCnt);
-		searchMap.put("startDiggingIdx", startDiggingIdx);
-		searchMap.put("search", search);
-		searchMap.put("sort", sort);
+		Map<String, Object> sortMap = new HashMap<String, Object>();
+		sortMap.put("onePageViewCnt", onePageViewCnt);
+		sortMap.put("startDiggingIdx", startDiggingIdx);
+		sortMap.put("sort", sort);
+		mv.addObject("diggingList", commonService.getDiggingList(sortMap));
 		
-		mv.addObject("diggingList", commonService.getDiggingList(searchMap));
 		mv.addObject("headList", commonService.getHeadList());
 		mv.addObject("recentShopList", commonService.getRecentShopList());
 		mv.addObject("populerShopList", commonService.getPopulerShopList());
@@ -86,12 +87,11 @@ public class CommonController {
 		return mv;
 	}
 
-	@PostMapping("/thumbsUp")
-	public ModelAndView thumbsUp(@RequestParam("diggingId") long diggingId) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("thumbsUp", commonService.upThumbsUp(diggingId));
-		return mv;
-		
+	@GetMapping("/updateThumbsUp")
+	public String updateThumbsUp(@RequestParam("diggingId") String diggingId) throws Exception {
+		commonService.upThumbsUp(Long.parseLong(diggingId));
+		String data = Integer.toString(commonService.countThumbsUp(Long.parseLong(diggingId)));
+		return data;
 	}
 	
 	
@@ -113,7 +113,6 @@ public class CommonController {
 		ModelAndView mv = new ModelAndView("/search");
 		mv.addObject("diggingList", commonService.getDiggingSearch(search));
 		mv.addObject("shopList", commonService.getShopSearch(search));
-		
 		return mv;
 		
 	}

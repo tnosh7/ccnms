@@ -158,9 +158,9 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="/search" style="background:ghostwhite">
-                                <input type="text" id="search" name="search" value="${search}" placeholder="What do yo u need?" onclick="onfocus">
-                                <button type="submit" class="site-btn" onclick="getDiggingList()">SEARCH</button>
+                            <form action="${contextPath }/search" style="background:ghostwhite">
+                                <input type="text" id="search" name="search" placeholder="What do yo u need?" onclick="onfocus">
+                                <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
                            	<section>

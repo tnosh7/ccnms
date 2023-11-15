@@ -19,7 +19,10 @@
    		text-align:center;
    		font-size: x-large;
    }
-   
+    table {
+    width: 100%;
+    height: 200px;
+  }
 </style>
 </head>
 <script>
@@ -27,35 +30,26 @@
 	$().ready(function(){
 		
 		$("#onePageViewCnt").val("${onePageViewCnt}");
-		$("#search").val("${search}");
-		
-		$("#thumbsUp").click(function(){
-			var diggingId = $("#diggingId").val();
-			$.ajax ({
-				url : "${contextPath}/thumbsUp",
-				type : "post",
-				data : {"diggingId" : diggingId},
-				success : function(mv){
-					updatethumbsUp();
-				}
-			});	
-		});
-		
 	});
-	function updatethumbsUp(){
-		
-		var thumbsUp = document.getElementById("thumbsUp").value;
-		thumbsUp += 1;
-		document.getElementById("thumbsUp").innerHTML = thumbsUp;
-		return;
-	}
+	
 	function getDiggingList() {
-		
 		var url = "${contextPath }/"
 		    url += "?onePageViewCnt=" + $("#onePageViewCnt").val();
-		  	url += "&search=" + $("#search").val();
 		location.href = url;
-	} 
+	}
+	
+	function updateThumb(diggingId) {
+		$.ajax({
+			url: "${contextPath}/updateThumbsUp",
+			type:"get",
+			data: {
+				"diggingId" : diggingId
+			},
+			success: function(data){
+				$("#updateThumbs").html(data);
+			}
+		});
+	}
 </script>
 <body>
 ---------------------
@@ -102,45 +96,48 @@
 						    </div>
 						  </li>
                     	</ul>
-                    	<ul id="onePageViewCnt"> 
+                    	<ul> 
 	                   		<li> 게시물 보기
 								<select id="onePageViewCnt" onchange="getDiggingList()" >
-									<option>5</option>
-									<option>7</option>
-									<option selected>10</option>
+									<option value="5">5</option>
+									<option value="7">7</option>
+									<option value="10">10</option>
 								</select>
 	                   		</li>
                     	</ul>
                 	</div>
             <div class="row">
                 <div class="col-lg-12">
-                
-                    <div class="shoping__cart__table" id="list-content">
+                    <div class="digging__table" id="list-content">
                       <c:forEach var="diggingDTO" items="${diggingList }">
                   		<input type="hidden" id="diggingId"  value="${diggingDTO.userList}"/>
-                        <table>
+                        <table style="width:100%">
                            	<thead height="50">
                        			<tr style="background:whitesmoke">
-                       				<th align="left" colspan="3" width="70%" >
-                       				<c:choose>
-                       					<c:when test="${diggingDTO.profile eq null}">
-                       						<a href="${contextPath }/client/userDetail?userId=${diggingDTO.userId}"><img src="${contextPath}/resources/admin/assets/img/avatars/2.png" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
-                       					</c:when>
-                       					<c:otherwise>
-		                       				<img src="${contextPath }/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;
-		                       				<a href="${contextPath }/ranking/otherUserInfo?userId=${diggingDTO.userId }">
-		                       					${diggingDTO.userId }&emsp;${diggingDTO.likePoint }
-		                       				</a>
-                       					</c:otherwise>
-                       				</c:choose>
+                       				<th align="left" colspan="4" style="width:70%">
+	                       				<c:choose>
+	                       					<c:when test="${diggingDTO.profile eq null}">
+	                       						<a href="${contextPath }/client/userDetail?userId=${diggingDTO.userId}"><img src="${contextPath}/resources/admin/assets/img/avatars/2.png" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
+	                       					</c:when>
+	                       					<c:otherwise>
+			                       				<img src="${contextPath }/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;
+			                       				<a href="${contextPath }/ranking/otherUserInfo?userId=${diggingDTO.userId }">
+			                       					${diggingDTO.userId }&emsp;${diggingDTO.likePoint }
+			                       				</a>
+	                       					</c:otherwise>
+	                       				</c:choose>
                      					<input type="hidden" id="writer" value="${diggingDTO.userId }"/>
                      					</th>
                        				<th align="right">${diggingDTO.enrollDT }</th>
                        			</tr>
                       		</thead>
-                            <tbody>
+                            <tbody style="height:50">
                                 <tr>
-									<th colspan="3" height="100"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}"><h5>${diggingDTO.subject }</h5></a></th>
+                                	<th align="left">
+                               			<c:set var="startDiggingIdx" value="${startDiggingIdx = startDiggingIdx + 1 }"/>
+	                       				<span>${startDiggingIdx }. </span>
+                                	</th>
+									<th colspan="3"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}"><h5>${diggingDTO.subject }</h5></a></th>
 	                                   <c:choose>
 	                                   	<c:when test="${diggingDTO.file eq ''}">
 	                                   	</c:when>
@@ -154,7 +151,7 @@
                             </tbody>
                             <tfoot>
 							  	<tr><td colspan="4" align="left">
-							    &emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" value="${diggingDTO.diggingId }"/>${diggingDTO.thumbsUp }</a>
+							    &emsp;<a href="javascript:updateThumb(${diggingDTO.diggingId })" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp"/><span id="updateThumbs">${diggingDTO.thumbsUp }</span></a>
 							    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${diggingDTO.replyCnt}</a>
 							    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
 							   <input type="hidden" value="${diggingDTO.diggingId }"/>
@@ -167,17 +164,16 @@
                     </div>
                 </div>
             </div>
-    <br>
-    <br>
+   		<br>
     <div class="product__pagination blog__pagination" align="center">
         <c:if test="${startPage > 10 }">
-	        <a href="${contextPath }/?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&search=${search}"><i class="fa fa-long-arrow-left"></i></a>
+	        <a href="${contextPath }/?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i>이전</a>
         </c:if>
         <c:forEach var="i" begin="${startPage }" end="${endPage }">
-        <a href="${contextPath }/?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&search=${search}">${i }</a>
+       		<a href="${contextPath }/?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}">${i }</a>
         </c:forEach>
         <c:if test="${endPage != allPageCnt && endPage >= 10 }">
-        	<a href="${contextPath }/?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}&search=${search}"><i class="fa fa-long-arrow-right"></i></a>
+        	<a href="${contextPath }/?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i>다음</a>
         </c:if>
      </div>
     <!-- Featured Section End -->
