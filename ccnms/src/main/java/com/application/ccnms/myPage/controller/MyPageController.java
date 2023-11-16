@@ -196,7 +196,6 @@ public class MyPageController {
 		int[] delReplyIdList = new int[temp.length];
 		for (int i = 0; i < temp.length; i++) {
 			delReplyIdList [i] = Integer.parseInt(temp[i]);
-			System.out.println(delReplyIdList [i]);
 		}
 		myPageService.removeReply(delReplyIdList);
 		

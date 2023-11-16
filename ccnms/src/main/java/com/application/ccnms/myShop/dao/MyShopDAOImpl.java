@@ -93,5 +93,11 @@ public class MyShopDAOImpl implements MyShopDAO {
 		return sqlSession.selectList("myShop.selectListSaleList", userId);
 	}
 
+	@Override
+	public void updateDeliveryStatus(int[] changeDeliveryList) throws Exception {
+		sqlSession.update("myshop.updateDeliveryStatus",changeDeliveryList);
+	
+	}
+
 
 }

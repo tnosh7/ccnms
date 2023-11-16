@@ -23,6 +23,7 @@
                                     <th>상품수량</th>
                                     <th>주문가격</th>
                                     <th>주문날짜</th>
+                                    <th>리뷰</th>
                                 </tr>
                             </thead>
                             <tbody >
@@ -54,6 +55,9 @@
 			                                    </td>
 			                                    <td>
 			                                    	<span><fmt:formatDate value="${myOrder.payOrderTime }"  pattern="yyyy-MM-dd"/></span>
+			                                    </td>
+			                                    <td>
+			                                    	<span></span>
 			                                    </td>
 			                                </tr>
 										</c:forEach>	                            	

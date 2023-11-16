@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.application.ccnms.qna.dto.QnaDTO;
-import com.application.ccnms.review.dto.ReviewDTO;
 import com.application.ccnms.shop.dto.ShopDTO;
 
 @Repository
@@ -56,13 +55,4 @@ public class ShopDAOImpl implements ShopDAO {
 		return sqlSession.selectList("shop.selectListQnaList", productCd);
 	}
 
-	@Override
-	public List<ReviewDTO> selectListReviewList(long productCd) throws Exception {
-		return sqlSession.selectList("shop.selectListReviewList", productCd);
-	}
-
-	@Override
-	public int selectOneReviewCnt(long productCd) throws Exception {
-		return sqlSession.selectOne("shop.selectOneReviewCnt", productCd);
-	}	
 }

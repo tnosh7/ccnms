@@ -156,10 +156,6 @@
                                     aria-selected="true">상품설명</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                                    aria-selected="false">리뷰<span>(${reviewCnt })</span></a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
                                     aria-selected="false">Q&A <span>(${shopDTO.qnaCnt })</span></a>
                             </li>
@@ -169,22 +165,6 @@
                                 <div class="product__details__tab__desc">
                                     <h6>${shopDTO.productNm }</h6>
                                     <p>${shopDTO.content }</p>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                <div class="product__details__tab__desc">
-                                    <h6>리뷰 (${reviewCnt })</h6>
-                                    <a href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start">
-			                            <div class="d-flex justify-content-between w-100">
-			                              <h6>List group item heading</h6>
-			                              <small class="text-muted">3 days ago</small>
-			                            </div>
-			                            <p class="mb-1">
-			                              Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-			                              blandit.
-			                            </p>
-			                            <small class="text-muted">Donec id elit non mi porta.</small>
-			                          </a>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-3" role="tabpanel">

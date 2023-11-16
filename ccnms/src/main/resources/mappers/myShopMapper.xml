@@ -317,4 +317,16 @@
 			ON	O.PRODUCT_CD = S.PRODUCT_CD
 			AND S.WRITER = #{userId}	
 	</select>
+	
+	<update id="updateDeliveryStatus">
+		UPDATE
+			ORDERED 
+		SET
+			DELIVERY_STATUS = '상품발송'
+		WHERE
+			ORDER_CD IN
+			<foreach collection="array" item="orderCd" separator="," open="(" close=")">
+				#{orderCd}		
+			</foreach>
+	</update>
 </mapper>

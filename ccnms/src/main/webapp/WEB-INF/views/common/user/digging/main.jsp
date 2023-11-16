@@ -155,7 +155,7 @@
                  				<div class="card mb-3" style="background:whitesmoke">
 								  <div class="card-body">
 									<span>${startDiggingIdx }. </span>
-                 					 <h5 align="center"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.subject }</a></h5>
+                 					 <h5 align="center"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}"><strong>${diggingDTO.subject }</strong></a></h5>
 									  <hr>
 									  <h6 class="card-title">${diggingDTO.writer }
 									 	&emsp;<i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/>

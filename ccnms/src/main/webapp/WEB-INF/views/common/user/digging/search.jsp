@@ -33,7 +33,7 @@
                             <tbody>
                                <c:forEach var="diggingDTO" items="${diggingList}" >
 			               			<c:choose>
-			               				<c:when test="${shopList eq '' }">
+			               				<c:when test="${empty shopList}">
 			               				<tr>
 			               					<td colspan="2">조회된 검색결과가 없습니다.</td>
 			               				</tr>
@@ -85,7 +85,7 @@
                             <tbody>
                                <c:forEach var="shopDTO" items="${shopList}">
 			               			<c:choose>
-			               				<c:when test="${shopList eq '' }">
+			               				<c:when test="${empty shopList}">
 			               				<tr>
 			               					<td colspan="2">조회된 검색결과가 없습니다.</td>
 			               				</tr>

@@ -31,7 +31,7 @@ public class OrderDTO {
 	private int orderQty;
 	private String accountCompanyNm;
 	private String account;
-	
+	private int review;
 	public long getOrderCd() {
 		return orderCd;
 	}
@@ -176,6 +176,12 @@ public class OrderDTO {
 	public void setAccount(String account) {
 		this.account = account;
 	}
+	public int getReview() {
+		return review;
+	}
+	public void setReview(int review) {
+		this.review = review;
+	}
 	@Override
 	public String toString() {
 		return "OrderDTO [orderCd=" + orderCd + ", userId=" + userId + ", productCd=" + productCd + ", paymentAmt="
@@ -186,9 +192,8 @@ public class OrderDTO {
 				+ ", giftWrapping=" + giftWrapping + ", payMethod=" + payMethod + ", payOrdererHp=" + payOrdererHp
 				+ ", cardCompanyNm=" + cardCompanyNm + ", cardPayMonth=" + cardPayMonth + ", payOrderTime="
 				+ payOrderTime + ", orderQty=" + orderQty + ", accountCompanyNm=" + accountCompanyNm + ", account="
-				+ account + "]";
+				+ account + ", review=" + review + "]";
 	}
-	
 	
 	
 }

@@ -107,20 +107,4 @@
 		WHERE
 			PRODUCT_CD = #{productCd}
 	</select>
-	<select id="selectListReviewList" parameterType="long" resultType="ReviewDTO">
-		SELECT
-			*
-		FROM 
-			REVIEW
-		WHERE 
-			PRODUCT_CD = #{productCd}
-	</select>
-	<select id="selectOneReviewCnt" parameterType="long" resultType="int">
-		SELECT 
-			COUNT(*)
-		FROM
-			REVIEW 
-		WHERE 
-			PRODUCT_CD = #{productCd}
-	</select>
 </mapper>

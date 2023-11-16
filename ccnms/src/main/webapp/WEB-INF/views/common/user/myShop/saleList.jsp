@@ -8,6 +8,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	function changeDeliveryStatus(){
+		var deliveryList="";
+		if ($("#deliveryCheck").prop("checked")) {
+			$("#deliveryCheck:checked").each(function(){
+				deliveryList+= $(this).val()+",";
+				location.href="${contextPath}/myShop/changeDeliveryStatus?deliveryList=" + deliveryList;
+			});
+		}
+	}
+
+</script>
 </head>
 <body>
 <section class="shoping-cart spad">
@@ -22,6 +34,7 @@
                         <table>
                             <thead align="center">
                                 <tr>
+                                	<th>체크</th>
                                     <th colspan="2">주문정보</th>
                                     <th>주문자</th>
                                     <th>상품수량</th>
@@ -41,6 +54,9 @@
 									<c:otherwise>
 										<c:forEach var="sale" items="${saleList }">
 			                                <tr>
+			                                	<td width=7>
+			                                		<input type="checkbox" id="deliveryCheck" name="orderCd" value="${sale.orderCd }">
+			                                	</td>
 			                                    <td class="shoping__cart__product__pic">
 			                                    	<img src="${contextPath }/shop/thumbnails?file=${sale.productFile}" width="50" height="50"/>
 			                                    </td>
@@ -83,7 +99,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns" align="center">
-                        <a href="${contextPath }/shop/" class="primary-btn cart-btn">계속 쇼핑하기</a>
+                        <a href="javascript:changeDeliveryStatus();" class="primary-btn cart-btn">상품발송</a>
                     </div>
                 </div>
             </div>

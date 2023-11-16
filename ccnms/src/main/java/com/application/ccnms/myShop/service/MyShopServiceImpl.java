@@ -93,4 +93,9 @@ public class MyShopServiceImpl implements MyShopService {
 	public List<Map<String, Object>> getSaleList(String userId) throws Exception {
 		return myShopDAO.selectListSaleList(userId);
 	}
+
+	@Override
+	public void changeDeliveryStatus(int[] changeDeliveryList) throws Exception {
+		myShopDAO.updateDeliveryStatus(changeDeliveryList);
+	}
 }

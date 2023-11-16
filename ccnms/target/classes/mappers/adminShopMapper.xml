@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminShop">
+	<select id="selectListShop" resultType="ShopDTO">
+		SELECT
+			*
+		FROM
+			SHOP
+	</select>
+	
+	
+	<resultMap type="hashmap" id="adminOrderListMap">
+		<result column="ORDER_CD" 			property="orderCd"/>	
+		<result column="USER_ID" 			property="userId"/>	
+		<result column="ORDER_QTY" 			property="orderQty"/>	
+		<result column="PAYMENT_AMT" 		property="paymentAmt"/>	
+		<result column="PAY_ORDER_TIME" 	property="payOrderTime"/>	
+		<result column="DELIVERY_STATUS" 	property="deliveryStatus"/>	
+		<result column="PRODUCT_CD" 		property="productCd"/>	
+		<result column="PRODUCT_NM" 		property="productNm"/>	
+		<result column="PRICE" 				property="price"/>	
+	</resultMap>
+	<select id="selectListOrder" resultMap="adminOrderListMap">
+			SELECT 
+				O.ORDER_CD 			AS ORDER_CD,
+				O.USER_ID			AS USER_ID,
+				O.ORDER_QTY 		AS ORDER_QTY,
+				O.PAYMENT_AMT 		AS PAYMENT_AMT,
+				O.PAY_ORDER_TIME 	AS PAY_ORDER_TIME,
+				O.DELIVERY_STATUS 	AS DELIVERY_STATUS,
+				S.PRODUCT_CD 		AS PRODUCT_CD, 
+				S.PRODUCT_NM 		AS PRODUCT_NM,
+				S.PRICE 			AS PRICE
+		FROM 
+				ORDERED O
+			JOIN SHOP S 
+			ON	O.PRODUCT_CD = S.PRODUCT_CD
+			AND S.WRITER = 'Modudigging'
+	</select>
+	
+<resultMap type="hashmap" id="adminOrderDetailMap">
+		<result column="ORDER_CD" 			property="orderCd"/>
+		<result column="ORDER_QTY" 			property="orderQty"/>
+		<result column="PAYMENT_AMT" 		property="paymentAmt"/>
+		<result column="ORDERER_NM" 		property="ordererNm"/>
+		<result column="ORDERER_HP" 		property="ordererHp"/>
+		<result column="RECEIVER_NM" 		property="receiverNm"/>
+		<result column="RECEIVER_HP" 		property="receiverHp"/>
+		<result column="ZIPCODE" 			property="zipcode"/>
+		<result column="ROAD_ADDRESS" 		property="roadAddress"/>
+		<result column="JIBUN_ADDRESS" 		property="jibunAddress"/>
+		<result column="NAMUJI_ADDRESS" 	property="namujiAddress"/>
+		<result column="DELIVERY_METHOD" 	property="deliveryMethod"/>
+		<result column="DELIVERY_MESSAGE" 	property="deliveryMessage"/>
+		<result column="DELIVERY_STATUS" 	property="deliveryStatus"/>
+		<result column="GIFT_WRAPPING" 		property="giftWrapping"/>
+		<result column="PAY_METHOD" 		property="payMethod"/>
+		<result column="CARD_COMPANY_NM" 	property="cardCompanyNm"/>
+		<result column="CARD_PAY_MONTH" 	property="cardPayMonth"/>
+		<result column="PAY_ORDERER_HP" 	property="payOrdererHp"/>
+		<result column="ACCOUNT_COMPANY_NM" property="accountCompanyNm"/>
+		<result column="ACCOUNT" 			property="account"/>
+		<result column="PRODUCT_CD" 		property="productCd"/>
+		<result column="PRODUCT_NM" 		property="productNm"/>
+		<result column="PRICE" 				property="price"/>
+		<result column="DISCOUNT_RATE" 		property="discountRate"/>
+		<result column="DELIVERY_PRICE" 	property="deliveryPrice"/>
+		<result column="POINT" 				property="point"/>
+	</resultMap>
+	<select id="selectOneOrder" parameterType="hashmap" resultMap="adminOrderDetailMap">
+		SELECT 
+				O.ORDER_CD 				AS ORDER_CD,
+				O.ORDER_QTY 			AS ORDER_QTY,
+				O.PAYMENT_AMT 			AS PAYMENT_AMT,
+				O.ORDERER_NM 			AS ORDERER_NM,
+				O.ORDERER_HP 			AS ORDERER_HP,
+				O.RECEIVER_NM 			AS RECEIVER_NM,
+				O.RECEIVER_HP 			AS RECEIVER_HP,
+				O.ZIPCODE 				AS ZIPCODE,
+				O.ROAD_ADDRESS 			AS ROAD_ADDRESS,
+				O.JIBUN_ADDRESS 		AS JIBUN_ADDRESS,
+				O.NAMUJI_ADDRESS 		AS NAMUJI_ADDRESS,
+				O.DELIVERY_METHOD 		AS DELIVERY_METHOD,
+				O.DELIVERY_MESSAGE 		AS DELIVERY_MESSAGE,
+				O.DELIVERY_STATUS 		AS DELIVERY_STATUS,
+				O.GIFT_WRAPPING 		AS GIFT_WRAPPING,
+				O.PAY_METHOD 			AS PAY_METHOD,
+				O.CARD_COMPANY_NM 		AS CARD_COMPANY_NM,
+				O.CARD_PAY_MONTH 		AS CARD_PAY_MONTH,
+				O.PAY_ORDERER_HP 		AS PAY_ORDERER_HP,
+				O.ACCOUNT_COMPANY_NM 	AS ACCOUNT_COMPANY_NM,
+				O.ACCOUNT 				AS ACCOUNT,
+				S.PRODUCT_CD 			AS PRODUCT_CD,
+				S.PRODUCT_NM 			AS PRODUCT_NM,
+				S.PRICE 				AS PRICE,
+				S.DISCOUNT_RATE 		AS DISCOUNT_RATE,
+				S.DELIVERY_PRICE 		AS DELIVERY_PRICE,
+				S.POINT 				AS POINT
+		FROM 
+				ORDERED O 
+			JOIN USER U 
+			ON	U.USER_ID = O.USER_ID
+			AND U.USER_ID = #{userId}
+			JOIN SHOP S
+			ON	S.PRODUCT_CD = O.PRODUCT_CD
+			AND O.ORDER_CD = #{orderCd}
+	</select>
+</mapper>

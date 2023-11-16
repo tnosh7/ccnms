@@ -14,6 +14,7 @@ public class ContactDTO {
 	private String reply;
 	private String replyYN;
 	private Date regDt ;
+	private String category;
 	public int getContactCd() {
 		return contactCd;
 	}
@@ -56,12 +57,18 @@ public class ContactDTO {
 	public void setRegDt(Date regDt) {
 		this.regDt = regDt;
 	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	@Override
 	public String toString() {
 		return "ContactDTO [contactCd=" + contactCd + ", userId=" + userId + ", subject=" + subject + ", content="
-				+ content + ", reply=" + reply + ", replyYN=" + replyYN + ", regDt=" + regDt + "]";
+				+ content + ", reply=" + reply + ", replyYN=" + replyYN + ", regDt=" + regDt + ", category=" + category
+				+ "]";
 	}
-
 	
 	
 }

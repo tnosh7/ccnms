@@ -261,4 +261,19 @@ public class MyShopController {
 	    wb.close();
 	}
 	
+	@GetMapping("/changeDeliveryStatus") 
+	public String changeDeliveryStatus (@RequestParam("deliveryList") String deliveryList) throws Exception {
+		String []temp = deliveryList.split(",");
+		int[]changeDeliveryList = new int[temp.length];
+		for (int i = 0; i < temp.length; i++) {
+			changeDeliveryList[i] = Integer.parseInt(temp[i]);
+		}
+		myShopService.changeDeliveryStatus(changeDeliveryList);
+		
+		String jsScript = "<script>";
+			   jsScript+="history.go(-1)";
+			   jsScript+="</script>";
+		return jsScript;
+		
+	}
 }

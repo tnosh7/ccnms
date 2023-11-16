@@ -106,8 +106,6 @@ public class ShopController {
 		
 		mv.addObject("shopDTO", shopService.getProductDetail(productCd));
 		mv.addObject("qnaList", shopService.getQnaList(productCd));
-		mv.addObject("reviewList", shopService.getReviewList(productCd));
-		mv.addObject("reviewCnt", shopService.getReviewCnt(productCd));
 		mv.setViewName("/shop/shopDetail");
 		
 		return mv;

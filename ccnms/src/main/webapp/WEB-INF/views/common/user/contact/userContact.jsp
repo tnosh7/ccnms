@@ -79,6 +79,15 @@
 	                    <div class="col-lg-6 col-md-6">
 	                        <input type="text" name="userId" placeholder="유저 아이디" value="${sessionId }" readonly>
 	                    </div>
+	                    <div class="col-lg-6 col-md-6">
+	                        <span>
+	                        	<select name="category">
+	                        		<option value="qna">고객문의</option>
+	                        		<option value="topic">토픽신청</option>
+	                        		<option value="publish">홍보요청</option>
+	                        	</select>
+	                        </span>
+	                    </div>
 	                    <div class="col-lg-12">
 	                        <input type="text" name="subject" placeholder="제목">
 	                    </div>

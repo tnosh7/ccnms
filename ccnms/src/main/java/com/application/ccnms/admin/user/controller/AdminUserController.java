@@ -1,5 +1,7 @@
 package com.application.ccnms.admin.user.controller;
 
+import java.io.File;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -30,10 +32,12 @@ import com.application.ccnms.admin.dto.AdminDTO;
 import com.application.ccnms.admin.user.service.AdminUserService;
 import com.application.ccnms.user.dto.UserDTO;
 
+import net.coobird.thumbnailator.Thumbnails;
+
 @Controller
 @RequestMapping("/admin/management")
 public class AdminUserController {
-
+	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	@Autowired
 	private AdminUserService adminUserService;
 	
@@ -250,7 +254,20 @@ public class AdminUserController {
 		
 	}
 
-
+	@GetMapping("/thumbnails")
+	public void thumbnails(@RequestParam("fileName") String fileName, HttpServletResponse response) throws Exception {
+	
+		OutputStream out = response.getOutputStream();
+		String filePath = FILE_REPO_PATH + fileName;
+		
+		File image = new File(filePath);
+		if (image.exists()) { 
+			Thumbnails.of(image).size(800,800).outputFormat("png").toOutputStream(out);
+		}
+		byte[] buffer = new byte[1024 * 8];
+		out.write(buffer);
+		out.close();
+	}
 
 	
 	

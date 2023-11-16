@@ -126,7 +126,7 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="${contextPath }//admin/contact/contactList" class="menu-link">
+            <a href="${contextPath }/admin/contact/contactList" class="menu-link">
               <i class="menu-icon tf-icons bx bx-crown"></i>
               <div data-i18n="Boxicons">고객문의 관리</div>
             </a>
@@ -136,13 +136,13 @@
           <li class="menu-header small text-uppercase"><span class="menu-header-text">상점 관리</span></li>
           <!-- Forms -->
           <li class="menu-item">
-            <a href="tables-basic.html" class="menu-link">
+            <a href="${contextPath }/admin/shop/shopList" class="menu-link">
               <i class="menu-icon tf-icons bx bx-table"></i>
               <div data-i18n="Tables">상품 조회</div>
             </a>
           </li>
           <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
+            <a href="${contextPath }/admin/shop//orderList" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
               <div data-i18n="Basic">주문 조회</div>
             </a>

@@ -174,7 +174,11 @@ nav {
 		                        <td>${userDTO.email}</td>
 		                        <td><span class="badge bg-label-primary me-1">${userDTO.sex}</span></td>
 		                        <td><span class="badge bg-label-success me-1">${userDTO.emailYN}</span></td>
-		                        <td>${userDTO.profile}</td>
+		                        <td>
+			                        <c:if test="${userDTO.profile != null }">
+			                        	<img src="${contextPath }/admin/management/thumbnails?fileName=${userDTO.profile }" width="40" height="40">
+			                        </c:if>
+		                        </td>
 		                        <td>${userDTO.zipcode} ${userDTO.roadAddress} ${userDTO.namujiAddress}</td>
 		                        <td>${userDTO.likePoint}</td>
 		                        <td>${userDTO.joinDT}</td>
