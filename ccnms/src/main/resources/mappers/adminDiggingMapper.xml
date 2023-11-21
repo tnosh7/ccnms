@@ -30,4 +30,14 @@
 			DIGGING
 	
 	</select>
+	
+	<delete id="selectListdeleteDigging">
+		DELETE FROM
+			DIGGING
+		WHERE
+			DIGGING_ID IN
+			<foreach collection="array" item="diggingId" separator="," open="(" close=")">
+				#{diggingId}
+			</foreach>
+	</delete>
 </mapper>

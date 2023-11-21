@@ -20,19 +20,20 @@ public class AdminUserServiceImpl implements AdminUserService {
 	public List<UserDTO> getUserList() throws Exception {
 		return adminUserDAO.selectListUser();
 	}
-
+	
+	@Override
+	public List<UserDTO> getSearchUserList(Map<String, Object> searchMap) throws Exception {
+		return adminUserDAO.selectListSearchUser(searchMap);
+	}
+	
 	@Override
 	public List<AdminDTO> getAdminList() throws Exception {
 		return adminUserDAO.selectListAdmin();
 	}
 
 	@Override
-	public List<AdminDTO> getSearchAdmin(Map<String, String> searchMap) throws Exception {
-		return adminUserDAO.selectListSearchAdmin(searchMap);
-	}
-
-	@Override
 	public void deleteUserList(String[] delUserIdList) throws Exception {
 		adminUserDAO.deleteUserList(delUserIdList);
 	}
+
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -65,8 +66,6 @@ public class AdminDiggingController {
 		return jsScript;
 	}
 	
-	
-	
 	@GetMapping("/diggingManagement")
 	public ModelAndView diggingManagement () throws Exception {
 		ModelAndView mv= new ModelAndView();
@@ -74,4 +73,17 @@ public class AdminDiggingController {
 		mv.setViewName("/admin/digging/diggingManagement");
 		return mv;
 	}
+	
+	@GetMapping("/removeDigging")
+	public ModelAndView removeDigging (@RequestParam("removeDiggingList") String removeDiggingList) throws Exception  {
+		String [] temp =  removeDiggingList.split(",");
+		int [] removeDiggingIdList= new int[temp.length];
+		for (int i = 0; i < temp.length; i++) {
+			removeDiggingIdList[i] = Integer.parseInt(temp[i]);
+		}
+		adminDiggingService.removeDiggingList(removeDiggingIdList);
+		return new ModelAndView("redirect:/admin/digging/diggingManagement");
+		
+	}
+	
 }

@@ -7,6 +7,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	$().ready(function(){
+		
+		$("form").submit(function(){
+			if (${sessionId == null}) {
+				Swal.fire({
+					  icon: 'info',
+					  title: '로그인 후에 이용가능합니다.',
+					  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
+				})
+				return false;
+			}
+		});
+		
+	});
+
+</script>
 </head>
 <body>
 	<section class="contact spad">

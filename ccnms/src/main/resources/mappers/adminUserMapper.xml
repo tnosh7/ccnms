@@ -2,11 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="adminUser" >
+	<select id="selectListSearchUser" parameterType="hashmap" resultType="UserDTO">
+		SELECT 
+				*
+		FROM
+				USER
+		WHERE
+				<if test='searchKey.equals("hp")'>
+				HP LIKE CONCAT('%',#{searchWord},'%')
+				</if>
+				<if test='searchKey.equals("birth")'>
+				BIRTH_DT LIKE CONCAT('%',#{searchWord},'%')
+				</if>
+				<if test='searchKey.equals("name")'>
+				USER_NM LIKE CONCAT('%',#{searchWord},'%')
+				</if>
+				<if test='searchKey.equals("userId")'>
+				USER_ID LIKE CONCAT('%',#{searchWord},'%')
+				</if>
+	</select>
 	<select id="selectListUser" resultType="UserDTO">
 		SELECT 
 				*
 		FROM 
-				USER	
+				USER
 	</select>
 	<select id="selectListAdmin" resultType="AdminDTO">
 		SELECT 
@@ -14,32 +33,14 @@
 		FROM 
 				ADMIN
 	</select>
-	<select id="selectListSearchAdmin" parameterType="AdminDTO" resultType="hashMap">
-		SELECT 
-				*
-		FROM 
-				ADMIN
-		<where>
-			<if test='searchKey.equals("adminId")'>
-				ADMIN_ID LIKE CONCAT ('%', #{searchKeyword}, '%')
-			</if>
-			<if test='searchKey.equals("adminNm")'>
-				ADMIN_NM LIKE CONCAT ('%', #{searchKeyword}, '%')
-			</if>
-			<if test='searchKey.equals("adminRank")'>
-				ADMIN_Rank LIKE CONCAT ('%', #{searchKeyword}, '%')
-			</if>
-		</where>
-	</select>
 	
-	<delete id="delUserIdList">
+	<delete id="deleteUserList" >
 		DELETE FROM 
 				USER
 		WHERE 
 				USER_ID IN
-		<foreach collection="array" item="userId" separator="," open="(" close=")">
-				#{userId}
-		</foreach>
-	
+			<foreach collection="array" item="userId" separator="," open="(" close=")">
+					#{userId}
+			</foreach>
 	</delete>
 </mapper>

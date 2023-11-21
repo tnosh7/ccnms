@@ -21,38 +21,40 @@ nav {
 </style>
 </head>
 <script>
-	$().ready(function(){
-		
-		$("#allCheck").change(function(){
-			if($("#allCheck").prop("checked")) {
-				$("[name='userId']").prop("checked", true);			
-			}
-			else if($("#allCheck").prop("checked", false)) {
-				$("[name='userId']").prop("checked", false);	
-			}
-		});
-	});
-	function deleteUser(){
-		var deluserIdList = "";
-		$("input[name='userId']:checked").each(function(){
-			deluserIdList = $(this).val() + ",";
-		});
-		Swal.fire({
-			  title: '유저를 삭제하시겠습니까?',
-			  showDenyButton: true,
-			  showCancelButton: true,
-			  confirmButtonText: '네',
-			  denyButtonText: '아니요',
-			}).then((result) {
-			  if (result.isConfirmed) {
-				location.href="${contextPath}//admin/management/delUser?deluserIdList=" + deluserIdList;
-			   	
-			  } else if (result.isDenied) {
-				  return;
-			  }
-		})
+	
+	function selectAllDigging(){
+		if ($("#allDigging").prop("checked")){
+			$("[name='diggingId']").prop("checked", true);
+		}
+		else {
+			$("[name='diggingId']").prop("checked", false);
+		}
 	}
-		
+	
+	function removeDigging(){
+		var removeDiggingList = "";
+		if($("input[name='diggingId']:checked")) {
+			$("input[name='diggingId']:checked").each(function(){
+				removeDiggingList += $(this).val() + ",";
+				location.href="${contextPath}/admin/digging/removeDigging?removeDiggingList=" + removeDiggingList;
+			});
+		}
+		else return;
+	}
+	
+	function search(){
+		var searchKey = $("[name='searchKey']").val();
+		var searchWord = $("[name='searchWord']").val();
+		if (searchWord == "" || searchKey == "null") {
+			return;
+		}
+		else {
+			var url = "${contextPath}/admin/management/"
+				url +="?searchWord=" + searchWord;
+				url +="&searchKey=" + searchKey;
+			location.href= url;
+		}
+	}
 </script>
 <body>
 <fieldset>
@@ -96,17 +98,12 @@ nav {
                 <img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/id.png"/><strong> 디깅 조회</strong></h5>
 	            <nav>
 					<ul class="nav nav-pills flex-md-row mb-3" >
+                        <li>
+                          <button type="button" class="btn btn-outline-primary" onclick="location.href='${contextPath }/admin/digging/diggingAdd'">디깅하기</button>
+                        </li>
+						&emsp;
 						<li><a href="${contextPath }/admin/management/userExcelExport"><img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a></li>
 						&emsp;
-						<li><div class="btn-group">
-                          <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow show" data-bs-toggle="dropdown" aria-expanded="true">
-                            <i class="bx bx-dots-vertical-rounded"></i>
-                          </button>
-                          <ul class="dropdown-menu dropdown-menu-end show" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 40px, 0px);">
-                            <li><a class="dropdown-item"  onclick="updateUser();">디깅수정</a></li>
-                            <li><a class="dropdown-item"  onclick="deleteUser();">디깅삭제</a></li>
-                          </ul>
-                        </div></li>
 					</ul>
 				</nav>               	
              </header>
@@ -114,36 +111,26 @@ nav {
                 <div class="table-responsive text-nowrap">
 	               <ul class="nav nav-pills flex-column flex-md-row mb-3">
                 	<li>
-	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                          <option selected="">검색선택1</option>
-                          <option value="1">디깅 토픽</option>
-                          <option value="2">제목</option>
-                          <option value="3">글쓴이</option>
+	                <select class="form-select" id="searchKey" aria-label="Default select example">
+                          <option value="null">검색어 선택</option>
+                          <option value="topic">디깅 토픽</option>
+                          <option value="subject">제목</option>
+                          <option value="writer">글쓴이</option>
                     </select>
                 	</li>
                 	&emsp;
-                	<li>
-	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                          <option selected="">검색선택2</option>
-                          <option value="1">디깅 토픽</option>
-                          <option value="2">제목</option>
-                          <option value="3">글쓴이</option>
-                    </select>
-                	</li>
-                	&emsp;
-                	<li><input id="defaultInput" class="form-control" type="text" placeholder="검색어를 입력하세요"></li>
+                	<li><input id="defaultInput" class="form-control" id="searchWord" name="searchWord" type="text" placeholder="검색어를 입력하세요"></li>
                 	&emsp;
                 	<li><button type="button" class="btn btn-success">조 회</button></li>
                 	&emsp;
                 	<li><button type="reset" class="btn btn-outline-success" onclick="window.location.reload()">새로고침</button></li>
                	 </ul>
-                <a href="${contextPath }/admin/digging/diggingAdd"><button type="button">디깅하기</button></a>
                 </div>
                 </div>
                   <table class="table">
                     <thead class="table-light" align="center">
                       <tr>
-                      	<th width="30"><input type="checkbox" id="allCheck"></th>
+                      	<th width="30"><input type="checkbox" id="allDigging" onchange="selectAllDigging()"></th>
                         <th>토픽</th>
                         <th>글쓴이</th>
                         <th>제목</th>
@@ -156,13 +143,13 @@ nav {
                     <c:choose>
 	                    <c:when test="${empty diggingList}">
 		                      <tr>
-		                      	<td colspan="12">유저가 없습니다.</td>
+		                      	<td colspan="12">게시글이 없습니다.</td>
 		                      </tr>
 		                </c:when>
 	                <c:otherwise>
 	                	<c:forEach var="diggingDTO"  items="${diggingList}">
 	                		<tr>
-		                      	<td><input type="checkbox" id="userCheck" name="userId" value="${diggingDTO.diggingId }"></td>
+		                      	<td><input type="checkbox" id="diggingId" name="diggingId" value="${diggingDTO.diggingId }"></td>
 		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${diggingDTO.diggingTopic }</td>
 		                        <td>${diggingDTO.writer }</td>
 		                        <td>${diggingDTO.subject}</td>
@@ -176,6 +163,15 @@ nav {
 	              </tbody>
                   </table>
                   <br>
+                    <div align="right">
+	                  <span>
+		                  <button type="button" class="btn btn-danger" onclick="updateDigging();">수정</button>
+	                  </span>
+                  &emsp;
+                  	  <span>
+		                  <button type="button" class="btn btn-danger" onclick="removeDigging();">삭제</button>
+                  	  </span>
+                  </div>
                </form>
              </div>
            </div>

@@ -22,4 +22,11 @@ public class AdminDiggingServiceImpl implements AdminDiggingService {
 	public List<DiggingDTO> getDiggingList() throws Exception {
 		return adminDiggingDAO.selectListDiggingList();
 	}
+
+	@Override
+	public void removeDiggingList(int[] removeDiggingIdList) throws Exception {
+		adminDiggingDAO.selectListdeleteDigging(removeDiggingIdList);
+	}
+
+	
 }

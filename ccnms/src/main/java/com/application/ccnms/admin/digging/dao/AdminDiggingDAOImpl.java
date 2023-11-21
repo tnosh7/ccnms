@@ -22,5 +22,10 @@ public class AdminDiggingDAOImpl implements AdminDiggingDAO {
 	public List<DiggingDTO> selectListDiggingList() throws Exception {
 		return sqlSession.selectList("adminDigging.selectListDiggingList");
 	}
+
+	@Override
+	public void selectListdeleteDigging(int[] removeDiggingIdList) throws Exception {
+		sqlSession.selectList("adminDigging.selectListdeleteDigging", removeDiggingIdList);
+	}
 	
 }

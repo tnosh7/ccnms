@@ -20,6 +20,11 @@ public class AdminUserDAOImpl implements AdminUserDAO {
 	public List<UserDTO> selectListUser() throws Exception {
 		return sqlSession.selectList("adminUser.selectListUser");
 	}
+	
+	@Override
+	public List<UserDTO> selectListSearchUser(Map<String, Object> searchMap) throws Exception {
+		return sqlSession.selectList("adminUser.selectListSearchUser", searchMap);
+	}
 
 	@Override
 	public List<AdminDTO> selectListAdmin() throws Exception {
@@ -27,14 +32,10 @@ public class AdminUserDAOImpl implements AdminUserDAO {
 	}
 
 	@Override
-	public List<AdminDTO> selectListSearchAdmin(Map<String, String> searchMap) throws Exception {
-		return sqlSession.selectList("adminUser.selectListSearchAdmin", searchMap);
-	}
-
-	@Override
 	public void deleteUserList(String[] delUserIdList) throws Exception {
 		sqlSession.delete("adminUser.deleteUserList", delUserIdList);
 	}
+
 
 	
 }

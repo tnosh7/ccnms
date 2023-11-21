@@ -165,7 +165,7 @@
                         </div>
                            	<section>
                            		<div>
-	                               <button type="submit" class="site-btn">디깅토픽신청</button>
+	                               <button type="submit" class="site-btn" onclick="location.href='${contextPath }/contact/user'">디깅토픽신청</button>
                            		</div>
                            	</section>
                     </div>

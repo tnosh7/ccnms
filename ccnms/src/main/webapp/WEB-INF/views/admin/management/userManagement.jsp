@@ -21,38 +21,40 @@ nav {
 </style>
 </head>
 <script>
-	$().ready(function(){
-		
-		$("#allCheck").change(function(){
-			if($("#allCheck").prop("checked")) {
-				$("[name='userId']").prop("checked", true);			
-			}
-			else if($("#allCheck").prop("checked", false)) {
-				$("[name='userId']").prop("checked", false);	
-			}
-		});
-	});
-	function deleteUser(){
-		var deluserIdList = "";
-		$("input[name='userId']:checked").each(function(){
-			deluserIdList = $(this).val() + ",";
-		});
-		Swal.fire({
-			  title: '유저를 삭제하시겠습니까?',
-			  showDenyButton: true,
-			  showCancelButton: true,
-			  confirmButtonText: '네',
-			  denyButtonText: '아니요',
-			}).then((result) {
-			  if (result.isConfirmed) {
-				location.href="${contextPath}//admin/management/delUser?deluserIdList=" + deluserIdList;
-			   	
-			  } else if (result.isDenied) {
-				  return;
-			  }
-		})
+	function selectAllUser(){
+		if ($("#allUser").prop("checked")){
+			$("[name='userId']").prop("checked", true);
+		}
+		else {
+			$("[name='userId']").prop("checked", false);
+		}
 	}
-		
+	
+	function removeUser(){
+		var removeUserIdList = "";
+		if ($("input[name='userId']:checked")){
+			$("input[name='userId']:checked").each(function(){
+				removeUserIdList += $(this).val() + ",";
+				location.href="${contextPath}/admin/management/removeUser?removeUserIdList=" + removeUserIdList;
+			});
+		}
+		else return;
+	}
+	
+	function search(){
+		var searchKey = $("[name='searchKey']").val();
+		var searchWord = $("[name='searchWord']").val();
+		if (searchWord == "" || searchKey == "null") {
+			return;
+		}
+		else {
+			var url = "${contextPath}/admin/management/"
+				url +="?searchWord=" + searchWord;
+				url +="&searchKey=" + searchKey;
+			location.href= url;
+		}
+	}
+	
 </script>
 <body>
 <fieldset>
@@ -98,15 +100,6 @@ nav {
 					<ul class="nav nav-pills flex-md-row mb-3" >
 						<li><a href="${contextPath }/admin/management/userExcelExport"><img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a></li>
 						&emsp;
-						<li><div class="btn-group">
-                          <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow show" data-bs-toggle="dropdown" aria-expanded="true">
-                            <i class="bx bx-dots-vertical-rounded"></i>
-                          </button>
-                          <ul class="dropdown-menu dropdown-menu-end show" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 40px, 0px);">
-                            <li><a class="dropdown-item"  onclick="updateUser();">유저수정</a></li>
-                            <li><a class="dropdown-item"  onclick="deleteUser();">유저삭제</a></li>
-                          </ul>
-                        </div></li>
 					</ul>
 				</nav>               	
              </header>
@@ -114,35 +107,31 @@ nav {
                 <div class="table-responsive text-nowrap">
 	               <ul class="nav nav-pills flex-column flex-md-row mb-3">
                 	<li>
-	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                          <option selected="">검색선택1</option>
-                          <option value="1">핸드폰 번호</option>
-                          <option value="2">생년월일</option>
-                          <option value="3">이름</option>
+	                <select class="form-select" name="searchKey" id="searchKey"  aria-label="Default select example">
+                          <option value="null">검색어 선택</option>
+                          <option value="hp">핸드폰 번호</option>
+                          <option value="birth">생년월일</option>
+                          <option value="name">이름</option>
+                          <option value="userId">아이디</option>
                     </select>
                 	</li>
                 	&emsp;
-                	<li>
-	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                          <option selected="">검색선택2</option>
-                          <option value="1">핸드폰 번호</option>
-                          <option value="2">생년월일</option>
-                          <option value="3">이름</option>
-                    </select>
-                	</li>
+                	<li><input id="defaultInput" class="form-control" id="searchWord" name="searchWord" type="text" placeholder="검색어를 입력하세요"></li>
                 	&emsp;
-                	<li><input id="defaultInput" class="form-control" type="text" placeholder="검색어를 입력하세요"></li>
+                	<li><button type="button" class="btn btn-success" onclick="search();">조 회</button></li>
                 	&emsp;
-                	<li><button type="button" class="btn btn-success">조 회</button></li>
+                	<li><button type="reset" class="btn btn-outline-success" onclick="location.href='${contextPath}/admin/management/'">새로고침</button></li>
                 	&emsp;
-                	<li><button type="reset" class="btn btn-outline-success" onclick="window.location.reload()">새로고침</button></li>
                	 </ul>
+                </div>
+                <div id="warn">
+                	<span></span>
                 </div>
                 </div>
                   <table class="table">
                     <thead class="table-light" align="center">
                       <tr>
-                      	<th width="30"><input type="checkbox" id="allCheck"></th>
+                      	<th width="30"><input type="checkbox" id="allUser" onchange="selectAllUser();"></th>
                         <th>아이디</th>
                         <th>이름</th>
                         <th>생일</th>
@@ -166,8 +155,8 @@ nav {
 	                <c:otherwise>
 	                	<c:forEach var="userDTO"  items="${userList}">
 	                		<tr>
-		                      	<td><input type="checkbox" id="userCheck" name="userId" value="${userDTO.userId }"></td>
-		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${userDTO.userId }</td>
+		                      	<td><input type="checkbox" name="userId" value="${userDTO.userId }"></td>
+		                        <td>${userDTO.userId }</td>
 		                        <td>${userDTO.userNm }</td>
 		                        <td>${userDTO.birthDT}</td>
 		                        <td>${userDTO.hp}</td>
@@ -189,6 +178,15 @@ nav {
 	              </tbody>
                   </table>
                   <br>
+                  <div align="right">
+	                  <span>
+		                  <button type="button" class="btn btn-danger" onclick="updateUser();">유저 수정</button>
+	                  </span>
+                  &emsp;
+                  	  <span>
+		                  <button type="button" class="btn btn-danger" onclick="removeUser();">유저 삭제</button>
+                  	  </span>
+                  </div>
                </form>
              </div>
            </div>

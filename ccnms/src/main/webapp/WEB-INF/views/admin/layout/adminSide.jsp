@@ -113,7 +113,7 @@
           <!-- Components -->
           <li class="menu-header small text-uppercase"><span class="menu-header-text">사이트 관리</span></li>
           <li class="menu-item">
-            <a href="${contextPath }/admin/management/user" class="menu-link">
+            <a href="${contextPath }/admin/management/" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
               <div data-i18n="Basic">유저 관리</div>
             </a>
@@ -125,13 +125,6 @@
               <div data-i18n="Boxicons">디깅 관리</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="${contextPath }/admin/contact/contactList" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-crown"></i>
-              <div data-i18n="Boxicons">고객문의 관리</div>
-            </a>
-          </li>
-
           <!-- Forms & Tables -->
           <li class="menu-header small text-uppercase"><span class="menu-header-text">상점 관리</span></li>
           <!-- Forms -->
@@ -150,11 +143,7 @@
           <!-- Misc -->
           <li class="menu-header small text-uppercase"><span class="menu-header-text">고객센터</span></li>
           <li class="menu-item">
-            <a
-              href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-              target="_blank"
-              class="menu-link"
-            >
+            <a href="${contextPath }/admin/contact/contactList" class="menu-link">  
               <i class="menu-icon tf-icons bx bx-support"></i>
               <div data-i18n="Support">문의 메시지</div>
             </a>

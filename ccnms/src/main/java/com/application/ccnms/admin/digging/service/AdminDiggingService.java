@@ -7,5 +7,6 @@ import com.application.ccnms.digging.dto.DiggingDTO;
 public interface AdminDiggingService {
 	public void addDigging(DiggingDTO diggingDTO) throws Exception;
 	public List<DiggingDTO> getDiggingList()throws Exception;
+	public void removeDiggingList (int[] removeDiggingIdList)throws Exception;
 
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,11 +42,19 @@ public class AdminUserController {
 	@Autowired
 	private AdminUserService adminUserService;
 	
-	@GetMapping("/user")
-	public ModelAndView user() throws Exception {
+	@GetMapping("/")
+	public ModelAndView user(@RequestParam(required =false, value="searchWord")String searchWord, @RequestParam(required =false, value="searchKey")String searchKey) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		if (searchWord == null) {
+			mv.addObject("userList", adminUserService.getUserList());
+		}
+		else {
+			Map<String,Object> searchMap= new HashMap<String, Object>();
+			searchMap.put("searchWord", searchWord);
+			searchMap.put("searchKey", searchKey);
+			mv.addObject("userList", adminUserService.getSearchUserList(searchMap));
+		}
 		mv.setViewName("/management/user");
-		mv.addObject("userList", adminUserService.getUserList());
 		return mv;
 	}
 	@GetMapping("/admin")
@@ -54,11 +63,6 @@ public class AdminUserController {
 		mv.setViewName("/management/admin");
 		mv.addObject("adminList", adminUserService.getAdminList());
 		return mv;
-	}
-	
-	@GetMapping("/searchAdmin") 
-	public @ResponseBody List<AdminDTO> searchAdmin (@RequestParam Map<String, String> searchMap) throws Exception {
-		return adminUserService.getSearchAdmin(searchMap); 
 	}
 	
 	@GetMapping("/adminExcelExport")
@@ -135,7 +139,7 @@ public class AdminUserController {
 	@GetMapping("/userExcelExport")
 	public void userExcelExport(HttpServletResponse response) throws Exception {
 		  
-		SimpleDateFormat joinSdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat joinTime = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat fileSdf = new SimpleDateFormat("yyyy_MM_dd_hh_mm");
 		String makeFileTime = fileSdf.format(new Date());
 		String makeFileName = makeFileTime + "_userList.xls";
@@ -233,7 +237,7 @@ public class AdminUserController {
 	        cell.setCellValue(userDTO.getLikePoint());
 	        cell = row.createCell(10);
 	        cell.setCellStyle(bodyStyle);
-	        cell.setCellValue(userDTO.getJoinDT());
+	        cell.setCellValue(joinTime.format(userDTO.getJoinDT()));
 		} 
 	    response.setContentType("ms-vnd/excel");
 	    response.setHeader("Content-Disposition", "attachment;filename="+makeFileName);
@@ -241,19 +245,20 @@ public class AdminUserController {
 	    wb.close();
 	}
 	
-	@GetMapping("delUser")
-	public ResponseEntity<Object> delUser(@RequestParam("deluserIdList") String deluserIdList) throws Exception{
+	@GetMapping("removeUser")
+	public ModelAndView delUser(@RequestParam("removeUserIdList") String removeUserIdList) throws Exception{
 		
-		String[] temp= deluserIdList.split(",");
+		String[] temp= removeUserIdList.split(",");
 		String[] delUserIdList = new String[temp.length];
 		for (int i = 0; i < temp.length; i++) {
 			delUserIdList[i] = temp[i];
 		}
 		adminUserService.deleteUserList(delUserIdList);
-		return null;
+		return new ModelAndView("redirect:/admin/management/");
 		
 	}
-
+	
+	
 	@GetMapping("/thumbnails")
 	public void thumbnails(@RequestParam("fileName") String fileName, HttpServletResponse response) throws Exception {
 	
