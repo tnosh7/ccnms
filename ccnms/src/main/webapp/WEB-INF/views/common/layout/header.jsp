@@ -108,6 +108,7 @@
                                     <li><a href="${contextPath }/shop/?sort=sale"">유저마켓</a></li>
                                     <li><a href="${contextPath }/shop/?sort=Modudigging">디깅마켓</a></li>
                                     <li><a href="${contextPath }/shop/?sort=exchange">교환마켓</a></li>
+                                    <li><a href="${contextPath }/myShop/saleList">내 상점</a></li>
                                 </ul>
                             </li>
                             <li><a href="${contextPath }/ranking/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png">디깅랭킹</a></li>

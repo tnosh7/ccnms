@@ -6,6 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	$().ready(function(){
+		$("form").submit(function(){
+			var passwd = $("[name='passwd']").val();
+			var passwdCheck = $("#passwdCheck").val();
+			if (passwd != passwdCheck){
+				$("#passwdCheckWarn").html("*비밀번호가 다릅니다. 다시 입력해주세요.");
+				return false; 
+			}	
+			if(passwd.length<8) {
+				$("#passwdCheckWarn").html("*비밀번호는 8글자 이상이어야 합니다.");
+				 return false;
+			}
+		})
+	});		
+</script>
 </head>
 <body>
 <div align="center" style="padding-top: 50px">
@@ -102,10 +118,10 @@
 	                </a>
 	              </div>
 	              <!-- /Logo -->
+	              <form id="formAuthentication" class="mb-3" action="${contextPath }/admin/registerAdmin" method="POST">
 	              <h4 class="mb-2"></h4>
 	              <p class="mb-4"></p>
 				   <div align="left" style="padding-top: 50px"> 
-	              <form id="formAuthentication" class="mb-3" action="${contextPath }/admin/registerAdmin" method="POST">
 	                <div class="mb-3">
 	                  <label for="adminId" class="form-label"><strong>관리자 ID</strong></label>
 	                  <input
@@ -113,8 +129,10 @@
 	                    class="form-control"
 	                    id="adminId"
 	                    name="adminId"
-	                    placeholder="Enter your username"
+	                    placeholder="관리자 아이디를 입력하세요 "
 	                    autofocus
+	                    required="required"
+	                    maxlength="15"
 	                  />
 	                </div>
 	                  <label for="adminNm" class="form-label"><strong>관리자 이름</strong></label>
@@ -123,7 +141,9 @@
 	                    class="form-control"
 	                    id="adminNm"
 	                    name="adminNm"
-	                    placeholder="Enter your name"
+	                    placeholder="성명을 입력하세요."
+	                    required="required"
+	                    maxlength="10"
 	                  />
 	                </div>
 	                <br>
@@ -138,11 +158,30 @@
 	                      name="passwd"
 	                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
 	                      aria-describedby="password"
+	                      required="required"	
+	                      maxlength="12"	
+	                      onblur="passwd()"
+	                    />
+	                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+	                  </div>
+	                </div>
+	                <div class="mb-3 form-password-toggle">
+	                  <label class="form-label" for="passwd"><strong>비밀번호 다시 입력</strong></label>
+	                  <div class="input-group input-group-merge">
+	                    <input
+	                      type="password"
+	                      id="passwdCheck"
+	                      class="form-control"
+	                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+	                      aria-describedby="password"
+	                      required="required"
+	                      maxlength="12"
 	                    />
 	                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
 	                  </div>
 	                </div>
 					<div>
+					<p><span id="passwdCheckWarn"></span></p>
 	                <div class="mb-3">
 	                  <div class="form-check">
 						<br>	                    

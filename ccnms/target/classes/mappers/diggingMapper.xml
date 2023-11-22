@@ -9,6 +9,8 @@
 			CONTENT,
 			DIGGING_TOPIC,
 			FILE,
+			VIDEO_YN,
+			VIDEO_ID,
 			ENROLL_DT
 		)
 		VALUES (
@@ -17,6 +19,8 @@
 			#{content},
 			#{diggingTopic},
 			#{file},
+			#{videoYn},
+			#{videoId},
 			NOW()
 		)	
 	</insert>

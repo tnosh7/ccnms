@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="adminId" value="${sessionScope.adminId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +59,11 @@ nav {
 <body>
 <fieldset>
 <section>
-
+	<c:if test="${adminId eq null}">
+		<script>
+			location.href = "${contextPath }/admin/loginAdmin";
+		</script>
+	</c:if>		
   <div class="row">
      <div class="col-xl">
        <div class="card mb-4">

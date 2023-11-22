@@ -17,7 +17,6 @@
 			#{adminId},
 			#{adminNm},
 			#{passwd},
-			#{adminRank},
 			NOW()
 		)
 	</insert>

@@ -7,6 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	a {color:black}
+  	a:visited { color:black; }
+	a:hover { color:purple; }   
+</style>
 <script>
 	
 	function removeKeep(){
@@ -34,52 +39,73 @@
         </div>
     </div>
     <!-- Breadcrumb End -->
-	<section class="shoping-cart spad">
+    <section class="shoping-cart spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__table">
-	                  <table>
-	                      	<c:choose>
-	                      		<c:when test="${empty myKeepList }">
-	                      			<tr align="center">
-	                      				<td colspan="5"><h5>조회된 상품이 없습니다.</h5></td>
-	                      			</tr>
-	                      		</c:when>
-	                      		<c:otherwise>
-		                           <c:forEach var="keepDTO" items="${myKeepList}" >
-	                                    <a href="${contextPath }/shop/shopDetail?productCd=${keepDTO.productCd } class="list-group-item list-group-item-action flex-column align-items-start">
-				                            <div class="d-flex justify-content-between w-100">
-				                              <h6><input type="checkbox" name="keepCd" value="${keepDTO.keepCd }"> &emsp;
-				                              	<img alt="" src="${contextPath }/shop/thumbnails?file=${keepDTO.productFile}" width="50" height="50">
-				                              </h6>
-				                              <br>
-				                              <h6 >
-				                              	<span>${keepDTO.productNm }</span>
-				                              	<br>
-				                              	<span style="text-decoration: line-through; color: gray">${keepDTO.price }원</span>
-				                              	<span><fmt:formatNumber value="${keepDTO.price - keepDTO.price * keepDTO.discountRate / 100}"/>원</span>	                
-				                              </h6>
-				                              <small class="text-muted">판매자 : ${keepDTO.writer } </small>
-				                            </div>
-			                          	</a>
-                                    </c:forEach>
-	                      		</c:otherwise>
-	                      	</c:choose>
-	                     </table>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12" align="right">
-                    <div class="shoping__cart__btns">
-                        <a href="${contextPath }/shop/" class="primary-btn cart-btn">계속 쇼핑하기</a>
-                        <a href="javascript:removeKeep();" class="primary-btn cart-btn">찜 취소</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>	
-
+                        <table>
+                            <thead align="center">
+                                <tr>
+                                	<th></th>
+                                    <th>판매자</th>
+                                    <th colspan="2">제품</th>
+                                    <th>가격</th>
+                                    <th>등록일</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                            	<c:choose>
+                            		<c:when test="${empty myKeepList }">
+                            			<tr>
+                            				<td colspan="6" ><h5>조회된 상품이 없습니다.</h5></td>
+                            			</tr>
+                            		</c:when>
+									<c:otherwise>
+										 <c:forEach var="keepDTO" items="${myKeepList}" >
+			                                <tr>
+			                                    <td class="shoping__cart__checkbox">
+			                                    	<input type="checkbox" name="keepCd" value="${keepDTO.keepCd }">
+			                                    </td>
+			                                	<td>
+		                                		   <div>
+			                                       	판매자 : <span>${keepDTO.writer }</span>
+			                                       </div>
+			                                	</td>
+			                                    <td class="shoping__cart__product__pic">
+			                                    	<img alt="" src="${contextPath }/shop/thumbnails?file=${keepDTO.productFile}" width="50" height="50">
+			                                    </td>
+			                                    <td class="shoping__cart__product" align="left">
+			                                    	 <a href="${contextPath }/shop/shopDetail?productCd=${keepDTO.productCd }"> 	
+					                             		 ${keepDTO.productNm }
+				                              	 	 </a>
+			                                    </td>
+			                                    <td class="shoping__cart__price">
+			                                      	<span style="text-decoration: line-through; color: gray" ><fmt:formatNumber value="${keepDTO.price }"/></span><br>
+			                                    	<span><fmt:formatNumber value="${keepDTO.price - keepDTO.price * keepDTO.discountRate / 100}"/>원</span>
+			                                    </td>
+			                                    <td>
+			                                    	<span><fmt:formatDate value="${keepDTO.enrollDt }" pattern="yyyy-MM-dd"/></span>
+			                                    </td>
+		                                    </tr>
+	                                    </c:forEach>
+                                    </c:otherwise>
+                                   </c:choose>
+                                  </tbody>
+                                </table>
+                               <br>
+							<div class="row">
+				                <div class="col-lg-12" align="right">
+				                    <div class="shoping__cart__btns">
+				                        <a href="${contextPath }/shop/" class="primary-btn cart-btn">계속 쇼핑하기</a>
+				                        <a href="javascript:removeKeep();" class="primary-btn cart-btn">찜 취소</a>
+				                    </div>
+			                    </div>
+		                    </div>
+                    	</div>
+                   </div>
+                  </div>
+                 </div>
+              </section>
 </body>
 </html>

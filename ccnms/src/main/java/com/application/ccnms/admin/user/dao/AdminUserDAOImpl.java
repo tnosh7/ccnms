@@ -27,11 +27,6 @@ public class AdminUserDAOImpl implements AdminUserDAO {
 	}
 
 	@Override
-	public List<AdminDTO> selectListAdmin() throws Exception {
-		return sqlSession.selectList("adminUser.selectListAdmin");
-	}
-
-	@Override
 	public void deleteUserList(String[] delUserIdList) throws Exception {
 		sqlSession.delete("adminUser.deleteUserList", delUserIdList);
 	}

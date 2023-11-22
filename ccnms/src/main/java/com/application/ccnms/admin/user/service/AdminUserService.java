@@ -9,6 +9,5 @@ import com.application.ccnms.user.dto.UserDTO;
 public interface AdminUserService {
 	public List<UserDTO> getUserList()throws Exception;
 	public List<UserDTO> getSearchUserList(Map<String,Object> searchMap) throws Exception;
-	public List<AdminDTO> getAdminList() throws Exception;
 	public void deleteUserList(String[] delUserIdList) throws Exception;
 }

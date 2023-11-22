@@ -8,6 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	a {color:black}
+  	a:visited { color:black; }
+	a:hover { color:purple; }   
+</style>
 <script>
 	$().ready(function(){
 		getTotalPrice();
@@ -96,6 +101,18 @@
 </script>
 </head>
 <body>
+<div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="${contextPath }/"><i class="fa fa-home"></i> Home > </a>
+                        <span> 장바구니 </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <section class="shoping-cart spad">
         <div class="container">
             <div class="row">
@@ -162,18 +179,18 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" align="right">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
                         <a href="${contextPath }/shop/" class="primary-btn cart-btn">계속 쇼핑하기</a>
                          <a href="javascript:removeCart();" class="primary-btn" style="background:grey">물품 삭제</a>
                     </div>
                 </div>
-                <div class="col-lg-6 md-6">
+                <div class="col-lg-6 md-6" >
                     <div class="shoping__checkout">
                         <h5>총 금액</h5>
                         <ul>
-                            <li>Total <span id="totalPrice"></span></li>
+                            <li>Total<span id="totalPrice">&esmp;</span></li>
                         </ul>
                         <a href="javascript:orderSheet()" class="primary-btn" style="background:salmon">구매진행하기</a>
                     </div>

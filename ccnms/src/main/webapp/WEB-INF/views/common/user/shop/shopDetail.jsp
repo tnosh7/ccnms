@@ -37,19 +37,6 @@
 		})
 	}
 	
-	function replyQna(qnaCd){
-		var qnaReply = $("#qnaReply").val();
-		console.log(qnaReply);
-		$.ajax ({
-			url:"${contextPath}/qna/replyQna",
-			type:"get",
-			data: {
-				"qnaCd" : qnaCd,
-				"qnaReply" : qnaReply 
-			}
-		})		
-	}
-	
 	function orderSheet() {
 		var orderQty = $("[name='orderQty']").val();
 		var shopCd = $("[name='productCd']").val();
@@ -86,12 +73,34 @@
 			})
 		}
 	}
-	function showReply(qnaYn){
-		if (qnaYn == 'Y') {
-			$("#reply").show();
+	function myKeep(productCd) {
+		if ("${sessionId == null}" == "true") {
+			Swal.fire({
+				  icon: 'info',
+				  title: '로그인 후에 이용가능합니다.',
+				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
+				})
 		}
 		else {
-			$("#replyForm").show();
+			$.ajax ({
+				url:"${contextPath}/myShop/addMyKeep",
+				type:"get",
+				data: {
+					"productCd" : productCd, 
+					"keepQty" : 1	
+				},
+				success:function(result) {
+					if (result =="duple") {
+						Swal.fire('이미 추가된 상품입니다.');
+					}
+					else {
+						Swal.fire({
+							  text: '찜에 추가되었습니다.',
+							  footer: '<a href="${contextPath }/myShop/myKeep">찜으로 이동하기</a>'
+							})
+					}
+				}
+			})
 		}
 	}
 </script>
@@ -144,7 +153,7 @@
                         </div>
                         <br>
                         <a href="javascript:orderSheet()" class="primary-btn" style="background:royalblue">구매하기</a>
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <a href="javascript:myKeep(${shopDTO.productCd})" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <a href="javascript:myCart(${shopDTO.productCd })" class="primary-btn" style="background:grey">장바구니</a>
                     </div>
                 </div>
@@ -221,33 +230,21 @@
 							                        <td>
 							                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
 							                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" >
-							                            	<span onclick="showReply(${qnaDTO.qnaYn})">${qnaDTO.content }</span>
+							                            	<span>${qnaDTO.content }</span>
 							                            </li>
 							                          </ul>
 							                        </td>
 							                        <td><span class="badge bg-label-primary me-1">${qnaDTO.writer }</span></td>
 							                        <td><fmt:formatDate value="${qnaDTO.enrollDt }" pattern="yyyy-MM-dd"/></td>
 							                      </tr>
-							                      <tr id="reply" style="background-color:lightgrey">
-							                      		
-							                      		<td colspan="2">
-							                      			${qnaDTO.qnaReply }
+							                      <c:if test="${qnaDTO.qnaYn eq 'Y'}">
+								                      <tr id="reply" style="background-color:lightgrey">
+							                      		<td colspan="4">
+							                      			
+							                      			답변 : ${qnaDTO.qnaReply }
 							                      	 	</td>
-							                      	 	<td>
-							                      	 		판매자
-							                      	 	</td>
-								                        <td><fmt:formatDate value="${qnaDTO.enrollDt }" pattern="yyyy-MM-dd"/></td>
-							                      </tr>
-							                      <tr id="replyForm" style="display:show">
-					                            	<c:if test="${shopDTO.writer eq sessionId }">
-								                      	<td colspan="3">
-								                        	<textarea rows="4" cols="80%" id="qnaReply" name="qnaReply"></textarea>
-								                      	</td>
-								                      	<td>
-								                      		<input type="submit" value="답변등록" onclick="replyQna(${qnaDTO.qnaCd})">
-								                      	</td>
-								                      </c:if>
-							                      </tr>
+								                      </tr>
+							                      </c:if>
 					                    	</c:otherwise>
 					                    </c:choose>
 				                    </c:forEach>

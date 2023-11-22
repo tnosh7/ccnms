@@ -105,7 +105,7 @@
 					return false;
 				}
 				if(passwd.length<8) {
-					 $("#passwdCheckWarn").html("비밀번호는 8~16자를 사용해 주세요.");
+					 $("#passwdCheckWarn").html("비밀번호는 8글자 이상이어야 합니다.");
 					 return false;
 				}
 			})

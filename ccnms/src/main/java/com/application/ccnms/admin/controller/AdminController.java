@@ -1,5 +1,7 @@
 package com.application.ccnms.admin.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,7 +27,10 @@ public class AdminController {
 	@GetMapping("/main") 
 	public ModelAndView main () throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("CntList",  adminService.todayCnt());
+		mv.addObject("todayDigging", adminService.getDiggingCnt());
+		mv.addObject("todayUser", adminService.getUserCnt());
+		mv.addObject("todayShop", adminService.getShopCnt());
+		mv.addObject("todaySale", adminService.getSaleCnt());
 		mv.setViewName("/admin/main");
 		return mv;
 	}
@@ -89,5 +95,5 @@ public class AdminController {
 	}
 	
 	
-
+	
 }

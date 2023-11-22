@@ -13,24 +13,6 @@
         <a href="https://demos.themeselection.com/ModuDigging-bootstrap-html-admin-template/html/vertical-menu-template/" target="_blank" class="footer-text fw-bold">ModuDigging</a> ©
       </div>
       <div>
-        <div class="form-check form-control-sm footer-link me-3">
-          <input class="form-check-input" type="checkbox" value="" id="customCheck2" checked="">
-          <label class="form-check-label" for="customCheck2">
-            Show
-          </label>
-        </div>
-        <div class="dropdown dropup footer-link me-3">
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Currency
-          </button>
-          <div class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-dollar"></i> USD</a>
-            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-euro"></i> Euro</a>
-            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-pound"></i> Pound</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-bitcoin"></i> Bitcoin</a>
-          </div>
-        </div>
         <a href="${contextPath }/admin/logout" class="btn btn-sm btn-outline-danger"><i class="bx bx-log-out-circle me-1"></i>로그아웃</a>
       </div>
     </div>

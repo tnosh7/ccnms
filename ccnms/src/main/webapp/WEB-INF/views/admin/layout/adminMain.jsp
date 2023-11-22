@@ -43,11 +43,9 @@
                         <div class="card-body">
                           <h5 class="card-title text-primary">환영합니다! 관리자 ${sessionScope.adminId }님 🎉</h5>
                           <p class="mb-4">
-                            You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                            your profile.
+                            <span>게시글 작성 전에 공지사항을 꼭 읽어주세요.</span>
                           </p>
-
-                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">공지사항 보기</a>
                         </div>
                       </div>
                       <div class="col-sm-5 text-center text-sm-left">
@@ -94,11 +92,8 @@
                               </div>
                             </div>
                           </div>
-                          <c:forEach var="i" items="${cntList }">
-                          <span class="fw-semibold d-block mb-1">디깅 게시물 등록수</span>
-                          <h3 class="card-title mb-2">${cntList.todayDigging} 개</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
-                          </c:forEach>
+                          <span class="fw-semibold d-block mb-1">새로운 게시물 등록수</span>
+                          <h3 class="card-title mb-2">${todayDigging} 개</h3>
                         </div>
                       </div>
                     </div>
@@ -130,8 +125,8 @@
                               </div>
                             </div>
                           </div>
-                          <span>댓글수</span>
-                          <h3 class="card-title text-nowrap mb-1">${todayReply }개</h3>
+                          <span>새로운 유저 등록</span>
+                          <h3 class="card-title text-nowrap mb-1">${todayUser }개</h3>
                           <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
                         </div>
                       </div>
@@ -342,8 +337,8 @@
                               </div>
                             </div>
                           </div>
-                          <span class="d-block mb-1">새로운 유저 등록수</span>
-                          <h3 class="card-title text-nowrap mb-2">${todayUser }개</h3>
+                          <span class="d-block mb-1">새로운 상품 등록수</span>
+                          <h3 class="card-title text-nowrap mb-2">${todayShop }개</h3>
                           <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
                         </div>
                       </div>
@@ -372,8 +367,8 @@
                               </div>
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">새로운 상품 등록수</span>
-                          <h3 class="card-title mb-2">${todayShop }개</h3>
+                          <span class="fw-semibold d-block mb-1">새로운 주문 등록수</span>
+                          <h3 class="card-title mb-2">${todaySale }개</h3>
                           <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
                         </div>
                       </div>

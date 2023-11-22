@@ -25,7 +25,17 @@ public class QnaController {
 	@Autowired
 	private ShopService shopService;
 	
-	@GetMapping("addQna")
+	@GetMapping("/qnaList")
+	public ModelAndView qnaList(HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		HttpSession session = request.getSession();
+		mv.addObject("myQnaList", qnaService.getMyQnaList((String)session.getAttribute("userId")));
+		mv.addObject("qnaList", qnaService.getQnaList((String)session.getAttribute("userId")));
+		mv.setViewName("/qna/qnaList");
+		return mv;
+	}
+	
+	@GetMapping("/addQna")
 	public @ResponseBody String addQna(@RequestParam("productCd") String productCd, @RequestParam("qna") String qna, HttpServletRequest request)  throws Exception{
 		HttpSession session = request.getSession();
 		QnaDTO qnaDTO = new QnaDTO();
@@ -43,16 +53,26 @@ public class QnaController {
 	}
 	
 	@GetMapping("/replyQna") 
-	public @ResponseBody String replyQna(@RequestParam("qnaCd") String qnaCd, @RequestParam("qnaReply")String qnaReply) throws Exception {
+	public @ResponseBody String replyQna(QnaDTO qnaDTO, HttpServletRequest request) throws Exception {
 		
-		QnaDTO qnaDTO = new QnaDTO();
-		qnaDTO.setQnaReply(qnaReply);
-		qnaDTO.setQnaCd(Long.parseLong(qnaCd));
 		qnaService.updateQnaReply(qnaDTO);
-		
+		System.out.println("====================");
+		System.out.println(qnaDTO);
+		System.out.println("====================");
 		String jsScript = "<script>";
-		jsScript += "history.go(-1)";
-		jsScript +="</script>";
+			   jsScript += "location.href='" + request.getContextPath() + "/qna/qnaList'"; 
+			   jsScript +="</script>";
 		return jsScript;
+	}
+	
+	@GetMapping("/removeQna")
+	public ModelAndView removeQna(@RequestParam("removeQnaList") String removeQnaList) throws Exception {
+		String[] temp = removeQnaList.split(",");
+		int[] removeQnaCd = new int[temp.length];
+		for (int i = 0; i < temp.length; i++) {
+			removeQnaCd[i] = Integer.parseInt(temp[i]);
+		}
+		qnaService.removeQnaList(removeQnaCd);
+		return new ModelAndView("redirect:/qna/qnaList");
 	}
 }

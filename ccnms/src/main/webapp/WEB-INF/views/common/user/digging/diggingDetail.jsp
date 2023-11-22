@@ -148,6 +148,18 @@
                             					</td>
                             				</c:otherwise>
                             			</c:choose>
+                            				<td>
+		                            			<c:if test="${diggingDTO.videoYn eq 'Y'}">
+			                            			<tr>
+			                            				<div>
+														    <iframe src="https://www.youtube.com/embed/${diggingDTO.videoId }"
+														        style="position: absolute; width: 80%; height: 80%; top: 0; left: 20; padding-bottom: -20%;"
+														        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+														    </iframe>
+														</div>
+													</tr>
+		                            			</c:if>
+                            				</td>
 		                            		</tr>
                             			</tbody>
                             			<tfoot>

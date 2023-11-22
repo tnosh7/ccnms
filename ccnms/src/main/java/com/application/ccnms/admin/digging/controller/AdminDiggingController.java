@@ -57,10 +57,23 @@ public class AdminDiggingController {
 		diggingDTO.setDiggingTopic(request.getParameter("diggingTopic"));
 		diggingDTO.setSubject(request.getParameter("subject"));
 		diggingDTO.setContent(request.getParameter("content"));
+		
+		String content = request.getParameter("content");
+		int idx=  content.indexOf("/embed/");
+		if (idx != 0) {
+			int idx2 = content.indexOf("></oembed>");
+			String url = content.substring(idx+7, idx2-1);	
+			diggingDTO.setVideoYn("Y");
+			diggingDTO.setVideoId(url);
+		}
+		else {
+			diggingDTO.setVideoYn("N");
+			diggingDTO.setVideoId("");
+		}
+			
 		diggingDTO.setWriter("ModuDigging");
 		diggingDTO.setFile(fileName);
 		diggingDTO.setEnrollDT(new Date());
-		System.out.println(diggingDTO);
 		adminDiggingService.addDigging(diggingDTO);
 		String jsScript ="<script>";
 			   jsScript +="location.href='" + request.getContextPath() + "/'";

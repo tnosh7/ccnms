@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="adminId" value="${sessionScope.adminId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +60,11 @@ nav {
 <body>
 <fieldset>
 <section>
-
+	<c:if test="${adminId eq null}">
+		<script>
+			location.href = "${contextPath }/admin/loginAdmin";
+		</script>
+	</c:if>		
   <div class="row">
      <div class="col-xl">
        <div class="card mb-4">
@@ -98,7 +103,7 @@ nav {
                 <img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/id.png"/><strong> 주문 조회</strong></h5>
 	            <nav>
 					<ul class="nav nav-pills flex-md-row mb-3" >
-						<li><a href="${contextPath }/admin/management/userExcelExport"><img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a></li>
+						<li><a href="${contextPath }/admin/shop/orderExcelExport"><img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a></li>
 						&emsp;
 					</ul>
 				</nav>               	

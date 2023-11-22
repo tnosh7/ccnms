@@ -13,10 +13,12 @@ public class DiggingDTO {
 	private String content;
 	private int readCnt;
 	private String diggingTopic;
-	private Date enrollDT;
+	private String videoYn;
+	private String videoId;
 	private String file;
-	private int thumbsUp;
 	private int replyCnt;
+	private int thumbsUp;
+	private Date enrollDT;
 	public long getDiggingId() {
 		return diggingId;
 	}
@@ -53,11 +55,17 @@ public class DiggingDTO {
 	public void setDiggingTopic(String diggingTopic) {
 		this.diggingTopic = diggingTopic;
 	}
-	public Date getEnrollDT() {
-		return enrollDT;
+	public String getVideoYn() {
+		return videoYn;
 	}
-	public void setEnrollDT(Date enrollDT) {
-		this.enrollDT = enrollDT;
+	public void setVideoYn(String videoYn) {
+		this.videoYn = videoYn;
+	}
+	public String getVideoId() {
+		return videoId;
+	}
+	public void setVideoId(String videoId) {
+		this.videoId = videoId;
 	}
 	public String getFile() {
 		return file;
@@ -65,23 +73,30 @@ public class DiggingDTO {
 	public void setFile(String file) {
 		this.file = file;
 	}
-	public int getThumbsUp() {
-		return thumbsUp;
-	}
-	public void setThumbsUp(int thumbsUp) {
-		this.thumbsUp = thumbsUp;
-	}
 	public int getReplyCnt() {
 		return replyCnt;
 	}
 	public void setReplyCnt(int replyCnt) {
 		this.replyCnt = replyCnt;
 	}
+	public int getThumbsUp() {
+		return thumbsUp;
+	}
+	public void setThumbsUp(int thumbsUp) {
+		this.thumbsUp = thumbsUp;
+	}
+	public Date getEnrollDT() {
+		return enrollDT;
+	}
+	public void setEnrollDT(Date enrollDT) {
+		this.enrollDT = enrollDT;
+	}
 	@Override
 	public String toString() {
 		return "DiggingDTO [diggingId=" + diggingId + ", writer=" + writer + ", subject=" + subject + ", content="
-				+ content + ", readCnt=" + readCnt + ", diggingTopic=" + diggingTopic + ", enrollDT=" + enrollDT
-				+ ", file=" + file + ", thumbsUp=" + thumbsUp + ", replyCnt=" + replyCnt + "]";
+				+ content + ", readCnt=" + readCnt + ", diggingTopic=" + diggingTopic + ", videoYn=" + videoYn
+				+ ", videoId=" + videoId + ", file=" + file + ", replyCnt=" + replyCnt + ", thumbsUp=" + thumbsUp
+				+ ", enrollDT=" + enrollDT + "]";
 	}
 	
 }

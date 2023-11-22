@@ -35,10 +35,8 @@
     <title><tiles:insertAttribute name="title"/></title>
 
     <meta name="description" content="" />
-
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="${contextPath}/resources/admin/assets/img/favicon/favicon.ico" />
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -49,24 +47,15 @@
 	<script src="${contextPath}/resources/bootstrap/js/jquery-3.3.1.min.js"></script>	
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="${contextPath}/resources/admin/assets/vendor/fonts/boxicons.css" />
-
     <!-- Core CSS -->
     <link rel="stylesheet" href="${contextPath}/resources/admin/assets/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="${contextPath}/resources/admin/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="${contextPath}/resources/admin/assets/css/demo.css" />
-
-    <!-- Vendors CSS -->
     <link rel="stylesheet" href="${contextPath}/resources/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
     <link rel="stylesheet" href="${contextPath}/resources/admin/assets/vendor/libs/apex-charts/apex-charts.css" />
-
-    <!-- Page CSS -->
-    <!-- Helpers -->
     <script src="${contextPath}/resources/admin/assets/vendor/js/helpers.js"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${contextPath}/resources/admin/assets/js/config.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
   </head>
   <body>
     <!-- Layout wrapper -->
@@ -110,8 +99,6 @@
     <script src="${contextPath}/resources/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
     <script src="${contextPath}/resources/admin/assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
-
     <!-- Vendors JS -->
     <script src="${contextPath}/resources/admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 

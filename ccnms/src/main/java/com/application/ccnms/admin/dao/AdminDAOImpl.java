@@ -45,7 +45,5 @@ public class AdminDAOImpl implements AdminDAO {
 	public int selectOneTodaySaleCnt(String today) throws Exception {
 		return sqlSession.selectOne("admin.selectOneTodaySaleCnt", today);
 	}
-
-	
 	
 }

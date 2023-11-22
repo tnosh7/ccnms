@@ -18,14 +18,18 @@ import com.application.ccnms.digging.service.DiggingServiceImpl;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-
+	
 	@Autowired
 	private AdminDAO adminDAO;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@Autowired
 	private static Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	String today = sdf.format(new Date());
 
 	@Override
 	public AdminDTO loginAdmin(AdminDTO adminDTO) throws Exception {
@@ -44,25 +48,35 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public int getDiggingCnt() throws Exception {
+		return adminDAO.selectOneTodayDiggingCnt(today);
+	}
+	
+	@Override
+	public int getUserCnt() throws Exception {
+		return adminDAO.selectOneTodayUserCnt(today);
+	}
+	
+	@Override
+	public int getShopCnt() throws Exception {
+		return adminDAO.selectOneTodayShopCnt(today);
+	}
+	
+	@Override
+	public int getSaleCnt() throws Exception {
+		return adminDAO.selectOneTodaySaleCnt(today);
+	}
+
+	@Override
 	@Scheduled(cron="59 59 23 * * *")
-	public Map<String, Object> todayCnt() throws Exception{
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String today = sdf.format(new Date());
+	public void todayCnt() throws Exception{
 		
 		logger.info(today + "의 댓글 등록수 : " + adminDAO.selectOneTodayReplyCnt(today));
 		logger.info(today + "의 디깅 등록수 : " + adminDAO.selectOneTodayDiggingCnt(today));
 		logger.info(today + "의 유저 등록수 : " + adminDAO.selectOneTodayUserCnt(today));
 		logger.info(today + "의 상품 등록수 : " + adminDAO.selectOneTodayShopCnt(today));
 		logger.info(today + "의 판매 등록수 : " + adminDAO.selectOneTodaySaleCnt(today));
-		
-		Map<String, Object> todayCntList = new HashMap<String, Object>();
-		todayCntList.put("todayCnt", adminDAO.selectOneTodayReplyCnt(today));
-		todayCntList.put("todayDigging", adminDAO.selectOneTodayDiggingCnt(today));
-		todayCntList.put("todayUser", adminDAO.selectOneTodayUserCnt(today));
-		todayCntList.put("todayShop", adminDAO.selectOneTodayShopCnt(today));
-		todayCntList.put("todaySale", adminDAO.selectOneTodaySaleCnt(today));
-
-		return todayCntList;
 	}
+
 
 }

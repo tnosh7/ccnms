@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <c:set var="sessionId" value="${sessionScope.userId }"/>
+<c:set var="admin" value="${sessionScope.adminId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,11 +22,15 @@
 </script>
 </head>
 <body>
-<c:if test="${sessionScope.userId eq null}">
-	<script>
-		location.href = "${contextPath}/user/loginUser";
-	</script>
-</c:if>
+<c:choose>
+	<c:when test="${adminId eq null }">
+		<c:if test="${sessionScope.userId eq null}">
+			<script>
+				location.href = "${contextPath}/user/loginUser";
+			</script>
+		</c:if>
+	</c:when>
+</c:choose>
  <section class="checkout spad">
         <div class="container">
            <form action="${contextPath }/order/orderSheet" method="post">

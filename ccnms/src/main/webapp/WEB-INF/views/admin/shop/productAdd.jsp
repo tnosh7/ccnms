@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <c:set var="sessionId" value="${sessionScope.userId }"/>
+<c:set var="adminId" value="${sessionScope.adminId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,11 @@
 </style>
 </head>
 <body>
+	<c:if test="${adminId eq null}">
+		<script>
+			location.href = "${contextPath }/admin/loginAdmin";
+		</script>
+	</c:if>		
 <form action="${contextPath }/shop/addProduct" method="post" enctype="multipart/form-data"> 
   <div class="container">
             <div class="row">
@@ -105,15 +111,15 @@
 	                  	 	 			<th>상품 소개</th>
 	                  	 	 			<th><textarea name="content" id="editor"></textarea>
 												<script>
-												  ClassicEditor
-												  .create(document.querySelector('#editor'), {
-														ckfinder: {
-															uploadUrl : '/image/upload'
-														}
-													})
-													.then(editor => {
-														console.log('Editor was initialized');
-													})
+													  ClassicEditor
+													  .create(document.querySelector('#editor'), {
+															ckfinder: {
+																uploadUrl : '/image/upload'
+															}
+														})
+														.then(editor => {
+															console.log('Editor was initialized');
+														})
 												</script>
 	                  	 	 			</th>
 	                  	 	 		</tr>
@@ -122,7 +128,6 @@
 	                  	 	 			<th> <input type="file" class="form-control" id="uploadfile" name="uploadfile">
 	                  	 	 			</th>
 	                  	 	 		</tr>
-	                  	 	 		
 	                  	 	 	</table>
 							</div>
 	                   		<br>

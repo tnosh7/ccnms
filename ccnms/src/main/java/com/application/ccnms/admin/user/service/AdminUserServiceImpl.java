@@ -27,11 +27,6 @@ public class AdminUserServiceImpl implements AdminUserService {
 	}
 	
 	@Override
-	public List<AdminDTO> getAdminList() throws Exception {
-		return adminUserDAO.selectListAdmin();
-	}
-
-	@Override
 	public void deleteUserList(String[] delUserIdList) throws Exception {
 		adminUserDAO.deleteUserList(delUserIdList);
 	}

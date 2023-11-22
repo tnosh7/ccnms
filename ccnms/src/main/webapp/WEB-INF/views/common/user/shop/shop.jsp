@@ -78,9 +78,6 @@
 </script>
 </head>
 <body>
----------------------
-<h1>사용자아이디:${sessionId }</h1>
------------------
 <section class="product spad">	
         <div class="container">
             <div class="row">
@@ -88,9 +85,6 @@
                     <div class="sidebar">
                         <div class="sidebar__item">
                         	<input type="hidden" name="userId" value="${sessionScope.userId }"> 
-                        	<c:if test="${sessionScope.userId != null}">
-                        		<a href="${contextPath }/shop/addProduct"><input type="button" id="addProduct" value="상품 올리기"/></a>
-                        	</c:if>
                         	<br>
                             <h4>카테고리</h4>
                             <ul>

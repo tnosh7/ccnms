@@ -104,12 +104,6 @@
               <div data-i18n="Basic">관리자 회원가입</div>
             </a>
           </li>
-           <li class="menu-item">
-            <a href="${contextPath }/admin/management/admin" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">관리자 조회</div>
-            </a>
-          </li>
           <!-- Components -->
           <li class="menu-header small text-uppercase"><span class="menu-header-text">사이트 관리</span></li>
           <li class="menu-item">

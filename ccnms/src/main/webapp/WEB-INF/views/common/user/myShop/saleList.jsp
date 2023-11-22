@@ -23,16 +23,38 @@
 </head>
 <body>
 <section class="shoping-cart spad">
+	<c:if test="${userId eq null}">
+		<script>
+			location.href = "${contextPath }/user/loginUser";
+		</script>
+	</c:if>	
+	 <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="${contextPath }/"><i class="fa fa-home"></i> Home > </a>
+                        <span>내 상점</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                 	<div align="right">
 		                <a href="${contextPath }/myShop/saleExcelExport"><img alt="엑셀이미지" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a>
                 	</div>
+               		<a href="${contextPath }/shop/addProduct" class="primary-btn cart-btn"/>상품 등록</a>
+               		<a href="${contextPath }/qna/qnaList" class="primary-btn cart-btn"/>Q&A 확인</a>
                 	<hr>
                     <div class="shoping__cart__table">
                         <table>
                             <thead align="center">
+                            	<tr>
+                            		<th colspan="9" >주문상품</th>
+                            	</tr>
                                 <tr>
                                 	<th>체크</th>
                                     <th colspan="2">주문정보</th>
@@ -48,7 +70,7 @@
                             	<c:choose>
                             		<c:when test="${empty saleList }">
                             			<tr align="center">
-                            				<td colspan="5" ><h5>조회된 상품이 없습니다.</h5></td>
+                            				<td colspan="8" ><h5>조회된 상품이 없습니다.</h5></td>
                             			</tr>
                             		</c:when>
 									<c:otherwise>
@@ -93,13 +115,7 @@
                             	</c:choose>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__btns" align="center">
-                        <a href="javascript:changeDeliveryStatus();" class="primary-btn cart-btn">상품발송</a>
+                        
                     </div>
                 </div>
             </div>

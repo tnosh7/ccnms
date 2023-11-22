@@ -79,7 +79,7 @@
 		JOIN SHOP 	AS S
 			 	ON C.PRODUCT_CD = S.PRODUCT_CD
 		WHERE 
-				USER_ID = #{userId} 
+				C.USER_ID = #{userId} 
 		ORDER BY 
 			 	C.ENROLL_DT DESC	
 			 	

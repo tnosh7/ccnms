@@ -35,5 +35,9 @@
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/myShop/saleList.jsp"/>
 	 		<put-attribute name="title" value="판매 내역"/>
 	 	</definition>
+	 	<definition name="/qna/qnaList" extends="common">
+	 		<put-attribute name="body" value="/WEB-INF/views/common/user/myShop/qnaList.jsp"/>
+	 		<put-attribute name="title" value="QnA 내역"/>
+	 	</definition>
 
 </tiles-definitions>

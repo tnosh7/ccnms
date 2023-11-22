@@ -27,12 +27,6 @@
 		FROM 
 				USER
 	</select>
-	<select id="selectListAdmin" resultType="AdminDTO">
-		SELECT 
-				*
-		FROM 
-				ADMIN
-	</select>
 	
 	<delete id="deleteUserList" >
 		DELETE FROM 

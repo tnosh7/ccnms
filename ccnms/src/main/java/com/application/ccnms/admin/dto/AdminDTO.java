@@ -10,7 +10,6 @@ public class AdminDTO {
 	private String adminId;
 	private String adminNm;
 	private String passwd;
-	private String adminRank;
 	private Date joinDT;
 	public String getAdminId() {
 		return adminId;
@@ -30,12 +29,6 @@ public class AdminDTO {
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
 	}
-	public String getAdminRank() {
-		return adminRank;
-	}
-	public void setAdminRank(String adminRank) {
-		this.adminRank = adminRank;
-	}
 	public Date getJoinDT() {
 		return joinDT;
 	}
@@ -44,9 +37,8 @@ public class AdminDTO {
 	}
 	@Override
 	public String toString() {
-		return "AdminDTO [adminId=" + adminId + ", adminNm=" + adminNm + ", passwd=" + passwd + ", adminRank="
-				+ adminRank + ", joinDT=" + joinDT + "]";
+		return "AdminDTO [adminId=" + adminId + ", adminNm=" + adminNm + ", passwd=" + passwd + ", joinDT=" + joinDT
+				+ "]";
 	}
-	
 	
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="adminId" value="${sessionScope.adminId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,11 @@
 </style>
 </head>
 <body>
+	<c:if test="${adminId eq null}">
+		<script>
+			location.href = "${contextPath }/admin/loginAdmin";
+		</script>
+	</c:if>		
 <form action="${contextPath }/admin/digging/diggingAdd" method="post" enctype="multipart/form-data"> 
   <div class="container">
             <div class="row">
