@@ -54,7 +54,6 @@ nav {
 			location.href= url;
 		}
 	}
-	
 </script>
 <body>
 <fieldset>
@@ -179,10 +178,9 @@ nav {
                   </table>
                   <br>
                   <div align="right">
-	                  <span>
-		                  <button type="button" class="btn btn-danger" onclick="updateUser();">유저 수정</button>
-	                  </span>
-                  &emsp;
+                  	  <span>
+		                  <button type="button" class="btn btn-danger" onclick="modifyUser();">유저 수정</button>
+                  	  </span>
                   	  <span>
 		                  <button type="button" class="btn btn-danger" onclick="removeUser();">유저 삭제</button>
                   	  </span>

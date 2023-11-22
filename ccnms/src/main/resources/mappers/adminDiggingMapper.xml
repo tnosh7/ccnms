@@ -40,4 +40,25 @@
 				#{diggingId}
 			</foreach>
 	</delete>
+	
+	<select id="selectListSearchDigging" parameterType="hashmap" resultType="DiggingDTO">
+		SELECT
+			*
+		FROM
+			DIGGING
+		WHERE
+			<if test='searchKey.equals("topic")'>
+				DIGGING_TOPIC LIKE CONCAT('%',#{searchWord},'%')
+			</if>
+			<if test='searchKey.equals("subject")'>
+				SUBJECT LIKE CONCAT('%',#{searchWord},'%')
+			</if>
+			<if test='searchKey.equals("writer")'>
+				WRITER LIKE CONCAT('%',#{searchWord},'%')
+			</if>
+			<if test='searchKey.equals("content")'>
+				CONTENT LIKE CONCAT('%',#{searchWord},'%')
+			</if>
+	</select>
+	
 </mapper>

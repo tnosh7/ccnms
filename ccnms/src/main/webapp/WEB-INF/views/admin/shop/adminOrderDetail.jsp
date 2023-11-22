@@ -22,7 +22,7 @@
 <body>
  <section class="checkout spad">
         <div class="container">
-           <form action="${contextPath }/order/orderSheet" method="post">
+           <form>
             <div class="row">
                 <div class="col-lg-12">
                      <div class="checkout__order">

@@ -1,6 +1,7 @@
 package com.application.ccnms.admin.contact.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class AdminContactDAOImpl implements AdminContactDAO {
 	public List<ContactDTO> selectListContactList() throws Exception {
 		return sqlSession.selectList("adminContact.selectListContactList");
 	}
+	@Override
+	public List<ContactDTO> selectListSearchContactList(Map<String, Object> searchMap) throws Exception {
+		return sqlSession.selectList("adminContact.selectListSearchContactList", searchMap);
+	}
 
 	@Override
 	public ContactDTO selectOneContactDetail(int contactCd) throws Exception {
@@ -28,4 +33,10 @@ public class AdminContactDAOImpl implements AdminContactDAO {
 	public void updateReply(ContactDTO contactDTO) throws Exception {
 		sqlSession.insert("adminContact.updateReply", contactDTO);
 	}
+
+	@Override
+	public void deleteContactList(int[] removeContact) throws Exception {
+		sqlSession.delete("adminContact.deleteContactList", removeContact);
+	}
+
 }

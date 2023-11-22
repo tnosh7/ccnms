@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -245,7 +246,7 @@ public class AdminUserController {
 	    wb.close();
 	}
 	
-	@GetMapping("removeUser")
+	@GetMapping("/removeUser")
 	public ModelAndView delUser(@RequestParam("removeUserIdList") String removeUserIdList) throws Exception{
 		
 		String[] temp= removeUserIdList.split(",");
@@ -273,9 +274,20 @@ public class AdminUserController {
 		out.write(buffer);
 		out.close();
 	}
-
 	
-	
-	
+	@PostMapping("/modifyUser") 
+	public ModelAndView modifyUser(@RequestParam("modifyUserList") String modifyUserList) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("=================");
+		System.out.println(modifyUserList);
+		System.out.println("=================");
+		String [] temp = modifyUserList.split(",");
+		String [] modifyUser = new String[temp.length];
+		for (int i = 0; i < temp.length; i++) {
+			modifyUser[i] = temp[i];
+		}
+		mv.setViewName("/management/adminUserModify");
+		return mv;
+	}
 	
 }

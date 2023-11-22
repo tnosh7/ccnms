@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -49,7 +50,7 @@ nav {
 			return;
 		}
 		else {
-			var url = "${contextPath}/admin/management/"
+			var url = "${contextPath}/admin/digging/diggingManagement"
 				url +="?searchWord=" + searchWord;
 				url +="&searchKey=" + searchKey;
 			location.href= url;
@@ -111,19 +112,20 @@ nav {
                 <div class="table-responsive text-nowrap">
 	               <ul class="nav nav-pills flex-column flex-md-row mb-3">
                 	<li>
-	                <select class="form-select" id="searchKey" aria-label="Default select example">
+	                <select class="form-select" id="searchKey" name="searchKey" aria-label="Default select example">
                           <option value="null">검색어 선택</option>
                           <option value="topic">디깅 토픽</option>
                           <option value="subject">제목</option>
                           <option value="writer">글쓴이</option>
+                          <option value="content">내용</option>
                     </select>
                 	</li>
                 	&emsp;
                 	<li><input id="defaultInput" class="form-control" id="searchWord" name="searchWord" type="text" placeholder="검색어를 입력하세요"></li>
                 	&emsp;
-                	<li><button type="button" class="btn btn-success">조 회</button></li>
+                	<li><button type="button" class="btn btn-success" onclick="search()">조 회</button></li>
                 	&emsp;
-                	<li><button type="reset" class="btn btn-outline-success" onclick="window.location.reload()">새로고침</button></li>
+                	<li><button type="reset" class="btn btn-outline-success" onclick="location.href='${contextPath}/admin/digging/diggingManagement'">새로고침</button></li>
                	 </ul>
                 </div>
                 </div>
@@ -150,12 +152,12 @@ nav {
 	                	<c:forEach var="diggingDTO"  items="${diggingList}">
 	                		<tr>
 		                      	<td><input type="checkbox" id="diggingId" name="diggingId" value="${diggingDTO.diggingId }"></td>
-		                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${diggingDTO.diggingTopic }</td>
-		                        <td>${diggingDTO.writer }</td>
-		                        <td>${diggingDTO.subject}</td>
+		                        <td><a href="${contextPath }/digging/main?diggingTopic=${diggingDTO.diggingTopic }">${diggingDTO.diggingTopic }</a></td>
+		                        <td><a href="${contextPath }/ranking/otherUserInfo?userId=${diggingDTO.writer }">${diggingDTO.writer }</a></td>
+		                        <td><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.subject}</a></td>
 		                        <td>${diggingDTO.readCnt}</td>
 		                        <td>${diggingDTO.thumbsUp}</td>
-		                        <td>${diggingDTO.enrollDT}</td>
+		                        <td><fmt:formatDate value="${diggingDTO.enrollDT}" pattern="yyyy-MM-dd" /></td>
 	                      	</tr>
 	                	</c:forEach>
 	                </c:otherwise>
@@ -163,15 +165,15 @@ nav {
 	              </tbody>
                   </table>
                   <br>
-                    <div align="right">
-	                  <span>
-		                  <button type="button" class="btn btn-danger" onclick="updateDigging();">수정</button>
+               	 <div align="right">
+                	 <span>
+	                  <button type="button" class="btn btn-danger" onclick="updateDigging();">수정</button>
 	                  </span>
-                  &emsp;
-                  	  <span>
-		                  <button type="button" class="btn btn-danger" onclick="removeDigging();">삭제</button>
-                  	  </span>
-                  </div>
+	                  &emsp;
+                 	  <span>
+	                  <button type="button" class="btn btn-danger" onclick="removeDigging();">삭제</button>
+                 	 </span>
+                 </div>
                </form>
              </div>
            </div>

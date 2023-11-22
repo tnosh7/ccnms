@@ -1,5 +1,8 @@
 package com.application.ccnms.admin.contact.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +26,18 @@ public class AdminContactController {
 	private AdminContactService adminContactService;
 
 	@GetMapping("/contactList") 
-	public ModelAndView contactList() throws Exception {
-		ModelAndView mv = new ModelAndView("/contactList");
-		mv.addObject("contactList", adminContactService.getContactList());
-		
+	public ModelAndView contactList(@RequestParam(required =false, value="searchWord")String searchWord, @RequestParam(required =false, value="searchKey")String searchKey) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		if (searchWord == null) {
+			mv.addObject("contactList", adminContactService.getContactList());
+		}
+		else {
+			Map<String,Object> searchMap= new HashMap<String, Object>();
+			searchMap.put("searchWord", searchWord);
+			searchMap.put("searchKey", searchKey);
+			mv.addObject("contactList", adminContactService.getSearchContactList(searchMap));
+		}
+		mv.setViewName("/contactList");
 		return mv;
 	}
 	
@@ -47,4 +58,18 @@ public class AdminContactController {
 		
 		return jsScript;
 	}
+	
+	@GetMapping("/removeContact")
+	public ModelAndView removeContact(@RequestParam("removeContactList") String removeContactList) throws Exception {
+		String [] temp = removeContactList.split(",");
+		int [] removeContact = new int[temp.length];
+		for (int i = 0; i < temp.length; i++) {
+			removeContact[i] = Integer.parseInt(temp[i]);
+		}
+		adminContactService.removeContactList(removeContact);
+		return new ModelAndView("redirect:/admin/contact/contactList");
+		
+	}
+	
 }
+	

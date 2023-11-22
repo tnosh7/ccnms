@@ -21,14 +21,25 @@ public class AdminShopDAOImpl implements AdminShopDAO {
 		return sqlSession.selectList("adminShop.selectListShop");
 	}
 	@Override
+	public List<ShopDTO> selectListSearchShop(Map<String, Object> searchMap) throws Exception {
+		return sqlSession.selectList("adminShop.selectListSearchShop", searchMap);
+	}
+	@Override
 	public List<Map<String,Object>> selectListOrder() throws Exception {
 		return sqlSession.selectList("adminShop.selectListOrder");
+	}
+	@Override
+	public List<Map<String, Object>> selectListSearchOrder(Map<String, Object> searchMap) throws Exception {
+		return sqlSession.selectList("adminShop.selectListSearchOrder", searchMap);
 	}
 	@Override
 	public Map<String,Object> selectOneOrderDetail(Map<String, Object> adminOrderDetailMap) throws Exception {
 		return sqlSession.selectOne("adminShop.selectOneOrder", adminOrderDetailMap);
 	}
-	
+	@Override
+	public void deleteProductList(int[] removeProduct) throws Exception {
+		sqlSession.delete("adminShop.deleteProductList", removeProduct);
+	}
 	
 	
 }

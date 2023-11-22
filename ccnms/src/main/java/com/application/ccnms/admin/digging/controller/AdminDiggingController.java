@@ -3,7 +3,9 @@ package com.application.ccnms.admin.digging.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,9 +69,17 @@ public class AdminDiggingController {
 	}
 	
 	@GetMapping("/diggingManagement")
-	public ModelAndView diggingManagement () throws Exception {
+	public ModelAndView diggingManagement (@RequestParam(required =false, value="searchWord")String searchWord, @RequestParam(required =false, value="searchKey")String searchKey) throws Exception{
 		ModelAndView mv= new ModelAndView();
-		mv.addObject("diggingList", adminDiggingService.getDiggingList());
+		if (searchWord == null) {
+			mv.addObject("diggingList", adminDiggingService.getDiggingList());
+		}
+		else {
+			Map<String,Object> searchMap= new HashMap<String, Object>();
+			searchMap.put("searchWord", searchWord);
+			searchMap.put("searchKey", searchKey);
+			mv.addObject("diggingList", adminDiggingService.getSearchDiggingList(searchMap));
+		}
 		mv.setViewName("/admin/digging/diggingManagement");
 		return mv;
 	}

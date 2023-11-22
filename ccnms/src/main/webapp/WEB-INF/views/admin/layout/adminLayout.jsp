@@ -46,7 +46,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
-
+	<script src="${contextPath}/resources/bootstrap/js/jquery-3.3.1.min.js"></script>	
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="${contextPath}/resources/admin/assets/vendor/fonts/boxicons.css" />
 
@@ -68,7 +68,6 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${contextPath}/resources/admin/assets/js/config.js"></script>
   </head>
-  <script src="${contextPath}/resources/bootstrap/js/jquery-3.3.1.min.js"></script>	
   <body>
     <!-- Layout wrapper -->
    	 <div class="layout-wrapper layout-content-navbar">

@@ -22,38 +22,39 @@ nav {
 </style>
 </head>
 <script>
-	$().ready(function(){
-		
-		$("#allCheck").change(function(){
-			if($("#allCheck").prop("checked")) {
-				$("[name='userId']").prop("checked", true);			
-			}
-			else if($("#allCheck").prop("checked", false)) {
-				$("[name='userId']").prop("checked", false);	
-			}
-		});
-	});
-	function deleteUser(){
-		var delProductCdList = "";
-		$("input[name='productCd']:checked").each(function(){
-			deluserIdList = $(this).val() + ",";
-		});
-		Swal.fire({
-			  title: '유저를 삭제하시겠습니까?',
-			  showDenyButton: true,
-			  showCancelButton: true,
-			  confirmButtonText: '네',
-			  denyButtonText: '아니요',
-			}).then((result) {
-			  if (result.isConfirmed) {
-				location.href="${contextPath}//admin/shop?delProductCdList=" + delProductCdList;
-			   	
-			  } else if (result.isDenied) {
-				  return;
-			  }
-		})
+	function selectAllProduct(){
+		if ($("#allProduct").prop("checked")){
+			$("[name='productCd']").prop("checked", true);
+		}
+		else {
+			$("[name='productCd']").prop("checked", false);
+		}
 	}
-		
+	
+	function removeProduct(){
+		var removeProductList = "";
+		if($("input[name='productCd']:checked")) {
+			$("input[name='productCd']:checked").each(function(){
+				removeProductList += $(this).val() + ",";
+				location.href="${contextPath}/admin/shop/removeProduct?removeProductList=" + removeProductList;
+			});
+		}
+		else return;
+	}
+	
+	function search(){
+		var searchKey = $("[name='searchKey']").val();
+		var searchWord = $("[name='searchWord']").val();
+		if (searchWord == "" || searchKey == "null") {
+			return;
+		}
+		else {
+			var url = "${contextPath}/admin/shop/orderList"
+				url +="?searchWord=" + searchWord;
+				url +="&searchKey=" + searchKey;
+			location.href= url;
+		}
+	}
 </script>
 <body>
 <fieldset>
@@ -99,15 +100,6 @@ nav {
 					<ul class="nav nav-pills flex-md-row mb-3" >
 						<li><a href="${contextPath }/admin/management/userExcelExport"><img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a></li>
 						&emsp;
-						<li><div class="btn-group">
-                          <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow show" data-bs-toggle="dropdown" aria-expanded="true">
-                            <i class="bx bx-dots-vertical-rounded"></i>
-                          </button>
-                          <ul class="dropdown-menu dropdown-menu-end show" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 40px, 0px);">
-                            <li><a class="dropdown-item"  onclick="updateUser();">상품수정</a></li>
-                            <li><a class="dropdown-item"  onclick="deleteUser();">상품삭제</a></li>
-                          </ul>
-                        </div></li>
 					</ul>
 				</nav>               	
              </header>
@@ -115,26 +107,19 @@ nav {
                 <div class="table-responsive text-nowrap">
 	               <ul class="nav nav-pills flex-column flex-md-row mb-3">
                 	<li>
-	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                          <option selected="">검색선택1</option>
-                          <option value="2">상품이름</option>
-                          <option value="3">유저</option>
+	                <select class="form-select" id="searchKey" name="searchKey" aria-label="Default select example">
+                          <option value="null">검색어 선택</option>
+                          <option value="productNm">상품 이름</option>
+                          <option value="userId">유저</option>
+                          <option value="deliveryStatus">배송 상태</option>
                     </select>
                 	</li>
                 	&emsp;
-                	<li>
-	                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                          <option selected="">검색선택2</option>
-                          <option value="1">상품이름</option>
-                          <option value="2">유저</option>
-                    </select>
-                	</li>
+                	<li><input id="defaultInput" class="form-control" name="searchWord" type="text" placeholder="검색어를 입력하세요"></li>
                 	&emsp;
-                	<li><input id="defaultInput" class="form-control" type="text" placeholder="검색어를 입력하세요"></li>
+                	<li><button type="button" class="btn btn-success" onclick="search()">조 회</button></li>
                 	&emsp;
-                	<li><button type="button" class="btn btn-success">조 회</button></li>
-                	&emsp;
-                	<li><button type="reset" class="btn btn-outline-success" onclick="window.location.reload()">새로고침</button></li>
+                	<li><button type="reset" class="btn btn-outline-success" onclick="location.href='${contextPath}/admin/shop/orderList'">새로고침</button></li>
                	 </ul>
                 </div>
                 </div>
@@ -143,10 +128,10 @@ nav {
                       <tr>
                       	<th width="30"><input type="checkbox" id="allCheck"></th>
                         <th>유저</th>
-                        <th width=300>상품이름</th>
-                        <th>주문수량</th>
+                        <th width=300>상품 이름</th>
+                        <th>주문 수량</th>
                         <th>가격</th>
-                        <th>배송상태</th>
+                        <th>배송 상태</th>
                         <th>주문일</th>
                       </tr>
                     </thead>
@@ -163,12 +148,12 @@ nav {
 		                      	<td><input type="checkbox" id="orderCd" name="orderCd" value="${orderDTO.orderCd }"></td>
 		                        <td>${orderDTO.userId }</td>
 		                        <td >
-		                        	<a href="${contextPath }/admin/shop/orderDetail?orderCd=${orderDTO.orderCd}&userId=${orderDTO.userId}">
+		                        	<a href="${contextPath }/myShop/orderDetail?orderCd=${orderDTO.orderCd}&userId=${orderDTO.userId}">
 				                        ${orderDTO.productNm }
 		                        	</a>
 		                        </td>
 		                        <td>${orderDTO.orderQty }개</td>
-		                        <td><fmt:formatNumber value="${orderDTO.paymentAmt}"/>원</td>
+		                        <td><fmt:formatNumber value="${orderDTO.paymentAmt}"/></td>
 		                        <td>${orderDTO.deliveryStatus}</td>
 		                        <td><fmt:formatDate value="${orderDTO.payOrderTime}" pattern="yyyy-MM-dd"/></td>
 	                      	</tr>
@@ -178,6 +163,11 @@ nav {
 	              </tbody>
                   </table>
                   <br>
+                  <div align="right">
+	               	 <span>
+	                 	<button type="button" class="btn btn-danger" onclick="removeProduct();">주문취소</button>
+	               	 </span>
+                 </div>
                </form>
              </div>
            </div>

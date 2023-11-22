@@ -9,6 +9,25 @@
 			SHOP
 	</select>
 	
+	<select id="selectListSearchShop" parameterType="hashmap" resultType="ShopDTO">
+		SELECT 
+			*
+		FROM 	
+			SHOP
+		WHERE
+			<if test='searchKey.equals("productNm")'>
+				PRODUCT_NM LIKE CONCAT('%',#{searchWord},'%')			
+			</if>
+			<if test='searchKey.equals("writer")'>
+				WRITER LIKE CONCAT('%',#{searchWord},'%')					
+			</if>
+			<if test='searchKey.equals("sort")'>
+				SORT LIKE CONCAT('%',#{searchWord},'%')					
+			</if>
+			<if test='searchKey.equals("tag")'>
+				TAG LIKE CONCAT('%',#{searchWord},'%')		
+			</if>
+	</select>
 	
 	<resultMap type="hashmap" id="adminOrderListMap">
 		<result column="ORDER_CD" 			property="orderCd"/>	
@@ -39,7 +58,35 @@
 			AND S.WRITER = 'Modudigging'
 	</select>
 	
-<resultMap type="hashmap" id="adminOrderDetailMap">
+	<select id="selectListSearchOrder" parameterType="hashmap" resultMap="adminOrderListMap">
+			SELECT 
+				O.ORDER_CD 			AS ORDER_CD,
+				O.USER_ID			AS USER_ID,
+				O.ORDER_QTY 		AS ORDER_QTY,
+				O.PAYMENT_AMT 		AS PAYMENT_AMT,
+				O.PAY_ORDER_TIME 	AS PAY_ORDER_TIME,
+				O.DELIVERY_STATUS 	AS DELIVERY_STATUS,
+				S.PRODUCT_CD 		AS PRODUCT_CD, 
+				S.PRODUCT_NM 		AS PRODUCT_NM,
+				S.PRICE 			AS PRICE
+		FROM 
+				ORDERED O
+			JOIN SHOP S 
+			ON	O.PRODUCT_CD = S.PRODUCT_CD
+			AND S.WRITER = 'Modudigging'
+		WHERE
+			<if test='searchKey.equals("productNm")'>
+				S.PRODUCT_NM LIKE CONCAT('%',#{searchWord},'%')			
+			</if>
+			<if test='searchKey.equals("userId")'>
+				O.USER_ID LIKE CONCAT('%',#{searchWord},'%')					
+			</if>
+			<if test='searchKey.equals("deliveryStatus")'>
+				O.DELIVERY_STATUS LIKE CONCAT('%',#{searchWord},'%')					
+			</if>
+	</select>
+	
+	<resultMap type="hashmap" id="adminOrderDetailMap">
 		<result column="ORDER_CD" 			property="orderCd"/>
 		<result column="ORDER_QTY" 			property="orderQty"/>
 		<result column="PAYMENT_AMT" 		property="paymentAmt"/>
@@ -106,4 +153,16 @@
 			ON	S.PRODUCT_CD = O.PRODUCT_CD
 			AND O.ORDER_CD = #{orderCd}
 	</select>
+	
+	<delete id="deleteProductList">
+		DELETE FROM 
+			SHOP
+		WHERE
+			PRODUCT_CD IN
+			<foreach collection="array" item="productCd" separator="," open="(" close=")">
+				#{productCd}
+			</foreach>
+	</delete>
+	
+	
 </mapper>

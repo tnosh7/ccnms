@@ -21,56 +21,39 @@ nav {
 }
 </style>
 <script>
-	$().ready(function(){
-		
-		$("#allCheck").change(function(){
-			if($("#allCheck").prop("checked")) {
-				$("[name='adminCheck']").prop("checked", true);			
-			}
-			else if($("#allCheck").prop("checked", false)) {
-				$("[name='adminCheck']").prop("checked", false);	
-			}
-		});
-		
-			$("[name='searchKeyword']").keyup(function(){
-					var param = {
-							"searchKeyword" : $("[name='searchKeyword']").val(),
-							"searchKey" : $("[name='searchKey']").val()
-					}
-					$.ajax ({
-						type : "get",
-						url  : "${contextPath}/admin/management/searchAdmin",
-						data : param,
-						success : function(data) {
-							
-							var adminList = "";
-							if(data.length == 0) {
-								adminList +="<tr colspan='5'>"
-								adminList +="<td>검색결과가 없습니다.</td>"
-								adminList +="</tr>"
-						}
-							else {
-								$(data).each(function(){
-									adminList +="<tr>"
-									adminList +="<td><input type='checkbox' id='adminCheck' name='adminCheck'></td>"
-									adminList +="<td>" + this.adminId+ "</td>"
-									adminList +="<td>" + this.adminNm+ "</td>"
-									adminList +="<td>" + this.adminRank+ "</td>"
-									   var joinDt = new Date(this.joinDt);
-						    		   var year = joinDt.getFullYear();
-						    		   var month = joinDt.getMonth() + 1;
-						    		   if (month < 10) month = "0" + month;
-						    		   var date = joinDt.getDate();
-						    		   if (date < 10) date = "0" + date;
-						    		   adminList   += "<td>"+ year + "-" + month + "-" + date + "</td>";
-									   adminList +="</tr>"
-								});
-							}
-						$("#adminList").html(adminList);
-						}
-					})
-			});		
-		});
+	function selectAllContact(){
+		if ($("#allContact").prop("checked")){
+			$("[name='contactCd']").prop("checked", true);
+		}
+		else {
+			$("[name='contactCd']").prop("checked", false);
+		}
+	}
+	
+	function removeContact(){
+		var removeContactList = "";
+		if($("input[name='contactCd']:checked")) {
+			$("input[name='contactCd']:checked").each(function(){
+				removeContactList += $(this).val() + ",";
+				location.href="${contextPath}/admin/contact/removeContact?removeContactList=" + removeContactList;
+			});
+		}
+		else return;
+	}
+	
+	function search(){
+		var searchKey = $("[name='searchKey']").val();
+		var searchWord = $("[name='searchWord']").val();
+		if (searchWord == "" || searchKey == "null") {
+			return;
+		}
+		else {
+			var url = "${contextPath}/admin/contact/contactList"
+				url +="?searchWord=" + searchWord;
+				url +="&searchKey=" + searchKey;
+			location.href= url;
+		}
+	}
 </script>
 </head>
 <body>
@@ -117,15 +100,6 @@ nav {
 			<ul class="nav nav-pills flex-md-row mb-3" >
 				<li><a href="${contextPath }/admin/management/adminExcelExport"><img alt="엑셀이미지" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a></li>
 				&emsp;
-				<li><div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow show" data-bs-toggle="dropdown" aria-expanded="true">
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end show" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 40px, 0px);">
-                          <li><a class="dropdown-item" href="javascript:void(0);">관리자 수정</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">관리자 삭제</a></li>
-                        </ul>
-                      </div></li>
 			</ul>
 			</nav>               	
            </header>
@@ -133,24 +107,28 @@ nav {
               <div class="table-responsive text-nowrap">
               <ul class="nav nav-pills flex-column flex-md-row mb-3">
               	<li>
-               <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="searchKey">
-                        <option selected value="">검색선택</option>
-                        <option value="adminId">아이디</option>
-                        <option value="adminNm">제목</option>
+               <select class="form-select" id="searchKey" name="searchKey" aria-label="Default select example" name="searchKey">
+                        <option value="null">검색어 선택</option>
+                        <option value="userId">아이디</option>
+                        <option value="subject">제목</option>
+                        <option value="category">카테고리</option>
                   </select>
               	</li>
               	&emsp;
-              	<li><input id="defaultInput" class="form-control" name="searchKeyword" type="text" placeholder="검색어를 입력하세요"></li>
+              	<li><input id="defaultInput" class="form-control" name="searchWord" type="text" placeholder="검색어를 입력하세요"></li>
               	&emsp;
-              	<li><button type="reset" class="btn btn-outline-success" onclick="window.location.reload()">새로고침</button></li>
+               	<li><button type="button" class="btn btn-success" onclick="search()">조 회</button></li>
+           		&emsp;
+              	<li><button type="reset" class="btn btn-outline-success" onclick="location.href='${contextPath}/admin/contact/contactList'">새로고침</button></li>
              	 </ul>
               </div>
               </div>
                 <table class="table">
                   <thead class="table-light" align="center">
                     <tr height="">
-                      <th width="30"><input type="checkbox" id="allCheck"></th>
+                      <th width="30"><input type="checkbox" id="allContact" onchange="selectAllContact()"></th>
                       <th>답글완료여부</th>
+                      <th>카테고리</th>
                       <th>아이디</th>
                       <th>제목</th>
                       <th>등록날짜</th>
@@ -159,20 +137,18 @@ nav {
                   <tbody id="contactList" align="center">
                    <c:choose>
                     <c:when test="${empty contactList }">
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                   	<th></th>
-                    </tr>
+                       <tr>
+                     	 	<td colspan="6">접수된 고객문의 메시지가 없습니다.</td>
+                       </tr>
                     </c:when>
                     <c:otherwise>
                      <c:forEach var="contactDTO" items="${contactList }"> 
                      	<tr>
-	                      	<td><input type="checkbox" id="contactCd" name="adminCheck" value="${contactDTO.contactCd }"></td>
+	                      	<td><input type="checkbox" id="contactCd" name="contactCd" value="${contactDTO.contactCd }"></td>
+                     	 	<td>${contactDTO.category }</td>
                      	 	<td><span class="badge bg-label-primary me-1">${contactDTO.replyYN }</span></td>
-	                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${contactDTO.userId }</td>
-	                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i><a href="${contextPath }/admin/contact/contactDetail?contactCd=${contactDTO.contactCd}">${contactDTO.subject }</a></td>
+	                        <td>${contactDTO.userId }</td>
+	                        <td><a href="${contextPath }/admin/contact/contactDetail?contactCd=${contactDTO.contactCd}">${contactDTO.subject }</a></td>
 	                        <td><fmt:formatDate value="${contactDTO.regDt }" pattern="yyyy-MM-dd"/> </td>
                      	</tr>
                      </c:forEach>
@@ -181,6 +157,15 @@ nav {
                   </tbody>
                 </table>
                 <br>
+                <div align="right">
+                	 <span>
+	                  <button type="button" class="btn btn-danger" onclick="updateContact();">수정</button>
+	                  </span>
+	                  &emsp;
+                 	  <span>
+	                  <button type="button" class="btn btn-danger" onclick="removeContact();">삭제</button>
+                 	 </span>
+                 </div>
              </form>
              </div>
            </div>

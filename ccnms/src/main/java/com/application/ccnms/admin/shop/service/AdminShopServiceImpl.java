@@ -22,11 +22,23 @@ public class AdminShopServiceImpl implements AdminShopService {
 		return adminShopDAO.selectListShop();
 	}
 	@Override
+	public List<ShopDTO> getSearchShopList(Map<String, Object> searchMap) throws Exception {
+		return adminShopDAO.selectListSearchShop(searchMap);
+	}
+	@Override
 	public List<Map<String,Object>> getOrderList() throws Exception {
 		return adminShopDAO.selectListOrder();
 	}
 	@Override
+	public List<Map<String, Object>> getSearchOrderList(Map<String, Object> searchMap) throws Exception {
+		return adminShopDAO.selectListSearchOrder(searchMap);
+	}
+	@Override
 	public Map<String,Object> getOrderDetail(Map<String, Object> adminOrderDetailMap) throws Exception {
 		return adminShopDAO.selectOneOrderDetail(adminOrderDetailMap);
+	}
+	@Override
+	public void removeProductList(int[] removeProduct) throws Exception {
+		adminShopDAO.deleteProductList(removeProduct);
 	}
 }

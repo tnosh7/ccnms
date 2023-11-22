@@ -9,6 +9,22 @@
 		FROM 
 				CONTACT
 	</select>
+	<select id="selectListSearchContactList" parameterType="hashmap" resultType="ContactDTO">
+		SELECT 
+			*
+		FROM 
+			CONTACT
+		WHERE	
+			<if test='searchKey.equals("userId")'>
+				USER_ID LIKE CONCAT('%',#{searchWord},'%')			
+			</if>
+			<if test='searchKey.equals("subject")'>
+				SUBJECT LIKE CONCAT('%',#{searchWord},'%')					
+			</if>
+			<if test='searchKey.equals("category")'>
+				CATEGORY LIKE CONCAT('%',#{searchWord},'%')					
+			</if>
+	</select>
 	
 	<select id="selectOneContactDetail" resultType="ContactDTO">
 		SELECT 
@@ -28,5 +44,15 @@
 		WHERE 
 				CONTACT_CD = #{contactCd}
 	</update>	
+	
+	<delete id="deleteContactList">
+		DELETE FROM
+			CONTACT
+		WHERE
+			CONTACT_CD IN
+			<foreach collection="array" item="contactCd" separator="," open="(" close=")">
+				#{contactCd}
+			</foreach>
+	</delete>
 	
 </mapper>

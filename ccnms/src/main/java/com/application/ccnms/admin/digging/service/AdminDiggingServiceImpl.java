@@ -1,6 +1,7 @@
 package com.application.ccnms.admin.digging.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,11 @@ public class AdminDiggingServiceImpl implements AdminDiggingService {
 	@Override
 	public void removeDiggingList(int[] removeDiggingIdList) throws Exception {
 		adminDiggingDAO.selectListdeleteDigging(removeDiggingIdList);
+	}
+
+	@Override
+	public List<DiggingDTO> getSearchDiggingList(Map<String, Object> searchMap) throws Exception {
+		return adminDiggingDAO.selectListSearchDigging(searchMap);
 	}
 
 	

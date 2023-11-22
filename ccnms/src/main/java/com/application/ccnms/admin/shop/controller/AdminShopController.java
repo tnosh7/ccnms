@@ -1,5 +1,6 @@
 package com.application.ccnms.admin.shop.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,18 @@ public class AdminShopController {
 	
 	
 	@GetMapping("/shopList")
-	public ModelAndView shopManagement() throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/shop/shopList");
-		mv.addObject("shopList", adminShopService.getShopList());
+	public ModelAndView shopManagement(@RequestParam(required =false, value="searchWord")String searchWord, @RequestParam(required =false, value="searchKey")String searchKey) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		if (searchWord == null) {
+			mv.addObject("shopList", adminShopService.getShopList());
+		}
+		else {
+			Map<String,Object> searchMap= new HashMap<String, Object>();
+			searchMap.put("searchWord", searchWord);
+			searchMap.put("searchKey", searchKey);
+			mv.addObject("shopList", adminShopService.getSearchShopList(searchMap));
+		}
+		mv.setViewName("/admin/shop/shopList");
 		return mv;
 	}
 	
@@ -33,15 +43,33 @@ public class AdminShopController {
 	}
 	
 	@GetMapping("/orderList")
-	public ModelAndView orderList() throws Exception {
-		ModelAndView mv = new ModelAndView("/admin/shop/orderList");
-		mv.addObject("orderList", adminShopService.getOrderList());
-		return mv;
-	}
-	@GetMapping("/orderDetail")
-	public ModelAndView orderDetail(@RequestParam Map<String,Object> adminOrderDetailMap)throws Exception {
+	public ModelAndView orderList(@RequestParam(required =false, value="searchWord")String searchWord, @RequestParam(required =false, value="searchKey")String searchKey) throws Exception{
+		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("orderDTO", adminShopService.getOrderDetail(adminOrderDetailMap));
+		if (searchWord == null) {
+			mv.addObject("orderList", adminShopService.getOrderList());
+		}
+		else {
+			Map<String,Object> searchMap= new HashMap<String, Object>();
+			searchMap.put("searchWord", searchWord);
+			searchMap.put("searchKey", searchKey);
+			mv.addObject("orderList", adminShopService.getSearchOrderList(searchMap));
+		}
+		mv.setViewName("/admin/shop/orderList");
 		return mv;
 	}
+	
+	@GetMapping("/removeProduct") 
+	public ModelAndView removeProduct(@RequestParam("removeProductList") String removeProductList)throws Exception {
+		
+		String []temp = removeProductList.split(",");
+		int [] removeProduct = new int[temp.length];
+		for (int i = 0; i < temp.length; i++) {
+			removeProduct[i] = Integer.parseInt(temp[i]);
+		}
+		adminShopService.removeProductList(removeProduct);
+		return new ModelAndView("redirect:/admin/shop/shopList");
+		
+	}
+	
 }
