@@ -10,6 +10,10 @@
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/client/login.jsp"/>
 	 		<put-attribute name="title" value="로그인"/>	
 	 	</definition>
+	 	<definition name="/user/authenticationEmail" extends="common">
+	 		<put-attribute name="body" value="/WEB-INF/views/common/user/client/authenticationEmail.jsp"/>
+	 		<put-attribute name="title" value="이메일 인증"/>	
+	 	</definition>
 	 	
 	 	
 </tiles-definitions>

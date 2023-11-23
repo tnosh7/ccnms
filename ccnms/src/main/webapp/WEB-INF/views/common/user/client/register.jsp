@@ -25,11 +25,11 @@
 					type :"get",
 					url : "${contextPath}/user/emailCheck",
 					data : {"email" : email},
-					success : function (data) {
+					success : function(data){
 						console.log("data : " +  data);
-						checkInput.attr('disabled',false);
-						code =data;
+						$("#emailCheck").prop("disabled", false);
 						alert('인증번호가 전송되었습니다.');
+						
 					}			
 				});
 				

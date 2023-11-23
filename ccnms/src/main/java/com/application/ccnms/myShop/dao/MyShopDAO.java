@@ -28,6 +28,6 @@ public interface MyShopDAO {
 
 	public List<Map<String,Object>> selectListSaleList(String userId)throws Exception;
 	public void updateDeliveryStatus (int[]changeDeliveryList)throws Exception;
-
-
+	public List<ShopDTO> selectListUserSaleList(String userId) throws Exception;
+	public void deleteMySale(int[] removeMySale)throws Exception;
 }

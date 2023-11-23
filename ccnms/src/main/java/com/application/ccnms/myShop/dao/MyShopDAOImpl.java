@@ -95,8 +95,17 @@ public class MyShopDAOImpl implements MyShopDAO {
 
 	@Override
 	public void updateDeliveryStatus(int[] changeDeliveryList) throws Exception {
-		sqlSession.update("myshop.updateDeliveryStatus",changeDeliveryList);
+		sqlSession.update("myShop.updateDeliveryStatus",changeDeliveryList);
+	}
 	
+	@Override
+	public List<ShopDTO> selectListUserSaleList(String userId) throws Exception {
+		return sqlSession.selectList("myShop.selectListUserSaleList", userId);
+	}
+
+	@Override
+	public void deleteMySale(int[] removeMySale) throws Exception {
+		sqlSession.delete("myShop.deleteMySale", removeMySale);
 	}
 
 

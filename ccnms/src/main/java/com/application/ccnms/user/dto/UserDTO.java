@@ -24,6 +24,8 @@ public class UserDTO {
 	private String profile;
 	private int likePoint;
 	private int point;
+	private String emailCheck;
+	private String emailAuthentication;
 	public String getUserId() {
 		return userId;
 	}
@@ -120,14 +122,28 @@ public class UserDTO {
 	public void setPoint(int point) {
 		this.point = point;
 	}
+	public String getEmailCheck() {
+		return emailCheck;
+	}
+	public void setEmailCheck(String emailCheck) {
+		this.emailCheck = emailCheck;
+	}
+	public String getEmailAuthentication() {
+		return emailAuthentication;
+	}
+	public void setEmailAuthentication(String emailAuthentication) {
+		this.emailAuthentication = emailAuthentication;
+	}
 	@Override
 	public String toString() {
 		return "UserDTO [userId=" + userId + ", userNm=" + userNm + ", birthDT=" + birthDT + ", passwd=" + passwd
 				+ ", zipcode=" + zipcode + ", roadAddress=" + roadAddress + ", jibunAddress=" + jibunAddress
 				+ ", namujiAddress=" + namujiAddress + ", sex=" + sex + ", hp=" + hp + ", email=" + email + ", emailYN="
 				+ emailYN + ", joinDT=" + joinDT + ", profile=" + profile + ", likePoint=" + likePoint + ", point="
-				+ point + "]";
+				+ point + ", emailCheck=" + emailCheck + ", emailAuthentication=" + emailAuthentication + "]";
 	}
 	
+	
+
 	
 }

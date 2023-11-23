@@ -79,7 +79,7 @@
 					                 <c:choose>
 					                 	<c:when test="${empty myQnaList}">
 						                  	<tr>
-						                  		<td colspan="5">
+						                  		<td colspan="6">
 													문의한 Q&A가 없습니다.				                  		
 						                  		</td>
 						                  	</tr>
@@ -108,6 +108,7 @@
 			                  </c:forEach>
                          	 </table> 
                          	 <br>
+                         	 <br>
 			                 	 <div align="center">
 				                 	  <span>
 					                  	<button type="button" class="btn btn-danger" onclick="removeQna();">삭제</button>
@@ -116,6 +117,8 @@
 			                 <br>
                          </div>
                      </div>
+                      <br>
+				      <br>
                      <div class="tab-pane" id="tabs-3" role="tabpanel">
                          <div class="product__details__tab__desc">
                             <div class="card">
@@ -172,6 +175,8 @@
 				                 </c:forEach>
 				                 </tbody>
 				                 </table>
+				                 <br>
+				                 <br>
 			                 </div>
 		                 </div>
 	                 </div>

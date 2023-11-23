@@ -1,6 +1,9 @@
 package com.application.ccnms.user.controller;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -43,8 +46,10 @@ public class UserController {
 			email += emailDomain;
 		}
 		userDTO.setEmail(email);
-		userService.addUser(userDTO);
-
+		if (userService.addUser(userDTO) == true) {
+			String userId = userDTO.getUserId();
+			userService.getEmailCheck(email, userId);
+		}
 		String jsScript = "<script>";
 			   jsScript +="location.href='" + request.getContextPath() + "/'";
 			   jsScript +="</script>";
@@ -57,18 +62,10 @@ public class UserController {
 		return userService.checkDuplicateUserId(userId);
 	}
 	
-	@GetMapping("/emailCheck") 
-	public String emailCheck (@RequestParam("email") String email) throws Exception {
-		System.out.println("email:" +email);
-		return userService.getEmailCheck(email);
-	}
-	
-	
 	@GetMapping("/loginUser")
 	public ModelAndView loginUser() throws Exception {
 		return new ModelAndView("/user/loginUser");
 	}
-	
 	
 	@PostMapping("/loginUser")
 	public ModelAndView loginUser(HttpServletRequest request, UserDTO userDTO) throws Exception {
@@ -79,9 +76,15 @@ public class UserController {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userDTO.getUserId());
 			session.setAttribute("role", "user");
-			session.setAttribute("myOrderCnt", userService.getMyOrderCnt((String)session.getAttribute(userDTO.getUserId())));
-			session.setAttribute("myCartCnt", userService.getMyCartCnt((String)session.getAttribute(userDTO.getUserId())));
-			mv.setViewName("redirect:/");
+			session.setAttribute("myOrderCnt", userService.getMyOrderCnt(userDTO.getUserId()));
+			session.setAttribute("myCartCnt", userService.getMyCartCnt(userDTO.getUserId()));
+			
+			if (!userService.getEmailIdentify(userDTO.getUserId())) {
+				mv.setViewName("/user/authenticationEmail");
+			}
+			else {
+				mv.setViewName("redirect:/");
+			}
 		}
 		else {
 			mv.setViewName("/user/loginUser");
@@ -101,4 +104,14 @@ public class UserController {
 		return jsScript;
 	}
 	
+	@PostMapping("/emailAuthentication")
+	public ModelAndView emailAuthentication (UserDTO userDTO, HttpServletRequest request)throws Exception {
+		HttpSession session = request.getSession();
+		if(!userService.emailAuthentication(userDTO)) {
+			session.setAttribute("identify", "fail");
+			return new ModelAndView("/user/authenticationEmail");
+		}
+		else 
+			return new ModelAndView("redirect:/");
+	}
 }

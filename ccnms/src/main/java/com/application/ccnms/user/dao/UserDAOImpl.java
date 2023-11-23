@@ -1,5 +1,7 @@
 package com.application.ccnms.user.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,8 +15,9 @@ public class UserDAOImpl implements UserDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public void insertUser(UserDTO userDTO) throws Exception {
+	public boolean insertUser(UserDTO userDTO) throws Exception {
 		sqlSession.insert("user.insertUser", userDTO);
+		return true; 
 	}
 
 	@Override
@@ -28,6 +31,11 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
+	public void updateEmailCheck(Map<String, Object> emailMap) {
+		sqlSession.update("user.updateEmailCheck", emailMap);
+	}
+	
+	@Override
 	public int selectOneMyOrderCnt(String userId) throws Exception {
 		return sqlSession.selectOne("user.selectOneMyOrderCnt", userId);
 	}
@@ -36,5 +44,21 @@ public class UserDAOImpl implements UserDAO {
 	public int selectOneMyCartCnt(String userId) throws Exception {
 		return sqlSession.selectOne("user.selectOneMyCartCnt", userId);
 	}
+
+	@Override
+	public boolean selectOneEmailIdentify(String userId) throws Exception {
+		if (sqlSession.selectOne("user.selectOneEmailIdentify",userId).equals("F")) return false;
+		else return true;
+	}
+
+	@Override
+	public boolean selectOneEmailAuthentication(UserDTO userDTO) throws Exception {
+		if (sqlSession.selectOne("user.selectOneEmailAuthentication", userDTO) == null) return false;
+		else {
+			sqlSession.update("user.updateMailCheck", sqlSession.selectOne("user.selectOneEmailAuthentication", userDTO)); 
+			return true;
+		}
+	}
+
 
 }

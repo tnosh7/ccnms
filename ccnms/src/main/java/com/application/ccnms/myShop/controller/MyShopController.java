@@ -144,7 +144,6 @@ public class MyShopController {
 			
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type","text/html; charset=UTF-8");
-		
 		return new ResponseEntity<Object> (jsScript, responseHeaders, HttpStatus.OK);
 	}
 	
@@ -153,7 +152,6 @@ public class MyShopController {
 		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView("/myShop/orderList");
 		mv.addObject("orderList", myShopService.getOrderList((String)session.getAttribute("userId")));
-		
 		return mv;
 	}
 	
@@ -262,18 +260,34 @@ public class MyShopController {
 	}
 	
 	@GetMapping("/changeDeliveryStatus") 
-	public String changeDeliveryStatus (@RequestParam("deliveryList") String deliveryList) throws Exception {
+	public ModelAndView changeDeliveryStatus (@RequestParam("deliveryList") String deliveryList) throws Exception {
 		String []temp = deliveryList.split(",");
 		int[]changeDeliveryList = new int[temp.length];
 		for (int i = 0; i < temp.length; i++) {
 			changeDeliveryList[i] = Integer.parseInt(temp[i]);
 		}
 		myShopService.changeDeliveryStatus(changeDeliveryList);
-		
-		String jsScript = "<script>";
-			   jsScript+="history.go(-1)";
-			   jsScript+="</script>";
-		return jsScript;
-		
+		return new ModelAndView("redirect:/myShop/mySaleList");
 	}
+	
+	@GetMapping("/mySaleList")
+	public ModelAndView mySaleList (HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		HttpSession session = request.getSession();
+		mv.addObject("mySaleList", myShopService.getUserSaleList((String)session.getAttribute("userId")));
+		mv.setViewName("/myShop/mySaleList");
+		return mv;
+	}
+	@GetMapping("/removeMySale")
+	public ModelAndView removeMySale (@RequestParam("removeMySaleList") String removeMySaleList) throws Exception {
+		String[]temp = removeMySaleList.split(",");
+		int [] removeMySale = new int[temp.length];
+		for (int i = 0; i < temp.length; i++) {
+			removeMySale[i] = Integer.parseInt(temp[i]);
+		}
+		myShopService.removeMySaleList(removeMySale);
+		return new ModelAndView("redirect:/myShop/mySaleList");
+	}
+	
+	
 }

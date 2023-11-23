@@ -28,5 +28,6 @@ public interface MyShopService {
 	
 	public List<Map<String,Object>>getSaleList (String userId)throws Exception;
 	public void changeDeliveryStatus(int[] changeDeliveryList)throws Exception;
-
+	public List<ShopDTO> getUserSaleList (String userId)throws Exception;
+	public void removeMySaleList(int[] removeMySale)throws Exception;
 }

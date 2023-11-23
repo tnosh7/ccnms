@@ -127,9 +127,6 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
                         <h3>${shopDTO.productNm }</h3>
-                        <div class="product__details__rating">
-                            <span>(${reviewCnt } reviews)</span>
-                        </div>
                         	<span style="text-decoration: line-through; color: gray">${shopDTO.price } 원 </span>
                         <div class="product__details__price"> 
                         	<span><fmt:formatNumber value="${shopDTO.price - shopDTO.price * shopDTO.discountRate / 100}"/>원</span>	                                
