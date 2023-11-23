@@ -11,6 +11,7 @@
 			FILE,
 			VIDEO_YN,
 			VIDEO_ID,
+			TAG,
 			ENROLL_DT
 		)
 		VALUES (
@@ -21,6 +22,7 @@
 			#{file},
 			#{videoYn},
 			#{videoId},
+			#{tag},
 			NOW()
 		)	
 	</insert>
@@ -30,7 +32,7 @@
 		FROM 
 			DIGGING
 		WHERE 
-			DIGGING_TOPIC = #{diggingTopic}
+			DIGGING_TOPIC = #{diggingTopic} 
 		ORDER BY 
 		<if test='sort == "readCnt"'>
 			READ_CNT DESC	
@@ -79,13 +81,44 @@
 			USER_ID = (SELECT WRITER FROM DIGGING)
 	</select>
 	
-	<select id="selectDiggingDetail" parameterType="long" resultType="DiggingDTO">
+	<resultMap type="hashmap" id="diggingDetailMap">
+		<result column="DIGGING_ID"	 	property="diggingId"/>
+		<result column="WRITER" 		property="writer"/>
+		<result column="SUBJECT" 		property="subject"/>
+		<result column="CONTENT" 		property="content"/>
+		<result column="READ_CNT" 		property="readCnt"/>
+		<result column="DIGGING_TOPIC" 	property="diggingTopic"/>
+		<result column="ENROLL_DT" 		property="enrollDT"/>
+		<result column="REPLY_CNT" 		property="replyCnt"/>
+		<result column="THUMBS_UP" 		property="thumbsUp"/>
+		<result column="FILE" 			property="file"/>
+		<result column="VIDEO_YN" 		property="videoYn"/>
+		<result column="VIDEO_ID" 		property="videoId"/>
+		<result column="TAG" 			property="tag"/>
+		<result column="PROFILE" 		property="profile"/>
+	</resultMap>
+	<select id="selectDiggingDetail" parameterType="long" resultMap="diggingDetailMap">
 		SELECT 
-			*
+				D.DIGGING_ID	AS DIGGING_ID,
+				D.WRITER		AS WRITER, 
+				D.SUBJECT		AS SUBJECT,
+				D.CONTENT		AS CONTENT,
+				D.READ_CNT		AS READ_CNT,
+				D.DIGGING_TOPIC	AS DIGGING_TOPIC,
+				D.ENROLL_DT		AS ENROLL_DT,
+				D.REPLY_CNT		AS REPLY_CNT,
+				D.THUMBS_UP		AS THUMBS_UP,
+				D.FILE			AS FILE,
+				D.VIDEO_YN		AS VIDEO_YN,
+				D.VIDEO_ID		AS VIDEO_ID,
+				D.TAG			AS TAG,
+				U.PROFILE		AS PROFILE
 		FROM 
-			DIGGING
+			DIGGING D
+			JOIN USER U
+				ON D.WRITER = U.USER_ID
 		WHERE 
-			DIGGING_ID = #{diggingId}
+			D.DIGGING_ID = #{diggingId}
 	</select>
 	<update id="updateReadCnt">
 		UPDATE DIGGING
@@ -166,6 +199,20 @@
 				DIGGING
 		WHERE
 			DIGGING_ID = #{diggingId}
-	
 	</delete>
+	<select id="selectListTagList" parameterType="long" resultType="String">
+		SELECT 
+			TAG
+		FROM 
+			DIGGING 
+		WHERE 
+			DIGGING_TOPIC IN (
+				SELECT 
+					DIGGING_TOPIC
+				FROM
+					DIGGING
+				WHERE
+					DIGGING_ID = #{diggingId}
+			)
+	</select>
 </mapper>

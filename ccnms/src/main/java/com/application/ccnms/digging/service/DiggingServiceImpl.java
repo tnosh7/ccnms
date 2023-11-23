@@ -42,7 +42,7 @@ public class DiggingServiceImpl implements DiggingService {
 
 	@Override
 	@Transactional
-	public DiggingDTO getDiggingDetail(long diggingId) throws Exception {
+	public Map<String,Object> getDiggingDetail(long diggingId) throws Exception {
 		diggingDAO.updateReadCnt(diggingId);
 		return diggingDAO.selectDiggingDetail(diggingId);
 	}
@@ -75,6 +75,10 @@ public class DiggingServiceImpl implements DiggingService {
 	@Override
 	public void removeDigging(long diggingId) throws Exception {
 		diggingDAO.deleteDigging(diggingId);
+	}
+	@Override
+	public List<String> getTagList(long diggingId) throws Exception {
+		return diggingDAO.selectListTagList(diggingId);
 	}
 	
 

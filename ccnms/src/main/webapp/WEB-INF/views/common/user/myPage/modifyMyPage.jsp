@@ -61,7 +61,6 @@ function execDaumPostcode() {
                             <ul>
                                 <li><a href="${contextPath }/myPage/main"><strong>내프로필</strong></a></li>
                                 <li><a href="${contextPath }/myPage/myLog?userId=${userDTO.userId}"><strong>이력관리</strong></a></li>
-                                <li><a href="#"><strong>설정</strong></a></li>
                             </ul>
                         </div>
                         <hr>

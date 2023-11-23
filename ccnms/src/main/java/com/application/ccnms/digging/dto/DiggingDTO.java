@@ -16,6 +16,7 @@ public class DiggingDTO {
 	private String videoYn;
 	private String videoId;
 	private String file;
+	private String tag;
 	private int replyCnt;
 	private int thumbsUp;
 	private Date enrollDT;
@@ -73,6 +74,12 @@ public class DiggingDTO {
 	public void setFile(String file) {
 		this.file = file;
 	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 	public int getReplyCnt() {
 		return replyCnt;
 	}
@@ -95,8 +102,8 @@ public class DiggingDTO {
 	public String toString() {
 		return "DiggingDTO [diggingId=" + diggingId + ", writer=" + writer + ", subject=" + subject + ", content="
 				+ content + ", readCnt=" + readCnt + ", diggingTopic=" + diggingTopic + ", videoYn=" + videoYn
-				+ ", videoId=" + videoId + ", file=" + file + ", replyCnt=" + replyCnt + ", thumbsUp=" + thumbsUp
-				+ ", enrollDT=" + enrollDT + "]";
+				+ ", videoId=" + videoId + ", file=" + file + ", tag=" + tag + ", replyCnt=" + replyCnt + ", thumbsUp="
+				+ thumbsUp + ", enrollDT=" + enrollDT + "]";
 	}
 	
 }

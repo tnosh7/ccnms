@@ -32,4 +32,13 @@ public class ReplyController {
 		
 	}
 	
+	@GetMapping("/removeReply")
+	public ModelAndView removeReply(@RequestParam("replyId") String replyId,@RequestParam("diggingId")long diggingId)throws Exception {
+		replyService.removeReply(Long.parseLong(replyId));
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("diggingId", diggingId);
+		mv.setViewName("redirect:/digging/diggingDetail");
+		return mv;
+	}
+	
 }

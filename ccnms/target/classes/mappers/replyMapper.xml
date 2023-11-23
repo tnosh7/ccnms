@@ -25,12 +25,19 @@
 			NOW()		
 		)
 	</insert>
-	<update id="updateReadCnt" parameterType="long">
+	<update id="updateReplyCnt" parameterType="long">
 		UPDATE 
 			DIGGING
 		SET 
-			READ_CNT = READ_CNT + 1
+			REPLY_CNT = REPLY_CNT + 1
 		WHERE 
 			DIGGING_ID = #{diggingId}
 	</update>
+	
+	<delete id="deleteReply">
+		DELETE FROM 
+			REPLY
+		WHERE
+			REPLY_ID = #{replyId}
+	</delete>
 </mapper>

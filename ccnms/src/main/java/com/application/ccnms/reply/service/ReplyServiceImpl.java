@@ -26,6 +26,10 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public void updateReplyCnt(long diggingId) throws Exception {
 		replyDAO.updateReplyCnt(diggingId);
-		
+	}
+
+	@Override
+	public void removeReply(long replyId) throws Exception {
+		replyDAO.deleteReply(replyId);
 	}
 }

@@ -23,13 +23,13 @@
 <script>
 	$().ready(function(){
 		
-		$("form").submit(function({
+		$("form").submit(function(){
 		
-			var diggingTopic= $("[name='diggingTopic']")val();
-			if (diggingTopic == "") {
+			var diggingTopic= $("[name='diggingTopic']").val();
+			if (diggingTopic == "null") {
 				return false;
-			});
-		}
+			}
+		})
 	});
 
 </script>
@@ -99,7 +99,7 @@
 	                  	 	<li>
 	                  	 	<div >
 	                  	 		<select name="diggingTopic" >
-			  						<option value="">[필수] 디깅 토픽 선택</option>
+			  						<option value="null">[필수] 디깅 토픽 선택</option>
 			  						<option value="game">게임</option>
 			  						<option value="kPop">K-POP</option>
 			  						<option value="ott">OTT</option>
@@ -138,9 +138,9 @@
 										console.log('Editor was initialized');
 									})
 								</script>
-								</li>
+							</li>
 							<li>
-							
+								 <input class="form-control form-control-lg" type="text" id="tag" name="tag" maxlength="9" placeholder="태그 입력" >
 							</li>
 							<li>
 								<div class="input-group">

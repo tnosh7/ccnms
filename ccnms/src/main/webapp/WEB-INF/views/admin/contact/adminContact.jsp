@@ -150,8 +150,8 @@ nav {
                      <c:forEach var="contactDTO" items="${contactList }"> 
                      	<tr>
 	                      	<td><input type="checkbox" id="contactCd" name="contactCd" value="${contactDTO.contactCd }"></td>
-                     	 	<td>${contactDTO.category }</td>
                      	 	<td><span class="badge bg-label-primary me-1">${contactDTO.replyYN }</span></td>
+                     	 	<td>${contactDTO.category }</td>
 	                        <td>${contactDTO.userId }</td>
 	                        <td><a href="${contextPath }/admin/contact/contactDetail?contactCd=${contactDTO.contactCd}">${contactDTO.subject }</a></td>
 	                        <td><fmt:formatDate value="${contactDTO.regDt }" pattern="yyyy-MM-dd"/> </td>

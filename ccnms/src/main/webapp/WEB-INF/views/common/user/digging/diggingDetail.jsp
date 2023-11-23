@@ -9,20 +9,39 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-  table {
-    width: 100%;
-    height: 500px;
-  }
-  #modify {
-  	hide;
-  }
+	  table {
+	    width: 100%;
+	    height:100%;
+	  }
+	  #modify {
+	  	hide;
+	  }
+	.video-container { 
+	    margin: 10;
+	    padding-bottom: 100%; 
+	    max-width: 100%; 
+	    height:100%;  
+	    position: relative;
+	    overflow: hidden;
+	} 
+	.video-container iframe, 
+	.video-container object,
+	.video-container embed {
+	    margin: 0;
+	    padding: 0;  
+	    width: 100%; 
+	    height: 100%;
+	    position: absolute; 
+	    top: 0; 
+	    left: 0; 
+}
 </style>
 <script>
 	var writer= $("#writer").val();
 	$().ready(function(){
 		 $("#modifyBtn").click(function(){
 			  $("#modify").show();
-			  });
+		 })
 		
 		$("#addBtn").click(function(){
 			Swal.fire({
@@ -37,16 +56,16 @@
 				url : "${contextPath}/digging/thumbsUp",
 				type : "post",
 				data : {"diggingId" : diggingId}
-			});	
-		});	
+			})
+		})	
 		$("likeBtn").click(function(){
 			var writer = $("#writer").val();
 			$.ajax ({
 				url : "${contextPath}/digging/likeUp",
 				type : "post",
 				data : {"writer" : writer}
-			});	
-		});
+			})	
+		})
 		$("#delete").click(function(){
 			Swal.fire({
 				  title: '게시물을 삭제하시겠습니까?',
@@ -61,11 +80,18 @@
 						    	Swal.fire('삭제완료!', '', 'success')
 						    	history.go(-1)
 							}
-						});
+						})
 				  	} 
-				  });
-				});			
+				  })
+			})			
 		});
+	
+	function removeReply(){
+		var replyId = $("#replyId").val();
+		var diggingId = $("#diggingId").val();
+		location.href="${contextPath}/reply/removeReply?replyId=" + replyId + "&diggingId=" + diggingId;
+	}
+	
 </script>
 </head>
 <body>
@@ -79,74 +105,78 @@
 	                    	<div class="blog__sidebar__item">
 	                            <h4>#관련 태그</h4>
 	                            <div class="blog__sidebar__item__tags">
-	                                <a href="#">Apple</a>
-	                                <a href="#">Beauty</a>
-	                                <a href="#">Vegetables</a>
-	                                <a href="#">Fruit</a>
-	                                <a href="#">Healthy Food</a>
-	                                <a href="#">Lifestyle</a>
+	                            <c:forEach var="tagDTO" items="${tagList }">
+	                                <a href="#">${tagDTO }</a>
+	                            </c:forEach>
 	                            </div>
 	                        </div>
                    			<div class="col-lg-12">
                                <div class="blog__details__author">
                                    <div class="blog__details__author__text">
                                       <table >
-	                            	<thead>
-	                            		<tr height="30">
-	                            		<c:choose>
-	                            			<c:when test="${userDTO.profile eq null }">
-	                            				<th><img src="${contextPath }/resources/bootstrap/img/person.png"> ${diggingDTO.writer }
-	                            				<button type="button" class="btn btn-outline-primary" >
-					                              LIKE
-					                              <span class="badge">${likePoint}</span>
-					                            </button>
-					                            <input type="hidden" value="${diggingDTO.writer }">
-	                            				</th>
-	                            			</c:when>
-	                            			<c:otherwise>
-		                            			<th><img src="${contextPath }/myPage/thumbnails?file=${userDTO.profile }" alt="프로필이미지">
-		                            			${diggingDTO.writer }</th>
-	                            			</c:otherwise>
-	                            		</c:choose>
-	                            			<td align="right"><i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></td>
-	                            			<td align="right"><img src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</td>
-	                            		</tr>
-	                            		<tr height="60">
-                            				<th colspan="3">&emsp;${diggingDTO.subject }</th>
-	                            		</tr>
-	                            	</thead>
-                           			<tbody>
-	                            		<tr>
-                           			<c:choose>
-                           				<c:when test="${diggingDTO.file eq '' }">
-                            				<td colspan="3">${diggingDTO.content }</td>
-                           				</c:when>
-                           				<c:otherwise>
-                           					<td colspan="3">
-		                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}" width="300" height="300">
-		                                       ${diggingDTO.content }
-                           					</td>
-                           				</c:otherwise>
-                           			</c:choose>
-                           				<td>
+		                            	<thead>
+		                            		<tr height="30">
+		                            		<c:choose>
+		                            			<c:when test="${diggingDTO.profile eq null }">
+		                            				<th><img src="${contextPath }/resources/bootstrap/img/person.png"> ${diggingDTO.writer }
+						                            <input type="hidden" value="${diggingDTO.writer }">
+		                            				</th>
+		                            			</c:when>
+		                            			<c:otherwise>
+			                            			<th align="left"><img src="${contextPath }/digging/thumbnails?file=${diggingDTO.profile }" alt="프로필이미지" width="40" height="40">
+			                            				<strong>&emsp;${diggingDTO.writer }</strong>
+			                            			</th>
+		                            			</c:otherwise>
+		                            		</c:choose>
+		                            			<td align="right"><i class="fa fa-calendar-o"></i>&emsp;<fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></td>
+		                            		</tr>
+		                            		<tr height="60">
+	                            				<th colspan="3">&emsp;${diggingDTO.subject }</th>
+		                            		</tr>
+		                            	</thead>
+	                           			<tbody>
+		                            		<tr>
+			                           			<c:choose>
+			                           				<c:when test="${diggingDTO.file eq '' }">
+			                            				<td colspan="3">${diggingDTO.content }</td>
+			                           				</c:when>
+			                           				<c:otherwise>
+			                           					<td colspan="3">
+					                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}" width="300" height="300">
+					                                       ${diggingDTO.content }
+			                           					</td>
+			                           				</c:otherwise>
+			                           			</c:choose>
+		                            		</tr>
 	                            			<c:if test="${diggingDTO.videoYn eq 'Y'}">
-		                            			<tr>
-		                            				<div>
-													    <iframe src="https://www.youtube.com/embed/${diggingDTO.videoId }"
-													        style="position: absolute; width: 80%; height: 80%; top: 0; left: 20; padding-bottom: -20%;"
-													        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-													    </iframe>
-													</div>
+		                            			<tr align="center">
+		                            				<td colspan="3">
+			                            				<div class="video-container">
+														    <iframe src="https://www.youtube.com/embed/${diggingDTO.videoId }"
+														         style="position: absolute; width: 80%; height: 80%; top: 0; left: 0;" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+														    </iframe>
+														</div>
+		                            				</td>
 												</tr>
 	                            			</c:if>
-                           				</td>
-	                            		</tr>
-                           			</tbody>
+	                           			</tbody>
                            			<tfoot>
                            				<tr>
-											<th colspan="2"><span id="thumbsUp"><img src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="30" height="30"/>${diggingDTO.thumbsUp }                        				
-                           					&emsp;<img src="${contextPath }/resources/bootstrap/img/comment.png"/>
-                           					 ${allReplyCnt }</span></th>
+											<th colspan="2">
+												<span id="thumbsUp">
+												<img src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="30" height="30"/>
+												${diggingDTO.thumbsUp }                        				
+                           						&emsp;<img src="${contextPath }/resources/bootstrap/img/comment.png"/>
+                           					 	${allReplyCnt }
+                           					 	&emsp;<img src="${contextPath }/resources/bootstrap/img/show.png"/> 
+                           					 	${diggingDTO.readCnt }
+                           					 	</span>
+                           					 </th>
+                           				</tr>
+                           				<tr>
+                           					<th colspan="4">	
+                           						<span>TAG &emsp;${diggingDTO.tag }</span>
+                           					</th>
                            				</tr>
                            			</tfoot>
                            			</table>
@@ -178,8 +208,7 @@
 			                      	<c:if test="${replyDTO.writer eq sessionId }">
 			                      		<dd class="col-sm-9">
 			                      		<span id='modify' >
-											<input type="button" value="수정">
-											<input type="button" id="delete" value="삭제" >
+			                      			<button type="button" class="btn btn-light" id="replyId" value="${replyDTO.replyId }" onclick="removeReply()">삭제</button>
 										</span>
 										</dd>
 			                      	</c:if>

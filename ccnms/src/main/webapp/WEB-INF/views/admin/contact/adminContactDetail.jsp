@@ -77,7 +77,6 @@ nav {
 <body>
 <fieldset>
 <section>
-
   <div class="row">
      <div class="col-xl">
        <div class="card mb-4">
@@ -114,39 +113,9 @@ nav {
            <header>
               <h5 class="card-header">
               <img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/id.png"/><strong> 고객문의 조회</strong></h5>
-           <nav>
-			<ul class="nav nav-pills flex-md-row mb-3" >
-				<li><a href="${contextPath }/admin/management/adminExcelExport"><img alt="엑셀이미지" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a></li>
-				&emsp;
-				<li><div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow show" data-bs-toggle="dropdown" aria-expanded="true">
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end show" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 40px, 0px);">
-                          <li><a class="dropdown-item" href="javascript:void(0);">관리자 수정</a></li>
-                          <li><a class="dropdown-item" href="javascript:void(0);">관리자 삭제</a></li>
-                        </ul>
-                      </div></li>
-			</ul>
-			</nav>               	
            </header>
+           </div>
            <hr>
-              <div class="table-responsive text-nowrap">
-              <ul class="nav nav-pills flex-column flex-md-row mb-3">
-              	<li>
-               <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="searchKey">
-                        <option selected value="">검색선택</option>
-                        <option value="adminId">아이디</option>
-                        <option value="adminNm">제목</option>
-                  </select>
-              	</li>
-              	&emsp;
-              	<li><input id="defaultInput" class="form-control" name="searchKeyword" type="text" placeholder="검색어를 입력하세요"></li>
-              	&emsp;
-              	<li><button type="reset" class="btn btn-outline-success" onclick="window.location.reload()">새로고침</button></li>
-             	 </ul>
-              </div>
-              </div>
               </form>
               <form action="${contextPath }/admin/contact/addReply" method="post">
                 <table class="table">
@@ -169,21 +138,24 @@ nav {
                       <th>내용</th>
                       <td><i class="fab fa-angular fa-lg text-danger me-3"></i>${contactDTO.content }</td>
                     </tr>
-                    <tr height="50"  align="center">
-                    	<th>답글</th>
                     	<c:choose>
 							<c:when test="${contactDTO.reply eq null}">
-		                    	<td><textarea name="reply"  rows="5" cols="50"></textarea></td>
+			                    <tr height="50"  align="center">
+            			        	<th>답글</th>
+		                	    	<td><textarea name="reply"  rows="5" cols="50"></textarea></td>
+			                    </tr>
+			                    <tr align="center">
+			                    	<th></th>
+			                    	<td><button type="submit" class="btn btn-outline-dark">등록</button></td>
+			                    </tr>
 							</c:when>                    	
 							<c:otherwise>
-								<td>${contactDTO.reply }</td>
+			                    <tr height="50"  align="center">
+            			        	<th>답글</th>
+									<td>${contactDTO.reply }</td>
+								</tr>
 							</c:otherwise>
                     	</c:choose>
-                    </tr>
-                    <tr align="center">
-                    	<th></th>
-                    	<td><button type="submit" class="btn btn-outline-dark">등록</button></td>
-                    </tr>
                 </table>
               </form>
                 <br>

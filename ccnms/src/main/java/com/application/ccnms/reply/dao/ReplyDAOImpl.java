@@ -24,7 +24,12 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	@Override
 	public void updateReplyCnt(long diggingId) throws Exception {
-		sqlSession.update("reply.updateReadCnt",diggingId);
+		sqlSession.update("reply.updateReplyCnt",diggingId);
+	}
+
+	@Override
+	public void deleteReply(long replyId) throws Exception {
+		sqlSession.delete("reply.deleteReply", replyId);
 	}
 	
 }

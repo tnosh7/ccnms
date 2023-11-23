@@ -8,12 +8,14 @@
 				USER_ID,
 				SUBJECT,
 				CONTENT,
+				CATEGORY,
 				REG_DT
 		)
 		VALUES (
 				#{userId},
 				#{subject},
 				#{content},
+				#{category},
 				NOW()
 		)
 	</insert>

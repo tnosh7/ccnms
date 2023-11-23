@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -119,15 +120,13 @@ public class DiggingController {
 				uploadFile.transferTo(new File(FILE_REPO_PATH + fileName)); 
 			}
 		}
-		
-		
 		diggingDTO.setDiggingTopic(request.getParameter("diggingTopic"));
 		diggingDTO.setSubject(request.getParameter("subject"));
 		diggingDTO.setWriter(String.valueOf(session.getAttribute("userId")));
 		diggingDTO.setContent(request.getParameter("content"));
 		String content = request.getParameter("content");
 		int idx=  content.indexOf("/embed/");
-		if (idx != 0) {
+		if (idx >= 0) {
 			int idx2 = content.indexOf("></oembed>");
 			String url = content.substring(idx+7, idx2-1);	
 			diggingDTO.setVideoYn("Y");
@@ -138,8 +137,7 @@ public class DiggingController {
 			diggingDTO.setVideoId("");
 		}
 		diggingDTO.setFile(fileName);
-		
-		
+		diggingDTO.setTag(request.getParameter("tag"));
 		diggingService.addDigging(diggingDTO);
 		
 		String jsScript ="<script>";
@@ -156,6 +154,14 @@ public class DiggingController {
 		mv.addObject("diggingDTO", diggingService.getDiggingDetail(diggingId));
 		mv.addObject("allReplyCnt", diggingService.getallReplyCnt(diggingId));
 		mv.addObject("replyList", diggingService.getReplyList(diggingId));
+		List<String> tagList =  diggingService.getTagList(diggingId);
+		tagList.remove(null);
+		System.out.println("==============");
+		System.out.println(tagList);
+		System.out.println(tagList.size());
+		System.out.println("==============");
+		
+		mv.addObject("tagList", tagList);
 		return mv;
 	}
 	@PostMapping("/thumbsUp")
