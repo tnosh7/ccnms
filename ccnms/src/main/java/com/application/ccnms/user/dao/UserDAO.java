@@ -14,5 +14,7 @@ public interface UserDAO {
 	public int selectOneMyCartCnt(String userId) throws Exception;
 	public boolean selectOneEmailIdentify(String userId) throws Exception;
 	public boolean selectOneEmailAuthentication(UserDTO userDTO) throws Exception;
-
+	public String selectOneFindId(String userNm, String email) throws Exception;
+	public String selectOneFindPw(String userId, String email) throws Exception;
+	public void updatePw(UserDTO userDTO)throws Exception;
 }

@@ -68,22 +68,16 @@ public class UserServiceImpl implements UserService {
 		String subject = "모두디깅의 회원가입 인증 메시지입니다.";
 		String content = "<h4>인증번호는 " + emailAuthentication + "입니다.</h4>";
 			   content += "<br>";
-			   content += "해당 인증번호를 로그인 후에 인증번호 확인란에 입력해주세요.";
+			   content += "로그인 후에 해당 인증번호를 인증번호 확인란에 입력해주세요.";
 		MailHandler mailHandler = new MailHandler(mailSender);	  
         mailHandler.setFrom(setFrom);
 	    mailHandler.setSubject(subject);
 	    mailHandler.setText(content,true);
 	    mailHandler.setTo(toEmail);
 	    mailHandler.send();
-	    System.out.println("============================");
-	    System.out.println(Integer.toString(emailAuthentication));
-	    System.out.println("============================");
 	    Map<String,Object> emailMap = new HashMap<String,Object>();
 	    emailMap.put("userId", userId);
 	    emailMap.put("emailAuthentication", Integer.toString(emailAuthentication));
-	    System.out.println("=============");
-	    System.out.println("emailMAp: " + emailMap );
-	    System.out.println("=============");
 	    userDAO.updateEmailCheck(emailMap);
 	}
 
@@ -109,6 +103,55 @@ public class UserServiceImpl implements UserService {
 		else return true;
 	}
 
+	@Override
+	public String getFindId(String userNm, String email) throws Exception {
+		String result;
+		if (userDAO.selectOneFindId(userNm, email).equals("false")) {
+			result = "false";
+		}
+		else {
+			String userId = userDAO.selectOneFindId(userNm, email);
+			getEmailKey(email);
+			result = userId + "," + Integer.toString(emailAuthentication);
+		}
+		return result;
+	}
+	
+	public void getEmailKey(String email) throws Exception {
+		
+		ranNumber();
+		String setFrom = "modudig@gmail.com";
+		String toEmail = email;
+		String subject = "모두디깅의 인증 메시지입니다.";
+		String content = "<h4>인증번호는 " + emailAuthentication + "입니다.</h4>";
+			   content += "<br>";
+			   content += "해당 인증번호를 인증번호 확인란에 입력해주세요.";
+		MailHandler mailHandler = new MailHandler(mailSender);	  
+        mailHandler.setFrom(setFrom);
+	    mailHandler.setSubject(subject);
+	    mailHandler.setText(content,true);
+	    mailHandler.setTo(toEmail);
+	    mailHandler.send();
+	}
+
+	@Override
+	public String getFindPw(String userId, String email) throws Exception {
+		String result;
+		if (userDAO.selectOneFindPw(userId, email).equals("false")) {
+			result = "false";
+		}
+		else {
+			String userPw = userDAO.selectOneFindPw(userId, email);
+			getEmailKey(email);
+			result = userId + "," + Integer.toString(emailAuthentication);
+		}
+		return result;
+	}
+
+	@Override
+	public void modifyPw(UserDTO userDTO) throws Exception {
+		userDAO.updatePw(userDTO);
+	}
 
 	
 	

@@ -1,5 +1,6 @@
 package com.application.ccnms.user.dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -58,6 +59,27 @@ public class UserDAOImpl implements UserDAO {
 			sqlSession.update("user.updateMailCheck", sqlSession.selectOne("user.selectOneEmailAuthentication", userDTO)); 
 			return true;
 		}
+	}
+	@Override
+	public String selectOneFindId(String userNm, String email) throws Exception {
+		Map<String,Object> findIdMap = new HashMap<String, Object>();
+		findIdMap.put("userNm", userNm);
+		findIdMap.put("email", email);
+		if (sqlSession.selectOne("user.selectOneFindId", findIdMap) == null) return "false";
+		else return sqlSession.selectOne("user.selectOneFindId", findIdMap);
+	}
+	@Override
+	public String selectOneFindPw(String userId, String email) throws Exception {
+		Map<String,Object> findPwMap = new HashMap<String, Object>();
+		findPwMap.put("userId", userId);
+		findPwMap.put("email", email);
+		if (sqlSession.selectOne("user.selectOneFindPw", findPwMap) == null) return "false";
+		else return sqlSession.selectOne("user.selectOneFindPw", findPwMap);
+	}
+
+	@Override
+	public void updatePw(UserDTO userDTO) throws Exception {
+		sqlSession.update("user.updatePw", userDTO);
 	}
 
 

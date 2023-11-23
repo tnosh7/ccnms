@@ -52,8 +52,8 @@
                            <div class="row">
 			                <div class="col-lg-12">
 			                <p class="text-center">
-			                <span><a href="${contextPath }/user/registerUser">비밀번호 찾기</a></span> ㅣ
-			                <span><a href="${contextPath }/user/registerUser">아이디 찾기</a></span> ㅣ
+			                <span><a href="${contextPath }/user/findUser?find=pw">비밀번호 찾기</a></span> ㅣ
+			                <span><a href="${contextPath }/user/findUser?find=id">아이디 찾기</a></span> ㅣ
 			                <span><a href="${contextPath }/user/register">회원가입</a></span>
 			             	</p>
 			            </div>

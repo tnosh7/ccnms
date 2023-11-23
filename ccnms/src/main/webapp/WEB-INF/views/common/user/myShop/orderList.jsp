@@ -29,7 +29,7 @@
                             	<c:choose>
                             		<c:when test="${empty orderList }">
                             			<tr align="center">
-                            				<td colspan="5" ><h5>조회된 상품이 없습니다.</h5></td>
+                            				<td colspan="6" ><h5>조회된 상품이 없습니다.</h5></td>
                             			</tr>
                             		</c:when>
 									<c:otherwise>

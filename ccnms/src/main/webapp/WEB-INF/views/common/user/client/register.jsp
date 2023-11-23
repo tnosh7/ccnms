@@ -163,7 +163,7 @@
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>비밀번호<span>*</span></p>
-	                                <input type="password" id="passwd" name="passwd" placeholder="8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요." required maxlength="16" />
+	                                <input type="password" id="passwd" name="passwd" placeholder="8자 이상을 입력해주세요." required maxlength="16" />
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>비밀번호 확인<span>*</span></p>

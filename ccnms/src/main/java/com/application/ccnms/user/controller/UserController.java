@@ -88,7 +88,6 @@ public class UserController {
 			mv.setViewName("/user/loginUser");
 			mv.addObject("menu", "miss");
 		}
-		
 		return mv;
 	}
 	@GetMapping("/logout")
@@ -114,10 +113,25 @@ public class UserController {
 	}
 	
 	@GetMapping("/findUser")
-	public ModelAndView findUser (@RequestParam("find") String find) {
+	public ModelAndView findUser (@RequestParam("find") String find) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("find", find);
 		mv.setViewName("/user/findUser");
 		return mv;
+	}
+	@GetMapping("/findId") 
+	public @ResponseBody String findId (@RequestParam("userNm") String userNm, @RequestParam("email") String email) throws Exception {
+		return userService.getFindId(userNm, email);
+	}
+	
+	@GetMapping("/findPw")
+	public @ResponseBody String findPw (@RequestParam("userId") String userId, @RequestParam("email") String email) throws Exception {
+		return userService.getFindPw(userId, email);
+	}
+	
+	@PostMapping("/changePw")
+	public ModelAndView changePw (UserDTO userDTO) throws Exception {
+		userService.modifyPw(userDTO);
+		return new ModelAndView("redirect:/");
 	}
 }
