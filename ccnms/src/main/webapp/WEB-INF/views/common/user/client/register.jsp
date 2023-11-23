@@ -12,28 +12,6 @@
 		var validateId = false;	
 		
 		$().ready(function(){
-			$("#emailCheckBtn").click(function(){
-				
-				var emailDomain = $("[name='emailDomain']").val();
-				var email = $("#email").val();
-				var emailCheck = $("#emailCheck") 
-				if ( emailDomain != "") {
-					email += emailDomain;
-				}
-				
-				$.ajax ({
-					type :"get",
-					url : "${contextPath}/user/emailCheck",
-					data : {"email" : email},
-					success : function(data){
-						console.log("data : " +  data);
-						$("#emailCheck").prop("disabled", false);
-						alert('인증번호가 전송되었습니다.');
-						
-					}			
-				});
-				
- 			});
 			
 			$("[name='allAgreeYN']").change(function(){
 				
@@ -251,16 +229,6 @@
 	                                </div>
 	                            </div>
 	                             <div class="row">
-	                                <div class="col-lg-6">
-	                                    <div class="checkout__input">
-										<span><input type="email" id="emailCheck" name="emailCheck" placeholder="인증번호를 입력하세요" disabled="disabled"></span>
-	                                    </div>
-	                                </div>
-	                                <div class="col-lg-6">
-	                                    <div class="checkout__input">
-	                                   		<input type="button" id="emailCheckBtn" value="이메일인증하기">
-	                                    </div>
-	                                </div>
 	                                <p><span id="passwdCheckWarn"></span></p>
 	                            </div>
 	                        </div>

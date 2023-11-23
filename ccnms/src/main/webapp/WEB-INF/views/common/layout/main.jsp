@@ -52,10 +52,6 @@
 	}
 </script>
 <body>
----------------------
-<h1>사용자아이디:${sessionId }</h1>
------------------
-    <!-- Categories Section Begin -->
     <section class="categories">
         <div class="container">
             <div class="row">
@@ -77,9 +73,6 @@
             </div>
         </div>
     </section>
-    <!-- Categories Section End -->
-
-    <!-- Featured Section Begin -->
     <section class="section">
         <div class="container">
             <div class="row">
@@ -246,7 +239,5 @@
           </div>
          </div>
     </section>
-    <!-- Latest Product Section End -->
-
 </body>
 </html>

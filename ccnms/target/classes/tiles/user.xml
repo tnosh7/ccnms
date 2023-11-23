@@ -14,6 +14,10 @@
 	 		<put-attribute name="body" value="/WEB-INF/views/common/user/client/authenticationEmail.jsp"/>
 	 		<put-attribute name="title" value="이메일 인증"/>	
 	 	</definition>
+	 	<definition name="/user/findUser" extends="common">
+	 		<put-attribute name="body" value="/WEB-INF/views/common/user/client/findUser.jsp"/>
+	 		<put-attribute name="title" value="계정 찾기"/>	
+	 	</definition>
 	 	
 	 	
 </tiles-definitions>

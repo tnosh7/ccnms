@@ -42,9 +42,6 @@
                            	  </c:if>
                            	  <span></span>
                            </div>
-                           <div align="left">
-	     				   <span id="autoLogin" class="form-text text-muted"><input type="checkbox" name="useCookie">&ensp;<small>간편 로그인 사용하기</small></span>
-                           </div>
                            <br>
                            <div align="center">
 	                           <button type="submit" class="site-btn" width="400">로그인</button>
@@ -53,8 +50,8 @@
                            <div class="row">
 			                <div class="col-lg-12">
 			                <p class="text-center">
-			                <span><a href="${contextPath }/user/registerUser">비밀번호 찾기</a></span> ㅣ
-			                <span><a href="${contextPath }/user/registerUser">아이디 찾기</a></span> ㅣ
+			                <span><a href="${contextPath }/user/findUser?find=pw">비밀번호 찾기</a></span> ㅣ
+			                <span><a href="${contextPath }/user/findUser?find=id">아이디 찾기</a></span> ㅣ
 			                <span><a href="${contextPath }/user/register">회원가입</a></span>
 			             	</p>
 			            </div>

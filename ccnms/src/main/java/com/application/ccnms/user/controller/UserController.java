@@ -1,8 +1,6 @@
 package com.application.ccnms.user.controller;
 
 
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -113,5 +111,13 @@ public class UserController {
 		}
 		else 
 			return new ModelAndView("redirect:/");
+	}
+	
+	@GetMapping("/findUser")
+	public ModelAndView findUser (@RequestParam("find") String find) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("find", find);
+		mv.setViewName("/user/findUser");
+		return mv;
 	}
 }
