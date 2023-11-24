@@ -18,11 +18,28 @@
 	ul{
    list-style:none;
    }
-	
+.head-wrap {
+	position: relative;
+}
+.head-wrap img {
+	width: 60%;
+	vertical-align: middle;
+}
+.head-text {
+	padding: 5px 10px;
+	text-align: center;
+	position: absolute;
+	color:white;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
+}
 </style>
 <script>
-
+	var diggingTopic = "";
 	$().ready(function(){
+		diggingTopic  = ${diggingTopic};
+		
 		$("#onePageViewCnt").val("${onePageViewCnt}");
 	});
 	
@@ -58,24 +75,16 @@
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="${contextPath}/resources/bootstrap/img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>${diggingTopic }</h2>
-                        <div class="breadcrumb__option">
-                        	<img alt="" src="${contextPath}/resources/bootstrap/img/header/${diggingTopic}.jsp">
-                            <a href="./index.html">Home</a>
-                            <span>Blog</span>
-                        </div>
-                    </div>
+   <section align="center">
+	   <div class="head-wrap" >
+            <div class="head-img">
+	   			<img alt="" src="${contextPath}/resources/bootstrap/img/header/${diggingTopic }.jpg" height="150" width="100%">
+	   			     <div class="col-lg-12 head-text">
+	   			     <h1>${diggingTopic }</h1>
                 </div>
-            </div>
-        </div>
-    </section>
-    <!-- Breadcrumb Section End -->
-
+	  		 </div>
+	   </div>
+   </section>
     <!-- Blog Section Begin -->
     <section class="blog spad">
         <div class="container">
