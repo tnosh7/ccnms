@@ -35,16 +35,20 @@ public class UserDAOImpl implements UserDAO {
 	public void updateEmailCheck(Map<String, Object> emailMap) {
 		sqlSession.update("user.updateEmailCheck", emailMap);
 	}
+	@Override
+	public int selectOneMyKeepCnt(String userId) throws Exception {
+		return sqlSession.selectOne("user.selectOneMyKeepCnt", userId);
+	}
 	
+	@Override
+	public int selectOneMyCartCnt(String userId) throws Exception {
+		return sqlSession.selectOne("user.selectOneMyCartCnt", userId);
+	}
 	@Override
 	public int selectOneMyOrderCnt(String userId) throws Exception {
 		return sqlSession.selectOne("user.selectOneMyOrderCnt", userId);
 	}
 
-	@Override
-	public int selectOneMyCartCnt(String userId) throws Exception {
-		return sqlSession.selectOne("user.selectOneMyCartCnt", userId);
-	}
 
 	@Override
 	public boolean selectOneEmailIdentify(String userId) throws Exception {
@@ -81,6 +85,7 @@ public class UserDAOImpl implements UserDAO {
 	public void updatePw(UserDTO userDTO) throws Exception {
 		sqlSession.update("user.updatePw", userDTO);
 	}
+
 
 
 }

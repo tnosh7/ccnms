@@ -111,17 +111,36 @@
                                     <li><a href="${contextPath }/myShop/saleList">내 상점</a></li>
                                 </ul>
                             </li>
-                            <li><a href="${contextPath }/ranking/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png">디깅랭킹</a></li>
-                            <li class="active"><a href="${contextPath }/contact/user">문의</a></li>
+                            <li><a href="${contextPath }/ranking/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png"> 디깅랭킹</a></li>
+                            <li class="active"><a href="${contextPath }/contact/user"><img alt="문의에러" src="${contextPath }/resources/bootstrap/img/qna.png"> 문의</a></li>
                         </ul>
                     </nav>
                 </div>
+                
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="${contextPath }/myShop/myKeep"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="${contextPath }/myShop/cartList"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                       		<li><a href="${contextPath }/myShop/orderList"><img src="${contextPath }/resources/bootstrap/img/purchase.png"></a></li>
+                        	<c:choose>
+								<c:when test="${sessionScope.role == 'user' }">
+									<li>
+										<a href="${contextPath }/myShop/myKeep"><i class="fa fa-heart"></i>
+										<span>${sessionScope.myKeepCnt}</span></a>
+									</li>
+									<li>
+										<a href="${contextPath }/myShop/cartList"><i class="fa fa-shopping-bag"></i>
+										<span>${sessionScope.myCartCnt}</span></a>
+									</li>
+									<li>
+										<a href="${contextPath }/myShop/orderList"><img src="${contextPath }/resources/bootstrap/img/purchase.png">
+										<span>${sessionScope.myOrderCnt}</span></a>
+									</li>
+								</c:when>
+								<c:otherwise>
+		                            <li><a href="${contextPath }/myShop/myKeep"><i class="fa fa-heart"></i><span>0</span></a></li>
+		                            <li><a href="${contextPath }/myShop/cartList"><i class="fa fa-shopping-bag"></i><span>0</span></a></li>
+		                       		<li><a href="${contextPath }/myShop/orderList"><img src="${contextPath }/resources/bootstrap/img/purchase.png"><span>0</span></a></li>
+								</c:otherwise>                        	
+                        	</c:choose>
                         </ul>
                     </div>
                 </div>
@@ -151,7 +170,7 @@
                             <li><a href="${contextPath }/digging/main?diggingTopic=business"><img alt="비즈니스에러" src="${contextPath }/resources/bootstrap/img/buss.png"><strong>&emsp;비즈니스</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=sport"><img alt="스포츠에러" src="${contextPath }/resources/bootstrap/img/heal.png"><strong>&emsp;스포츠</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=celeb"><img alt="연예인에러" src="${contextPath }/resources/bootstrap/img/person.png"><strong>&emsp;연예인</strong></a></li>
-                            <li><a href="${contextPath }/digging/main?diggingTopic=trevel"><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/world.png"><strong>&emsp;여행</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=travel"><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/world.png"><strong>&emsp;여행</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=fashion"><img alt="패션에러" src="${contextPath }/resources/bootstrap/img/fas.png"><strong>&emsp;패션</strong></a></li>
                         </ul>
                     </div>

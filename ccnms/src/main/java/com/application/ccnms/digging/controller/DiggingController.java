@@ -87,6 +87,7 @@ public class DiggingController {
 		searchMap.put("diggingTopic", diggingTopic);
 		mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
 		mv.addObject("populerList", diggingService.getPopulerList(searchMap));
+		mv.addObject("diggingTopic", diggingTopic);
 		return mv;
 	}
 	@GetMapping("/thumbnails")

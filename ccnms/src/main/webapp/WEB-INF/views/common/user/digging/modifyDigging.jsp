@@ -100,7 +100,7 @@
 			  						<option value="business">비즈니스</option>
 			  						<option value="sport">스포츠</option>
 			  						<option value="celeb">연예인</option>
-			  						<option value="trevel">여행</option>
+			  						<option value="travel">여행</option>
 			  						<option value="fashion">패션</option>
 		  						</select>
 	                  	 	</div>

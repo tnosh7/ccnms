@@ -21,16 +21,13 @@
                 <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                     <div class="footer__widget">
                         <ul>
-                            <li><a href="#"><strong>모두디깅이란?</strong></a></li>
-                            <li><a href="${contextPath }/contact/user">고객센터</a></li>
-                            <li><a href="${contextPath }/contact/user">1:1문의</a></li>
+                            <li><a href="${contextPath }/contact/user#introduce"><strong>모두디깅이란?</strong></a></li>
+                            <li><a href="${contextPath }/contact/user#askCenter">1:1문의</a></li>
                             <li>ModuDigging Inc</li>
                         </ul>
                         <ul>
-                            <li><a href="#"><strong>개인보호처리방침</strong></a></li>
-                            <li><a href="#">모두디깅 정책</a></li>
-                            <li><a href="#">배송 정책</a></li>
-                            <li><a href="#">상품거래 정책</a></li>
+                            <li><a href="${contextPath }/contact/user#modudiggingPolicy"><strong>모두디깅 정책</strong></a></li>
+                            <li><a href="${contextPath }/contact/user#modudiggingPolicy#personalPolicy">개인보호처리방침</a></li>
                         </ul>
                     </div>
                 </div>

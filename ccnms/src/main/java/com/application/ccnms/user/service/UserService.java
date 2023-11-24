@@ -8,8 +8,9 @@ public interface UserService {
 	public UserDTO loginUser (UserDTO userDTO) throws Exception;
 	public String checkDuplicateUserId(String userId)throws Exception;
 	public void getEmailCheck(String email, String userId)throws Exception;
-	public int getMyOrderCnt(String userId) throws Exception;
+	public int getMyKeepCnt(String userId) throws Exception;
 	public int getMyCartCnt(String userId) throws Exception;
+	public int getMyOrderCnt(String userId) throws Exception;
 	public boolean getEmailIdentify(String userId) throws Exception;
 	public boolean emailAuthentication(UserDTO userDTO) throws Exception;
 	public String getFindId(String userNm, String email) throws Exception;

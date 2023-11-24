@@ -44,49 +44,88 @@
             <a href="#"><img src="${contextPath }/resources/bootstrap/img/logo.png" alt="로고이미지에러"></a>
         </div>
         <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+           <ul>
+            	<c:choose>
+				<c:when test="${sessionScope.role == 'user' }">
+					<li>
+						<a href="${contextPath }/myShop/myKeep"><i class="fa fa-heart"></i>
+						<span>${sessionScope.myKeepCnt}</span></a>
+					</li>
+					<li>
+						<a href="${contextPath }/myShop/cartList"><i class="fa fa-shopping-bag"></i>
+						<span>${sessionScope.myCartCnt}</span></a>
+					</li>
+					<li>
+						<a href="${contextPath }/myShop/orderList"><img src="${contextPath }/resources/bootstrap/img/purchase.png">
+						<span>${sessionScope.myOrderCnt}</span></a>
+					</li>
+				</c:when>
+				<c:otherwise>
+                     <li><a href="${contextPath }/myShop/myKeep"><i class="fa fa-heart"></i><span>0</span></a></li>
+                     <li><a href="${contextPath }/myShop/cartList"><i class="fa fa-shopping-bag"></i><span>0</span></a></li>
+                	 <li><a href="${contextPath }/myShop/orderList"><img src="${contextPath }/resources/bootstrap/img/purchase.png"><span>0</span></a></li>
+				</c:otherwise>                        	
+            	</c:choose>
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                		<div class="header__top__right__auth">
-                      	<a href="#"><button type="button" class="btn btn-outline-dark">로그인</button></a>
+                         <c:choose>
+                            	<c:when test="${sessionScope.role eq 'admin'}">
+                            	    <div class="header__top__right__auth">
+	                               		<p><a href="${contextPath }/admin/digging/diggingAdd"><button type="button" class="btn btn-secondary disabled">디깅하기</button></a></p>
+                            		</div>
+                            	    <div class="header__top__right__auth">
+	                               		<p><a href="${contextPath }/admin/main"><button type="button" class="btn btn-outline-dark">관리자 페이지</button></a></p>
+                            		</div>
+	 								<div class="header__top__right__language">
+	                               		<p><a href="${contextPath }/admin/logout"><button type="button" class="btn btn-outline-danger">로그아웃</button></a></p>
+                            		</div>
+                            	</c:when>
+                            	<c:otherwise>
+									<c:choose>
+										<c:when test="${sessionScope.role eq 'user'}">
+		                            	  	<div class="header__top__right__auth">
+			                               		<p><a href="${contextPath }/digging/addDigging"><button type="button" class="btn btn-secondary disabled">디깅하기</button></a></p>
+        		                    		</div>
+                            	     		<div class="header__top__right__auth">
+		                            			<p><a href="${contextPath }/myPage/main"><button type="button" class="btn btn-outline-dark">내 회원정보</button></a></p>
+                            				</div>
+		                            	  	<div class="header__top__right__language">
+		                            	   		<p><a href="${contextPath }/user/logout"><button type="button" class="btn btn-outline-danger">로그아웃</button></a></p>
+                            				</div>
+										</c:when>
+		                            	<c:otherwise>
+	                            	      	<div class="header__top__right__auth">
+												<p><a href="${contextPath }/user/loginUser"><button type="button" class="btn btn-outline-dark">로그인</button></a></p>
+                            				</div>
+		                               	  	<div class="header__top__right__language">
+		                               			<p><a href="${contextPath }/user/register"><button type="button" class="btn btn-outline-success">회원가입</button></a></p>
+	                            			</div>
+		                            	</c:otherwise>
+									</c:choose>                            
+                            	</c:otherwise>
+                            </c:choose>
                      </div>
             	</div>
-             <div class="header__top__right__language">
-                <a href="#"><button type="button" class="btn btn-outline-success">회원가입</button></a>
-             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="${contextPath }/"><img alt="홈에러" src="${contextPath }/resources/bootstrap/img/home.png"> 홈</a></li>
-                <li><a href="${contextPath }/shop/"><img alt="상점에러" src="${contextPath }/resources/bootstrap/img/shop.png"> 상점</a></li>
-                <li><a href="${contextPath }/digging/main">디깅</a>
-                 <ul class="header__menu__dropdown">
-                     <li><a href="#"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/game.png"><strong> 게임</strong></a></li>
-                     <li><a href="#"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/music.png"><strong> K-POP</strong></a></li>
-                     <li><a href="#"><img alt="오티티에러" src="${contextPath }/resources/bootstrap/img/videos.png"><strong> OTT</strong></a></li>
-                     <li><a href="#"><img alt="펫에러" src="${contextPath }/resources/bootstrap/img/dog.png"><strong> 동물 & 애완동물</strong></a></li>
-                     <li><a href="#"><img alt="비즈니스에러" src="${contextPath }/resources/bootstrap/img/buss.png"><strong> 비즈니스</strong></a></li>
-                     <li><a href="#"><img alt="스포츠에러" src="${contextPath }/resources/bootstrap/img/heal.png"><strong> 스포츠</strong></a></li>
-                     <li><a href="#"><img alt="연예인에러" src="${contextPath }/resources/bootstrap/img/person.png"><strong> 연예인</strong></a></li>
-                     <li><a href="#"><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/world.png"><strong> 여행</strong></a></li>
-                     <li><a href="#"><img alt="패션에러" src="${contextPath }/resources/bootstrap/img/fas.png"><strong> 패션</strong></a></li>
-                  </ul>
+                <li><a href="${contextPath }/"><img alt="홈에러" src="${contextPath }/resources/bootstrap/img/home.png"> 홈</a></li>
+                <li><a href="${contextPath }/shop/"><img alt="상점에러" src="${contextPath }/resources/bootstrap/img/shop.png"> 상점</a>
+                    <ul class="header__menu__dropdown">
+                        <li><a href="${contextPath }/shop/?sort=sale"">유저마켓</a></li>
+                        <li><a href="${contextPath }/shop/?sort=Modudigging">디깅마켓</a></li>
+                        <li><a href="${contextPath }/shop/?sort=exchange">교환마켓</a></li>
+                        <li><a href="${contextPath }/myShop/saleList">내 상점</a></li>
+                    </ul>
                 </li>
-                <li><a href="${contextPath }/digging/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png"> 디깅랭킹</a></li>
+                <li><a href="${contextPath }/ranking/ranking"><img alt="디깅랭킹에러" src="${contextPath }/resources/bootstrap/img/hot.png">디깅랭킹</a></li>
+                <li class="active"><a href="${contextPath }/contact/user"><img alt="문의에러" src="${contextPath }/resources/bootstrap/img/qna.png"> 문의</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
-        <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-         <a href="#"><i class="fa fa-pinterest-p"></i></a>
-        </div>
         <div class="humberger__menu__contact">
             <ul>
                 <li><i class="fa fa-envelope"></i> moduDigging@gmail.com</li>

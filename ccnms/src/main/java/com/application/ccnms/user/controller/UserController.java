@@ -74,8 +74,9 @@ public class UserController {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userDTO.getUserId());
 			session.setAttribute("role", "user");
-			session.setAttribute("myOrderCnt", userService.getMyOrderCnt(userDTO.getUserId()));
+			session.setAttribute("myKeepCnt", userService.getMyKeepCnt(userDTO.getUserId()));
 			session.setAttribute("myCartCnt", userService.getMyCartCnt(userDTO.getUserId()));
+			session.setAttribute("myOrderCnt", userService.getMyOrderCnt(userDTO.getUserId()));
 			
 			if (!userService.getEmailIdentify(userDTO.getUserId())) {
 				mv.setViewName("/user/authenticationEmail");

@@ -80,15 +80,17 @@ public class UserServiceImpl implements UserService {
 	    emailMap.put("emailAuthentication", Integer.toString(emailAuthentication));
 	    userDAO.updateEmailCheck(emailMap);
 	}
-
 	@Override
-	public int getMyOrderCnt(String userId) throws Exception {
-		return userDAO.selectOneMyOrderCnt(userId);
+	public int getMyKeepCnt(String userId) throws Exception {
+		return userDAO.selectOneMyKeepCnt(userId);
 	}
-	
 	@Override
 	public int getMyCartCnt(String userId) throws Exception {
 		return userDAO.selectOneMyCartCnt(userId);
+	}
+	@Override
+	public int getMyOrderCnt(String userId) throws Exception {
+		return userDAO.selectOneMyOrderCnt(userId);
 	}
 
 	@Override
@@ -153,8 +155,6 @@ public class UserServiceImpl implements UserService {
 		userDAO.updatePw(userDTO);
 	}
 
-	
-	
 
 
 
