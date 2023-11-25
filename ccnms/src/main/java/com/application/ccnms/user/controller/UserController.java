@@ -2,10 +2,14 @@ package com.application.ccnms.user.controller;
 
 
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -134,5 +138,11 @@ public class UserController {
 	public ModelAndView changePw (UserDTO userDTO) throws Exception {
 		userService.modifyPw(userDTO);
 		return new ModelAndView("redirect:/");
+	}
+	
+	@GetMapping("/updateLike")
+	public ResponseEntity<Object> updateLike (@RequestParam ("writer") String writer) throws Exception {
+		userService.addLikePoint(writer);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 }

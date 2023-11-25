@@ -58,14 +58,6 @@
 				data : {"diggingId" : diggingId}
 			})
 		})	
-		$("likeBtn").click(function(){
-			var writer = $("#writer").val();
-			$.ajax ({
-				url : "${contextPath}/digging/likeUp",
-				type : "post",
-				data : {"writer" : writer}
-			})	
-		})
 		$("#delete").click(function(){
 			Swal.fire({
 				  title: '게시물을 삭제하시겠습니까?',
@@ -85,7 +77,34 @@
 				  })
 			})			
 	});
-	
+
+	function updateLike(writer){
+		var diggingId = $("#diggingId").val();
+		var writer ="";
+		writer = $("[name='writer']").val();
+		if ("${sessionId == null}" == "true") {
+			Swal.fire({
+				  icon: 'info',
+				  title: '로그인 후에 이용가능합니다.',
+				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
+				})
+		}
+		else {
+			$.ajax({
+				url:"${contextPath}/user/updateLike",
+				type:"get",
+				data:{
+					"writer" : writer,
+					"diggingId" : diggingId
+				},
+				success:function(result){
+						Swal.fire({
+							  text: 'LIKE!'
+						})
+				}
+			})
+		}
+	}
 	function removeReply(){
 		var replyId = $("#replyId").val();
 		var diggingId = $("#diggingId").val();
@@ -119,12 +138,15 @@
 		                            		<c:choose>
 		                            			<c:when test="${diggingDTO.profile eq null }">
 		                            				<th><img src="${contextPath }/resources/bootstrap/img/person.png"> ${diggingDTO.writer }
-						                            <input type="hidden" value="${diggingDTO.writer }">
+			                            				&emsp;<button type="button" class="btn btn-primary btn-sm" id="writer" onclick="updateLike()">LIKE</button>
+							                            <input type="hidden" name=" writer" value="${diggingDTO.writer }">
 		                            				</th>
 		                            			</c:when>
 		                            			<c:otherwise>
 			                            			<th align="left"><img src="${contextPath }/digging/thumbnails?file=${diggingDTO.profile }" alt="프로필이미지" width="40" height="40">
 			                            				<strong>&emsp;${diggingDTO.writer }</strong>
+			                            				&emsp;<button type="button" class="btn btn-primary btn-sm" id="writer" onclick="updateLike()">LIKE</button>
+							                            <input type="hidden" name=" writer" value="${diggingDTO.writer }">
 			                            			</th>
 		                            			</c:otherwise>
 		                            		</c:choose>

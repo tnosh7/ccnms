@@ -16,7 +16,6 @@ public interface DiggingService {
 	public void addDigging(DiggingDTO diggingDTO) throws Exception;
 	public Map<String,Object> getDiggingDetail(long diggingId) throws Exception;
 	public int upThumbsUp(long diggingId)throws Exception;	
-	public int getlikeUp(String writer)throws Exception;	
 	public int getallReplyCnt(long diggingId)throws Exception;	 
 	public List<ReplyDTO> getReplyList(long diggingId)throws Exception;	 
 	public List<DiggingDTO> getRecentList(String diggingTopic) throws Exception;	 

@@ -163,15 +163,15 @@
                             <span style="color:black">디깅 토픽</span>
                         </div>
                         <ul style="background:ghostwhite">
-                            <li><a href="${contextPath }/digging/main?diggingTopic=game"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/game.png"><strong>&emsp;게임</strong></a></li>
-                            <li><a href="${contextPath }/digging/main?diggingTopic=kPop"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/music.png"><strong>&emsp;K-POP</strong></a></li>
-                            <li><a href="${contextPath }/digging/main?diggingTopic=ott"><img alt="오티티에러" src="${contextPath }/resources/bootstrap/img/videos.png"><strong>&emsp;OTT</strong></a></li>
-                            <li><a href="${contextPath }/digging/main?diggingTopic=animal"><img alt="펫에러" src="${contextPath }/resources/bootstrap/img/dog.png"><strong>&emsp;동물 & 애완동물</strong></a></li>
-                            <li><a href="${contextPath }/digging/main?diggingTopic=business"><img alt="비즈니스에러" src="${contextPath }/resources/bootstrap/img/buss.png"><strong>&emsp;비즈니스</strong></a></li>
-                            <li><a href="${contextPath }/digging/main?diggingTopic=sport"><img alt="스포츠에러" src="${contextPath }/resources/bootstrap/img/heal.png"><strong>&emsp;스포츠</strong></a></li>
-                            <li><a href="${contextPath }/digging/main?diggingTopic=celeb"><img alt="연예인에러" src="${contextPath }/resources/bootstrap/img/person.png"><strong>&emsp;연예인</strong></a></li>
-                            <li><a href="${contextPath }/digging/main?diggingTopic=travel"><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/world.png"><strong>&emsp;여행</strong></a></li>
-                            <li><a href="${contextPath }/digging/main?diggingTopic=fashion"><img alt="패션에러" src="${contextPath }/resources/bootstrap/img/fas.png"><strong>&emsp;패션</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=game"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/icon/game.png"><strong>&emsp;게임</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=kPop"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/icon/kPop.png"><strong>&emsp;K-POP</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=ott"><img alt="오티티에러" src="${contextPath }/resources/bootstrap/img/icon/ott.png"><strong>&emsp;OTT</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=animal"><img alt="펫에러" src="${contextPath }/resources/bootstrap/img/icon/animal.png"><strong>&emsp;동물 & 애완동물</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=business"><img alt="비즈니스에러" src="${contextPath }/resources/bootstrap/img/icon/business.png"><strong>&emsp;비즈니스</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=sport"><img alt="스포츠에러" src="${contextPath }/resources/bootstrap/img/icon/sport.png"><strong>&emsp;스포츠</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=celeb"><img alt="연예인에러" src="${contextPath }/resources/bootstrap/img/icon/celeb.png"><strong>&emsp;연예인</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=travel"><img alt="여행에러" src="${contextPath }/resources/bootstrap/img/icon/travel.png"><strong>&emsp;여행</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=fashion"><img alt="패션에러" src="${contextPath }/resources/bootstrap/img/icon/fashion.png"><strong>&emsp;패션</strong></a></li>
                         </ul>
                     </div>
                 </div>

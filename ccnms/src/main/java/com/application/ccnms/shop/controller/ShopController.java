@@ -105,7 +105,7 @@ public class ShopController {
 		shopService.addProduct(shopDTO);
 		
 		String jsScript = "<script>";		
-			   jsScript +="location.href='" + request.getContextPath() + "/shop/'"; 
+			   jsScript +="location.href='" + request.getContextPath() + "/myShop/saleList'"; 
 			   jsScript +="</script>";
 		return jsScript;
 	}

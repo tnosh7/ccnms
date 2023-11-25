@@ -57,14 +57,9 @@ public class DiggingServiceImpl implements DiggingService {
 		return diggingDAO.updateThumbsUp(diggingId);
 	}
 	@Override
-	public int getlikeUp(String writer) throws Exception {
-		return diggingDAO.updateLikePoint(writer);
-	}
-	@Override
 	public int getallReplyCnt(long diggingId) throws Exception {
 		return diggingDAO.selectOneAllReplyCnt(diggingId);
 	}
-
 	@Override
 	public List<ReplyDTO> getReplyList(long diggingId) throws Exception {
 		return diggingDAO.selectListReplyList(diggingId);

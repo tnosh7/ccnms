@@ -17,7 +17,6 @@ public interface DiggingDAO {
 	public int updateReadCnt(long diggingId)throws Exception ;
 	public Map<String,Object> selectDiggingDetail(long diggingId)throws Exception ;
 	public int updateThumbsUp(long diggingId)throws Exception ;
-	public int updateLikePoint(String writer) throws Exception ;
 	public int selectOneAllReplyCnt(long diggingId)throws Exception ;
 	public List<ReplyDTO> selectListReplyList(long diggingId)throws Exception ;
 	public List<DiggingDTO> selectListRecentList(String diggingTopic) throws Exception ;

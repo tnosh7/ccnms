@@ -53,10 +53,6 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	}
 
 	@Override
-	public int updateLikePoint(String writer) throws Exception {
-		return sqlSession.update("digging.updateLikePoint", writer);
-	}
-	@Override
 	public int selectOneAllReplyCnt(long diggingId) throws Exception {
 		return sqlSession.selectOne("digging.selectOneAllReplyCnt",diggingId);
 	}

@@ -18,4 +18,5 @@ public interface UserDAO {
 	public String selectOneFindId(String userNm, String email) throws Exception;
 	public String selectOneFindPw(String userId, String email) throws Exception;
 	public void updatePw(UserDTO userDTO)throws Exception;
+	public void updateLikePoint(String writer)throws Exception;
 }

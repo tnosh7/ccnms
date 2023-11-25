@@ -159,14 +159,6 @@
 			DIGGING_ID = #{diggingId}
 	</update>
 	
-	<update id="updateLikePoint" parameterType="String">
-		UPDATE USER
-		SET 
-			LIKE_POINT = LIKE_POINT + 1 
-		WHERE 
-			USER_ID = #{writer}
-	</update>
-	
 	<select id="selectOneAllReplyCnt" parameterType="long" resultType="int">
 		SELECT 
 			COUNT(*)

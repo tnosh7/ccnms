@@ -173,13 +173,6 @@ public class DiggingController {
 		return diggingService.upThumbsUp(diggingId);
 		
 	}
-	@PostMapping("/likeUp")
-	public ModelAndView likeUp(@RequestParam("writer") String writer) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("likePoint", diggingService.getlikeUp(writer));
-		return mv;
-		
-	}
 	@GetMapping("/modifyDigging")
 	public ModelAndView modify(@RequestParam("diggingId")long diggingId)throws Exception{
 		ModelAndView mv = new ModelAndView();

@@ -86,6 +86,11 @@ public class UserDAOImpl implements UserDAO {
 		sqlSession.update("user.updatePw", userDTO);
 	}
 
+	@Override
+	public void updateLikePoint(String writer) throws Exception {
+		sqlSession.update("user.updateLikePoint", writer);
+	}
+
 
 
 }

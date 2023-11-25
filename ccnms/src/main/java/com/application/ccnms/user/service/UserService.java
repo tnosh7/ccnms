@@ -1,6 +1,7 @@
 package com.application.ccnms.user.service;
 
 
+
 import com.application.ccnms.user.dto.UserDTO;
 
 public interface UserService {
@@ -16,4 +17,5 @@ public interface UserService {
 	public String getFindId(String userNm, String email) throws Exception;
 	public String getFindPw(String userId, String email) throws Exception;
 	public void modifyPw(UserDTO userDTO) throws Exception;
+	public void addLikePoint(String writer)throws Exception;
 }

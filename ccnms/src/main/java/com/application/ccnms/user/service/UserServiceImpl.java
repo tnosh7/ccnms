@@ -155,6 +155,11 @@ public class UserServiceImpl implements UserService {
 		userDAO.updatePw(userDTO);
 	}
 
+	@Override
+	public void addLikePoint(String writer) throws Exception {
+		userDAO.updateLikePoint(writer);
+	}
+
 
 
 

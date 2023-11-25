@@ -30,9 +30,6 @@
 			data: {
 				"productCd" : productCd,
 				"qna" : qna
-			},
-			success:function(){
-				confirm("추가됬음.");
 			}
 		})
 	}
