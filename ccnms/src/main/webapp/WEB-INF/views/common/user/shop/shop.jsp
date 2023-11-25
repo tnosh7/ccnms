@@ -113,7 +113,7 @@
                                     	<c:forEach var="shopDTO" items="${shopList}" begin="0" end="2">
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="${contextPath }/thumbnails?file=${shopDTO.productFile}" alt="" >
+                                                <img src="${contextPath}/thumbnails?file=${shopDTO.productFile}" alt="" >
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>${shopDTO.productNm }</h6>
@@ -167,7 +167,7 @@
 	                            		<span><strong>${shopDTO.writer }</strong></span>
 	                            		<span><img src="${contextPath }/resources/bootstrap/img/show.png"/>${shopDTO.readCnt }</span>
 	                            	</div>
-	                                <div class="product__item__pic set-bg" data-setbg="${contextPath }/thumbnails?file=${shopDTO.productFile}">
+	                                <div class="product__item__pic set-bg" data-setbg="${contextPath}/thumbnails?file=${shopDTO.productFile}">
 	                                    <ul class="product__item__pic__hover">
 	                                        <li><a href="javascript:myKeep(${shopDTO.productCd})"><i class="fa fa-heart"></i></a></li>
 	                                        <li><a href="javascript:myCart(${shopDTO.productCd})"><i class="fa fa-shopping-cart"></i></a></li>

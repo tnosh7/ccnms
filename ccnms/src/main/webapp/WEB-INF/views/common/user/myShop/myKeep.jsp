@@ -73,7 +73,7 @@
 			                                       </div>
 			                                	</td>
 			                                    <td class="shoping__cart__product__pic">
-			                                    	<img alt="" src="${contextPath }/thumbnails?file=${keepDTO.productFile}" width="50" height="50">
+			                                    	<img alt="" src="${contextPath}/thumbnails?file=${keepDTO.productFile}" width="50" height="50">
 			                                    </td>
 			                                    <td class="shoping__cart__product" align="left">
 			                                    	 <a href="${contextPath }/shop/shopDetail?productCd=${keepDTO.productCd }"> 	

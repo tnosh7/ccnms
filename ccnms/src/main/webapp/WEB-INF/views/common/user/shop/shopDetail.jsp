@@ -110,11 +110,11 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="${contextPath }/thumbnails?file=${shopDTO.productFile}" alt="상품사진">
+                                src="${contextPath}/thumbnails?file=${shopDTO.productFile}" alt="상품사진">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
                             <img data-imgbigurl="img/product/details/product-details-2.jpg"
-                                src="${contextPath }/thumbnails?file=${shopDTO.productFile}" alt="">
+                                src="${contextPath}/thumbnails?file=${shopDTO.productFile}" alt="">
                         </div>
                     </div>
                 </div>

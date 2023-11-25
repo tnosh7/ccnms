@@ -39,7 +39,7 @@
 			                                		<span>${myOrder.deliveryStatus}</span>
 			                                	</td>
 			                                    <td class="shoping__cart__product__pic">
-			                                    	<img src="${contextPath }/shop/thumbnails?file=${myOrder.productFile}" width="50" height="50"/>
+			                                    	<img src="${contextPath}/thumbnails?file=${myOrder.productFile}" width="50" height="50"/>
 			                                    </td>
 			                                    <td class="shoping__cart__product" align="left">
 			                                    	<a href="${contextPath }/myShop/orderDetail?orderCd=${myOrder.orderCd}&userId=${myOrder.userId}">

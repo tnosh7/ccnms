@@ -61,7 +61,7 @@ public class AdminDiggingController {
 		
 		String content = request.getParameter("content");
 		int idx=  content.indexOf("/embed/");
-		if (idx != 0) {
+		if (idx >= 0) {
 			int idx2 = content.indexOf("></oembed>");
 			String url = content.substring(idx+7, idx2-1);	
 			diggingDTO.setVideoYn("Y");

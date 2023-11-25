@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <c:set var="sessionId" value="${sessionScope.userId }"/>
+<c:set var="adminId" value="${sessionScope.adminId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -164,7 +165,7 @@
 			                           				</c:when>
 			                           				<c:otherwise>
 			                           					<td colspan="3">
-					                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}" width="300" height="300">
+					                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}">
 					                                       ${diggingDTO.content }
 			                           					</td>
 			                           				</c:otherwise>
@@ -210,6 +211,14 @@
                            <c:choose>
                            	<c:when test="${diggingDTO.writer eq sessionId }">
 								<span>
+									<span id='modify'>
+										<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
+										<input type="button" id="delete" value="삭제" >
+									</span>
+								</span>
+                           	</c:when>
+                           	<c:when test="${adminId != null}">
+                        		<span>
 									<span id='modify'>
 										<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
 										<input type="button" id="delete" value="삭제" >

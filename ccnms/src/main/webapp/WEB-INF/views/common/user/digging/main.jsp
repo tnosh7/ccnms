@@ -168,13 +168,11 @@
 	                           			<c:when test="${diggingDTO.profile eq null }">
 	                           				<span><img src="${contextPath }/resources/bootstrap/img/person.png"> ${diggingDTO.writer }
 	                           				</span>
-	                           				<span>&emsp;${diggingDTO.writer }</span>	
 	                           				<span>&emsp;<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>
 	                           			</c:when>
 	                           			<c:otherwise>
 	                            			<span><img src="${contextPath }/thumbnails?file=${diggingDTO.profile }" alt="프로필이미지" width="40" height="40">
 	                            			</span>
-	                            			<span>&emsp;${diggingDTO.writer }</span>	
 	                           				<span>&emsp;<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>
 	                           			</c:otherwise>
                            			 </c:choose>

@@ -74,7 +74,14 @@
                <div class="categories__slider owl-carousel">
                	<c:forEach var="headDiggingDTO" items="${headList }">
                     <div class="col-lg-12 col-md-12">
-                        <div class="categories__item set-bg" data-setbg="${contextPath }/thumbnails?file=${headDiggingDTO.file}">
+                    <c:choose>
+                    	<c:when test="${headDiggingDTO.file eq ''}">
+	                        <div class="categories__item set-bg" data-setbg="${contextPath }/resources/bootstrap/img/banner/notice.PNG">
+                    	</c:when>
+                    	<c:otherwise>
+	                        <div class="categories__item set-bg" data-setbg="${contextPath }/thumbnails?file=${headDiggingDTO.file}">
+                    	</c:otherwise>
+                    </c:choose>
                             <span class="headDigging">${headDiggingDTO.writer}
                         	</span>
                             <br><br><br><br><br><br><br><br>
@@ -98,7 +105,7 @@
                     	
                     	<ul align="right">
 						    <li class="nav-item dropdown">
-						    <a class="nav-link dropdown-toggle show" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" onmouseenter="show()" onmouseleave="hide()">정 렬</a>
+						    <a class="nav-link dropdown-toggle show" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" onmouseenter="show()" onclick="hide()">정 렬</a>
 						    <div class="dropdown-menu" name="dropdown-menu" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 41px);">
 						      <a class="dropdown-item" href="${contextPath }/?sort=readCnt">인기많은순</a>
 						      <a class="dropdown-item" href="${contextPath }/?sort=thumbsUp">추천순</a>

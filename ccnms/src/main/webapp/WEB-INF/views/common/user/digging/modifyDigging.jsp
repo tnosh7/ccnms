@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="adminId" value="${sessionScope.adminId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,27 +92,56 @@
                   	 	<ul >
 	                  	 	<li>
 	                  	 	<div >
-	                  	 		<select name="diggingTopic" >
-			  						<option value="">[필수] 디깅 토픽 선택</option>
-			  						<option value="game">게임</option>
-			  						<option value="kPop">K-POP</option>
-			  						<option value="ott">OTT</option>
-			  						<option value="animal">동물 & 애완동물</option>
-			  						<option value="business">비즈니스</option>
-			  						<option value="sport">스포츠</option>
-			  						<option value="celeb">연예인</option>
-			  						<option value="travel">여행</option>
-			  						<option value="fashion">패션</option>
-		  						</select>
+	                  	 	<c:choose>
+	                  	 		<c:when test="${adminId != null }">
+	                  	 			<select name="diggingTopic" >
+				  						<option value="">[필수] 디깅 토픽 선택</option>
+				  						<option value="notice">공지</option>
+				  						<option value="game">게임</option>
+				  						<option value="kPop">K-POP</option>
+				  						<option value="ott">OTT</option>
+				  						<option value="animal">동물 & 애완동물</option>
+				  						<option value="business">비즈니스</option>
+				  						<option value="sport">스포츠</option>
+				  						<option value="celeb">연예인</option>
+				  						<option value="travel">여행</option>
+				  						<option value="fashion">패션</option>
+		  							</select>
+		  						</c:when>
+		  						<c:otherwise>
+		                  	 		<select name="diggingTopic" >
+				  						<option value="">[필수] 디깅 토픽 선택</option>
+				  						<option value="game">게임</option>
+				  						<option value="kPop">K-POP</option>
+				  						<option value="ott">OTT</option>
+				  						<option value="animal">동물 & 애완동물</option>
+				  						<option value="business">비즈니스</option>
+				  						<option value="sport">스포츠</option>
+				  						<option value="celeb">연예인</option>
+				  						<option value="travel">여행</option>
+				  						<option value="fashion">패션</option>
+			  						</select>
+		  						</c:otherwise>
+	                  	 	</c:choose>
 	                  	 	</div>
 	                  	 	&emsp;<span id="topicWarn" style="color:red"></span>
 	                  	 	</li>
 	                  	 	<li>
 	                  	 	<div >
-	                  	 		<select name="writer" >
-	                  	 			<option>choose</option>
-			  						<option>${sessionScope.userId }</option>
-		  						</select>
+	                  	 	<c:choose>
+	                  	 		<c:when test="${adminId != null }">
+		                  	 		<select name="writer" >
+		                  	 			<option>choose</option>
+				  						<option>ModuDigging</option>
+			  						</select>
+	                  	 		</c:when>
+	                  	 		<c:otherwise>
+		                  	 		<select name="writer" >
+		                  	 			<option>choose</option>
+				  						<option>${sessionScope.userId }</option>
+			  						</select>
+	                  	 		</c:otherwise>
+	                  	 	</c:choose>
 	                  	 	</div>
 	                  	 	</li>
 	                   		<li class="nav-item">

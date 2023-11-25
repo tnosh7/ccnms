@@ -185,7 +185,7 @@ public class DiggingController {
 		diggingDTO.setFile(fileName);
 		diggingService.updateDigging(diggingDTO); 
 		String jsScript="<script>";
-			   jsScript+="history.go(-1)";
+			   jsScript+="history.go(-2)";
 			   jsScript+="</script>";
 		return jsScript;
 	}

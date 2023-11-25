@@ -93,7 +93,7 @@
                							       		<input type="checkbox" name="productCd" value="${mySale.productCd}">
                							        </td>
 			                                    <td class="shoping__cart__product__pic">
-			                                    	<img src="${contextPath }/thumbnails?file=${mySale.productFile}" width="50" height="50"/>
+			                                    	<img src="${contextPath}/thumbnails?file=${mySale.productFile}" width="50" height="50"/>
 			                                    </td>
 			                                    <td class="shoping__cart__product" align="left">
 			                                    	<a href="${contextPath }/shop/shopDetail?productCd=${mySale.productCd }">

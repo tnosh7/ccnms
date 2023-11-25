@@ -24,6 +24,19 @@
   }
 
 </style>
+<script>
+	$().ready(function(){
+		
+		$("form").submit(function(){
+		
+			var diggingTopic= $("[name='diggingTopic']").val();
+			if (diggingTopic == "null") {
+				return false;
+			}
+		})
+	});
+
+</script>
 </head>
 <body>
 	<c:if test="${adminId eq null}">
@@ -120,7 +133,7 @@
 							  <input class="form-control form-control-lg" type="text" id="subject" name="subject" maxlength="30" placeholder="제목" >
 							</div>
 	                   		</li>
-	                   		<li class="nav-item"><textarea name="content" id="editor"></textarea>
+	                   		<li class="nav-item"><textarea name="content" id="editor" maxlength="2700"></textarea>
 								<script>
 								  ClassicEditor
 								  .create(document.querySelector('#editor'), {
