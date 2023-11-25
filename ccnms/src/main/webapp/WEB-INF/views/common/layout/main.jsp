@@ -39,16 +39,32 @@
 	}
 	
 	function updateThumb(diggingId) {
-		$.ajax({
-			url: "${contextPath}/updateThumbsUp",
-			type:"get",
-			data: {
-				"diggingId" : diggingId
-			},
-			success: function(data){
-				$("#updateThumbs").html(data);
-			}
-		});
+		if ("${sessionId == null}" == "true") {
+			Swal.fire({
+				  icon: 'info',
+				  title: '로그인 후에 이용가능합니다.',
+				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
+				})
+		}
+		else {
+			
+			$.ajax({
+				url: "${contextPath}/updateThumbsUp",
+				type:"get",
+				data: {
+					"diggingId" : diggingId
+				},
+				success: function(data){
+					$("#updateThumbs").html(data);
+				}
+			});
+		}
+	}
+	function show(){
+		$("[name='dropdown-menu']").show();
+	}
+	function hide(){
+		 $("[name='dropdown-menu']").hide();
 	}
 </script>
 <body>
@@ -79,10 +95,11 @@
                 <div class="col-lg-12">
                     <div class="featured__controls">
                     	<hr>
+                    	
                     	<ul align="right">
 						    <li class="nav-item dropdown">
-						    <a class="nav-link dropdown-toggle show" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">정 렬</a>
-						    <div class="dropdown-menu show" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 41px);">
+						    <a class="nav-link dropdown-toggle show" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" onmouseenter="show()" onmouseleave="hide()">정 렬</a>
+						    <div class="dropdown-menu" name="dropdown-menu" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 41px);">
 						      <a class="dropdown-item" href="${contextPath }/?sort=readCnt">인기많은순</a>
 						      <a class="dropdown-item" href="${contextPath }/?sort=thumbsUp">추천순</a>
 						      <a class="dropdown-item" href="${contextPath }/?sort=recent">최신순</a>
@@ -144,12 +161,13 @@
                             </tbody>
                             <tfoot>
 							  	<tr><td colspan="4" align="left">
-							    &emsp;<a href="javascript:updateThumb(${diggingDTO.diggingId })" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp"/>
-							   		<span id="updateThumbs">${diggingDTO.thumbsUp }</span></a>
-							    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${diggingDTO.replyCnt}</a>
-							    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
-							   <input type="hidden" value="${diggingDTO.diggingId }"/>
-							  	</td>
+								    &emsp;<a href="javascript:updateThumb(${diggingDTO.diggingId })" class="card-link">
+								    	<img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" />
+								   		<span id="updateThumbs">${diggingDTO.thumbsUp }</span></a>
+								    &emsp;&emsp;<img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${diggingDTO.replyCnt}
+								    &emsp;&emsp;<img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }
+							   		<input type="hidden" value="${diggingDTO.diggingId }"/>
+							  		</td>
 							  	</tr>
 							</tfoot>     
                         </table>
@@ -170,74 +188,105 @@
         	<a href="${contextPath }/?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i>다음</a>
         </c:if>
      </div>
-    <section class="latest-product spad">
+      <section class="latest-product spad">
         <div class="container">
+         	<div align="center">
+          		<img alt="" src="${contextPath }/resources/bootstrap/img/banner/weekendOffer.jpg">
+          	</div>
             <div class="row">
                  <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>최신 상품</h4>
+                     <br><br><br><br>
+                    <span>
+                    	<h4><img alt="상점에러" src="${contextPath }/resources/bootstrap/img/shop.png">&ensp;최신 상품</h4>
+                    </span>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                            <c:forEach var="recentShopDTO" items="${recentShopList }"> 
-                                <a href="${contextPath }/shop/shopDetail?productCd=${recentShopDTO.productCd }" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="${contextPath}/thumbnails?file=${recentShopDTO.productFile}" alt="" width="30" height="30">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>${recentShopDTO.productNm}</h6>
-                                        <span>${recentShopDTO.price }</span>
-                                    </div>
-                                </a>
-                            </c:forEach>
+                            	<table>
+		                     	   <c:forEach var="recentShopDTO" items="${recentShopList }" varStatus="i"> 
+		                     	 <tbody>
+		                     		<tr>
+		                     			<td>
+		                     				${i.count }.&ensp;	
+		                     				<img src="${contextPath }/shop/thumbnails?file=${recentShopDTO.productFile}" alt=""  width="40" height="60">
+		                   				</td>
+		                     			<td>
+		                     				<a href="${contextPath }/shop/shopDetail?productCd=${recentShopDTO.productCd }"  class="latest-product__item">
+				                     			<strong>${recentShopDTO.productNm}</strong>
+		                     				</a>
+		                     			</td>
+		                     		</tr>
+		                     	 </tbody>
+		                         </c:forEach>
+	                     	</table>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>인기많은 상품</h4>
+                     <br><br><br><br>
+                         <h4><img alt="상점에러" src="${contextPath }/resources/bootstrap/img/shop.png">&ensp;인기 상품</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                            <c:forEach var="populerShopDTO" items="${populerShopList }"> 
-                                <a href="${contextPath }/shop/shopDetail?productCd=${populerShopDTO.productCd }" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="${contextPath}/thumbnails?file=${populerShopDTO.productFile}" alt="" width="30" height="30">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>${populerShopDTO.productNm}</h6>
-                                        <span>${populerShopDTO.price }</span>
-                                    </div>
-                                </a>
-                            </c:forEach>
+                         <table>
+                   	   <c:forEach var="populerShopDTO" items="${populerShopList }" varStatus="i"> 
+                     	 <tbody>
+                     		<tr>
+                     			<td>
+                     				${i.count }.&ensp;	
+                     				<img src="${contextPath }/shop/thumbnails?file=${populerShopDTO.productFile}" alt=""  width="40" height="60">
+                   				</td>
+                     			<td>
+                   				 	<a href="${contextPath }/shop/shopDetail?productCd=${populerShopDTO.productCd }">
+                                        <strong>${populerShopDTO.productNm}</strong>
+                    				</a>
+                 				</td>
+                     		</tr>
+                     	 </tbody>
+                         </c:forEach>
+                     	</table>
                             </div>
                         </div>
                     </div>
                 </div>
                  <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>교환 상품</h4>
+                     <br><br><br><br>
+                        <h4><img alt="상점에러" src="${contextPath }/resources/bootstrap/img/shop.png">&ensp;교환 상품</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                            <c:forEach var="exchangeShopDTO" items="${exchangeShopList }"> 
-                                <a href="${contextPath }/shop/shopDetail?productCd=${exchangeShopDTO.productCd }" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="${contextPath}/thumbnails?file=${exchangeShopDTO.productFile}" alt="" width="30" height="30">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>${exchangeShopDTO.productNm}</h6>
-                                    </div>
-                                </a>
-                            </c:forEach>
+                            <table>
+                     	 <c:forEach var="exchangeShopDTO" items="${exchangeShopList }" varStatus="i"> 
+                     	 <tbody>
+                     		<tr>
+                     			<td>
+                     				${i.count }.&ensp;	
+                     				<img src="${contextPath }/shop/thumbnails?file=${exchangeShopDTO.productFile}" alt=""  width="40" height="60">
+                   				</td>
+                     			<td>
+                     				<a href="${contextPath }/shop/shopDetail?productCd=${exchangeShopDTO.productCd }" class="latest-product__item">
+                     				<strong>${exchangeShopDTO.productNm}</strong>
+                     				</a>
+                     			</td>
+                     		</tr>
+                     	 </tbody>
+                         </c:forEach>
+                     	</table>
                             <input type="hidden" name="userId" value="${sessionId }">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
             </section>
            </div>
           </div>
          </div>
+          <br><br><br><br>
     </section>
+     
+     
 </body>
 </html>

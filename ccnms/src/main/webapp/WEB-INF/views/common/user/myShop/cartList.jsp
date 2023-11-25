@@ -19,12 +19,12 @@
 
 		$("[name='cartCd']").change(function(){
 			getTotalPrice();
+			getCartCdPrice();
 		});
 	});
 
 	function getTotalPrice(){
 		var totalPrice = 0;
-		var cdPrice = 0;
 		
 		$("[name='cartCd']:checked").each(function(){
 			var tempCartCd = $(this).val();
@@ -32,36 +32,50 @@
 			for (var i = 0; i < this.length; i++) {
 				cdPrice[i] += Number($("#price" + tempCartCd).val()) * Number($("#cartQty" + tempCartCd).val());
 			}
-			
 		});
 		totalPrice = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " 원";
 		$("#totalPrice").html(totalPrice);
 	};
 	
+	function getCartCdPrice(cartCd){
+		var cartCdPrice = 0;
+		var tempCartCd = ""; 
+		tempCartCd= cartCd;
+		cartCdPrice= Number($("#price" + tempCartCd).val()) * Number($("#cartQty"+tempCartCd).val());
+		cartCdPrice = cartCdPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " 원";
+		$("#cdPrice" + tempCartCd).html(cartCdPrice);
+	}
+	
 	function modifyCartQty(cartCd) {
 		$.ajax({
 			type: "get",
-			url: "${contextPath}/order/modifyCartQty",
+			url: "${contextPath}/myShop/modifyCartQty",
 			data: {
 				"cartCd" : cartCd,
 				"cartQty" : $("#cartQty" + cartCd).val()
 			},
 			success:function(){
 				getTotalPrice();
+				getCartCdPrice(cartCd);
 			}
 		});
 	}
 	
 	function removeCart(){
 		var cartCdList = "";
-		if (confirm("정말로 삭제하시겠습니까?")) {
-		
-			$("input[name='cartCd']:checked").each(function(){
-				cartCdList += $(this).val() + ",";
-			});
-			location.href= "${contextPath}/myShop/removeCart?cartCdList=" + cartCdList;
-		}
-	}
+		Swal.fire({
+			  title: '장바구니에서 삭제하시겠습니까?',
+			  showCancelButton: true,
+			  confirmButtonText: '삭제',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$("input[name='cartCd']:checked").each(function(){
+						cartCdList += $(this).val() + ",";
+					});
+					location.href= "${contextPath}/myShop/removeCart?cartCdList=" + cartCdList;
+					}
+			})
+	} 
 	
 	function selectAll(){
 		if ($("#allChoice").prop("checked")) {
@@ -75,27 +89,38 @@
 	
 	function orderSheet(){
 		
-		var cartCdList="";
-		var cartQtyList="";
+		var cartCdList  = "";
+		var cartQtyList = "";
 		var productCdList="";
-		
 		$("[name='cartCd']:checked").each(function(){
 			var cartCd = $(this).val();
 			var productCd = $("#productCd" + cartCd).val();
 			var cartQty = $("#cartQty" + cartCd).val();
-			
+						
 			cartCdList    += cartCd + ",";
 			productCdList += productCd + ",";
 			cartQtyList   += cartQty + ",";
 		});
 		
 		if (cartCdList == "") {
+			Swal.fire({
+				  icon: 'info',
+				  title: '주문 목록이 없습니다.',
+			})	  
 			return false;
 		}
-		var url = "${contextPath}/order/cartOrderSheet";
-			url +="?cartCdList=" + cartCdList;
-			url +="&productCdList=" + productCdList;
-			url +="&cartQtyList=" + cartQtyList;
+		var total= $("#totalPrice").html();
+		if (total == "0 원") {
+			Swal.fire({
+				  icon: 'info',
+				  title: '주문 수량이 0개 입니다.',
+			})	  
+			return false;
+		}
+		var url =  "${contextPath}/order/cartOrderSheet";
+			url += "?cartCdList=" + cartCdList;
+			url += "&productCdList=" + productCdList;
+			url += "&cartQtyList=" + cartQtyList;
 		location.href = url;
 	}
 </script>
@@ -138,10 +163,11 @@
                             			</tr>
                             		</c:when>
 									<c:otherwise>
-										<c:forEach var="myCart" items="${cartList }">
+										<c:forEach var="myCart" items="${cartList }" >
 			                                <tr>
 			                                    <td class="shoping__cart__checkbox">
 			                                    	<input type="checkbox" name="cartCd" value="${myCart.cartCd }" checked>
+			                                    	<input type="hidden" name="cartCd${i.index }">
 			                                    </td>
 			                                    <td class="shoping__cart__product__pic">
 			                                    	<img src="${contextPath }/shop/thumbnails?file=${myCart.productFile}" width="50" height="50"/>
@@ -168,7 +194,7 @@
 			                                    	<span><fmt:formatDate value="${myCart.enrollDt }" pattern="yyyy-MM-dd"/></span>
 			                                    </td>
 			                                    <td class="shoping__cart__total">
-			                                    	<span id="cdPrice"><fmt:formatNumber value="${(myCart.price - myCart.price * (myCart.discountRate / 100)) * myCart.cartQty }"/>원</span>
+			                                    	<span id="cdPrice${myCart.cartCd }" >${myCart.price - myCart.price * (myCart.discountRate / 100) }원</span>
 			                                    </td>
 			                                </tr>
 										</c:forEach>	                            	
@@ -190,7 +216,7 @@
                     <div class="shoping__checkout">
                         <h5>총 금액</h5>
                         <ul>
-                            <li>Total<span id="totalPrice">&esmp;</span></li>
+                            <li>Total<span id="totalPrice" onclick="total()">&esmp;</span></li>
                         </ul>
                         <a href="javascript:orderSheet()" class="primary-btn" style="background:salmon">구매진행하기</a>
                     </div>

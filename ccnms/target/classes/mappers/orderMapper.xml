@@ -35,7 +35,6 @@
 		ORDER BY 
 			C.ENROLL_DT DESC
 	</select>
-	
 	<update id="updateShopStockCnt" parameterType="hashmap">
 			UPDATE 
 					SHOP
@@ -44,16 +43,6 @@
 			WHERE
 					PRODUCT_CD = #{productCd}
 	</update>
-	
-	<update id="updateUserPoint" parameterType="hashmap">
-			UPDATE 
-					USER
-			SET 
-					POINT = POINT + #{point}
-			WHERE
-					USER_ID = #{userId}
-	</update>
-	
 	<insert id="insertOrder" parameterType="OrderDTO">
 		INSERT INTO ORDERED (
 				PRODUCT_CD,
@@ -104,5 +93,77 @@
 				#{account}
 		)
 	</insert>
+	<insert id="insertOrderByCart">
+		INSERT INTO ORDERED (
+				PRODUCT_CD,
+				USER_ID,
+				PAYMENT_AMT,
+				ORDERER_NM,
+				ORDERER_HP,
+				RECEIVER_NM,
+				RECEIVER_HP,
+				ZIPCODE,
+				ROAD_ADDRESS,
+				JIBUN_ADDRESS,
+				NAMUJI_ADDRESS,
+				DELIVERY_METHOD,
+				DELIVERY_MESSAGE,
+				DELIVERY_STATUS,
+				GIFT_WRAPPING,
+				PAY_METHOD,
+				PAY_ORDERER_HP,
+				CARD_COMPANY_NM,
+				CARD_PAY_MONTH,
+				ORDER_QTY,
+				ACCOUNT_COMPANY_NM,
+				ACCOUNT
+		)
+		VALUES
+			<foreach collection="list" item="orderDTO" separator=",">
+			(
+				#{orderDTO.productCd},
+				#{orderDTO.userId},
+				#{orderDTO.paymentAmt},
+				#{orderDTO.ordererNm},
+				#{orderDTO.ordererHp},
+				#{orderDTO.receiverNm},
+				#{orderDTO.receiverHp},
+				#{orderDTO.zipcode},
+				#{orderDTO.roadAddress},
+				#{orderDTO.jibunAddress},
+				#{orderDTO.namujiAddress},
+				#{orderDTO.deliveryMethod},
+				#{orderDTO.deliveryMessage},
+				'배송준비중',
+				#{orderDTO.giftWrapping},
+				#{orderDTO.payMethod},
+				#{orderDTO.payOrdererHp},
+				#{orderDTO.cardCompanyNm},
+				#{orderDTO.cardPayMonth},
+				#{orderDTO.orderQty},
+				#{orderDTO.accountCompanyNm},
+				#{orderDTO.account}
+			)
+			</foreach> 
+	</insert>
 	
+	<delete id="deleteCartByOrder">
+		DELETE FROM
+			CART
+		WHERE
+			CART_CD IN 
+			<foreach collection="array" item="cartCd" separator="," open="(" close=")">
+				#{cartCd}
+			</foreach> 
+	</delete>
+	<update id="updateStockCnt">
+		<foreach collection="list" item="productMapList" separator=";">
+			UPDATE 
+				SHOP
+			SET 
+				STOCK = STOCK - #{productMapList.orderQty}
+			WHERE
+				PRODUCT_CD = #{productMapList.productCd}
+		</foreach>
+	</update>
 </mapper>

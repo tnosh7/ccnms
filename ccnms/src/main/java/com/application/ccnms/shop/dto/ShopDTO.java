@@ -17,7 +17,6 @@ public class ShopDTO {
 	private String deliveryMethod;
 	private int deliveryPrice;
 	private String content;
-	private int point;
 	private String productFile;
 	private int qnaCnt;
 	private Date enrollDt;
@@ -83,12 +82,6 @@ public class ShopDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getPoint() {
-		return point;
-	}
-	public void setPoint(int point) {
-		this.point = point;
-	}
 	public String getProductFile() {
 		return productFile;
 	}
@@ -123,9 +116,9 @@ public class ShopDTO {
 	public String toString() {
 		return "ShopDTO [productCd=" + productCd + ", productNm=" + productNm + ", writer=" + writer + ", price="
 				+ price + ", discountRate=" + discountRate + ", stock=" + stock + ", sort=" + sort + ", deliveryMethod="
-				+ deliveryMethod + ", deliveryPrice=" + deliveryPrice + ", content=" + content + ", point=" + point
-				+ ", productFile=" + productFile + ", qnaCnt=" + qnaCnt + ", enrollDt=" + enrollDt + ", tag=" + tag
-				+ ", readCnt=" + readCnt + "]";
+				+ deliveryMethod + ", deliveryPrice=" + deliveryPrice + ", content=" + content + ", productFile="
+				+ productFile + ", qnaCnt=" + qnaCnt + ", enrollDt=" + enrollDt + ", tag=" + tag + ", readCnt="
+				+ readCnt + "]";
 	}
 	
 }

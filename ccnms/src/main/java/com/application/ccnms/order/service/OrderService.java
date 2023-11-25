@@ -13,7 +13,7 @@ public interface OrderService {
 	
 	public ShopDTO getShopDTO(long productCd) throws Exception;
 	public UserDTO getUserDTO(String userId) throws Exception;
-	public void addOrder(OrderDTO orderDTO, int point) throws Exception;
+	public void addOrder(OrderDTO orderDTO) throws Exception;
 	public List<ShopDTO> getProductListByCart(int[] productCdsList)throws Exception;
-	public void addCartOrder(OrderDTO orderDTO, int point) throws Exception;
+	public void addCartOrder(Map<String,Object> orderListMap) throws Exception;
 }

@@ -53,7 +53,6 @@
              <input type="hidden" name="productCd" value="${shopDTO.productCd }">
              <input type="hidden" name="orderQty" value='<fmt:parseNumber integerOnly="true" value="${orderQty}"/>'/>
              <input type="hidden" name="userId" value="${userDTO.userId}">
-             <input type="hidden" name="point" value="${shopDTO.point * orderQty}">
             <div class="checkout__form">
                 <h4>주문/결제</h4>
                     <div class="row">
@@ -165,7 +164,6 @@
                                 			</c:choose>
                                 		</span>
                                 	</li>
-                                	<li>포인트<span><fmt:formatNumber value="${orderDTO.point }"/></span></li>
                                 </ul>
                                 <hr>
                                 <div class="checkout__order__total">

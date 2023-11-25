@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,10 +42,30 @@ public class ShopController {
 		ModelAndView mv = new ModelAndView();
 		if (sort == null) {
 			mv.addObject("shopList", shopService.getProductList());
-			mv.addObject("discountRateList", shopService.getDiscountRateList());
+			List<String> temp = shopService.getShopTagList();
+			String tag="";
+			for (String string : temp) {
+				tag += string;
+			}
+			String[]tagList =  tag.split("#");
+			for (int i = 0; i < tagList.length; i++) {
+				System.out.println("tagList" +tagList[i]);
+			}
+			mv.addObject("tagList", tagList);
+			
 		}
 		else {
 			mv.addObject("shopList", shopService.sortList(sort));
+			List<String> temp = shopService.getShopTagSortList(sort);
+			String tag="";
+			for (String string : temp) {
+				tag += string;
+			}
+			String[]tagList =  tag.split("#");
+			for (int i = 0; i < tagList.length; i++) {
+				System.out.println("tagList" +tagList[i]);
+			}
+			mv.addObject("tagList", tagList);
 		}
 		mv.setViewName("/shop/main");
 		return mv; 

@@ -11,6 +11,7 @@ public interface DiggingService {
 	public List<DiggingDTO> getDiggingList(Map<String, Object> searchMap) throws Exception;
 	public List<DiggingDTO> getPopulerList(Map<String, Object> searchMap) throws Exception;
 	public int getAllDiggingCnt(String diggingTopic)throws Exception;
+	public List<String> getTagList(String diggingTopic)throws Exception;
 	public List<UserDTO> getUser(String writer)throws Exception;
 	public void addDigging(DiggingDTO diggingDTO) throws Exception;
 	public Map<String,Object> getDiggingDetail(long diggingId) throws Exception;

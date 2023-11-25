@@ -113,7 +113,7 @@
 		<result column="PRICE" 				property="price"/>
 		<result column="DISCOUNT_RATE" 		property="discountRate"/>
 		<result column="DELIVERY_PRICE" 	property="deliveryPrice"/>
-		<result column="POINT" 				property="point"/>
+		
 	</resultMap>
 	<select id="selectOneOrder" parameterType="hashmap" resultMap="adminOrderDetailMap">
 		SELECT 
@@ -142,8 +142,7 @@
 				S.PRODUCT_NM 			AS PRODUCT_NM,
 				S.PRICE 				AS PRICE,
 				S.DISCOUNT_RATE 		AS DISCOUNT_RATE,
-				S.DELIVERY_PRICE 		AS DELIVERY_PRICE,
-				S.POINT 				AS POINT
+				S.DELIVERY_PRICE 		AS DELIVERY_PRICE
 		FROM 
 				ORDERED O 
 			JOIN USER U 

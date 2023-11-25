@@ -63,13 +63,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__btns" align="right">
-                        <a href="#" class="primary-btn cart-btn">디깅 더보기</a>
-                    </div>
-                </div>
-            </div>
         </div>
         <br>
         <div class="container">
@@ -114,13 +107,6 @@
 			               	  </c:forEach>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__btns" align="right">
-                        <a href="#" class="primary-btn cart-btn">상점 더보기</a>
                     </div>
                 </div>
             </div>

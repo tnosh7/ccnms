@@ -29,15 +29,17 @@ public class ShopDAOImpl implements ShopDAO {
 	public List<ShopDTO> selectListSortList(String sort) throws Exception {
 		return sqlSession.selectList("shop.selectListSortList", sort);
 	}
-
+	@Override
+	public List<String> selectListShopTagList() throws Exception {
+		return sqlSession.selectList("shop.selectListShopTagList");
+	}
+	@Override
+	public List<String> selectListShopTagSortList(String sort) throws Exception {
+		return sqlSession.selectList("shop.selectListShopTagSortList", sort);
+	}
 	@Override
 	public ShopDTO selectOneProductDetail(long productCd) throws Exception {
 		return sqlSession.selectOne("shop.selectOneProductDetai", productCd);
-	}
-
-	@Override
-	public List<ShopDTO> selectListdiscountRateList() throws Exception {
-		return sqlSession.selectList("shop.selectListdiscountRateList");
 	}
 
 	@Override
@@ -54,5 +56,6 @@ public class ShopDAOImpl implements ShopDAO {
 	public List<QnaDTO> selectListQnaList(long productCd) throws Exception {
 		return sqlSession.selectList("shop.selectListQnaList", productCd);
 	}
+
 
 }

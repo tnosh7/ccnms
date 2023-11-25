@@ -135,10 +135,12 @@
                        <div class="col-lg-12">
                        	<c:choose>
                        		<c:when test="${find eq 'id'}">
+                       		<div>
                        			<h4>아이디 찾기</h4>
                        			<br>
-                       			<h5>본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</h5>
-	                           	<br>
+                       			<strong>본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</strong>
+                       		</div>
+                       		<br>
 	                           <div class="checkout__form__input">
 		    						 <input type="text" class="form-control" id="userNm" name="userNm" aria-describedby="emailHelp" placeholder="성명을 입력해주세요.">
 	                           </div>
@@ -168,11 +170,13 @@
                        		</c:when>
 							<c:otherwise>
 								<form action="${contextPath }/user/changePw" method="post">
+								<div>
 									<h4>비밀번호 찾기</h4>
 									<br>
-	                       			<h5>비밀번호를 찾고자 하는 아이디를 입력해주세요.</h5>
-	                       			<h5>본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</h5>
-		                           	<br>
+	                       			<strong>비밀번호를 찾고자 하는 아이디를 입력해주세요.</strong>
+	                       			<strong>본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</strong>
+								</div>
+								<br>
 		                           <div class="checkout__form__input">
 			    						 <input type="text" class="form-control" id="userId" name="userId" aria-describedby="emailHelp" placeholder="아이디를 입력해주세요.">
 		                           </div>

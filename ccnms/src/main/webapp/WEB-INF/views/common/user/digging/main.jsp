@@ -80,7 +80,7 @@
             <div class="head-img">
 	   			<img alt="" src="${contextPath}/resources/bootstrap/img/header/${diggingTopic }.jpg" height="150" width="100%">
 	   			     <div class="col-lg-12 head-text">
-	   			     <h1>${diggingTopic }</h1>
+	   			     <h1 style="color:white">${diggingTopic }</h1>
                 </div>
 	  		 </div>
 	   </div>
@@ -98,7 +98,6 @@
                             <br>
                             <div class="blog__sidebar__recent">
                             	<c:forEach var="diggingDTO" items="${populerList }">
-                                <class="digging__sidebar__populer__List">
                                     <div class="digging__sidebar__populer__List__file">
                                     <c:choose>
                                     	<c:when test="${diggingDTO.file != ''}">
@@ -107,8 +106,8 @@
                                     </c:choose>
                                     </div>
                                     <div class="digging__sidebar__populer__text">
-                                        <a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">
 	                                        ${diggingDTO.writer}<span><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>
+                                        <a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">
 	                                        <h5>${diggingDTO.subject }</h5>
                                         </a>
                                     </div>
@@ -119,11 +118,9 @@
                         <div class="blog__sidebar__item">
                             <h4>관련 태그</h4>
                             <div class="blog__sidebar__item__tags">
-                     			 <button type="button" class="btn btn-outline-info">연예</button>	
-                     			 <button type="button" class="btn btn-outline-info">게임</button>	
-                     			 <button type="button" class="btn btn-outline-info">비즈니스</button>	
-                     			 <button type="button" class="btn btn-outline-info">만화</button>	
-                     			 <button type="button" class="btn btn-outline-info">OTT</button>	
+                            	 <c:forEach var="tagDTO" items="${tagList }">
+	                     			 <button type="button" class="btn btn-outline-info">${tagDTO }</button>	
+	                            </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -167,9 +164,20 @@
 									<span>${startDiggingIdx }. </span>
                  					 <h5 align="center"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}"><strong>${diggingDTO.subject }</strong></a></h5>
 									  <hr>
-									  <h6 class="card-title">${diggingDTO.writer }
-									 	&emsp;<i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/>
-									  </h6>
+									  <c:choose>
+	                           			<c:when test="${diggingDTO.profile eq null }">
+	                           				<span><img src="${contextPath }/resources/bootstrap/img/person.png"> ${diggingDTO.writer }
+	                           				</span>
+	                           				<span>&emsp;${diggingDTO.writer }</span>	
+	                           				<span>&emsp;<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>
+	                           			</c:when>
+	                           			<c:otherwise>
+	                            			<span><img src="${contextPath }/digging/thumbnails?file=${diggingDTO.profile }" alt="프로필이미지" width="40" height="40">
+	                            			</span>
+	                            			<span>&emsp;${diggingDTO.writer }</span>	
+	                           				<span>&emsp;<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>
+	                           			</c:otherwise>
+                           			 </c:choose>
 								  </div>
 								  <div class="card-body">
 								    <p class="card-text"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.content }</a></p>

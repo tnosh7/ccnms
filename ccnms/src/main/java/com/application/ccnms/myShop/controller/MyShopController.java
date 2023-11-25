@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.application.ccnms.myShop.dto.CartDTO;
 import com.application.ccnms.myShop.dto.KeepDTO;
 import com.application.ccnms.myShop.service.MyShopService;
+import com.application.ccnms.user.service.UserService;
 
 @Controller
 @RequestMapping("/myShop")
@@ -39,6 +40,9 @@ public class MyShopController {
 	
 	@Autowired
 	private MyShopService myShopService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping("/myCart")
 	public ModelAndView myCart(@RequestParam("productCd") long productCd) throws Exception{
@@ -59,7 +63,7 @@ public class MyShopController {
 		String result = "duple";
 		if (!myShopService.checkDuplicatedCart(cartDTO)) {
 			myShopService.addMyCart(cartDTO);
-			session.setAttribute("myCartCnt", myShopService.getMyCartCnt(userId));
+			session.setAttribute("myCartCnt", userService.getMyCartCnt(userId));
 			result = "notDuple";
 		}
 		return result;
@@ -73,22 +77,18 @@ public class MyShopController {
 		return mv;
 	}
 	
-	@GetMapping("/modifyCartQty")
-	public ResponseEntity<Object> modifyCartQty(@RequestParam Map<String, Object> updateMap) throws Exception{
-		myShopService.modifyCartQty(updateMap);
-		return new ResponseEntity<Object> (HttpStatus.OK);
-	}
-	
 	@GetMapping("/removeCart")
-	public ResponseEntity<Object> removeCart(@RequestParam("cartCdList") String cartCdList) throws Exception{
+	public ResponseEntity<Object> removeCart(@RequestParam("cartCdList") String cartCdList, HttpServletRequest request) throws Exception{
 		String []temp = cartCdList.split(",");
 		int [] removeCartCdList = new int[temp.length];
 		
 		for (int i = 0; i < temp.length; i++) {
 			removeCartCdList[i] = Integer.parseInt(temp[i]);
 		}
-		
 		myShopService.removeCart(removeCartCdList);
+		HttpSession session = request.getSession();
+		session.setAttribute("myCartCnt",userService.getMyCartCnt((String)session.getAttribute("userId")));
+		
 		String jsScript = "<script>";
 			   jsScript +="location.href='cartList'";
 			   jsScript +="</script>";
@@ -97,6 +97,12 @@ public class MyShopController {
 		responseHeaders.add("Content-Type","text/html; charset=UTF-8");
 		
 		return new ResponseEntity<Object> (jsScript, responseHeaders, HttpStatus.OK);
+	}
+	
+	@GetMapping("/modifyCartQty")
+	public ResponseEntity<Object> modifyCartQty(@RequestParam Map<String,Object> updateMap)throws Exception{
+		myShopService.modifyCartProductQty(updateMap);
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
 	@GetMapping("/myKeep")
@@ -121,23 +127,23 @@ public class MyShopController {
 		String result = "duple";
 		if (!myShopService.checkDuplicatedKeep(keepDTO)) {
 			myShopService.addMyKeep(keepDTO);
-			session.setAttribute("myKeepCnt", myShopService.getMyKeepCnt(userId));
+			session.setAttribute("myKeepCnt", userService.getMyKeepCnt(userId));
 			result ="notDuple";
 		}
 		return result;
 	}
 	
 	@GetMapping("/removeKeep")
-	public ResponseEntity<Object> removeKeep(@RequestParam("keepCdList") String keepCdList) throws Exception{
+	public ResponseEntity<Object> removeKeep(@RequestParam("keepCdList") String keepCdList, HttpServletRequest request) throws Exception{
 		String []temp = keepCdList.split(",");
 		int [] removeKeepCdList = new int[temp.length];
-		
 		
 		for (int i = 0; i < temp.length; i++) {
 			removeKeepCdList[i] = Integer.parseInt(temp[i]);
 		}
-		
+		HttpSession session = request.getSession();
 		myShopService.removeKeep(removeKeepCdList);
+		session.setAttribute("myKeepCnt", userService.getMyKeepCnt((String)session.getAttribute("userId")));
 		String jsScript = "<script>";
 			   jsScript +="location.href='myKeep'";
 			   jsScript +="</script>";

@@ -106,9 +106,6 @@
 </script>
 </head>
 <body>
----------------------
-<h1>사용자아이디:${sessionId }</h1>
------------------
   <section class="product-details spad">
         <div class="container">
             <div class="row">
@@ -133,7 +130,6 @@
                         </div>
                         <ul>
                             <li><b>할인율</b> <span>${shopDTO.discountRate } %</span></li>
-                            <li><b>포인트</b> <span>${shopDTO.point } point</span></li>
                             <li><b>판매자</b> <span>${shopDTO.writer }</span></li>
                             <li><b>재고수량</b> <span>${shopDTO.stock } 개</span></li>
                             <li><b>배송방법</b> <span>${shopDTO.deliveryMethod }</span></li>

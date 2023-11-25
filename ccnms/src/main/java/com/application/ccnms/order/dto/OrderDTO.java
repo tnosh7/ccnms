@@ -22,7 +22,7 @@ public class OrderDTO {
 	private String deliveryMethod; 
 	private String deliveryMessage; 
 	private String deliveryStatus;
-	private char giftWrapping; 
+	private String giftWrapping; 
 	private String payMethod; 
 	private String payOrdererHp; 
 	private String cardCompanyNm; 
@@ -122,10 +122,10 @@ public class OrderDTO {
 	public void setDeliveryStatus(String deliveryStatus) {
 		this.deliveryStatus = deliveryStatus;
 	}
-	public char getGiftWrapping() {
+	public String getGiftWrapping() {
 		return giftWrapping;
 	}
-	public void setGiftWrapping(char giftWrapping) {
+	public void setGiftWrapping(String giftWrapping) {
 		this.giftWrapping = giftWrapping;
 	}
 	public String getPayMethod() {

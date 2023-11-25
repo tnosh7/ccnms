@@ -21,6 +21,19 @@
   }
 
 </style>
+<script>
+	$().ready(function(){
+		$("form").submit(function(){
+			var content= $("#content").html();
+			if (content =="") {
+				$("#contentWarn").html("[주의] 상품 소개는 필수 항목입니다. 상품 내용을 입력하세요.");
+				return false;
+			}
+		})
+	});
+
+
+</script>
 </head>
 <body>
 <form action="${contextPath }/shop/addProduct" method="post" enctype="multipart/form-data"> 
@@ -37,7 +50,9 @@
                                	<hr>
                                 <li><strong>2. 공지에 있는 상품 등록 주의사항을 읽어주세요.</strong></li>
                                	<hr>
-                                <li><strong>3. 부적절한 상품 등록시 자동 삭제됩니다.</strong></li>
+                                <li><strong>3. 유튜브의 url 등록시 유튜브 정책 상 동영상 아래에 있는 공유 -> 퍼가기에 적힌 url을 입력하셔야 합니다.</strong></li>
+                               	<hr>
+                                <li><strong>4. 부적절한 상품 등록시 자동 삭제됩니다.</strong></li>
                                	<hr>
                             </ul>
                         </div>
@@ -70,11 +85,11 @@
 	                  	 	 	<table>
 	                  	 	 		<tr>
 	                  	 	 			<th width="30%">상품 이름</th>
-	                  	 	 			<th> <input class="form-control form-control-lg" type="text" id="productNm" name="productNm" maxlength="35" placeholder="상품 이름을 입력하세요." ></th>
+	                  	 	 			<th> <input class="form-control form-control-lg" type="text" id="productNm" name="productNm" maxlength="35" placeholder="상품 이름을 입력하세요." required="required"></th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>태그</th>
-	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="tag" name="tag" maxlength="35" placeholder="[필수] 태그를 입력하세요. 예)#000" ></th>
+	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="tag" name="tag" maxlength="8" placeholder="[필수] 태그를 입력하세요. 예)#모두디깅" required="required"></th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>분류</th>
@@ -101,15 +116,15 @@
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>가격</th>
-	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="price" name="price" maxlength="20" placeholder="가격을 입력하세요(숫자만 입력)." ></th>
+	                  	 	 			<th><input class="form-control form-control-lg" type="number" id="price" name="price" maxlength="20" placeholder="가격을 입력하세요(숫자만 입력)" required="required"></th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>할인률</th>
-	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="discountRate" name="discountRate" maxlength="35" placeholder="할인률을 입력하세요." ></th>
+	                  	 	 			<th><input class="form-control form-control-lg" type="number" id="discountRate" name="discountRate" max="100" min="0" placeholder="할인률을 입력하세요(숫자만 입력)" required="required"></th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>재고</th>
-	                  	 	 			<th><input class="form-control form-control-lg" type="number" id="stock" name="stock" maxlength="35" placeholder="재고를 입력하세요." ></th>
+	                  	 	 			<th><input class="form-control form-control-lg" type="number" id="stock" name="stock" maxlength="35" placeholder="재고를 입력하세요(숫자만 입력)" required="required"></th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>배송 방법</th>
@@ -121,7 +136,7 @@
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>배송 가격</th>
-	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="deliveryPrice" name="deliveryPrice" maxlength="35" placeholder="배송 가격을 입력하세요(숫자만 입력)."></th>
+	                  	 	 			<th><input class="form-control form-control-lg" type="number" id="deliveryPrice" name="deliveryPrice" maxlength="35" placeholder="배송 가격을 입력하세요(숫자만 입력)." required="required"></th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>상품 소개</th>
@@ -141,13 +156,19 @@
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>파일 업로드</th>
-	                  	 	 			<th> <input type="file" class="form-control" id="uploadfile" name="uploadfile">
+	                  	 	 			<th> <input type="file" class="form-control" id="uploadfile" name="uploadfile" required="required">
 	                  	 	 			</th>
 	                  	 	 		</tr>
-	                  	 	 		
+	                  	 	 		<tr align="center">
+	                  	 	 			<th colspan="2">
+	                  	 	 			 	<span id="contentWarn" style="color:red"></span>
+	                  	 	 			</th>
+	                  	 	 		</tr>
 	                  	 	 	</table>
 							</div>
 	                   		<br>
+	                   		<div align="center">
+	                   		</div>
 	                   		<div class="demo-inline-spacing" align="center">
                         		<button type="submit" class="btn btn-primary active">작성</button>
                         		<button type="reset" class="btn btn-primary" onclick="window.location.reload()">새로고침</button>

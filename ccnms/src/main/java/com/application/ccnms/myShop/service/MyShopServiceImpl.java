@@ -31,20 +31,16 @@ public class MyShopServiceImpl implements MyShopService {
 		myShopDAO.insertMyCart(cartDTO);
 	}
 	@Override
-	public int getMyCartCnt(String userId) throws Exception {
-		return myShopDAO.selectOneMyCartCnt(userId);
-	}
-	@Override
 	public List<Map<String, Object>> getCartList(String userId) throws Exception {
 		return myShopDAO.selectListCartList(userId);
 	}
 	@Override
-	public void modifyCartQty(Map<String, Object> updateMap) throws Exception {
-		myShopDAO.updateCartQty(updateMap);
-	}
-	@Override
 	public void removeCart(int[] removeCartCdList) throws Exception {
 		myShopDAO.deleteCart(removeCartCdList);
+	}
+	@Override
+	public void modifyCartProductQty(Map<String, Object> updateMap) throws Exception {
+		myShopDAO.updateCartProductQty(updateMap);
 	}
 	@Override
 	public boolean checkDuplicatedKeep(KeepDTO keepDTO) throws Exception {
@@ -55,11 +51,6 @@ public class MyShopServiceImpl implements MyShopService {
 	@Override	
 	public void addMyKeep(KeepDTO keepDTO) throws Exception {
 		myShopDAO.insertMyKeep(keepDTO);
-	}
-
-	@Override
-	public int getMyKeepCnt(String userId) throws Exception {
-		return myShopDAO.selectOneMyKeepCnt(userId);
 	}
 
 	@Override
@@ -101,4 +92,5 @@ public class MyShopServiceImpl implements MyShopService {
 	public void removeMySaleList(int[] removeMySale) throws Exception {
 		myShopDAO.deleteMySale(removeMySale);
 	}
+
 }

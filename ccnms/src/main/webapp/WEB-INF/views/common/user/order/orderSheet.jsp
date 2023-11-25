@@ -56,6 +56,20 @@
 			$("#payOrdererHp").hide();
 		}
 	}
+	function changeDelivery() {
+		var roadAddress = $("#roadAddress").val();
+		var jibunAddress = $("#jibunAddress").val();
+		var namujiAddress= $("#namujiAddress").val();
+		var zipcode = $("#zipcode").val();
+		$("[name='roadAddress']").val(roadAddress);
+		$("[name='jibunAddress']").val(jibunAddress);
+		$("[name='namujiAddress']").val(namujiAddress);
+		$("[name='zipcode']").val(zipcode);
+		document.getElementById("roadAddress").disabled = true;	
+		document.getElementById("jibunAddress").disabled = true;	
+		document.getElementById("zipcode").disabled = true;	
+		document.getElementById("namujiAddress").disabled = true;	
+	}	
 </script>
 
 </head>
@@ -79,26 +93,21 @@
                         </ul>
                         <div id="deliveryInfo">
                         	${userDTO.roadAddress} ${userDTO.namujiAddress } ( ${userDTO.zipcode} )
-                        	<input type="hidden" name="zipcode" value="${userDTO.zipcode}" />
-                        	<input type="hidden" name="roadAddress" value="${userDTO.roadAddress}" />
-                        	<input type="hidden" name="jibunAddress" value="${userDTO.jibunAddress}" />
-                        	<input type="hidden" name="namujiAddress" value="${userDTO.namujiAddress}" />
                         </div>
-                        <div id="newDelivery" style="display: none"  >
-                        	<p><input type="text" id="zipcode" placeholder="우편번호"  style="width: 40%;">
+                        <div id="newDelivery" style="display: none">
+                        	<p><input type="text" id="zipcode" placeholder="우편번호"  value="${orderer.zipcode }" style="width: 40%;">
                            		<input type="button" value="주소 검색" onclick="javascript:execDaumPostcode()" style="width: 30%; padding-left: 0"></p>
-                            <p><input type="text" id="roadAddress"   placeholder="도로명 주소"   style="width: 40%;"></p>
-                            <p><input type="text" id="jibunAddress"  placeholder="지번 주소"     style="width: 40%;"></p>
-                            <p><input type="text" id="namujiAddress" placeholder="나머지 주소"   style="width: 40%;"></p>
+                            <p><input type="text" id="roadAddress"   placeholder="도로명 주소"  value="${order.roadAddress }" style="width: 40%;"></p>
+                            <p><input type="text" id="jibunAddress"  placeholder="지번 주소"    value="${order.jibunAddress }" style="width: 40%;"></p>
+                            <p><input type="text" id="namujiAddress" placeholder="나머지 주소"  value="${order.namujiAddress }" style="width: 40%;"></p>
+                            <div>
+                            	<input type="button" id="changeBtn" value="확인" onclick="changeDelivery()">
+                            </div>
                         </div>
                       </div>
                 </div>
             </div>
             <br>
-             <input type="hidden" name="productCd" value="${shopDTO.productCd }">
-             <input type="hidden" name="orderQty" value='<fmt:parseNumber integerOnly="true" value="${orderQty}"/>'/>
-             <input type="hidden" name="userId" value="${userDTO.userId}">
-             <input type="hidden" name="point" value="${shopDTO.point * orderQty}">
             <div class="checkout__form">
                 <h4>주문/결제</h4>
                     <div class="row">
@@ -215,7 +224,7 @@
                                     <li>가격<span><fmt:formatNumber value="${(shopDTO.price - shopDTO.price * shopDTO.discountRate /100) * orderQty}"/>원</span></li>
                                     <li>배송비<span>${shopDTO.deliveryPrice}원</span></li>
                                 	<li>배송방법<span>${shopDTO.deliveryMethod }</span></li>
-                                	<li>포장 여부<span><input type="radio" name="giftWrapping" value="Y">예 <input type="radio" name="giftWrapping" value="N">아니오</span></li>
+                                	<li>포장 여부<span><input type="radio" name="giftWrapping" value="Y">예 <input type="radio" name="giftWrapping" value="N" checked>아니오</span></li>
                                 </ul>
                                 <input type="hidden" name="deliveryMethod" value="${shopDTO.deliveryMethod }"/>
                                 <hr>
@@ -227,6 +236,12 @@
                                 <p style="color:green"><span>*</span>
                                  	주문자 정보로 결제관련 정보가 제공됩니다. 정확한 정보로 등록되어있는지 확인해주세요.
                                 </p>
+                                <input type="hidden" name="userId" 		   value="${sessionId }">
+                                <input type="hidden" name="productCd"      value="${shopDTO.productCd }">
+                                <input type="hidden" name="roadAddress"    value="${userDTO.roadAddress}">
+                                <input type="hidden" name="jibunAddress"   value="${userDTO.jibunAddress}">
+                                <input type="hidden" name="namujiAddress"  value="${userDTO.namujiAddress }">
+                                <input type="hidden" name="zipcode"        value="${userDTO.zipcode}">	
                                 <div align="center">
 	                                <button type="submit" class="site-btn"><span class="icon_check"></span>&emsp;주문</button>
                                 </div>

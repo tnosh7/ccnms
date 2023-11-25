@@ -119,21 +119,6 @@
 	
 </script>
 <body>
-	<section class="breadcrumb-section set-bg" data-setbg="${contextPath}/resources/bootstrap/img/breadcrumb.jpg">
-	        <div class="container">
-	            <div class="row">
-	                <div class="col-lg-12 text-center">
-	                    <div class="breadcrumb__text">
-	                        <h2>홍보물</h2>
-	                        <div class="breadcrumb__option">
-	                            <a href="./index.html">여기다</a>
-	                            <span>넣기</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	 </section>
 	 <section class="checkout spad">
 	        <div class="container">
 	            <div class="row">
@@ -189,11 +174,11 @@
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>핸드폰 번호<span>*</span></p>
-	                                <input type="text" id="hp" name="hp" required placeholder="예) 01000000000 숫자만 입력" maxlength="11"> 
+	                                <input type="text" id="hp" name="hp" required placeholder="예) 01000000000 숫자만 입력" maxlength="11"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 
 	                            </div>
 	                            <div class="checkout__input">
 	                                <p>생년월일<span>*</span></p>
-	                                <input type="text" id="birthDT" name="birthDT" placeholder="예) 010916 6자리 입력" required>
+	                                <input type="text" id="birthDT" name="birthDT" placeholder="예) 010916 6자리 입력" required maxlength="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 	                                <p><span id="birthDTWarn"></span></p>
 	                            </div>
 	                            <div class="row">
@@ -218,7 +203,7 @@
 	                                </div>
 	                                <div class="col-lg-6">
 	                                    <div class="checkout__input">
-	                                    	<p><span id="mail-check-warn">*</span></p>
+	                                    	<p><span id="mail-check-warn">*회원가입 후에 인증번호가 전송됩니다.</span></p>
 	                                            <select name="emailDomain"> 
 													<option selected="selected" value="">직접 입력</option>
 													<option>@gmail.com</option>

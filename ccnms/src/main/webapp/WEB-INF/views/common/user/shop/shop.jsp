@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+	
 	function myCart(productCd) {
 		if ("${sessionId == null}" == "true") {
 			Swal.fire({
@@ -95,29 +96,12 @@
                             </ul>
                         </div>
                         <div class="sidebar__item">
-                            <h4>인기있는 태그</h4>
+                            <h4>관련있는 태그</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
-                                    Large
-                                    <input type="radio" id="large">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="medium">
-                                    Medium
-                                    <input type="radio" id="medium">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="small">
-                                    Small
-                                    <input type="radio" id="small">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="tiny">
-                                    Tiny
-                                    <input type="radio" id="tiny">
+                                <c:forEach var="tagDTO" items="${tagList }"> 
+                                   	 <button type="button" class="btn btn-outline-info"># ${tagDTO }</button>	
+                                </c:forEach>
                                 </label>
                             </div>
                         </div>

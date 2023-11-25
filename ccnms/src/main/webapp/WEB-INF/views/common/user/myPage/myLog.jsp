@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="sessionId" value="${sessionScope.userId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +59,6 @@
 </head>
 <body>
 <section class="shoping-cart spad">
-		<input type="hidden" name="userId" value="${sessionId }">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-5 order-md-1 order-2">
@@ -66,8 +66,8 @@
                         <div class="blog__sidebar__item">
                             <h4>Categories</h4>
                             <ul>
-                                <li><a href="${contextPath }/myPage/main?userId=${userDTO.userId}"><strong>내프로필</strong></a></li>
-                                <li><a href="${contextPath }/myPage/myLog?userId=${userDTO.userId}"><strong>이력관리</strong></a></li>
+                                <li><a href="${contextPath }/myPage/main?userId=${sessionId}"><strong>내프로필</strong></a></li>
+                                <li><a href="${contextPath }/myPage/myLog?userId=${sessionId}"><strong>이력관리</strong></a></li>
                             </ul>
                         </div>
                         <hr>
@@ -75,7 +75,7 @@
                             <h4>고객센터</h4>
                              <ul>
                                 <li><a href="${contextPath }//myPage/myContact"> 문의메시지</a></li>
-                                  <li><a href="${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=delete"> 탈퇴</a></li>
+                                  <li><a href="${contextPath }/myPage/authenticationUser?userId=${sessionId}&menu=delete"> 탈퇴</a></li>
                             </ul>
                         </div>
                     </div>

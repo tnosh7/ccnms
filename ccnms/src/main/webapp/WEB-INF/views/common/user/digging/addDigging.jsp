@@ -49,7 +49,7 @@
                                	<hr>
                                 <li><strong>2. 공지에 있는 디깅 룰을 읽어주세요.</strong></li>
                                	<hr>
-                                <li><strong>3. 유튜브에서 동영상을 퍼올 때에는 유튜브 정책 상 동영상 아래에 있는 공유->퍼가기에 적힌 url을 입력하셔야 합니다.</strong></li>
+                                <li><strong>3. 3. 유튜브의 url 등록시 유튜브 정책 상 동영상 아래에 있는 공유 -> 퍼가기에 적힌 url을 입력하셔야 합니다.</strong></li>
                                	<hr>
                                 <li><strong>4. 디깅 룰을 벗어난 글을 게시할 경우 관리자 관리하에 자동 삭제됩니다.</strong></li>
                                	<hr>
@@ -140,7 +140,7 @@
 								</script>
 							</li>
 							<li>
-								 <input class="form-control form-control-lg" type="text" id="tag" name="tag" maxlength="9" placeholder="태그 입력" >
+								 <input class="form-control form-control-lg" type="text" id="tag" name="tag" maxlength="9" placeholder="태그 입력(1개)" >
 							</li>
 							<li>
 								<div class="input-group">

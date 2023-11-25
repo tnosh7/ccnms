@@ -33,18 +33,13 @@ public class MyShopDAOImpl implements MyShopDAO {
 	}
 
 	@Override
-	public int selectOneMyCartCnt(String userId) throws Exception {
-		return sqlSession.selectOne("myShop.selectOneMyCartCnt", userId);
-	}
-
-	@Override
 	public List<Map<String, Object>> selectListCartList(String userId) throws Exception {
 		return sqlSession.selectList("myShop.selectListCartList", userId);
 	}
 
 	@Override
-	public void updateCartQty(Map<String, Object> updateMap) throws Exception {
-		sqlSession.update("myShop.updateCartQty", updateMap);
+	public void updateCartProductQty(Map<String, Object> updateMap) throws Exception {
+		sqlSession.update("myShop.updateCartProductQty", updateMap);
 	}
 
 	@Override
@@ -61,11 +56,6 @@ public class MyShopDAOImpl implements MyShopDAO {
 	public void insertMyKeep(KeepDTO keepDTO) throws Exception {
 		sqlSession.insert("myShop.insertMyKeep", keepDTO);
 		
-	}
-
-	@Override
-	public int selectOneMyKeepCnt(String userId) throws Exception {
-		return sqlSession.selectOne("myShop.selectOneMyKeepCnt", userId);
 	}
 
 	@Override
@@ -107,6 +97,7 @@ public class MyShopDAOImpl implements MyShopDAO {
 	public void deleteMySale(int[] removeMySale) throws Exception {
 		sqlSession.delete("myShop.deleteMySale", removeMySale);
 	}
+
 
 
 }

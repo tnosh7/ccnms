@@ -12,6 +12,7 @@ public interface DiggingDAO {
 	public List<DiggingDTO> selectListDiggingList(Map<String, Object> searchMap)throws Exception ;
 	public List<DiggingDTO> selectListPopulerList(Map<String, Object> searchMap)throws Exception ;
 	public int selectOneDiggingCnt(String diggingTopic) throws Exception ;
+	public List<String> selectListTag(String diggingTopic) throws Exception ;
 	public List<UserDTO> selectListUser(String writer)throws Exception ;
 	public int updateReadCnt(long diggingId)throws Exception ;
 	public Map<String,Object> selectDiggingDetail(long diggingId)throws Exception ;

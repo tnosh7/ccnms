@@ -16,35 +16,32 @@
 		var viewPaymentAmt = 0;
 		var paymentAmtList = 0;
 		var totalDeliveryPrice = 0;
-		var totalPoint = 0;
+		var deliveryMethodList = "";
 		for (var i = 0; i < cartQtyList.length-1; i++) {
 			$("#qty"+i).text(cartQtyList[i]+"개");
 			$("orderQty"+i).val(cartQtyList[i]);
-			
 			var price = Number($("#price"+i).val());
 			var discountRate = Number($("#discountRate"+i).val());
 			var orderQty = Number($("#orderQty"+i).val());
 			var deliveryPrice = Number($("#deliveryPrice"+i).val());
-			
 			viewPaymentAmt += (price - parseInt(price * (discountRate / 100)));
 			paymentAmtList += (price -parseInt(price * (discountRate / 100)));
 			paymentAmtList += ",";
-			
 			totalDeliveryPrice += deliveryPrice;
-			totlaPoint += Number($("#point"+i).val() * Number($("#orderQty"+i).val()));
+			deliveryMethodList += $("#deliveryMethod"+i).val() + "," ;
 		}		
 	
 		$("#totalDeliveryPrice").html(totalDeliveryPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " 원");
-		$("#totalPoint").html(totalPoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "P 적립");
 		$("#viewPaymentAmt").html(viewPaymentAmt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " 원");
 		$("[name='paymentAmtList']").val(paymentAmtList);
-		$("[name='totalPoint']").val(totalPoint);
+		$("[name='deliveryMethodList']").val(deliveryMethodList);		
 	});
 	
 	function setDelivery() {
 		$("#deliveryInfo").hide();
 		$("#newDelivery").show();
 	}
+	
 	function execDaumPostcode() {
 	    new daum.Postcode({
 	        oncomplete: function(data) {
@@ -88,7 +85,20 @@
 			$("#payOrdererHp").hide();
 		}
 	}
-		
+	function changeDelivery() {
+		var roadAddress = $("#roadAddress").val();
+		var jibunAddress = $("#jibunAddress").val();
+		var namujiAddress= $("#namujiAddress").val();
+		var zipcode = $("#zipcode").val();
+		$("[name='roadAddress']").val(roadAddress);
+		$("[name='jibunAddress']").val(jibunAddress);
+		$("[name='namujiAddress']").val(namujiAddress);
+		$("[name='zipcode']").val(zipcode);
+		document.getElementById("roadAddress").disabled = true;	
+		document.getElementById("jibunAddress").disabled = true;	
+		document.getElementById("zipcode").disabled = true;	
+		document.getElementById("namujiAddress").disabled = true;	
+	}	
 </script>
 
 </head>
@@ -109,19 +119,19 @@
                         	${userDTO.roadAddress} ${userDTO.namujiAddress } ( ${userDTO.zipcode} )
                         </div>
                         <div id="newDelivery" style="display: none">
-                        	<p><input type="text" id="zipcode" placeholder="우편번호" name="zipcode" value="${orderer.zipcode }" style="width: 40%;">
+                        	<p><input type="text" id="zipcode" placeholder="우편번호"  value="${orderer.zipcode }" style="width: 40%;">
                            		<input type="button" value="주소 검색" onclick="javascript:execDaumPostcode()" style="width: 30%; padding-left: 0"></p>
-                            <p><input type="text" id="roadAddress"   placeholder="도로명 주소" name="roadAddress"   value="${order.roadAddress }" style="width: 40%;"></p>
-                            <p><input type="text" id="jibunAddress"  placeholder="지번 주소"   name="jibunAddress"  value="${order.jibunAddress }" style="width: 40%;"></p>
-                            <p><input type="text" id="namujiAddress" placeholder="나머지 주소" name="namujiAddress" value="${order.namujiAddress }" style="width: 40%;"></p>
+                            <p><input type="text" id="roadAddress"   placeholder="도로명 주소"  value="${order.roadAddress }" style="width: 40%;"></p>
+                            <p><input type="text" id="jibunAddress"  placeholder="지번 주소"    value="${order.jibunAddress }" style="width: 40%;"></p>
+                            <p><input type="text" id="namujiAddress" placeholder="나머지 주소"  value="${order.namujiAddress }" style="width: 40%;"></p>
+                            <div>
+                            	<input type="button" id="changeBtn" value="확인" onclick="changeDelivery()">
+                            </div>
                         </div>
                       </div>
                 </div>
             </div>
             <br>
-             <input type="hidden" name="productCd" value="${shopDTO.productCd }">
-             <input type="hidden" name="productQty" value="${productQty}">
-             <input type="hidden" name="userId" value="${sessionId}">
             <div class="checkout__form">
                 <h4>주문/결제</h4>
                     <div class="row">
@@ -235,30 +245,41 @@
                                 <div class="checkout__order__products">상품<span></span></div>
                                 <c:forEach var="productDTO" items="${productList }" varStatus="i">
                                 <ul>
-                                    <li>${i.index + 1}.&nbsp; ${productDTO.productNm }
-                                    <span><fmt:formatNumber value="${productDTO.price - productDTO.price * productDTO.discountRate /100}"/>원</span></li>
+                                    <li>${i.index + 1}.&nbsp; ${productDTO.productNm }</li>
+                                    <li>가격<span><fmt:formatNumber value="${productDTO.price - productDTO.price * productDTO.discountRate /100}"/>원</span></li>
                                     <li>수량<span id="qty${i.index}"></span>
-                                    <li>배송비<span>${productDTO.deliveryPrice}원</span></li>
-                                	<li>배송방법<span>${productDTO.deliveryMethod }</span></li>
+                                    <li>배송비<span id="deliveryPrice">${productDTO.deliveryPrice}원</span></li>
+                                	<li>배송방법<span id="deliveryMethod">${productDTO.deliveryMethod }</span></li>
                                 </ul>
-                               	<input type="hidden" name="userId" value="${sessionId }">
-                               	<input type="hidden" name="price" value="${productDTO.price}">
-                               	<input type="hidden" name="deliveryPrice" value="${productDTO.deliveryPrice}">
-                               	<input type="hidden" name="discountRate" value="${productDTO.discountRate}">
-                               	<input type="hidden" name="orderQtyList" value="${proucdtDTO.deliveryPrice }">
-                               	<input type="hidden" name="cartCdList" value="${cartCdList }">
-                               	<input type="hidden" name="productCdList" value="${productCdList }">
-                               	<input type="hidden" name="paymentAmtList" value="${paymentAmtList }">
-                               	<input type="hidden" name="totalPoint" value="${totalPoint }">
+                               	<input type="hidden" id="price${i.index}"  			value="${productDTO.price}">
+                               	<input type="hidden" id="deliveryMethod${i.index}"  value="${productDTO.deliveryMethod}">
+                               	<input type="hidden" id="discountRate${i.index}"	value="${productDTO.discountRate}">
+                               	<input type="hidden" id="deliveryPrice${i.index}" 	value="${productDTO.deliveryPrice}">
+                               	<input type="hidden" id="orderQty${i.index}">
                                 </c:forEach>
                                 <hr>
-                                <p>포장 여부<span></span><input type="radio" name="package" value="Y">예 <input type="radio" name="package" value="N">아니오</span></p>
+                                <p>포장 여부&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                	<span>
+	                                	<input type="radio" name="package" value="Y">예 
+	                                	<input type="radio" name="package" value="N" checked>아니오
+                                	</span>
+                                </p>
                               	<div class="checkout__order__total">
                                 	총액 <span id="viewPaymentAmt"></span></div>
                                 </div>
                                 <p style="color:green"><span>*</span>
                                  	주문자 정보로 결제관련 정보가 제공됩니다. 정확한 정보로 등록되어있는지 확인해주세요.
                                 </p>
+                                <input type="hidden" name="productCdList"  value="${productCdsList }">
+                                <input type="hidden" name="cartQtyList"    value="${cartQtyList }">
+                                <input type="hidden" name="cartCdList"	   value="${cartCdList }">
+                                <input type="hidden" name="userId" 		   value="${sessionId }">
+                                <input type="hidden" name="deliveryMethodList" 	   >
+                                <input type="hidden" name="roadAddress"    value="${userDTO.roadAddress}">
+                                <input type="hidden" name="jibunAddress"   value="${userDTO.jibunAddress}">
+                                <input type="hidden" name="namujiAddress"  value="${userDTO.namujiAddress }">
+                                <input type="hidden" name="zipcode"        value="${userDTO.zipcode}">	
+                                <input type="hidden" name="paymentAmtList">
                                 <div align="center">
 	                                <button type="submit" class="site-btn"><span class="icon_check"></span>&emsp;주문</button>
                                 </div>

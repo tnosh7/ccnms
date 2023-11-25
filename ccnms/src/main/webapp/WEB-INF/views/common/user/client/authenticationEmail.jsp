@@ -30,6 +30,11 @@
                    <hr>
                    <div class="row">
                        <div class="col-lg-12">
+                       	  <div>
+                       	  	<h4>이메일 인증</h4>
+                       	  	<strong>회원가입을 하면서 등록한 이메일에 전송된 이메일 인증번호를 입력해주세요.</strong>
+                       	  </div>
+                       	  <br>
                            <div class="checkout__form__input">
 	    						 <input type="text" class="form-control" id="userId" name="userId" aria-describedby="emailHelp" value="${sessionScope.userId }" disabled="disabled" >
                            </div>

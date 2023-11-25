@@ -32,6 +32,11 @@ public class DiggingServiceImpl implements DiggingService {
 		return diggingDAO.selectOneDiggingCnt(diggingTopic);
 	}
 	@Override
+	public List<String> getTagList(String diggingTopic) throws Exception {
+		return diggingDAO.selectListTag(diggingTopic);
+	}
+	
+	@Override
 	public List<UserDTO> getUser(String writer) throws Exception {
 		return diggingDAO.selectListUser(writer);
 	}
@@ -80,7 +85,6 @@ public class DiggingServiceImpl implements DiggingService {
 	public List<String> getTagList(long diggingId) throws Exception {
 		return diggingDAO.selectListTagList(diggingId);
 	}
-	
 
 
 }

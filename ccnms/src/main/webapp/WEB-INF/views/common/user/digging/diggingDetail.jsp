@@ -84,7 +84,7 @@
 				  	} 
 				  })
 			})			
-		});
+	});
 	
 	function removeReply(){
 		var replyId = $("#replyId").val();

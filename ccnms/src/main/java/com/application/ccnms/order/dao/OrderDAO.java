@@ -16,5 +16,7 @@ public interface OrderDAO {
 	public void updateShopStockCnt (Map<String,Object> orderMap) throws Exception;
 	public void updateUserPoint (Map<String,Object> orderMap) throws Exception;
 	public void insertOrder (OrderDTO orderDTO) throws Exception;
-	
+	public void updateStockCnt(List<Map<String,Integer>> productMapList)throws Exception;
+	public void insertOrderByCart(List<OrderDTO> orderList)throws Exception;
+	public void deleteCartByOrder(int[] cartCdList)throws Exception;
 }

@@ -1,6 +1,8 @@
 package com.application.ccnms.shop.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +27,13 @@ public class ShopServiceImpl implements ShopService {
 	}
 	
 	@Override
-	public List<ShopDTO> getDiscountRateList() throws Exception {
-		return shopDAO.selectListdiscountRateList();
+	public List<String> getShopTagList() throws Exception {
+		return shopDAO.selectListShopTagList();
 	}
-
+	@Override
+	public List<String> getShopTagSortList(String sort) throws Exception {
+		return shopDAO.selectListShopTagSortList(sort);
+	}
 	@Override
 	public List<ShopDTO> sortList(String sort) throws Exception {
 		return shopDAO.selectListSortList(sort);
@@ -49,5 +54,6 @@ public class ShopServiceImpl implements ShopService {
 	public List<QnaDTO> getQnaList(long productCd) throws Exception {
 		return shopDAO.selectListQnaList(productCd);
 	}
+
 
 }

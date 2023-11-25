@@ -1,5 +1,7 @@
 package com.application.ccnms.order.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -47,8 +49,6 @@ public class OrderController {
 		mv.setViewName("/order/cartOrderSheet");
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("myOrderCnt", userService.getMyOrderCnt((String)session.getAttribute("userId")));
-		session.setAttribute("myCartCnt", userService.getMyCartCnt((String)session.getAttribute("userId")));
 		
 		mv.addObject("userDTO",  orderService.getUserDTO((String)session.getAttribute("userId")));
 		mv.addObject("productList",  orderService.getProductListByCart(productCdsList));
@@ -59,13 +59,16 @@ public class OrderController {
 	}
 	
 	@PostMapping("/cartOrderSheet")
-	public ResponseEntity<Object> cartOrderSheet (UserDTO userDTO, OrderDTO orderDTO, HttpServletRequest request, @RequestParam("point")int point) throws Exception{
-		orderService.addCartOrder(orderDTO,point);
+	public ResponseEntity<Object> cartOrderSheet (@RequestParam Map<String,Object> orderListMap ,  HttpServletRequest request) throws Exception{
 		
+		orderService.addCartOrder(orderListMap);
 		HttpSession session = request.getSession();
+		session.setAttribute("myOrderCnt", userService.getMyOrderCnt((String)session.getAttribute("userId")));
+		session.setAttribute("myCartCnt", userService.getMyCartCnt((String)session.getAttribute("userId")));
 		String jsScript = "<script>";
-			   jsScript+= "location.href='" + request.getContextPath() + "/shop/shopDetail?productCd=" + orderDTO.getProductCd() +"';";
-			   jsScript+= "</script>";
+			   jsScript+= "location.href='" + request.getContextPath() + "/shop/'";
+			   jsScript+= "</script>";	
+			   
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		return new ResponseEntity<Object> (jsScript, responseHeaders, HttpStatus.OK);
@@ -83,13 +86,10 @@ public class OrderController {
 		return mv;
 	}
 	@PostMapping("/orderSheet")
-	public ResponseEntity<Object> orderSheet(UserDTO userDTO, OrderDTO orderDTO, HttpServletRequest request, @RequestParam("point")int point) throws Exception{
-		orderService.addOrder(orderDTO, point);
-		
+	public ResponseEntity<Object> orderSheet(UserDTO userDTO, OrderDTO orderDTO, HttpServletRequest request) throws Exception{
+		orderService.addOrder(orderDTO);
 		HttpSession session = request.getSession();
-		System.out.println("==================================");
-		System.out.println(session.getAttribute("userId"));
-		System.out.println("==================================");
+		session.setAttribute("myOrderCnt", userService.getMyOrderCnt(userDTO.getUserId()));
 		String jsScript = "<script>";
 			   jsScript+= "location.href='" + request.getContextPath() + "/shop/shopDetail?productCd=" + orderDTO.getProductCd() +"';";
 			   jsScript+= "</script>";
@@ -99,5 +99,6 @@ public class OrderController {
 		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
 	}
 	
+
 	
 }
