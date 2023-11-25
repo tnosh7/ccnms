@@ -143,7 +143,7 @@
 		                            				</th>
 		                            			</c:when>
 		                            			<c:otherwise>
-			                            			<th align="left"><img src="${contextPath }/digging/thumbnails?file=${diggingDTO.profile }" alt="프로필이미지" width="40" height="40">
+			                            			<th align="left"><img src="${contextPath }/thumbnails?file=${diggingDTO.profile }" alt="프로필이미지" width="40" height="40">
 			                            				<strong>&emsp;${diggingDTO.writer }</strong>
 			                            				&emsp;<button type="button" class="btn btn-primary btn-sm" id="writer" onclick="updateLike()">LIKE</button>
 							                            <input type="hidden" name=" writer" value="${diggingDTO.writer }">

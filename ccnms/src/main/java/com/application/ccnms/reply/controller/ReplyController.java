@@ -13,6 +13,7 @@ import com.application.ccnms.reply.service.ReplyService;
 @Controller
 @RequestMapping("/reply")
 public class ReplyController {
+	
 	@Autowired
 	private ReplyService replyService;
 	

@@ -170,7 +170,7 @@
 			                                    	<input type="hidden" name="cartCd${i.index }">
 			                                    </td>
 			                                    <td class="shoping__cart__product__pic">
-			                                    	<img src="${contextPath }/shop/thumbnails?file=${myCart.productFile}" width="50" height="50"/>
+			                                    	<img src="${contextPath }/thumbnails?file=${myCart.productFile}" width="50" height="50"/>
 			                                    </td>
 			                                    <td class="shoping__cart__product" align="left">
 			                                    	<a href="${contextPath }/shop/shopDetail?productCd=${myCart.productCd}">

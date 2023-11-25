@@ -95,7 +95,7 @@ function execDaumPostcode() {
 						   	</c:when>
 						   	<c:otherwise>
 						   		<img
-		                         src="${contextPath }/myPage/thumbnails?fileName=${userDTO.profile }"
+		                         src="${contextPath }/thumbnails?file=${userDTO.profile }"
 		                         alt="user-avatar"
 		                         class="d-block rounded"
 		                         height="100"

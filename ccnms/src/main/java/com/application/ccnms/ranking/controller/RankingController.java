@@ -15,6 +15,7 @@ import com.application.ccnms.ranking.service.RankingService;
 @Controller
 @RequestMapping("/ranking")
 public class RankingController {
+	
 	@Autowired
 	private RankingService rankingService;
 	

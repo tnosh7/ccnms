@@ -30,8 +30,10 @@ public class CommonController {
 	@Autowired
 	private CommonService commonService;
 	
-	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-	//private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+	//private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+	
+	
 	@GetMapping("/")
 	public ModelAndView home(@RequestParam(required =false, value="sort") String sort, HttpServletRequest request) throws Exception {
 	

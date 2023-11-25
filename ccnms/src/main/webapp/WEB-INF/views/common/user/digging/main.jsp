@@ -101,7 +101,7 @@
                                     <div class="digging__sidebar__populer__List__file">
                                     <c:choose>
                                     	<c:when test="${diggingDTO.file != ''}">
-                                        	<img src="${contextPath}/digging/thumbnails?file=${diggingDTO.file}" alt="" width="50" height="50">
+                                        	<img src="${contextPath}/thumbnails?file=${diggingDTO.file}" alt="" width="50" height="50">
                                     	</c:when>
                                     </c:choose>
                                     </div>
@@ -172,7 +172,7 @@
 	                           				<span>&emsp;<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>
 	                           			</c:when>
 	                           			<c:otherwise>
-	                            			<span><img src="${contextPath }/digging/thumbnails?file=${diggingDTO.profile }" alt="프로필이미지" width="40" height="40">
+	                            			<span><img src="${contextPath }/thumbnails?file=${diggingDTO.profile }" alt="프로필이미지" width="40" height="40">
 	                            			</span>
 	                            			<span>&emsp;${diggingDTO.writer }</span>	
 	                           				<span>&emsp;<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>

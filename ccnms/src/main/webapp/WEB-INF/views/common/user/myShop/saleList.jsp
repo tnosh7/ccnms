@@ -81,7 +81,7 @@
 			                                		<input type="checkbox" id="deliveryCheck" name="orderCd" value="${sale.orderCd }">
 			                                	</td>
 			                                    <td class="shoping__cart__product__pic">
-			                                    	<img src="${contextPath }/shop/thumbnails?file=${sale.productFile}" width="50" height="50"/>
+			                                    	<img src="${contextPath }/thumbnails?file=${sale.productFile}" width="50" height="50"/>
 			                                    </td>
 			                                    <td class="shoping__cart__product" align="left">
 			                                    	<a href="${contextPath }/shop/shopDetail?productCd=${sale.productCd }">

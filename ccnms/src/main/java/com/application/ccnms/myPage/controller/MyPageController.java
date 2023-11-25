@@ -38,7 +38,8 @@ import net.coobird.thumbnailator.Thumbnails;
 @RequestMapping("/myPage")
 public class MyPageController {
 	
-	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	//private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@Autowired
 	private MyPageService myPageService;
@@ -133,21 +134,6 @@ public class MyPageController {
 			   jsScript +="location.href='" + request.getContextPath() + "/myPage/main'" ;
 			   jsScript +="</script>";
 		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
-	}
-	
-	@GetMapping("/thumbnails")
-	public void thumbnails(@RequestParam("fileName") String fileName, HttpServletResponse response) throws Exception {
-	
-		OutputStream out = response.getOutputStream();
-		String filePath = FILE_REPO_PATH + fileName;
-		
-		File image = new File(filePath);
-		if (image.exists()) { 
-			Thumbnails.of(image).size(800,800).outputFormat("png").toOutputStream(out);
-		}
-		byte[] buffer = new byte[1024 * 8];
-		out.write(buffer);
-		out.close();
 	}
 	
 	@GetMapping("/myLog") 

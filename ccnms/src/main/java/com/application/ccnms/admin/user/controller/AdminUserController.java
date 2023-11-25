@@ -39,7 +39,10 @@ import net.coobird.thumbnailator.Thumbnails;
 @Controller
 @RequestMapping("/admin/management")
 public class AdminUserController {
-	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	
+	//private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+	
 	@Autowired
 	private AdminUserService adminUserService;
 	

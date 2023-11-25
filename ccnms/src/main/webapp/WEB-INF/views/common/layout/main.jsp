@@ -208,7 +208,7 @@
 		                     		<tr>
 		                     			<td>
 		                     				${i.count }.&ensp;	
-		                     				<img src="${contextPath }/shop/thumbnails?file=${recentShopDTO.productFile}" alt=""  width="40" height="60">
+		                     				<img src="${contextPath }/thumbnails?file=${recentShopDTO.productFile}" alt=""  width="40" height="60">
 		                   				</td>
 		                     			<td>
 		                     				<a href="${contextPath }/shop/shopDetail?productCd=${recentShopDTO.productCd }"  class="latest-product__item">
@@ -235,7 +235,7 @@
                      		<tr>
                      			<td>
                      				${i.count }.&ensp;	
-                     				<img src="${contextPath }/shop/thumbnails?file=${populerShopDTO.productFile}" alt=""  width="40" height="60">
+                     				<img src="${contextPath }/thumbnails?file=${populerShopDTO.productFile}" alt=""  width="40" height="60">
                    				</td>
                      			<td>
                    				 	<a href="${contextPath }/shop/shopDetail?productCd=${populerShopDTO.productCd }">
@@ -262,7 +262,7 @@
                      		<tr>
                      			<td>
                      				${i.count }.&ensp;	
-                     				<img src="${contextPath }/shop/thumbnails?file=${exchangeShopDTO.productFile}" alt=""  width="40" height="60">
+                     				<img src="${contextPath }/thumbnails?file=${exchangeShopDTO.productFile}" alt=""  width="40" height="60">
                    				</td>
                      			<td>
                      				<a href="${contextPath }/shop/shopDetail?productCd=${exchangeShopDTO.productCd }" class="latest-product__item">

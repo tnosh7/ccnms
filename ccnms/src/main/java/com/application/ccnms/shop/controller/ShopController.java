@@ -36,7 +36,9 @@ public class ShopController {
 	@Autowired
 	private ShopService shopService;
 	
-	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	//private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+	
 	@GetMapping("/")
 	public ModelAndView shop(@RequestParam(required =false, value="sort") String sort, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -109,18 +111,6 @@ public class ShopController {
 			   jsScript +="</script>";
 		return jsScript;
 	}
-	@GetMapping("/thumbnails")
-	public void thumbnails(@RequestParam("file") String file, HttpServletResponse response) throws IOException {
-		OutputStream out = response.getOutputStream();
-		File image= new File(FILE_REPO_PATH + file);
-		if (image.exists()) {
-			Thumbnails.of(image).size(1000,1000).outputFormat("png").toOutputStream(out);
-		}
-		byte[] buffer = new byte[1024*8];
-		out.write(buffer);
-		out.close();
-	}
-	
 	@GetMapping("/shopDetail")
 	public ModelAndView shopDetail (@RequestParam("productCd") long productCd, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
