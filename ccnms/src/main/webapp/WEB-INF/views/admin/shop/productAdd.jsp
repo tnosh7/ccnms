@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
-<c:set var="sessionId" value="${sessionScope.userId }"/>
 <c:set var="adminId" value="${sessionScope.adminId }"/>
 <!DOCTYPE html>
 <html>
@@ -73,14 +72,14 @@
 	                  	 	 		<tr>
 	                  	 	 			<th>분류</th>
 		                  	 	 			<th><select name="sort" >
-							  						<option value="Modudigging">모두디깅</option>
+							  						<option value="ModuDigging">모두디깅</option>
 						  						</select>
 						  					</th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>
 	                  	 	 			<th>판매자</th>
 	                  	 	 			<th><select name="writer" >
-				                  	 			<option value="Modudigging">모두디깅</option>
+				                  	 			<option value="ModuDigging">모두디깅</option>
 					  						</select></th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>

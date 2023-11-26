@@ -10,4 +10,7 @@ public interface AdminUserService {
 	public List<UserDTO> getUserList()throws Exception;
 	public List<UserDTO> getSearchUserList(Map<String,Object> searchMap) throws Exception;
 	public void deleteUserList(String[] delUserIdList) throws Exception;
+	public UserDTO getOneUserInfo(String userId) throws Exception;
+	public void modifyUser(UserDTO userDTO) throws Exception;
+	
 }

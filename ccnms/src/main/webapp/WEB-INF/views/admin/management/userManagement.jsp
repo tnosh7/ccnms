@@ -55,6 +55,7 @@ nav {
 			location.href= url;
 		}
 	}
+	
 </script>
 <body>
 <fieldset>
@@ -157,10 +158,12 @@ nav {
 		                      </tr>
 		                </c:when>
 	                <c:otherwise>
-	                	<c:forEach var="userDTO"  items="${userList}">
+	                	<c:forEach var="userDTO"  items="${userList}" varStatus="i">
 	                		<tr>
 		                      	<td><input type="checkbox" name="userId" value="${userDTO.userId }"></td>
-		                        <td>${userDTO.userId }</td>
+		                        <td>
+		                        	<a href="${contextPath}/admin/management/admindModifyUser?userId=${userDTO.userId }">${userDTO.userId }</a>
+		                        </td>
 		                        <td>${userDTO.userNm }</td>
 		                        <td>${userDTO.birthDT}</td>
 		                        <td>${userDTO.hp}</td>
@@ -183,9 +186,6 @@ nav {
                   </table>
                   <br>
                   <div align="right">
-                  	  <span>
-		                  <button type="button" class="btn btn-danger" onclick="modifyUser();">유저 수정</button>
-                  	  </span>
                   	  <span>
 		                  <button type="button" class="btn btn-danger" onclick="removeUser();">유저 삭제</button>
                   	  </span>

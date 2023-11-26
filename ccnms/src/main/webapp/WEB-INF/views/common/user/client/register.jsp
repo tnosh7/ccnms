@@ -86,36 +86,65 @@
 					 $("#passwdCheckWarn").html("비밀번호는 8글자 이상이어야 합니다.");
 					 return false;
 				}
+				var birth = "$('[name=birth]')";
+				var hp = "${userDTO.hp}";
+				if(birth.charAt(2) > 1 || birth.charAt(4) > 3) {
+					return false;
+				}
+				else if (birth.charAt(2) == 1 && birth.charAt(3) > 2 || birth.charAt(4) == 3  && birth.charAt(5) > 1 ) {
+					return false;
+				}
+				if(hp.charAt(0) != 0) {
+					return false;
+				}
 			})
 		});	
 			
 		
-		function execDaumPostcode() {
-		    new daum.Postcode({
-		        oncomplete: function(data) {
-		
-		            var fullRoadAddr = data.roadAddress; 
-		            var extraRoadAddr = ''; 	
-		            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-		                extraRoadAddr += data.bname;
-		            }
-		            if (data.buildingName !== '' && data.apartment === 'Y'){
-		               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-		            }
-		            if (extraRoadAddr !== ''){
-		                extraRoadAddr = ' (' + extraRoadAddr + ')';
-		            }
-		            if (fullRoadAddr !== ''){
-		                fullRoadAddr += extraRoadAddr;
-		            }
-		
-		            document.getElementById('zipcode').value = data.zonecode; 
-		            document.getElementById('roadAddress').value = fullRoadAddr;
-		            document.getElementById('jibunAddress').value = data.jibunAddress;
-		        }
-		    }).open();
-		}
+	function execDaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
 	
+	            var fullRoadAddr = data.roadAddress; 
+	            var extraRoadAddr = ''; 	
+	            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                extraRoadAddr += data.bname;
+	            }
+	            if (data.buildingName !== '' && data.apartment === 'Y'){
+	               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	            }
+	            if (extraRoadAddr !== ''){
+	                extraRoadAddr = ' (' + extraRoadAddr + ')';
+	            }
+	            if (fullRoadAddr !== ''){
+	                fullRoadAddr += extraRoadAddr;
+	            }
+	
+	            document.getElementById('zipcode').value = data.zonecode; 
+	            document.getElementById('roadAddress').value = fullRoadAddr;
+	            document.getElementById('jibunAddress').value = data.jibunAddress;
+	        }
+	    }).open();
+	}
+	function birthDTWarn(){
+		var birth = "$(#birthDT).val()";
+		var hp = "$(#hp).val()";
+		if(birth.charAt(2) > 1 || birth.charAt(4) > 3) {
+			$("#birthDTWarn").html("생일을 올바르게 입력해주세요.");
+			return false;
+		}
+		else if (birth.charAt(2) == 1 && birth.charAt(3) > 2 || birth.charAt(4) == 3  && birth.charAt(5) > 1 ) {
+			$("#birthDTWarn").html("생일을 올바르게 입력해주세요.");
+			return false;
+		}
+	}
+	function hpWarn(){
+		var hp = "$(#hp).val()";
+		if(hp.charAt(0) != 0) {
+			$("#hpWarn").html("생일을 올바르게 입력해주세요.");
+			return false;
+		}
+	}
 	
 </script>
 <body>
@@ -173,13 +202,12 @@
 	                                <input type="text" id="userNm" name="userNm" required> 
 	                            </div>
 	                            <div class="checkout__input">
-	                                <p>핸드폰 번호<span>*</span></p>
-	                                <input type="text" id="hp" name="hp" required placeholder="예) 01000000000 숫자만 입력" maxlength="11"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 
+	                                <p>핸드폰 번호<span id="hpWarn">*</span></p>
+	                                <input type="text" id="hp" name="hp" required placeholder="예) 01000000000 숫자만 입력" maxlength="11"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onchange="hpWarn()"> 
 	                            </div>
 	                            <div class="checkout__input">
-	                                <p>생년월일<span>*</span></p>
-	                                <input type="text" id="birthDT" name="birthDT" placeholder="예) 010916 6자리 입력" required maxlength="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-	                                <p><span id="birthDTWarn"></span></p>
+	                                <p>생년월일<span id="birthDTWarn">*</span></p>
+	                                <input type="text" id="birthDT" name="birthDT" placeholder="예) 010916 6자리 입력" required maxlength="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onchange="birthDTWarn()">
 	                            </div>
 	                            <div class="row">
 	                                <div class="col-lg-6">

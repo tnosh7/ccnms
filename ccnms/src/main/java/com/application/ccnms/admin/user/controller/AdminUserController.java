@@ -5,9 +5,11 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -21,16 +23,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.application.ccnms.admin.dto.AdminDTO;
 import com.application.ccnms.admin.user.service.AdminUserService;
 import com.application.ccnms.user.dto.UserDTO;
 
@@ -40,8 +41,8 @@ import net.coobird.thumbnailator.Thumbnails;
 @RequestMapping("/admin/management")
 public class AdminUserController {
 	
-	//private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+//	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@Autowired
 	private AdminUserService adminUserService;
@@ -201,19 +202,42 @@ public class AdminUserController {
 		out.close();
 	}
 	
-	@PostMapping("/modifyUser") 
-	public ModelAndView modifyUser(@RequestParam("modifyUserList") String modifyUserList) throws Exception {
+	@GetMapping("/admindModifyUser")
+	public ModelAndView admindModifyUser (@RequestParam("userId") String userId) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("=================");
-		System.out.println(modifyUserList);
-		System.out.println("=================");
-		String [] temp = modifyUserList.split(",");
-		String [] modifyUser = new String[temp.length];
-		for (int i = 0; i < temp.length; i++) {
-			modifyUser[i] = temp[i];
-		}
-		mv.setViewName("/management/adminUserModify");
+		mv.addObject("userDTO", adminUserService.getOneUserInfo(userId));
+		mv.setViewName("/management/adminModifyUser");
 		return mv;
 	}
 	
+	@PostMapping("/admindModifyUser")
+	public ModelAndView admindModifyUser (HttpServletRequest request, MultipartHttpServletRequest multipartRequest ) throws Exception {
+		Iterator<String> fileList = multipartRequest.getFileNames();
+		String fileName= "";
+		if (fileList.hasNext()) {
+			MultipartFile uploadFile = multipartRequest.getFile(fileList.next());
+			if(!uploadFile.getOriginalFilename().isEmpty()) {
+				SimpleDateFormat fmt = new SimpleDateFormat("yyyymmdd");
+				fileName= fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();
+				uploadFile.transferTo(new File(FILE_REPO_PATH+fileName));
+				new File(FILE_REPO_PATH + multipartRequest.getParameter("beforeFileName")).delete();
+			}
+		}
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUserId(multipartRequest.getParameter("userId"));
+		userDTO.setUserNm(multipartRequest.getParameter("userNm"));
+		userDTO.setEmail(multipartRequest.getParameter("email"));
+		userDTO.setBirthDT(multipartRequest.getParameter("birthDT"));
+		userDTO.setHp(multipartRequest.getParameter("hp"));
+		userDTO.setZipcode(multipartRequest.getParameter("zipcode"));
+		userDTO.setRoadAddress(multipartRequest.getParameter("roadAddress"));
+		userDTO.setJibunAddress(multipartRequest.getParameter("jibunAddress"));
+		userDTO.setNamujiAddress(multipartRequest.getParameter("namujiAddress"));
+		userDTO.setProfile(fileName);
+		System.out.println("==================");
+		System.out.println(userDTO);
+		System.out.println("==================");
+		adminUserService.modifyUser(userDTO);
+		return new ModelAndView("redirect:/admin/management/");
+	}
 }

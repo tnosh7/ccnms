@@ -31,6 +31,16 @@ public class AdminUserDAOImpl implements AdminUserDAO {
 		sqlSession.delete("adminUser.deleteUserList", delUserIdList);
 	}
 
+	@Override
+	public UserDTO selectOneUserInfo(String userId) throws Exception {
+		return sqlSession.selectOne("adminUser.selectOneUserInfo", userId);
+	}
+
+	@Override
+	public void updateOneUser(UserDTO userDTO) throws Exception {
+		sqlSession.update("adminUser.updateOneUser", userDTO);
+	}
+
 
 
 	

@@ -31,4 +31,14 @@ public class AdminUserServiceImpl implements AdminUserService {
 		adminUserDAO.deleteUserList(delUserIdList);
 	}
 
+	@Override
+	public UserDTO getOneUserInfo(String userId) throws Exception {
+		return adminUserDAO.selectOneUserInfo(userId);
+	}
+
+	@Override
+	public void modifyUser(UserDTO userDTO) throws Exception {
+		adminUserDAO.updateOneUser(userDTO);
+	}
+
 }

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+	
 	$().ready(function(){
 		$("form").submit(function(){
 			var birth = "${userDTO.birthDT}";
@@ -22,6 +23,8 @@
 			}
 		})
 	});
+	
+	
 	function execDaumPostcode() {
 	    new daum.Postcode({
 	        oncomplete: function(data) {
@@ -56,39 +59,21 @@
 	           <div class="row">
 	               <div class="col-lg-12">
 	                   <div class="breadcrumb__links">
-	                       <a href="${contextPath }/"><i class="fa fa-home"></i> Home > </a>
-	                       <span>내 프로필 > </span>
-	                       <span>프로필 수정</span>
+	                   	<br>
+	                       <a href="${contextPath }/admin/main"><i class="fa fa-home"></i> Home </a> >
+	                       <span><a href="${contextPath }/admin/management/">유저 관리</a></span>
+	                       <span> > 프로필 수정</span>
 	                   </div>
 	               </div>
 	           </div>
 	       </div>
 	   </div>
-	<form action="${contextPath }/myPage/modifyMyPage" method="post" enctype="multipart/form-data">
+	<form action="${contextPath }/admin/management/admindModifyUser" method="post" enctype="multipart/form-data">
 	  <div class="content-wrapper">
 	   <section class="blog-details spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-5 order-md-1 order-2">
-                    <div class="blog__sidebar">
-                        <div class="blog__sidebar__item">
-                            <h4>Categories</h4>
-                            <ul>
-                                <li><a href="${contextPath }/myPage/main"><strong>내프로필</strong></a></li>
-                                <li><a href="${contextPath }/myPage/myLog?userId=${userDTO.userId}"><strong>이력관리</strong></a></li>
-                            </ul>
-                        </div>
-                        <hr>
-                        <div class="blog__sidebar__item">
-                            <h4>고객센터</h4>
-                             <ul>
-                                <li><a href="#"> 문의메시지</a></li>
-                                  <li><a href="${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=delete"> 탈퇴</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8 col-md-7 order-md-1 order-1" align="center">
+                <div class="col-lg-12">
                     <div class="blog__details__text">
                         <div class="card mb-4">
 	                   <h5 class="card-header">${userDTO.userNm } 님</h5>
@@ -110,7 +95,7 @@
 						   	</c:when>
 						   	<c:otherwise>
 						   		<img
-		                         src="${contextPath }/thumbnails?file=${userDTO.profile }"
+		                         src="${contextPath }/admin/management/thumbnails?fileName=${userDTO.profile }"
 		                         alt="user-avatar"
 		                         class="d-block rounded"
 		                         height="100"
@@ -150,7 +135,6 @@
 	                             class="form-control"
 	                             type="text"
 	                             id="userId"
-	                             name="userId"
 	                             value="${userDTO.userId }"
 	                             autofocus
 	                             disabled
@@ -224,7 +208,8 @@
 	                   		 	<div class="form-check form-switch">
 						      </div>
            					 <div align="center">
-	                         <button type="submit" class="btn btn-primary me-2" onclick="location.href='${contextPath }/myPage/modifyMyPage'">&emsp;수정&emsp;</button>
+           					 <input type="hidden" name="userId" value="${userDTO.userId }">
+	                         <button type="submit" class="btn btn-primary me-2" >&emsp;수정&emsp;</button>
          				</div>
        				</div>
    				</div>
