@@ -1,10 +1,14 @@
 package com.application.ccnms.admin.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.application.ccnms.admin.dto.AdminDTO;
+import com.application.ccnms.digging.dto.DiggingDTO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -44,6 +48,21 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public int selectOneTodaySaleCnt(String today) throws Exception {
 		return sqlSession.selectOne("admin.selectOneTodaySaleCnt", today);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectListUserStatic() throws Exception {
+		return sqlSession.selectList("admin.selectListUserStatic");
+	}
+
+	@Override
+	public List<DiggingDTO> selectListNoticeList() throws Exception {
+		return sqlSession.selectList("admin.selectListNoticeList");
+	}
+
+	@Override
+	public int selectOneMonthOrder() throws Exception {
+		return sqlSession.selectOne("admin.selectOneMonthOrder");
 	}
 	
 }

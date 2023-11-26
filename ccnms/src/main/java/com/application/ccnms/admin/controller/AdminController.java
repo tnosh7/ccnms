@@ -29,6 +29,12 @@ public class AdminController {
 		mv.addObject("todayUser", adminService.getUserCnt());
 		mv.addObject("todayShop", adminService.getShopCnt());
 		mv.addObject("todaySale", adminService.getSaleCnt());
+		mv.addObject("userStaticList", adminService.getUserStaticList());
+		mv.addObject("noticeList", adminService.getNoticeList());
+		mv.addObject("monthOrder", adminService.getMonthOrder());
+		System.out.println("======================");
+		System.out.println(adminService.getMonthOrder());
+		System.out.println("======================");
 		mv.setViewName("/admin/main");
 		return mv;
 	}

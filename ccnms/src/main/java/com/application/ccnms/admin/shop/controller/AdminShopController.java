@@ -285,4 +285,5 @@ public class AdminShopController {
 		adminShopService.removeOrderList(removeOrder);
 		return new ModelAndView("redirect:/admin/shop/orderList");
 	}
+	
 }

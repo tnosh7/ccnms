@@ -55,7 +55,6 @@
 				ORDERED O
 			JOIN SHOP S 
 			ON	O.PRODUCT_CD = S.PRODUCT_CD
-			AND S.WRITER = 'Modudigging'
 	</select>
 	
 	<select id="selectListSearchOrder" parameterType="hashmap" resultMap="adminOrderListMap">
@@ -73,7 +72,6 @@
 				ORDERED O
 			JOIN SHOP S 
 			ON	O.PRODUCT_CD = S.PRODUCT_CD
-			AND S.WRITER = 'Modudigging'
 		WHERE
 			<if test='searchKey.equals("productNm")'>
 				S.PRODUCT_NM LIKE CONCAT('%',#{searchWord},'%')			
@@ -83,6 +81,9 @@
 			</if>
 			<if test='searchKey.equals("deliveryStatus")'>
 				O.DELIVERY_STATUS LIKE CONCAT('%',#{searchWord},'%')					
+			</if>
+			<if test='searchKey.equals("writer")'>
+				S.WRITER LIKE CONCAT('%',#{searchWord},'%')
 			</if>
 	</select>
 	
@@ -171,6 +172,5 @@
 				#{orderCd}
 			</foreach>
 	</delete>
-	
 	
 </mapper>

@@ -70,27 +70,23 @@
             <!-- Footer -->
           	<tiles:insertAttribute name="footer"/>
             <!-- / Footer -->
-
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
       </div>
-
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
     <!-- / Layout wrapper -->
 	
     <div class="buy-now">
       <a
-        href="${contextPath }/"
-        target="_blank"
-        class="btn btn-danger btn-buy-now"
-        >홈</a
+        href="${contextPath }/admin/main"
+        class="btn btn-info btn-buy-now"
+        > 홈 </a
       >
     </div>
-
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="${contextPath}/resources/admin/assets/vendor/libs/jquery/jquery.js"></script>

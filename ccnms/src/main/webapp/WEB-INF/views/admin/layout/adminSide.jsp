@@ -129,7 +129,7 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="${contextPath }/admin/shop//orderList" class="menu-link">
+            <a href="${contextPath }/admin/shop/orderList" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
               <div data-i18n="Basic">주문 조회</div>
             </a>

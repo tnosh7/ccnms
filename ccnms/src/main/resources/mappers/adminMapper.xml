@@ -66,4 +66,35 @@
 			LEFT(PAY_ORDER_TIME, 10) = #{today}
 	</select>
 	
+	<resultMap type="hashmap" id="userStaticMap">
+		<result column="USER_COUNT" property="countUser" />
+		<result column="JOIN_USER" property="joinDt" />
+	</resultMap>
+	<select id="selectListUserStatic" resultMap="userStaticMap">
+		SELECT 
+			COUNT(USER_ID) AS USER_COUNT,
+			DATE_FORMAT(JOIN_DT,'%y-%m-%d') AS JOIN_USER
+		FROM 
+			USER
+		GROUP BY
+			JOIN_USER
+		ORDER BY
+			JOIN_USER
+	</select>
+	<select id="selectListNoticeList" resultType="DiggingDTO">
+		SELECT 
+			*
+		FROM 
+			DIGGING
+		WHERE
+			DIGGING_TOPIC = 'notice'
+	</select>
+	<select id="selectOneMonthOrder" resultType="int">
+		SELECT 
+			SUM(PAYMENT_AMT) AS TOTAL
+		FROM 
+			ORDERED
+		WHERE
+			PAY_ORDER_TIME BETWEEN '2023-11-01' AND NOW()
+	</select>
 </mapper>

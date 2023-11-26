@@ -23,6 +23,7 @@ nav {
 </style>
 </head>
 <script>
+	
 	function selectAllOrder(){
 		if ($("#allOrder").prop("checked")){
 			$("[name='orderCd']").prop("checked", true);
@@ -84,11 +85,10 @@ nav {
            <!-- Search -->
            <div class="navbar-nav align-items-center">
              <div class="nav-item d-flex align-items-center">
-               <i class="bx bx-search fs-4 lh-0"></i>
                <input
                  type="text"
                  class="form-control border-0 shadow-none"
-                 placeholder="Search..."
+                 placeholder="관리자 페이지 입니다."
                  aria-label="Search..."
                />
              </div>
@@ -111,9 +111,11 @@ nav {
              <hr>
                 <div class="table-responsive text-nowrap">
 	               <ul class="nav nav-pills flex-column flex-md-row mb-3">
+	               	&emsp;
                 	<li>
 	                <select class="form-select" id="searchKey" name="searchKey" aria-label="Default select example">
                           <option value="null">검색어 선택</option>
+                          <option value="writer">판매자</option>
                           <option value="productNm">상품 이름</option>
                           <option value="userId">유저</option>
                           <option value="deliveryStatus">배송 상태</option>

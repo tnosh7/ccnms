@@ -107,6 +107,7 @@
 	                  	 		<select name="diggingTopic" >
 			  						<option value="">[필수] 디깅 토픽 선택</option>
 			  						<option value="notice">공지</option>
+			  						<option value="ad">홍보</option>
 			  						<option value="game">게임</option>
 			  						<option value="kPop">K-POP</option>
 			  						<option value="ott">OTT</option>

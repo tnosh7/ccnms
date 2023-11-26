@@ -3,6 +3,7 @@ package com.application.ccnms.admin.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.application.ccnms.admin.dao.AdminDAO;
 import com.application.ccnms.admin.dto.AdminDTO;
+import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.digging.service.DiggingServiceImpl;
 
 @Service
@@ -76,6 +78,21 @@ public class AdminServiceImpl implements AdminService {
 		logger.info(today + "의 유저 등록수 : " + adminDAO.selectOneTodayUserCnt(today));
 		logger.info(today + "의 상품 등록수 : " + adminDAO.selectOneTodayShopCnt(today));
 		logger.info(today + "의 판매 등록수 : " + adminDAO.selectOneTodaySaleCnt(today));
+	}
+
+	@Override
+	public List<Map<String,Object>> getUserStaticList() throws Exception {
+		return adminDAO.selectListUserStatic();
+	}
+
+	@Override
+	public List<DiggingDTO> getNoticeList() throws Exception {
+		return adminDAO.selectListNoticeList();
+	}
+
+	@Override
+	public int getMonthOrder() throws Exception {
+		return adminDAO.selectOneMonthOrder();
 	}
 
 

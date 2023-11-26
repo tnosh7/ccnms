@@ -38,11 +38,10 @@
            <!-- Search -->
            <div class="navbar-nav align-items-center">
              <div class="nav-item d-flex align-items-center">
-               <i class="bx bx-search fs-4 lh-0"></i>
                <input
                  type="text"
                  class="form-control border-0 shadow-none"
-                 placeholder="Search..."
+                 placeholder="관리자 페이지 입니다."
                  aria-label="Search..."
                />
              </div>

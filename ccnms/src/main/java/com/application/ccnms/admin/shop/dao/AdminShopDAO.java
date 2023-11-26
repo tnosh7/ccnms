@@ -15,5 +15,4 @@ public interface AdminShopDAO {
 	public void deleteProductList(int[] removeProduct) throws Exception;
 	public void deleteOrderList(int[] removeOrder) throws Exception;
 
-
 }

@@ -41,7 +41,7 @@
 			JOIN USER	 AS U
 				 ON		D.WRITER = U.USER_ID
 		WHERE 
-			D.DIGGING_TOPIC NOT IN ("NOTICE")
+			D.DIGGING_TOPIC NOT IN ("NOTICE", "AD")
 		ORDER BY 
 		<if test='sort == "readCnt"'>
 			D.READ_CNT DESC	
@@ -65,7 +65,7 @@
 		FROM 
 			DIGGING
 		WHERE
-			DIGGING_TOPIC = "notice" 
+			DIGGING_TOPIC = "ad" 
 	</select>
 	
 	<update id="updateThumbsUp" parameterType="long">
@@ -146,4 +146,8 @@
 		ORDER BY 
 				READ_CNT DESC		
 	</select>	
+	
+
+	
+	
 </mapper>
