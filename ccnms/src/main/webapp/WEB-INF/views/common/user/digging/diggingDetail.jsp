@@ -209,22 +209,21 @@
                                </div>
                            </div>
                            <c:choose>
-                           	<c:when test="${diggingDTO.writer eq sessionId }">
-								<span>
-									<span id='modify'>
-										<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
-										<input type="button" id="delete" value="삭제" >
+	                           	<c:when test="${diggingDTO.writer eq sessionId }">
+									<span>
+										<span id='modify'>
+											<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
+											<input type="button" id="delete" value="삭제" >
+										</span>
 									</span>
-								</span>
-                           	</c:when>
-                           	<c:when test="${adminId != null}">
-                        		<span>
-									<span id='modify'>
-										<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
-										<input type="button" id="delete" value="삭제" >
+	                           	</c:when>
+	                           	<c:when test="${adminId != null}">
+	                        		<span>
+										<span id='modify'>
+											<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
+										</span>
 									</span>
-								</span>
-                           	</c:when>
+	                           	</c:when>
                            	<c:otherwise>
                            	</c:otherwise>
                            </c:choose>
@@ -243,6 +242,13 @@
 										</span>
 										</dd>
 			                      	</c:if>
+			                      	<c:if test="${adminId != null}">
+			                      		<dd class="col-sm-9">
+			                      		<span id='modify' >
+			                      			<button type="button" class="btn btn-light" id="replyId" value="${replyDTO.replyId }" onclick="removeReply()">삭제</button>
+										</span>
+										</dd>
+			                      	</c:if>
 			                      </dl>
 			                      <hr>
 								</c:forEach>
@@ -251,20 +257,32 @@
 									<br>
 									<c:choose>
 										<c:when test="${sessionScope.userId != null }">
-										<div class="input-group">
-					                        <span class="input-group-text">
-					                        	${sessionScope.userId}
-					                        	<input type="hidden" id="loginUserId" value="${sessionScope.userId}"/>
-					                        </span>
-					                        <textarea class="form-control" aria-label="With textarea" placeholder="댓글을 입력해주세요." id="content" name="content" maxlength="200"></textarea>
-					                      	<input type='submit' value='작성' id='addReplyBtn'>
-					                      	<input type="hidden" value="${diggingDTO.diggingId }" id="diggingId" name="diggingId"/>
-											<input type="hidden" value="${sessionScope.userId }" id="writer" name="writer">
-					                      </div>
+											<div class="input-group">
+						                        <span class="input-group-text">
+						                        	${sessionScope.userId}
+						                        	<input type="hidden" id="loginUserId" value="${sessionScope.userId}"/>
+						                        </span>
+						                        <textarea class="form-control" aria-label="With textarea" placeholder="댓글을 입력해주세요." id="content" name="content" maxlength="200"></textarea>
+						                      	<input type='submit' value='작성' id='addReplyBtn'>
+						                      	<input type="hidden" value="${diggingDTO.diggingId }" id="diggingId" name="diggingId"/>
+												<input type="hidden" value="${sessionScope.userId }" id="writer" name="writer">
+						                      </div>
 										</c:when>
-									<c:otherwise>
-										<button type="button" class="btn rounded-pill btn-outline-success" id="addBtn" >댓글 입력</button>
-									</c:otherwise>
+										<c:when test="${adminId != null}">
+		                        			<div class="input-group">
+						                        <span class="input-group-text">
+						                        	ModuDigging
+						                        	<input type="hidden" id="loginUserId" value="ModuDigging"/>
+						                        </span>
+						                        <textarea class="form-control" aria-label="With textarea" placeholder="댓글을 입력해주세요." id="content" name="content" maxlength="200"></textarea>
+						                      	<input type='submit' value='작성' id='addReplyBtn'>
+						                      	<input type="hidden" value="${diggingDTO.diggingId }" id="diggingId" name="diggingId"/>
+												<input type="hidden" value="ModuDigging" id="writer" name="writer">
+					                    	</div>
+                           				</c:when>
+										<c:otherwise>
+											<button type="button" class="btn rounded-pill btn-outline-success" id="addBtn" >댓글 입력</button>
+										</c:otherwise>
 									</c:choose>
 								<div>
 								</div>

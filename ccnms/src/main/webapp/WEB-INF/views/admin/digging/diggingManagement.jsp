@@ -169,12 +169,8 @@ nav {
                   </table>
                   <br>
                	 <div align="right">
-                	 <span>
-	                  <button type="button" class="btn btn-danger" onclick="updateDigging();">수정</button>
-	                  </span>
-	                  &emsp;
                  	  <span>
-	                  <button type="button" class="btn btn-danger" onclick="removeDigging();">삭제</button>
+	                  	<button type="button" class="btn btn-danger" onclick="removeDigging();">삭제</button>
                  	 </span>
                  </div>
                </form>

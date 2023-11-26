@@ -23,21 +23,21 @@ nav {
 </style>
 </head>
 <script>
-	function selectAllProduct(){
-		if ($("#allProduct").prop("checked")){
-			$("[name='productCd']").prop("checked", true);
+	function selectAllOrder(){
+		if ($("#allOrder").prop("checked")){
+			$("[name='orderCd']").prop("checked", true);
 		}
 		else {
-			$("[name='productCd']").prop("checked", false);
+			$("[name='orderCd']").prop("checked", false);
 		}
 	}
 	
-	function removeProduct(){
-		var removeProductList = "";
-		if($("input[name='productCd']:checked")) {
-			$("input[name='productCd']:checked").each(function(){
-				removeProductList += $(this).val() + ",";
-				location.href="${contextPath}/admin/shop/removeProduct?removeProductList=" + removeProductList;
+	function removeOrder(){
+		var removeOrderList = "";
+		if($("input[name='orderCd']:checked")) {
+			$("input[name='orderCd']:checked").each(function(){
+				removeOrderList += $(this).val() + ",";
+				location.href="${contextPath}/admin/shop/removeOrder?removeOrderList=" + removeOrderList;
 			});
 		}
 		else return;
@@ -131,7 +131,7 @@ nav {
                   <table class="table">
                     <thead class="table-light" align="center">
                       <tr>
-                      	<th width="30"><input type="checkbox" id="allCheck"></th>
+                      	<th width="30"><input type="checkbox" id="allOrder" onchange="selectAllOrder()"></th>
                         <th>유저</th>
                         <th width=300>상품 이름</th>
                         <th>주문 수량</th>
@@ -170,7 +170,7 @@ nav {
                   <br>
                   <div align="right">
 	               	 <span>
-	                 	<button type="button" class="btn btn-danger" onclick="removeProduct();">주문취소</button>
+	                 	<button type="button" class="btn btn-danger" onclick="removeOrder();">주문취소</button>
 	               	 </span>
                  </div>
                </form>

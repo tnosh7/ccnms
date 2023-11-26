@@ -14,4 +14,5 @@ public interface AdminShopService {
 	public List<Map<String,Object>> getSearchOrderList(Map<String,Object> searchMap) throws Exception;
 	public Map<String,Object> getOrderDetail(Map<String,Object> adminOrderDetailMap) throws Exception;
 	public void removeProductList(int[] removeProduct) throws Exception;
+	public void removeOrderList(int[] removeOrder) throws Exception;
 }

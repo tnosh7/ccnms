@@ -275,5 +275,14 @@ public class AdminShopController {
 		wb.close();
 	}
 	
-	
+	@GetMapping("/removeOrder")
+	public ModelAndView removeOrder (@RequestParam("removeOrderList")String removeOrderList) throws Exception {
+		String[] temp = removeOrderList.split(",");
+		int[] removeOrder = new int[temp.length];
+		for (int i = 0; i < temp.length; i++) {
+			removeOrder[i] = Integer.parseInt(temp[i]);
+		}
+		adminShopService.removeOrderList(removeOrder);
+		return new ModelAndView("redirect:/admin/shop/orderList");
+	}
 }

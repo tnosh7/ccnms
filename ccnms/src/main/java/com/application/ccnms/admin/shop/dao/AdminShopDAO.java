@@ -13,6 +13,7 @@ public interface AdminShopDAO {
 	public List<Map<String,Object>> selectListSearchOrder(Map<String,Object> searchMap) throws Exception;
 	public Map<String,Object> selectOneOrderDetail(Map<String, Object> adminOrderDetailMap) throws Exception ;
 	public void deleteProductList(int[] removeProduct) throws Exception;
+	public void deleteOrderList(int[] removeOrder) throws Exception;
 
 
 }

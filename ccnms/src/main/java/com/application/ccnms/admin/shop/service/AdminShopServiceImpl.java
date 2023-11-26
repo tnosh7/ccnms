@@ -41,4 +41,8 @@ public class AdminShopServiceImpl implements AdminShopService {
 	public void removeProductList(int[] removeProduct) throws Exception {
 		adminShopDAO.deleteProductList(removeProduct);
 	}
+	@Override
+	public void removeOrderList(int[] removeOrder) throws Exception {
+		adminShopDAO.deleteOrderList(removeOrder);
+	}
 }

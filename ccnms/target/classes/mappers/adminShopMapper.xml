@@ -162,6 +162,15 @@
 				#{productCd}
 			</foreach>
 	</delete>
+	<delete id="deleteOrderList">
+		DELETE FROM 
+			ORDERED
+		WHERE
+			ORDER_CD IN
+			<foreach collection="array" item="orderCd" separator="," open="(" close=")">
+				#{orderCd}
+			</foreach>
+	</delete>
 	
 	
 </mapper>

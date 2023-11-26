@@ -40,6 +40,10 @@ public class AdminShopDAOImpl implements AdminShopDAO {
 	public void deleteProductList(int[] removeProduct) throws Exception {
 		sqlSession.delete("adminShop.deleteProductList", removeProduct);
 	}
+	@Override
+	public void deleteOrderList(int[] removeOrder) throws Exception {
+		sqlSession.delete("adminShop.deleteOrderList", removeOrder);
+	}
 	
 	
 }
