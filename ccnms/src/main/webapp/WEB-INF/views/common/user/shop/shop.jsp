@@ -96,13 +96,19 @@
                             </ul>
                         </div>
                         <div class="sidebar__item">
-                            <h4>관련있는 태그</h4>
-                            <div class="sidebar__item__size">
-                                <label for="large">
-                                <c:forEach var="tagDTO" items="${tagList }"> 
-                                   	 <button type="button" class="btn btn-outline-info"># ${tagDTO }</button>	
-                                </c:forEach>
-                                </label>
+                            <h4>가격</h4>
+                            <div class="price-range-wrap">
+                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="10" data-max="540">
+                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;"></span>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 58.4906%;"></span>
+                                <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 58.4906%;"></div></div>
+                                <div class="range-slider">
+                                    <div class="price-input">
+                                        <input type="text" id="minamount">
+                                        <input type="text" id="maxamount">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="sidebar__item">
@@ -193,12 +199,6 @@
 	                      	</c:forEach>
 	                  	</c:otherwise>
                     </c:choose>
-                    </div>
-                    <div class="product__pagination" align="center">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
                     </div>
                 </div>
             </div>

@@ -10,12 +10,6 @@
 		WHERE 
 				SORT NOT IN ('exchange')		
 	</select>
-	<select id="selectListShopTagList" resultType="String">
-		SELECT 
-			TAG
-		FROM
-			SHOP
-	</select>
 	<insert id="insertProduct" parameterType="ShopDTO">
 		INSERT INTO SHOP (
 			PRODUCT_NM,
@@ -28,8 +22,6 @@
 			DELIVERY_METHOD,
 			CONTENT,
 			PRODUCT_FILE,
-			ENROLL_DT,
-			TAG
 		)
 		VALUES (	
 			#{productNm},
@@ -42,8 +34,7 @@
 			#{deliveryMethod},
 			#{content},
 			#{productFile},
-			NOW(),
-			#{tag}
+			NOW()
 		)
 	</insert>
 	
@@ -52,14 +43,6 @@
 			*
 		FROM
 		 	SHOP
-		WHERE
-			SORT = #{sort}
-	</select>
-	<select id="selectListShopTagSortList" resultType="String">
-		SELECT
-			TAG
-		FROM
-			SHOP
 		WHERE
 			SORT = #{sort}
 	</select>

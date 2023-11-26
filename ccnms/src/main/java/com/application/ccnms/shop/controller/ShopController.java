@@ -44,30 +44,10 @@ public class ShopController {
 		ModelAndView mv = new ModelAndView();
 		if (sort == null) {
 			mv.addObject("shopList", shopService.getProductList());
-			List<String> temp = shopService.getShopTagList();
-			String tag="";
-			for (String string : temp) {
-				tag += string;
-			}
-			String[]tagList =  tag.split("#");
-			for (int i = 0; i < tagList.length; i++) {
-				System.out.println("tagList" +tagList[i]);
-			}
-			mv.addObject("tagList", tagList);
 			
 		}
 		else {
 			mv.addObject("shopList", shopService.sortList(sort));
-			List<String> temp = shopService.getShopTagSortList(sort);
-			String tag="";
-			for (String string : temp) {
-				tag += string;
-			}
-			String[]tagList =  tag.split("#");
-			for (int i = 0; i < tagList.length; i++) {
-				System.out.println("tagList" +tagList[i]);
-			}
-			mv.addObject("tagList", tagList);
 		}
 		mv.setViewName("/shop/main");
 		return mv; 
@@ -85,7 +65,7 @@ public class ShopController {
 		Iterator<String> fileList = multipartRequest.getFileNames();
 		String fileName="";
 		while(fileList.hasNext()) {
-			MultipartFile uploadFile = multipartRequest.getFile(fileList.next()); // 하나의 <input type="file">를 반환한다.
+			MultipartFile uploadFile = multipartRequest.getFile(fileList.next());
 			if (!uploadFile.getOriginalFilename().isEmpty()) {
 				SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
 				fileName = fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();
@@ -102,7 +82,6 @@ public class ShopController {
 		shopDTO.setSort(request.getParameter("sort"));
 		shopDTO.setContent(request.getParameter("content"));
 		shopDTO.setProductFile(fileName);
-		shopDTO.setTag(request.getParameter("tag"));
 		System.out.println(shopDTO);
 		shopService.addProduct(shopDTO);
 		

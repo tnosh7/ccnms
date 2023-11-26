@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.common.service.CommonService;
@@ -30,8 +31,8 @@ public class CommonController {
 	@Autowired
 	private CommonService commonService;
 	
-	//private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+//	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	
 	@GetMapping("/")
@@ -90,7 +91,7 @@ public class CommonController {
 	}
 
 	@GetMapping("/updateThumbsUp")
-	public String updateThumbsUp(@RequestParam("diggingId") String diggingId) throws Exception {
+	public @ResponseBody String updateThumbsUp(@RequestParam("diggingId") String diggingId) throws Exception {
 		commonService.upThumbsUp(Long.parseLong(diggingId));
 		String data = Integer.toString(commonService.countThumbsUp(Long.parseLong(diggingId)));
 		return data;

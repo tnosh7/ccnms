@@ -20,7 +20,6 @@ public class ShopDTO {
 	private String productFile;
 	private int qnaCnt;
 	private Date enrollDt;
-	private String tag;
 	private int readCnt;
 	public long getProductCd() {
 		return productCd;
@@ -100,12 +99,6 @@ public class ShopDTO {
 	public void setEnrollDt(Date enrollDt) {
 		this.enrollDt = enrollDt;
 	}
-	public String getTag() {
-		return tag;
-	}
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
 	public int getReadCnt() {
 		return readCnt;
 	}
@@ -117,8 +110,8 @@ public class ShopDTO {
 		return "ShopDTO [productCd=" + productCd + ", productNm=" + productNm + ", writer=" + writer + ", price="
 				+ price + ", discountRate=" + discountRate + ", stock=" + stock + ", sort=" + sort + ", deliveryMethod="
 				+ deliveryMethod + ", deliveryPrice=" + deliveryPrice + ", content=" + content + ", productFile="
-				+ productFile + ", qnaCnt=" + qnaCnt + ", enrollDt=" + enrollDt + ", tag=" + tag + ", readCnt="
-				+ readCnt + "]";
+				+ productFile + ", qnaCnt=" + qnaCnt + ", enrollDt=" + enrollDt + ", readCnt=" + readCnt + "]";
 	}
+	
 	
 }

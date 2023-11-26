@@ -10,6 +10,7 @@ public interface AdminShopService {
 
 	public List<ShopDTO> getShopList() throws Exception;
 	public List<ShopDTO> getSearchShopList(Map<String,Object> searchMap) throws Exception;
+	public void addAdminProduct(ShopDTO shopDTO) throws Exception;
 	public List<Map<String,Object>> getOrderList() throws Exception;
 	public List<Map<String,Object>> getSearchOrderList(Map<String,Object> searchMap) throws Exception;
 	public Map<String,Object> getOrderDetail(Map<String,Object> adminOrderDetailMap) throws Exception;

@@ -24,11 +24,34 @@
 			<if test='searchKey.equals("sort")'>
 				SORT LIKE CONCAT('%',#{searchWord},'%')					
 			</if>
-			<if test='searchKey.equals("tag")'>
-				TAG LIKE CONCAT('%',#{searchWord},'%')		
-			</if>
 	</select>
-	
+	<insert id="insertAdminProduct" parameterType="ShopDTO">
+		INSERT INTO SHOP (
+			PRODUCT_NM,
+			WRITER, 
+			PRICE, 
+			DISCOUNT_RATE,
+			STOCK,
+			SORT,
+			DELIVERY_PRICE,
+			DELIVERY_METHOD,
+			CONTENT,
+			PRODUCT_FILE,
+			ENROLL_DT
+		)
+		VALUES (	
+			#{productNm},
+			#{writer},
+			#{price},
+			#{discountRate},
+			#{stock},
+			#{sort},
+			#{deliveryPrice},
+			#{deliveryMethod},
+			#{content},
+			#{productFile},
+		)
+	</insert>
 	<resultMap type="hashmap" id="adminOrderListMap">
 		<result column="ORDER_CD" 			property="orderCd"/>	
 		<result column="USER_ID" 			property="userId"/>	

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.application.ccnms.admin.dao.AdminDAO;
 import com.application.ccnms.admin.dto.AdminDTO;
@@ -42,7 +43,8 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return null;
 	}
-
+	
+	@Transactional
 	@Override
 	public void addRegisterAdmin(AdminDTO adminDTO) throws Exception {
 		adminDTO.setPasswd(bCryptPasswordEncoder.encode(adminDTO.getPasswd()));;
@@ -79,17 +81,20 @@ public class AdminServiceImpl implements AdminService {
 		logger.info(today + "의 상품 등록수 : " + adminDAO.selectOneTodayShopCnt(today));
 		logger.info(today + "의 판매 등록수 : " + adminDAO.selectOneTodaySaleCnt(today));
 	}
-
+	
+	@Transactional
 	@Override
 	public List<Map<String,Object>> getUserStaticList() throws Exception {
 		return adminDAO.selectListUserStatic();
 	}
-
+	
+	@Transactional
 	@Override
 	public List<DiggingDTO> getNoticeList() throws Exception {
 		return adminDAO.selectListNoticeList();
 	}
-
+	
+	@Transactional
 	@Override
 	public int getMonthOrder() throws Exception {
 		return adminDAO.selectOneMonthOrder();

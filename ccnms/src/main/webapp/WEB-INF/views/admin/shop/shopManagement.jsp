@@ -120,7 +120,6 @@ nav {
                           <option value="productNm">상품 이름</option>
                           <option value="writer">판매자</option>
                           <option value="sort">분류</option>
-                          <option value="tag">태그</option>
                     </select>
                 	</li>
                 	&emsp;
@@ -160,7 +159,6 @@ nav {
 		                        <td ><a href="${contextPath }/shop/shopDetail?productCd=${shopDTO.productCd }">${shopDTO.productNm }</a></td>
 		                        <td><fmt:formatNumber value="${shopDTO.price}"/></td>
 		                        <td><a href="${contextPath }/shop/?sort=${shopDTO.sort }">${shopDTO.sort }</a></td>
-		                        <td>${shopDTO.tag }</td>
 		                        <td>${shopDTO.readCnt}</td>
 		                        <td><fmt:formatDate value="${shopDTO.enrollDt}" pattern="yyyy-MM-dd"/></td>
 	                      	</tr>

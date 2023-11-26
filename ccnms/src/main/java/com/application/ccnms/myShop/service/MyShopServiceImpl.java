@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.application.ccnms.myShop.dao.MyShopDAO;
 import com.application.ccnms.myShop.dto.CartDTO;
@@ -26,6 +27,7 @@ public class MyShopServiceImpl implements MyShopService {
 		if ( myShopDAO.selectOneDuplicatedCart(cartDTO) == null ) return false;
 		else return true;
 	}
+	@Transactional
 	@Override
 	public void addMyCart(CartDTO cartDTO) throws Exception {
 		myShopDAO.insertMyCart(cartDTO);
@@ -47,7 +49,7 @@ public class MyShopServiceImpl implements MyShopService {
 		if (myShopDAO.selectOneDuplicatedKeep(keepDTO) == null) return false;
 		else return true;
 	}
-
+	@Transactional
 	@Override	
 	public void addMyKeep(KeepDTO keepDTO) throws Exception {
 		myShopDAO.insertMyKeep(keepDTO);

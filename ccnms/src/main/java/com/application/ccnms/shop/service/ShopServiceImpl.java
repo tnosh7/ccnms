@@ -27,14 +27,6 @@ public class ShopServiceImpl implements ShopService {
 	}
 	
 	@Override
-	public List<String> getShopTagList() throws Exception {
-		return shopDAO.selectListShopTagList();
-	}
-	@Override
-	public List<String> getShopTagSortList(String sort) throws Exception {
-		return shopDAO.selectListShopTagSortList(sort);
-	}
-	@Override
 	public List<ShopDTO> sortList(String sort) throws Exception {
 		return shopDAO.selectListSortList(sort);
 	}

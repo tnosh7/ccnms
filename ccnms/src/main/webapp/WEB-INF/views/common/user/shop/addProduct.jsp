@@ -88,10 +88,6 @@
 	                  	 	 			<th> <input class="form-control form-control-lg" type="text" id="productNm" name="productNm" maxlength="35" placeholder="상품 이름을 입력하세요." required="required"></th>
 	                  	 	 		</tr>
 	                  	 	 		<tr>
-	                  	 	 			<th>태그</th>
-	                  	 	 			<th><input class="form-control form-control-lg" type="text" id="tag" name="tag" maxlength="8" placeholder="[필수] 태그를 입력하세요. 예)#모두디깅" required="required"></th>
-	                  	 	 		</tr>
-	                  	 	 		<tr>
 	                  	 	 			<th>분류</th>
 	                  	 	 			<c:choose>
 	                  	 	 				<c:when test="${not empty sessionId}">

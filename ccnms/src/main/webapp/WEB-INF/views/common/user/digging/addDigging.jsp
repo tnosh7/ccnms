@@ -140,9 +140,6 @@
 								</script>
 							</li>
 							<li>
-								 <input class="form-control form-control-lg" type="text" id="tag" name="tag" maxlength="9" placeholder="태그 입력(1개)" >
-							</li>
-							<li>
 								<div class="input-group">
     			                    <input type="file" class="form-control" id="uploadfile" name="uploadfile">
                 			        <label class="input-group-text" for="inputGroupFile02" id="uploadFileBtn" name="uploadFile">업로드</label>

@@ -8,9 +8,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-  	a {color:black}
+  	a:link {color:black}
   	a:visited { color:black; }
-	a:hover { color:purple; }   
+	a:hover { color:black; }   
+	a:active {color:purple;}
    h1 { margin: 50px 0px; }
    .headDigging a{
 		font-family: 'Black Han Sans', sans-serif;
@@ -55,9 +56,9 @@
 					"diggingId" : diggingId
 				},
 				success: function(data){
-					$("#updateThumbs").html(data);
+					$("#updateThumbs"+diggingId).html(data);
 				}
-			});
+			})
 		}
 	}
 	function show(){
@@ -170,7 +171,7 @@
 							  	<tr><td colspan="4" align="left">
 								    &emsp;<a href="javascript:updateThumb(${diggingDTO.diggingId })" class="card-link">
 								    	<img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp" />
-								   		<span id="updateThumbs">${diggingDTO.thumbsUp }</span></a>
+								   		<span id="updateThumbs${diggingDTO.diggingId }">${diggingDTO.thumbsUp }</span></a>
 								    &emsp;&emsp;<img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${diggingDTO.replyCnt}
 								    &emsp;&emsp;<img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }
 							   		<input type="hidden" value="${diggingDTO.diggingId }"/>

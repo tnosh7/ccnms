@@ -36,6 +36,18 @@
 	    top: 0; 
 	    left: 0; 
 }
+	.head-wrap {
+		position: relative;
+	}
+	.head-text {
+		padding: 5px 10px;
+		text-align: center;
+		position: absolute;
+		color:white;
+		top: 50%;
+		left: 50%;
+		transform: translate( -50%, -50% );
+	}
 </style>
 <script>
 	var writer= $("#writer").val();
@@ -51,14 +63,6 @@
 				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
 				})
 		});
-		$("#thumbsUp").click(function(){
-			var diggingId = $("#diggingId").val();
-			$.ajax ({
-				url : "${contextPath}/digging/thumbsUp",
-				type : "post",
-				data : {"diggingId" : diggingId}
-			})
-		})	
 		$("#delete").click(function(){
 			Swal.fire({
 				  title: '게시물을 삭제하시겠습니까?',
@@ -78,7 +82,18 @@
 				  })
 			})			
 	});
-
+	function updateThumb(diggingId) {
+		$.ajax({
+			url: "${contextPath}/updateThumbsUp",
+			type:"get",
+			data: {
+				"diggingId" : diggingId
+			},
+			success: function(data){
+				$("#updateThumbs").html(data);
+			}
+		});
+	}
 	function updateLike(writer){
 		var diggingId = $("#diggingId").val();
 		var writer ="";
@@ -116,20 +131,20 @@
 </head>
 <body>
     <!-- Blog Details Section Begin -->
-    <section class="blog-details spad">
         <div class="container">
-            <div class="row">
                 <div class="col-lg-12 col-md-12 order-md-1 order-1">
                     <div class="blog__details__text">
                     	<div>
-	                    	<div class="blog__sidebar__item">
-	                            <h4>#관련 태그</h4>
-	                            <div class="blog__sidebar__item__tags">
-	                            <c:forEach var="tagDTO" items="${tagList }">
-	                                <a href="#">${tagDTO }</a>
-	                            </c:forEach>
-	                            </div>
-	                        </div>
+						   <div class="head-wrap" >
+					            <div class="head-img">
+						   			<img alt="" src="${contextPath}/resources/bootstrap/img/header/${diggingDTO.diggingTopic}.jpg" height="150" width="100%">
+						   			    <div class="col-lg-12 head-text">
+						   			     	<a href="${contextPath }/digging/main?diggingTopic=${diggingDTO.diggingTopic}">
+							   			     <h1 style="color:white">${diggingDTO.diggingTopic}</h1>
+						   			     	</a>
+					                	</div>
+						  		 </div>
+						  	</div>	 
                    			<div class="col-lg-12">
                                <div class="blog__details__author">
                                    <div class="blog__details__author__text">
@@ -153,8 +168,8 @@
 		                            		</c:choose>
 		                            			<td align="right"><i class="fa fa-calendar-o"></i>&emsp;<fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></td>
 		                            		</tr>
-		                            		<tr height="60">
-	                            				<th colspan="3">&emsp;${diggingDTO.subject }</th>
+		                            		<tr height="80">
+	                            				<th colspan="3">제목 : &emsp;<span>${diggingDTO.subject }</span></th>
 		                            		</tr>
 		                            	</thead>
 	                           			<tbody>
@@ -186,20 +201,16 @@
                            			<tfoot>
                            				<tr>
 											<th colspan="2">
-												<span id="thumbsUp">
-												<img src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="30" height="30"/>
-												${diggingDTO.thumbsUp }                        				
-                           						&emsp;<img src="${contextPath }/resources/bootstrap/img/comment.png"/>
-                           					 	${allReplyCnt }
-                           					 	&emsp;<img src="${contextPath }/resources/bootstrap/img/show.png"/> 
-                           					 	${diggingDTO.readCnt }
+												<span>
+													<a href="javascript:updateThumb(${diggingDTO.diggingId })" class="card-link">
+													<img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp"/>
+									    			<span id="updateThumbs">${diggingDTO.thumbsUp }</span></a>
+	                           						&emsp;<img src="${contextPath }/resources/bootstrap/img/comment.png"/>
+	                           					 		${allReplyCnt }
+	                           					 	&emsp;<img src="${contextPath }/resources/bootstrap/img/show.png"/> 
+	                           					 		${diggingDTO.readCnt }
                            					 	</span>
                            					 </th>
-                           				</tr>
-                           				<tr>
-                           					<th colspan="4">	
-                           						<span>TAG &emsp;${diggingDTO.tag }</span>
-                           					</th>
                            				</tr>
                            			</tfoot>
                            			</table>
@@ -292,7 +303,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+            </div>
 </body>
 </html>

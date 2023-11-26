@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -88,9 +89,6 @@ public class DiggingController {
 		mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
 		mv.addObject("populerList", diggingService.getPopulerList(searchMap));
 		mv.addObject("diggingTopic", diggingTopic);
-		List<String> tagList =  diggingService.getTagList(diggingTopic);
-		tagList.remove(null);
-		mv.addObject("tagList", tagList);
 		return mv;
 	}
 	
@@ -130,7 +128,6 @@ public class DiggingController {
 			diggingDTO.setVideoId("");
 		}
 		diggingDTO.setFile(fileName);
-		diggingDTO.setTag(request.getParameter("tag"));
 		diggingService.addDigging(diggingDTO);
 		
 		String jsScript ="<script>";
@@ -147,14 +144,6 @@ public class DiggingController {
 		mv.addObject("diggingDTO", diggingService.getDiggingDetail(diggingId));
 		mv.addObject("allReplyCnt", diggingService.getallReplyCnt(diggingId));
 		mv.addObject("replyList", diggingService.getReplyList(diggingId));
-		List<String> tagList =  diggingService.getTagList(diggingId);
-		tagList.remove(null);
-		System.out.println("==============");
-		System.out.println(tagList);
-		System.out.println(tagList.size());
-		System.out.println("==============");
-		
-		mv.addObject("tagList", tagList);
 		return mv;
 	}
 	@PostMapping("/thumbsUp")

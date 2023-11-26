@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 		orderDAO.insertOrder(orderDTO);
 	
 	}
-
+	@Transactional
 	@Override
 	public void addCartOrder(Map<String, Object> orderListMap) throws Exception {
 		List<OrderDTO> orderList = new ArrayList<OrderDTO>();

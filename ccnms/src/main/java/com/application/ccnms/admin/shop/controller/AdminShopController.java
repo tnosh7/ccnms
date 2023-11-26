@@ -1,11 +1,16 @@
 package com.application.ccnms.admin.shop.controller;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
@@ -20,8 +25,12 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.admin.shop.service.AdminShopService;
@@ -34,6 +43,8 @@ public class AdminShopController {
 	@Autowired
 	private AdminShopService adminShopService;
 	
+	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+//	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@GetMapping("/shopList")
 	public ModelAndView shopManagement(@RequestParam(required =false, value="searchWord")String searchWord, @RequestParam(required =false, value="searchKey")String searchKey) throws Exception{
@@ -54,6 +65,36 @@ public class AdminShopController {
 	@GetMapping("/productAdd")
 	public ModelAndView productAdd() throws Exception {
 		return new ModelAndView("/admin/shop/productAdd");
+	}
+	
+	@PostMapping("/productAdd")
+	public ModelAndView addProduct(MultipartHttpServletRequest multipartRequest, HttpServletRequest request) throws Exception {
+		ShopDTO shopDTO = new ShopDTO();
+		HttpSession session = request.getSession();
+		Iterator<String> fileList = multipartRequest.getFileNames();
+		String fileName="";
+		while(fileList.hasNext()) {
+			MultipartFile uploadFile = multipartRequest.getFile(fileList.next());
+			if (!uploadFile.getOriginalFilename().isEmpty()) {
+				SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+				fileName = fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();
+				uploadFile.transferTo(new File(FILE_REPO_PATH + fileName)); 
+			}
+		}
+		shopDTO.setProductNm(request.getParameter("productNm"));
+		shopDTO.setPrice(Integer.parseInt(request.getParameter("price")));
+		shopDTO.setWriter("ModuDigging");
+		shopDTO.setDiscountRate(Integer.parseInt(request.getParameter("discountRate")));
+		shopDTO.setStock(Integer.parseInt(request.getParameter("stock")));
+		shopDTO.setDeliveryPrice(Integer.parseInt(request.getParameter("deliveryPrice")));
+		shopDTO.setDeliveryMethod(request.getParameter("deliveryMethod"));
+		shopDTO.setSort(request.getParameter("sort"));
+		shopDTO.setContent(request.getParameter("content"));
+		shopDTO.setProductFile(fileName);
+		
+		adminShopService.addAdminProduct(shopDTO);
+		return new ModelAndView("redirect:/admin/shop/shopList");
+		
 	}
 	
 	@GetMapping("/orderList")
@@ -145,11 +186,8 @@ public class AdminShopController {
 	    cell.setCellValue("분류");
 	    cell = row.createCell(8);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue("태그");
-	    cell = row.createCell(9);
-	    cell.setCellStyle(headStyle);
 	    cell.setCellValue("조회수");
-	    cell = row.createCell(10);
+	    cell = row.createCell(9);
 	    cell.setCellStyle(headStyle);
 	    cell.setCellValue("등록일");
 	    
@@ -181,11 +219,8 @@ public class AdminShopController {
 	        cell.setCellValue(shopDTO.getSort());
 	        cell = row.createCell(8);
 	        cell.setCellStyle(bodyStyle);
-	        cell.setCellValue(shopDTO.getTag());
-	        cell = row.createCell(9);
-	        cell.setCellStyle(bodyStyle);
 	        cell.setCellValue(shopDTO.getReadCnt());
-	        cell = row.createCell(10);
+	        cell = row.createCell(9);
 	        cell.setCellStyle(bodyStyle);
 	        cell.setCellValue(enrollTime.format(shopDTO.getEnrollDt()));
 		} 

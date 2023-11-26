@@ -25,6 +25,10 @@ public class AdminShopDAOImpl implements AdminShopDAO {
 		return sqlSession.selectList("adminShop.selectListSearchShop", searchMap);
 	}
 	@Override
+	public void insertAdminProduct(ShopDTO shopDTO) throws Exception {
+		sqlSession.update("adminShop.insertAdminProduct", shopDTO);
+	}
+	@Override
 	public List<Map<String,Object>> selectListOrder() throws Exception {
 		return sqlSession.selectList("adminShop.selectListOrder");
 	}

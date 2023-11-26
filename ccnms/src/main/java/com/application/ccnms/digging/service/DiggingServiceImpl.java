@@ -31,10 +31,6 @@ public class DiggingServiceImpl implements DiggingService {
 	public int getAllDiggingCnt(String diggingTopic) throws Exception{
 		return diggingDAO.selectOneDiggingCnt(diggingTopic);
 	}
-	@Override
-	public List<String> getTagList(String diggingTopic) throws Exception {
-		return diggingDAO.selectListTag(diggingTopic);
-	}
 	
 	@Override
 	public List<UserDTO> getUser(String writer) throws Exception {
@@ -68,6 +64,8 @@ public class DiggingServiceImpl implements DiggingService {
 	public List<DiggingDTO> getRecentList(String diggingTopic) throws Exception {
 		return diggingDAO.selectListRecentList(diggingTopic);
 	}
+	
+	@Transactional
 	@Override
 	public void updateDigging(DiggingDTO diggingDTO) throws Exception {
 		diggingDAO.updateModifyDigging(diggingDTO);
@@ -75,10 +73,6 @@ public class DiggingServiceImpl implements DiggingService {
 	@Override
 	public void removeDigging(long diggingId) throws Exception {
 		diggingDAO.deleteDigging(diggingId);
-	}
-	@Override
-	public List<String> getTagList(long diggingId) throws Exception {
-		return diggingDAO.selectListTagList(diggingId);
 	}
 
 

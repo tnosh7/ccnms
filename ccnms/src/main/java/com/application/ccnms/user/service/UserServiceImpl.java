@@ -149,12 +149,12 @@ public class UserServiceImpl implements UserService {
 		}
 		return result;
 	}
-
+	
 	@Override
 	public void modifyPw(UserDTO userDTO) throws Exception {
 		userDAO.updatePw(userDTO);
 	}
-
+	
 	@Override
 	public void addLikePoint(String writer) throws Exception {
 		userDAO.updateLikePoint(writer);

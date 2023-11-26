@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.application.ccnms.admin.shop.dao.AdminShopDAO;
 import com.application.ccnms.shop.dto.ShopDTO;
@@ -24,6 +25,12 @@ public class AdminShopServiceImpl implements AdminShopService {
 	@Override
 	public List<ShopDTO> getSearchShopList(Map<String, Object> searchMap) throws Exception {
 		return adminShopDAO.selectListSearchShop(searchMap);
+	}
+	
+	@Transactional
+	@Override
+	public void addAdminProduct(ShopDTO shopDTO) throws Exception {
+		adminShopDAO.insertAdminProduct(shopDTO);
 	}
 	@Override
 	public List<Map<String,Object>> getOrderList() throws Exception {

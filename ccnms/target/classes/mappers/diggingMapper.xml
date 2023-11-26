@@ -11,7 +11,6 @@
 			FILE,
 			VIDEO_YN,
 			VIDEO_ID,
-			TAG,
 			ENROLL_DT
 		)
 		VALUES (
@@ -22,7 +21,6 @@
 			#{file},
 			#{videoYn},
 			#{videoId},
-			#{tag},
 			NOW()
 		)	
 	</insert>
@@ -39,7 +37,6 @@
 		<result column="FILE" 			property="file"/>
 		<result column="VIDEO_YN" 		property="videoYn"/>
 		<result column="VIDEO_ID" 		property="videoId"/>
-		<result column="TAG" 			property="tag"/>
 		<result column="PROFILE" 		property="profile"/>
 	</resultMap>
 	<select id="selectListDiggingList" parameterType="hashmap"  resultMap="diggingDetailMap">
@@ -56,7 +53,6 @@
 				D.FILE			AS FILE,
 				D.VIDEO_YN		AS VIDEO_YN,
 				D.VIDEO_ID		AS VIDEO_ID,
-				D.TAG			AS TAG,
 				U.PROFILE		AS PROFILE
 		FROM 
 			DIGGING D
@@ -111,15 +107,6 @@
 		WHERE 
 			USER_ID = (SELECT WRITER FROM DIGGING)
 	</select>
-	<select id="selectListTag" parameterType="String" resultType="String">
-		SELECT
-			TAG
-		FROM	
-			DIGGING
-		WHERE
-			DIGGING_TOPIC = #{diggingTopic} 
-	</select>
-	
 	<select id="selectDiggingDetail" parameterType="long" resultMap="diggingDetailMap">
 		SELECT 
 				D.DIGGING_ID	AS DIGGING_ID,
@@ -134,7 +121,6 @@
 				D.FILE			AS FILE,
 				D.VIDEO_YN		AS VIDEO_YN,
 				D.VIDEO_ID		AS VIDEO_ID,
-				D.TAG			AS TAG,
 				U.PROFILE		AS PROFILE
 		FROM 
 			DIGGING D
@@ -215,19 +201,4 @@
 		WHERE
 			DIGGING_ID = #{diggingId}
 	</delete>
-	<select id="selectListTagList" parameterType="long" resultType="String">
-		SELECT 
-			TAG
-		FROM 
-			DIGGING 
-		WHERE 
-			DIGGING_TOPIC IN (
-				SELECT 
-					DIGGING_TOPIC
-				FROM
-					DIGGING
-				WHERE
-					DIGGING_ID = #{diggingId}
-			)
-	</select>
 </mapper>

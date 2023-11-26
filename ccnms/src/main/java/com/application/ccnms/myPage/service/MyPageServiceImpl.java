@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.application.ccnms.contact.dto.ContactDTO;
 import com.application.ccnms.digging.dto.DiggingDTO;
@@ -22,7 +23,7 @@ public class MyPageServiceImpl implements MyPageService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-
+	@Transactional
 	@Override
 	public void addProfile(UserDTO userDTO) throws Exception {
 		myPageDAO.insertProfile(userDTO);

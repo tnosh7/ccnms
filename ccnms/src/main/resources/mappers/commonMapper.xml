@@ -78,7 +78,7 @@
 	</update>
 	<select id="selectThumbsUp" parameterType="long" resultType="int"> 
 		SELECT
-			COUNT(THUMBS_UP)
+			THUMBS_UP
 		FROM
 			DIGGING
 		WHERE 
@@ -141,8 +141,7 @@
 		WHERE
 				PRODUCT_NM LIKE CONCAT('%',#{search},'%') OR
 				WRITER LIKE CONCAT('%',#{search},'%') OR
-				CONTENT LIKE CONCAT('%',#{search},'%') OR
-				TAG LIKE CONCAT('%',#{search},'%')
+				CONTENT LIKE CONCAT('%',#{search},'%') 
 		ORDER BY 
 				READ_CNT DESC		
 	</select>	
