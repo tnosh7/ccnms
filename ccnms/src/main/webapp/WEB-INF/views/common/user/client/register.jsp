@@ -35,7 +35,7 @@
 				
 				if (passwd != null) {
 				   if (passwd != passwdCheck) {
-					   $("#passwdCheckWarn").html("비밀번호가 다릅니다. 다시 입력해주세요.");
+					   $("#passwdCheckWarn").html(" * 비밀번호가 다릅니다. 다시 입력해주세요.");
 				  	   return;
 				   }
 				   else {
@@ -49,7 +49,7 @@
 			$("#userIdCheck").click(function(){
 				var userId = $("#userId").val();
 				if (userId == "" || userId.length < 5) {
-					$("#userIdCheckWarn").html(" 아이디를 다시 입력해주세요.");
+					$("#userIdCheckWarn").html(" * 아이디를 다시 입력해주세요.");
 					return;
 				}
 				$.ajax ({
@@ -63,7 +63,7 @@
 							validateId = true;
 						}								
 						else {
-							$("#userIdCheckWarn").html("다른 아이디를 입력해주세요.");
+							$("#userIdCheckWarn").html(" * 다른 아이디를 입력해주세요.");
 							validateId = false;
 						}
 					}
@@ -83,11 +83,11 @@
 					return false;
 				}
 				if(passwd.length<8) {
-					 $("#passwdCheckWarn").html("비밀번호는 8글자 이상이어야 합니다.");
+					 $("#passwdCheckWarn").html(" * 비밀번호는 8글자 이상이어야 합니다.");
 					 return false;
 				}
-				var birth = "$('[name=birth]')";
-				var hp = "${userDTO.hp}";
+				var birth = $("#birthDT").val();
+				var hp = $("#hp").val();
 				if(birth.charAt(2) > 1 || birth.charAt(4) > 3) {
 					return false;
 				}
@@ -127,22 +127,29 @@
 	    }).open();
 	}
 	function birthDTWarn(){
-		var birth = "$(#birthDT).val()";
-		var hp = "$(#hp).val()";
+		var birth = $("#birthDT").val();
 		if(birth.charAt(2) > 1 || birth.charAt(4) > 3) {
-			$("#birthDTWarn").html("생일을 올바르게 입력해주세요.");
-			return false;
+			$("#birthDTWarn").html(" * 생일을 올바르게 입력해주세요.");
+			$("#birthDTWarn").css("color", "red");
 		}
 		else if (birth.charAt(2) == 1 && birth.charAt(3) > 2 || birth.charAt(4) == 3  && birth.charAt(5) > 1 ) {
-			$("#birthDTWarn").html("생일을 올바르게 입력해주세요.");
-			return false;
+			$("#birthDTWarn").html(" * 생일을 올바르게 입력해주세요.");
+			$("#birthDTWarn").css("color", "red");
+		}
+		else {
+			$("#birthDTWarn").html("*");
+			$("#birthDTWarn").css("color", "green");
 		}
 	}
 	function hpWarn(){
-		var hp = "$(#hp).val()";
+		var hp = $("#hp").val();
 		if(hp.charAt(0) != 0) {
-			$("#hpWarn").html("생일을 올바르게 입력해주세요.");
-			return false;
+			$("#hpWarn").html(" * 핸드폰 번호를 올바르게 입력해주세요.");
+			$("#birthDTWarn").css("color", "red");
+		}
+		else {
+			$("#hpWarn").html("*");
+			$("#hpWarn").css("color", "green");
 		}
 	}
 	
