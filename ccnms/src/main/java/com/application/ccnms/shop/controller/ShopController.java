@@ -82,7 +82,6 @@ public class ShopController {
 		shopDTO.setSort(request.getParameter("sort"));
 		shopDTO.setContent(request.getParameter("content"));
 		shopDTO.setProductFile(fileName);
-		System.out.println(shopDTO);
 		shopService.addProduct(shopDTO);
 		
 		String jsScript = "<script>";		

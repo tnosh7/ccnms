@@ -22,18 +22,6 @@
 		}
 	}
 	
-	function addQna(productCd){
-		var qna = $('#qna').val();
-		$.ajax({
-			url:"${contextPath}/qna/addQna",
-			type:"get",
-			data: {
-				"productCd" : productCd,
-				"qna" : qna
-			}
-		})
-	}
-	
 	function orderSheet() {
 		var orderQty = $("[name='orderQty']").val();
 		var shopCd = $("[name='productCd']").val();
@@ -147,7 +135,7 @@
                         <a href="javascript:myCart(${shopDTO.productCd })" class="primary-btn" style="background:grey">장바구니</a>
                     </div>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-12" id="info">
                     <div class="product__details__tab">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
@@ -174,12 +162,15 @@
                                     	<input type="button" value="Q&A 작성" onclick="setQna();" >
                                     </div>
                                     <div id="qnaForm" style="display:none">
-				                        <span class="input-group-text">
-				                        	${sessionId}
-				                        	<input type="hidden" id="loginUserId" value="${sessionId}"/>
-				                        </span>
-				                        <textarea class="form-control" aria-label="With textarea" placeholder="질문을 입력해주세요." id="qna" name="qna" maxlength="200"></textarea>
-				                      	<input type='submit' value='작성' onclick="addQna(${shopDTO.productCd});">
+	                                    <form action="${contextPath}/qna/addQna" method="get">
+					                        <span class="input-group-text">
+					                        	${sessionId}
+					                        	<input type="hidden" id="loginUserId" value="${sessionId}"/>
+					                        </span>
+					                        <textarea class="form-control" aria-label="With textarea" placeholder="질문을 입력해주세요." id="qna" name="qna" maxlength="200"></textarea>
+					                      	<input type="hidden" name="productCd" value="${shopDTO.productCd}">
+					                      	<input type='submit' value='작성' onclick="addQna(${shopDTO.productCd});">
+	                                    </form>
                                     </div>
                                     <br>	
                                    <div class="card">
@@ -228,10 +219,15 @@
 							                        <td><fmt:formatDate value="${qnaDTO.enrollDt }" pattern="yyyy-MM-dd"/></td>
 							                      </tr>
 							                      <c:if test="${qnaDTO.qnaYn eq 'Y'}">
-								                      <tr id="reply" style="background-color:lightgrey">
-							                      		<td colspan="4">
-							                      			
-							                      			답변 : ${qnaDTO.qnaReply }
+								                      <tr id="reply" style="background-color:whitesmoke">
+							                      		<td>
+							                      			ㄴ<button type="button" class="btn btn-primary btn-sm">답변</button>
+							                      	 	</td>
+							                      	 	<td>
+							                      			<span>${qnaDTO.qnaReply }</span> 
+							                      	 	</td>
+							                      	 	<td colspan="2">
+							                      	 		판매자
 							                      	 	</td>
 								                      </tr>
 							                      </c:if>

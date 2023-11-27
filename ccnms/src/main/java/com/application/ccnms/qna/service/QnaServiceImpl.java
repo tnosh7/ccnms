@@ -39,8 +39,13 @@ public class QnaServiceImpl implements QnaService {
 		qnaDAO.updateReply(qnaDTO);
 	}
 	@Override
-	public void removeQnaList(int[] removeQnaCd) throws Exception {
-		qnaDAO.deleteQnaList(removeQnaCd);
+	public void removeQnaList(int[] removeQna) throws Exception {
+		qnaDAO.deleteQnaList(removeQna);
+	}
+	@Override
+	public void removeQnaCnt(int[] removeQna) throws Exception {
+		qnaDAO.updateQnaListCnt(removeQna);
+		
 	}
 
 }

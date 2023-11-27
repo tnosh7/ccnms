@@ -97,11 +97,16 @@
                         	<div class="blog__sidebar__item">
                             	<h4><img alt="" src="${contextPath}/resources/bootstrap/img/icon/user.PNG" height="40" width="40"> DIGGING</h4>
 	                            <ul>
-	                                <li><a href="#">전체</a></li>
-	                                <li><a href="#"></a></li>
-	                                <li><a href="#"></a></li>
-	                                <li><a href="#">Life Style (9)</a></li>
-	                                <li><a href="#">Travel (10)</a></li>
+	                            	<c:forEach var="digDTO" items="${digList }">
+	                            		<c:choose>
+	                            			<c:when test="${empty digDTO.dig}">
+	                            				********
+	                            			</c:when>
+	                            		<c:otherwise>
+			                                <li><a href="${contextPath }/digging/main?diggingTopic=${digDTO.diggingTopic }&dig=${digDTO.dig}"> | ${digDTO.dig } </a></li>
+	                            		</c:otherwise>
+	                            		</c:choose>
+	                            	</c:forEach>
 	                            </ul>
                        		 </div>
                             <h4><img alt="" src="${contextPath}/resources/bootstrap/img/hot.png"> 인기 게시물</h4>

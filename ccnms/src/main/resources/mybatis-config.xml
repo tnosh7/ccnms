@@ -17,7 +17,6 @@
 		<typeAlias type="com.application.ccnms.contact.dto.ContactDTO"	alias="ContactDTO"/>
 		<typeAlias type="com.application.ccnms.order.dto.OrderDTO"		alias="OrderDTO"/>
 		<typeAlias type="com.application.ccnms.qna.dto.QnaDTO"			alias="QnaDTO"/>
-	
 	</typeAliases>
 
 

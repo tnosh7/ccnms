@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.admin.digging.service.AdminDiggingService;
 import com.application.ccnms.digging.dto.DiggingDTO;
+import com.application.ccnms.digging.service.DiggingService;
 
 @Controller
 @RequestMapping("/admin/digging")
@@ -31,7 +32,10 @@ public class AdminDiggingController {
 	
 	@Autowired
 	private AdminDiggingService adminDiggingService;
-
+	
+	@Autowired
+	private DiggingService diggingService;
+	
 	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 //	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
@@ -71,11 +75,15 @@ public class AdminDiggingController {
 			diggingDTO.setVideoYn("N");
 			diggingDTO.setVideoId("");
 		}
-			
 		diggingDTO.setWriter("ModuDigging");
+		diggingDTO.setDig(request.getParameter("dig"));
+		System.out.println("=======================");
+		System.out.println(request.getParameter("dig"));
+		System.out.println("=======================");
 		diggingDTO.setFile(fileName);
 		diggingDTO.setEnrollDT(new Date());
 		adminDiggingService.addDigging(diggingDTO);
+		
 		String jsScript ="<script>";
 			   jsScript +="location.href='" + request.getContextPath() + "/'";
 			   jsScript +="</script>";

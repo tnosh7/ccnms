@@ -17,26 +17,34 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	@Autowired
 	private SqlSession sqlSession;
 
-	@Override
-	public void insertDigging(DiggingDTO diggingDTO) throws Exception {
-		sqlSession.insert("digging.insertDigging", diggingDTO);	
-	}
 
 	@Override
 	public List<DiggingDTO> selectListDiggingList(Map<String, Object> searchMap) throws Exception {
 		return sqlSession.selectList("digging.selectListDiggingList", searchMap);
 	}
+	
 	@Override
 	public List<DiggingDTO> selectListPopulerList(Map<String, Object> searchMap) throws Exception {
 		return sqlSession.selectList("digging.selectListPopulerList", searchMap);
 	}
+	
+	@Override
+	public int selectOneDiggingCnt(String diggingTopic) throws Exception {
+		return sqlSession.selectOne("digging.selectOneDiggingCnt", diggingTopic);
+	}
+	
 	@Override
 	public List<UserDTO> selectListUser(String writer) throws Exception {
 		return sqlSession.selectList("digging.selectListUser", writer);
 	}
 	@Override
-	public int selectOneDiggingCnt(String diggingTopic) throws Exception {
-		return sqlSession.selectOne("digging.selectOneDiggingCnt", diggingTopic);
+	public List<DiggingDTO> selectListDigList(String diggingTopic) throws Exception {
+		return sqlSession.selectList("digging.selectListDigList", diggingTopic);
+	}
+
+	@Override
+	public void insertDigging(DiggingDTO diggingDTO) throws Exception {
+		sqlSession.insert("digging.insertDigging", diggingDTO);	
 	}
 	@Override
 	public Map<String,Object> selectDiggingDetail(long diggingId) throws Exception {
@@ -78,6 +86,8 @@ public class DiggingDAOImpl implements DiggingDAO  {
 		sqlSession.delete("digging.deleteDigging", diggingId);
 	}
 
-	
+
+
+
 
 }

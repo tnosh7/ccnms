@@ -24,14 +24,66 @@
 	$().ready(function(){
 		
 		$("form").submit(function(){
-		
 			var diggingTopic= $("[name='diggingTopic']").val();
 			if (diggingTopic == "null") {
 				return false;
 			}
 		})
 	});
-
+	function getDig(){
+		var diggingTopic = $("[name='diggingTopic']").val();
+		console.log("==============");
+		console.log(diggingTopic);
+		console.log("==============");
+		if (diggingTopic == "game") {
+			hideDig();
+			$("#game").show();
+		}
+		else if (diggingTopic =="kPop"){
+			hideDig();
+			$("#kPop").show();
+		}
+		else if (diggingTopic =="ott"){
+			hideDig();
+			$("#ott").show();
+		}
+		else if (diggingTopic =="animal"){
+			hideDig();
+			$("#animal").show();
+		}
+		else if (diggingTopic =="business"){
+			hideDig();
+			$("#business").show();
+		}
+		else if (diggingTopic =="sport"){
+			hideDig();
+			$("#sport").show();
+		}
+		else if (diggingTopic =="celeb"){
+			hideDig();
+			$("#celeb").show();
+		}
+		else if (diggingTopic =="travel"){
+			hideDig();
+			$("#travel").show();
+		}
+		else if (diggingTopic =="fashion"){
+			hideDig();
+			$("#fashion").show();
+		}
+		else hideDig();
+	}
+	function hideDig(){
+		$("#game").hide();
+		$("#kPop").hide();
+		$("#ott").hide();
+		$("#animal").hide();
+		$("#business").hide();
+		$("#sport").hide();
+		$("#celeb").hide();
+		$("#travel").hide();
+		$("#fashion").hide();
+	}
 </script>
 </head>
 <body>
@@ -76,84 +128,166 @@
                      	  글쓰기
                         </button>
                       </li>
-                      <li class="nav-item">
-                        <button
-                          type="button"
-                          class="nav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#navs-top-img"
-                          aria-controls="navs-top-img"
-                          aria-selected="false"
-                          id="imgBnt"
-                          name="imgBnt"
-                        >
-                          지도
-                        </button>
-                      </li>
                     </ul>
                     <div class="tab-content">
                       <div class="tab-pane fade show active" id="navs-top-write" role="tabpanel">
                       <div class="card-body">
-                  	 	<ul >
-	                  	 	<li>
-	                  	 	<div >
-	                  	 		<select name="diggingTopic" >
-			  						<option value="null">[필수] 디깅 토픽 선택</option>
-			  						<option value="game">게임</option>
-			  						<option value="kPop">K-POP</option>
-			  						<option value="ott">OTT</option>
-			  						<option value="animal">동물 & 애완동물</option>
-			  						<option value="business">비즈니스</option>
-			  						<option value="sport">스포츠</option>
-			  						<option value="celeb">연예인</option>
-			  						<option value="travel">여행</option>
-			  						<option value="fashion">패션</option>
-		  						</select>
-	                  	 	</div>
-	                  	 	&emsp;<span id="topicWarn" style="color:red"></span>
-	                  	 	</li>
-	                  	 	<li>
-	                  	 	<div >
-	                  	 		<select name="writer" >
-	                  	 			<option>choose</option>
-			  						<option>${sessionScope.userId }</option>
-		  						</select>
-	                  	 	</div>
-	                  	 	</li>
-	                   		<li class="nav-item">
-	                  	 	 <div class="form-group">
-							  <input class="form-control form-control-lg" type="text" id="subject" name="subject" maxlength="35" placeholder="제목" >
-							</div>
-	                   		</li>
-	                   		<li class="nav-item"><textarea name="content" id="editor" maxlength="2900"></textarea>
-								<script>
-								  ClassicEditor
-								  .create(document.querySelector('#editor'), {
-										ckfinder: {
-											uploadUrl : '/image/upload'
-										}
-									})
-									.then(editor => {
-										console.log('Editor was initialized');
-									})
-								</script>
-							</li>
-							<li>
-								<div class="input-group">
-    			                    <input type="file" class="form-control" id="uploadfile" name="uploadfile">
-                			        <label class="input-group-text" for="inputGroupFile02" id="uploadFileBtn" name="uploadFile">업로드</label>
-                			        <label class="input-group-text" for="inputGroupFile02" id="deleteFile" name="deleteFile">삭제</label>
-                 				</div>
-							</li>
-	                   		<li class="nav-item">	
-	                   		<br>
-	                   		<div class="demo-inline-spacing" align="center">
-                        		<button type="submit" class="btn btn-primary active">작성</button>
-                        		<button type="reset" class="btn btn-primary" onclick="window.location.reload()">새로고침</button>
-                      		</div>
-							</li>
-                   		</ul>
+                      	<table>
+                      		<thead>
+                      			<tr>
+                      				<th>디깅 토픽 : </th>
+                      				<th>
+                    					<select name="diggingTopic" onchange="getDig()">
+					  						<option value="null">[필수]</option>
+					  						<option value="game">게임</option>
+					  						<option value="kPop">K-POP</option>
+					  						<option value="ott">OTT</option>
+					  						<option value="animal">동물 & 애완동물</option>
+					  						<option value="business">비즈니스</option>
+					  						<option value="sport">스포츠</option>
+					  						<option value="celeb">연예인</option>
+					  						<option value="travel">여행</option>
+					  						<option value="fashion">패션</option>
+		  								</select>
+		  								<div id="game" style="display: none">
+			  								<select name="dig">
+			  									<option>LEAGUE_OF_LEGENDS</option>
+			  									<option>CALL_OF_CHAOS_ASSEMBLE</option>
+			  									<option>WOOPAROO_ODYSSEY</option>
+			  									<option>etc</option>
+			  								</select>
+			  							</div>
+			  							<div id="kPop" style="display: none">	
+			  								<select name="dig">
+			  									<option>BTS</option>
+			  									<option>IVE</option>
+			  									<option>NEWJEANS</option>
+			  									<option>AKMU</option>
+			  									<option>etc</option>
+			  								</select>
+		  								</div>
+		  								<div id="ott" style="display: none">
+			  								<select name="dig">
+			  									<option>마이_데몬</option>
+			  									<option>고려_거란_전쟁</option>
+			  									<option>무인도의_디바</option>
+			  									<option>etc</option>
+			  								</select>
+		  								</div>
+		  								<div id="animal" style="display: none">
+			  								<select name="dig">
+			  									<option>PET</option>
+			  									<option>푸바오</option>
+			  									<option>etc</option>
+			  								</select>
+		  								</div>
+		  								<div id="business" style="display: none">
+			  								<select name="dig">
+			  									<option>주식</option>
+			  									<option>부동산</option>
+			  									<option>etc</option>
+			  								</select>
+		  								</div>
+		  								<div id="sport" style="display: none">
+			  								<select name="dig">
+			  									<option>야구</option>
+			  									<option>축구</option>
+			  									<option>배구</option>
+			  									<option>etc</option>
+			  								</select>
+		  								</div>
+		  								<div id="celeb" style="display: none">
+			  								<select name="dig">
+			  									<option>Taylor_Swift</option>
+			  									<option>Sam_Smith</option>
+			  									<option>etc</option>
+			  								</select>
+		  								</div>
+		  								<div id="travel" style="display: none">
+			  								<select name="dig">
+			  									<option>다낭</option>
+			  									<option>타이베이</option>
+			  									<option>유럽</option>
+			  									<option>etc</option>
+			  								</select>
+		  								</div>
+		  								<div id="fashion" style="display: none">
+			  								<select name="dig">
+			  									<option>HEALTH</option>
+			  									<option>HOT_TREND</option>
+			  									<option>BEAUTY</option>
+			  									<option>etc</option>
+			  								</select>
+		  								</div>
+		  								&emsp;<span id="topicWarn" style="color:red"></span>
+                      				</th>
+                      			</tr>
+                      			<tr>
+                      				<td>
+		                      			<div id="game" style="display: none">
+	                      					<select>
+				  									<option>LEAGUE_OF_LEGENDS</option>
+				  									<option>CALL_OF_CHAOS_ASSEMBLE</option>
+				  									<option>WOOPAROO_ODYSSEY</option>
+			  								</select>
+		                      			</div>
+                      				</td>
+                      			</tr>
+                      			<tr>
+                      				<th>작성자 : </th>
+                      				<th>
+                      					<select name="writer" >
+					  						<option>${sessionScope.userId }</option>
+				  						</select>
+                      				</th>
+                      			</tr>
+                      			<tr> 
+                      				<th>제목 : </th>
+                      				<th>
+                      					<div class="form-group">
+										  <input class="form-control form-control-lg" type="text" id="subject" name="subject" maxlength="35" required="required">
+										</div>
+                      				</th>
+                      			</tr>
+                      		</thead>
+                      		<tbody>
+                      			<tr>
+                      				<td colspan="2">
+                      					<textarea name="content" id="editor" maxlength="2900"></textarea>
+											<script>
+											  ClassicEditor
+											  .create(document.querySelector('#editor'), {
+													ckfinder: {
+														uploadUrl : '/image/upload'
+													}
+												})
+												.then(editor => {
+													console.log('Editor was initialized');
+												})
+											</script>
+                      				</td>
+                      			</tr>
+                      		</tbody>
+                      		<tfoot>
+                      			<tr>
+                      				<td colspan="2">
+                      					<div class="input-group">
+	                      					<input type="file" class="form-control" id="uploadfile" name="uploadfile">
+		                			        <label class="input-group-text" for="inputGroupFile02" id="uploadFileBtn" name="uploadFile">업로드</label>
+		                			        <label class="input-group-text" for="inputGroupFile02" id="deleteFile" name="deleteFile">삭제</label>
+                      					</div>
+                      				</td>
+                      			</tr>
+                      			<tr>
+                      				<td colspan="2">
+	                      				<div class="demo-inline-spacing" align="center">
+			                        		<button type="submit" class="btn btn-primary active">작성</button>
+			                        		<button type="reset" class="btn btn-primary" onclick="window.location.reload()">새로고침</button>
+			                      		</div>
+                      				</td>
+                      			</tr>
+                      		</tfoot>
+                      	</table>
                    	</div>
               	 	</div>
                   </div>

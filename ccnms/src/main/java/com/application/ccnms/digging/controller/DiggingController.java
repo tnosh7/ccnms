@@ -43,7 +43,9 @@ public class DiggingController {
 //	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@GetMapping("/main")
-	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic, @RequestParam(required =false, value="sort") String sort)throws Exception {
+	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic, 
+							@RequestParam(required =false, value="sort") String sort, 
+							@RequestParam(required=false,value="dig") String dig) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/digging/main");
 		int onePageViewCnt = 10;
@@ -86,9 +88,13 @@ public class DiggingController {
 		searchMap.put("startDiggingIdx", startDiggingIdx);
 		searchMap.put("sort", sort);
 		searchMap.put("diggingTopic", diggingTopic);
+		searchMap.put("dig", dig);
+		System.out.println("=================================");
+		System.out.println(searchMap);
 		mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
 		mv.addObject("populerList", diggingService.getPopulerList(searchMap));
 		mv.addObject("diggingTopic", diggingTopic);
+		mv.addObject("digList",diggingService.getDigList(diggingTopic));
 		return mv;
 	}
 	
@@ -115,6 +121,7 @@ public class DiggingController {
 		diggingDTO.setSubject(request.getParameter("subject"));
 		diggingDTO.setWriter(String.valueOf(session.getAttribute("userId")));
 		diggingDTO.setContent(request.getParameter("content"));
+		diggingDTO.setDig(request.getParameter("dig"));
 		String content = request.getParameter("content");
 		int idx=  content.indexOf("/embed/");
 		if (idx >= 0) {
@@ -151,6 +158,7 @@ public class DiggingController {
 		return diggingService.upThumbsUp(diggingId);
 		
 	}
+	
 	@GetMapping("/modifyDigging")
 	public ModelAndView modify(@RequestParam("diggingId")long diggingId)throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -179,9 +187,5 @@ public class DiggingController {
 		return jsScript;
 	}
 	
-	@GetMapping("/removeDigging")
-	public @ResponseBody String removeDigging (@RequestParam("diggingId") String diggingId) throws NumberFormatException, Exception {
-		diggingService.removeDigging(Integer.parseInt(diggingId));
-		return "";
-	}
+	
 }		

@@ -27,8 +27,6 @@
 		}
 		else return;
 	}
-
-
 </script>
 </head>
 <body>
@@ -46,6 +44,8 @@
 	        </div>
 	    </div>
 	    <section>
+	     <div class="container">
+            <div class="row">
 		   <div class="col-lg-12">
              <div class="product__details__tab">
                  <ul class="nav nav-tabs" role="tablist">
@@ -87,7 +87,7 @@
 			                         	<c:otherwise>
 			                         		<tr>
                							        <td>
-               							       	 <input type="checkbox" name="qnaCd" value="${myQna.qnaCd}">
+               							       	 <input type="checkbox" name="qnaCd" value="${myQna.productCd}">
                							       </td>
 			                         			<td>
 			                         				<c:if test="${myQna.qnaYn eq 'F'}">
@@ -139,7 +139,9 @@
 				                  <c:choose>
 				                  	<c:when test="${empty qnaList}">
 				                  		<tr>
-				                 			<td colspan="6">등록된 Q&A가 없습니다.</td>
+					                  		<td colspan="6">
+												등록된 Q&A가 없습니다.				                  		
+					                  		</td>
 				                  		</tr>
 				                  	</c:when>
 				                  	<c:otherwise>
@@ -175,14 +177,15 @@
 				                 </c:forEach>
 				                 </tbody>
 				                 </table>
-				                 <br>
-				                 <br>
+				                 <br><br>
 			                 </div>
 		                 </div>
 	                 </div>
                  </div>
                 </div>
                </div>
+              </div>
+              </div>
               </div>
 	    </section>
 </body>

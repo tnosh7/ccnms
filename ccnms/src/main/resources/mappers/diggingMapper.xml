@@ -2,28 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="digging">
-	<insert id="insertDigging">
-		INSERT INTO DIGGING(
-			WRITER,
-			SUBJECT,
-			CONTENT,
-			DIGGING_TOPIC,
-			FILE,
-			VIDEO_YN,
-			VIDEO_ID,
-			ENROLL_DT
-		)
-		VALUES (
-			#{writer},
-			#{subject},
-			#{content},
-			#{diggingTopic},
-			#{file},
-			#{videoYn},
-			#{videoId},
-			NOW()
-		)	
-	</insert>
 	<resultMap type="hashmap" id="diggingDetailMap">
 		<result column="DIGGING_ID"	 	property="diggingId"/>
 		<result column="WRITER" 		property="writer"/>
@@ -37,6 +15,7 @@
 		<result column="FILE" 			property="file"/>
 		<result column="VIDEO_YN" 		property="videoYn"/>
 		<result column="VIDEO_ID" 		property="videoId"/>
+		<result column="DIG" 			property="dig"/>
 		<result column="PROFILE" 		property="profile"/>
 	</resultMap>
 	<select id="selectListDiggingList" parameterType="hashmap"  resultMap="diggingDetailMap">
@@ -53,6 +32,7 @@
 				D.FILE			AS FILE,
 				D.VIDEO_YN		AS VIDEO_YN,
 				D.VIDEO_ID		AS VIDEO_ID,
+				D.DIG 			AS DIG,
 				U.PROFILE		AS PROFILE
 		FROM 
 			DIGGING D
@@ -60,6 +40,9 @@
 				ON D.WRITER = U.USER_ID
 		WHERE 
 			DIGGING_TOPIC = #{diggingTopic} 
+			<if test='!dig.equals("null")'>
+				AND DIG = #{dig}
+			</if>
 		ORDER BY 
 		<if test='sort == "readCnt"'>
 			READ_CNT DESC	
@@ -90,6 +73,7 @@
 			READ_CNT DESC
 		LIMIT 3
 	</select>
+	
 	<select id="selectOneDiggingCnt" parameterType="String" resultType="int">
 		SELECT 
 			COUNT(*)
@@ -107,6 +91,48 @@
 		WHERE 
 			USER_ID = (SELECT WRITER FROM DIGGING)
 	</select>
+	<select id="selectListDigList" parameterType="String" resultType="DiggingDTO">
+		SELECT 
+			DIGGING_TOPIC, DIG
+		FROM
+			DIGGING
+		WHERE
+			DIGGING_TOPIC = #{diggingTopic}
+		GROUP BY 
+			DIG
+	</select>
+	<insert id="insertDigging">
+		INSERT INTO DIGGING(
+			WRITER,
+			SUBJECT,
+			CONTENT,
+			DIGGING_TOPIC,
+			FILE,
+			VIDEO_YN,
+			VIDEO_ID,
+			DIG,
+			ENROLL_DT
+		)
+		VALUES (
+			#{writer},
+			#{subject},
+			#{content},
+			#{diggingTopic},
+			#{file},
+			#{videoYn},
+			#{videoId},
+			#{dig},
+			NOW()
+		)	
+	</insert>
+	<update id="updateDigCnt" parameterType="String">
+		UPDATE 
+			DIG
+		SET 
+			DIG_CNT = DIG_CNT + 1 	
+		WHERE
+			DIG = #{dig}
+	</update>
 	<select id="selectDiggingDetail" parameterType="long" resultMap="diggingDetailMap">
 		SELECT 
 				D.DIGGING_ID	AS DIGGING_ID,

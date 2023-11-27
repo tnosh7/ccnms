@@ -50,6 +50,7 @@
 			#{deliveryMethod},
 			#{content},
 			#{productFile},
+			NOW()
 		)
 	</insert>
 	<resultMap type="hashmap" id="adminOrderListMap">

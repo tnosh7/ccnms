@@ -11,6 +11,6 @@ public interface QnaService {
 	public void addQna(QnaDTO qnaDTO) throws Exception;
 	public void setQnaCnt(long prouductCd) throws Exception;
 	public void updateQnaReply(QnaDTO qnaDTO)throws Exception;
-	public void removeQnaList(int[] removeQnaCd)throws Exception;
-	
+	public void removeQnaList(int[] removeQna)throws Exception;
+	public void removeQnaCnt(int[] removeQna)throws Exception;
 }

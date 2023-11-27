@@ -36,8 +36,12 @@ public class QnaDAOImpl implements QnaDAO {
 		sqlSession.update("qna.updateReply", qnaDTO);
 	}
 	@Override
-	public void deleteQnaList(int[] removeQnaCd) throws Exception {
-		sqlSession.delete("qna.deleteQnaList", removeQnaCd);
+	public void deleteQnaList(int[] removeQna) throws Exception {
+		sqlSession.delete("qna.deleteQnaList", removeQna);
+	}
+	@Override
+	public void updateQnaListCnt(int[] removeQna) throws Exception {
+		sqlSession.update("qna.updateQnaListCnt", removeQna);
 	}
 
 }

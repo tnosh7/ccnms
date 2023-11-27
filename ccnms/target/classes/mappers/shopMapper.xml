@@ -22,6 +22,7 @@
 			DELIVERY_METHOD,
 			CONTENT,
 			PRODUCT_FILE,
+			ENROLL_DT
 		)
 		VALUES (	
 			#{productNm},

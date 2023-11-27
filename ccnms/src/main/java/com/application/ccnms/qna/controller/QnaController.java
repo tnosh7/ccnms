@@ -36,7 +36,7 @@ public class QnaController {
 	}
 	
 	@GetMapping("/addQna")
-	public @ResponseBody String addQna(@RequestParam("productCd") String productCd, @RequestParam("qna") String qna, HttpServletRequest request)  throws Exception{
+	public ModelAndView addQna(@RequestParam("productCd") String productCd, @RequestParam("qna") String qna, HttpServletRequest request)  throws Exception{
 		HttpSession session = request.getSession();
 		QnaDTO qnaDTO = new QnaDTO();
 		qnaDTO.setWriter((String)session.getAttribute("userId"));
@@ -45,20 +45,17 @@ public class QnaController {
 		
 		qnaService.addQna(qnaDTO);
 		qnaService.setQnaCnt(Long.parseLong(productCd));
-		
-		String jsScript = "<script>";
-				jsScript += "history.go(-1)";
-				jsScript +="</script>";
-		return jsScript;
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("shopDTO", shopService.getProductDetail(Long.parseLong(productCd)));
+		mv.addObject("qnaList", shopService.getQnaList(Long.parseLong(productCd)));
+		mv.setViewName("/shop/shopDetail");
+		return mv;
 	}
 	
 	@GetMapping("/replyQna") 
 	public @ResponseBody String replyQna(QnaDTO qnaDTO, HttpServletRequest request) throws Exception {
 		
 		qnaService.updateQnaReply(qnaDTO);
-		System.out.println("====================");
-		System.out.println(qnaDTO);
-		System.out.println("====================");
 		String jsScript = "<script>";
 			   jsScript += "location.href='" + request.getContextPath() + "/qna/qnaList'"; 
 			   jsScript +="</script>";
@@ -68,11 +65,12 @@ public class QnaController {
 	@GetMapping("/removeQna")
 	public ModelAndView removeQna(@RequestParam("removeQnaList") String removeQnaList) throws Exception {
 		String[] temp = removeQnaList.split(",");
-		int[] removeQnaCd = new int[temp.length];
+		int[] removeQna = new int[temp.length];
 		for (int i = 0; i < temp.length; i++) {
-			removeQnaCd[i] = Integer.parseInt(temp[i]);
+			removeQna[i] = Integer.parseInt(temp[i]);
 		}
-		qnaService.removeQnaList(removeQnaCd);
+		qnaService.removeQnaList(removeQna);
+		qnaService.removeQnaCnt(removeQna);
 		return new ModelAndView("redirect:/qna/qnaList");
 	}
 }

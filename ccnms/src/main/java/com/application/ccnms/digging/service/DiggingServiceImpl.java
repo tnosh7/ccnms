@@ -19,13 +19,12 @@ public class DiggingServiceImpl implements DiggingService {
 	private DiggingDAO diggingDAO;
 	
 	@Override
-	@Transactional
-	public void addDigging(DiggingDTO diggingDTO) throws Exception {
-		diggingDAO.insertDigging(diggingDTO);
-	}
-	@Override
 	public List<DiggingDTO> getDiggingList(Map<String, Object> searchMap) throws Exception {
 		return diggingDAO.selectListDiggingList(searchMap);
+	}
+	@Override
+	public List<DiggingDTO> getPopulerList(Map<String, Object> searchMap) throws Exception {
+		return diggingDAO.selectListPopulerList(searchMap);
 	}
 	@Override
 	public int getAllDiggingCnt(String diggingTopic) throws Exception{
@@ -36,9 +35,15 @@ public class DiggingServiceImpl implements DiggingService {
 	public List<UserDTO> getUser(String writer) throws Exception {
 		return diggingDAO.selectListUser(writer);
 	}
+	
 	@Override
-	public List<DiggingDTO> getPopulerList(Map<String, Object> searchMap) throws Exception {
-		return diggingDAO.selectListPopulerList(searchMap);
+	public List<DiggingDTO> getDigList(String diggingTopic) throws Exception {
+		return diggingDAO.selectListDigList(diggingTopic);
+	}
+	@Override
+	@Transactional
+	public void addDigging(DiggingDTO diggingDTO) throws Exception {
+		diggingDAO.insertDigging(diggingDTO);
 	}
 
 	@Override
@@ -64,7 +69,6 @@ public class DiggingServiceImpl implements DiggingService {
 	public List<DiggingDTO> getRecentList(String diggingTopic) throws Exception {
 		return diggingDAO.selectListRecentList(diggingTopic);
 	}
-	
 	@Transactional
 	@Override
 	public void updateDigging(DiggingDTO diggingDTO) throws Exception {
@@ -74,6 +78,5 @@ public class DiggingServiceImpl implements DiggingService {
 	public void removeDigging(long diggingId) throws Exception {
 		diggingDAO.deleteDigging(diggingId);
 	}
-
 
 }

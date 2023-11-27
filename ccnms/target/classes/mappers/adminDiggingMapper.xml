@@ -12,6 +12,7 @@
 			FILE,
 			VIDEO_YN,
 			VIDEO_ID,
+			DIG,
 			ENROLL_DT
 		)
 		VALUES (
@@ -22,6 +23,7 @@
 			#{file},
 			#{videoYn},
 			#{videoId},
+			#{dig},
 			NOW()
 		)	
 	</insert>

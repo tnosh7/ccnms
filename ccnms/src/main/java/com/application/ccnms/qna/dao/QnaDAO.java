@@ -11,6 +11,7 @@ public interface QnaDAO {
 	public void insertQna(QnaDTO qnaDTO) throws Exception;
 	public void updateQnaCnt(long productCd) throws Exception;
 	public void updateReply(QnaDTO qnaDTO) throws Exception;
-	public void deleteQnaList(int[]removeQnaCd) throws Exception;
+	public void deleteQnaList(int[]removeQna) throws Exception;
+	public void updateQnaListCnt(int[]removeQna) throws Exception;
 	
 }

@@ -28,6 +28,8 @@
 					ON Q.PRODUCT_CD = S.PRODUCT_CD 
 		WHERE
 			S.WRITER = #{userId}
+		ORDER BY
+			Q.ENROLL_DT DESC
 	</select>
 	<select id="selectListMyQnaList" parameterType="String" resultType="QnaDTO">
 		SELECT 
@@ -74,9 +76,21 @@
 		DELETE FROM
 			QNA
 		WHERE
-			QNA_CD IN 
+			PRODUCT_CD IN 
 			<foreach collection="array" separator="," item="qnaCd" open="(" close=")">
 				#{qnaCd}
 			</foreach>
 	</delete>
+	<update id="updateQnaListCnt">
+		UPDATE 
+			SHOP
+		SET 
+			QNA_CNT = QNA_CNT - 1 
+		WHERE
+			PRODUCT_CD IN 
+			<foreach collection="array" separator="," item="qnaCd" open="(" close=")">
+				#{qnaCd}
+			</foreach>
+	</update>
+	
 </mapper>
