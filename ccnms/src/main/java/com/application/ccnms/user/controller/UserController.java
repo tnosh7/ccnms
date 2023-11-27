@@ -71,7 +71,7 @@ public class UserController {
 	
 		ModelAndView mv = new ModelAndView();
 		
-		if(userService.loginUser(userDTO) != null) {
+		if(userService.loginUser(userDTO, userDTO.getUserId()) != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userDTO.getUserId());
 			session.setAttribute("role", "user");

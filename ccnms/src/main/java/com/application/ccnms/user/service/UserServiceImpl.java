@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDTO loginUser(UserDTO userDTO) throws Exception {
+	public UserDTO loginUser(UserDTO userDTO, String userId) throws Exception {
 		UserDTO dbUserDTO = userDAO.selectOneLoginUser(userDTO) ;
 		if (dbUserDTO != null) {
 			if (bCryptPasswordEncoder.matches(userDTO.getPasswd(), dbUserDTO.getPasswd())) {
