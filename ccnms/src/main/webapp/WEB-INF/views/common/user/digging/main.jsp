@@ -53,16 +53,25 @@
 	} 
 	
 	function updateThumb(diggingId) {
-		$.ajax({
-			url: "${contextPath}/updateThumbsUp",
-			type:"get",
-			data: {
-				"diggingId" : diggingId
-			},
-			success: function(data){
-				$("#updateThumbs"+diggingId).html(data);
-			}
-		});
+		if ("${sessionId == null}" == "true") {
+			Swal.fire({
+				  icon: 'info',
+				  title: '로그인 후에 이용가능합니다.',
+				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
+				})
+		}
+		else {
+			$.ajax({
+				url: "${contextPath}/updateThumbsUp",
+				type:"get",
+				data: {
+					"diggingId" : diggingId
+				},
+				success: function(data){
+					$("#updateThumbs"+diggingId).html(data);
+				}
+			});
+		}	
 	}
 	function changeSort() {
 		var sort = $("#sort").val();
@@ -97,6 +106,7 @@
                         	<div class="blog__sidebar__item">
                             	<h4><img alt="" src="${contextPath}/resources/bootstrap/img/icon/user.PNG" height="40" width="40"> DIGGING</h4>
 	                            <ul>
+                           			<li><a href="${contextPath }/digging/main?diggingTopic=${diggingTopic }">전체</a></li>
 	                            	<c:forEach var="digDTO" items="${digList }">
 	                            		<c:choose>
 	                            			<c:when test="${empty digDTO.dig}">
@@ -175,7 +185,7 @@
 									  <hr>
 									  <c:choose>
 	                           			<c:when test="${diggingDTO.profile eq null }">
-	                           				<span><img src="${contextPath }/resources/bootstrap/img/person.png"> ${diggingDTO.writer }
+	                           				<span><img src="${contextPath}/resources/bootstrap/img/icon/profile.jpg" width="40" height="40"> ${diggingDTO.writer }
 	                           				</span>
 	                           				<span>&emsp;<i class="fa fa-calendar-o"></i> <fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>
 	                           			</c:when>

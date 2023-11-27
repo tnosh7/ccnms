@@ -135,7 +135,7 @@
                        				<th align="left" colspan="4" style="width:70%">
 	                       				<c:choose>
 	                       					<c:when test="${diggingDTO.profile eq null}">
-	                       						<a href="${contextPath }/ranking/otherUserInfo?userId=${diggingDTO.userId}"><img src="${contextPath}/resources/admin/assets/img/avatars/2.png" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
+	                       						<a href="${contextPath }/ranking/otherUserInfo?userId=${diggingDTO.userId}"><img src="${contextPath}/resources/bootstrap/img/icon/profile.jpg" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
 	                       					</c:when>
 	                       					<c:otherwise>
 			                       				<img src="${contextPath }/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;

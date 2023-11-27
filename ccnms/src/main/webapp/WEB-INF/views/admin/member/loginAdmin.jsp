@@ -132,6 +132,9 @@
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
                 </div>
+                 <c:if test="${menu eq 'miss'}"> 
+              	 	 <span style="color:red"><strong> * 로그인 실패 다시 입력해주세요.</strong></span>
+            	 </c:if>
                 <br>
                 <div class="mb-3">
                   <button class="btn btn-primary d-grid w-100" type="submit">로그인</button>

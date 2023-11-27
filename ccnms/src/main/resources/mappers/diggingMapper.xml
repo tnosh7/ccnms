@@ -40,9 +40,13 @@
 				ON D.WRITER = U.USER_ID
 		WHERE 
 			DIGGING_TOPIC = #{diggingTopic} 
-			<if test='!dig.equals("null")'>
+			<choose>
+				<when test='dig != ""'>
 				AND DIG = #{dig}
-			</if>
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
 		ORDER BY 
 		<if test='sort == "readCnt"'>
 			READ_CNT DESC	

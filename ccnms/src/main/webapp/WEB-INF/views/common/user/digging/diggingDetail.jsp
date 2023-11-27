@@ -83,16 +83,25 @@
 			})			
 	});
 	function updateThumb(diggingId) {
-		$.ajax({
-			url: "${contextPath}/updateThumbsUp",
-			type:"get",
-			data: {
-				"diggingId" : diggingId
-			},
-			success: function(data){
-				$("#updateThumbs").html(data);
-			}
-		});
+		if ("${sessionId == null}" == "true") {
+			Swal.fire({
+				  icon: 'info',
+				  title: '로그인 후에 이용가능합니다.',
+				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
+				})
+		}
+		else {
+			$.ajax({
+				url: "${contextPath}/updateThumbsUp",
+				type:"get",
+				data: {
+					"diggingId" : diggingId
+				},
+				success: function(data){
+					$("#updateThumbs").html(data);
+				}
+			});
+		}
 	}
 	function updateLike(writer){
 		var diggingId = $("#diggingId").val();
@@ -153,7 +162,7 @@
 		                            		<tr height="30">
 		                            		<c:choose>
 		                            			<c:when test="${diggingDTO.profile eq null }">
-		                            				<th><img src="${contextPath }/resources/bootstrap/img/person.png"> ${diggingDTO.writer }
+		                            				<th><img src="${contextPath}/resources/bootstrap/img/icon/profile.jpg"  width="40" height="40"> ${diggingDTO.writer }
 			                            				&emsp;<button type="button" class="btn btn-primary btn-sm" id="writer" onclick="updateLike()">LIKE</button>
 							                            <input type="hidden" name=" writer" value="${diggingDTO.writer }">
 		                            				</th>

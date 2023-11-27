@@ -36,8 +36,8 @@ public class AdminDiggingController {
 	@Autowired
 	private DiggingService diggingService;
 	
-	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-//	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+    //private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@GetMapping("/diggingAdd")
 	public ModelAndView diggingAdd () {
@@ -76,10 +76,8 @@ public class AdminDiggingController {
 			diggingDTO.setVideoId("");
 		}
 		diggingDTO.setWriter("ModuDigging");
-		diggingDTO.setDig(request.getParameter("dig"));
-		System.out.println("=======================");
-		System.out.println(request.getParameter("dig"));
-		System.out.println("=======================");
+		String dig= request.getParameter("diggingTopic");
+		diggingDTO.setDig(request.getParameter(dig));
 		diggingDTO.setFile(fileName);
 		diggingDTO.setEnrollDT(new Date());
 		adminDiggingService.addDigging(diggingDTO);

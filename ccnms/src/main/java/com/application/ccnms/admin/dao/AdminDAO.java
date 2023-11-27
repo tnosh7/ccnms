@@ -16,6 +16,6 @@ public interface AdminDAO {
 	public int selectOneTodaySaleCnt(String today)throws Exception;
 	public List<Map<String,Object>> selectListUserStatic()throws Exception;
 	public List<DiggingDTO> selectListNoticeList()throws Exception;
-	public int selectOneMonthOrder()throws Exception;
+	public Integer selectOneMonthOrder()throws Exception;
 	
 }

@@ -66,7 +66,7 @@
 						   <c:choose>
 						   	<c:when test="${userDTO.profile eq null}">
 						   		<img
-		                         src="${contextPath}/resources/admin/assets/img/avatars/2.png"
+		                         src="${contextPath}/resources/bootstrap/img/icon/profile.jpg"
 		                         alt="user-avatar"
 		                         class="d-block rounded"
 		                         height="100"

@@ -35,13 +35,13 @@ public class AdminServiceImpl implements AdminService {
 	String today = sdf.format(new Date());
 
 	@Override
-	public AdminDTO loginAdmin(AdminDTO adminDTO) throws Exception {
+	public boolean loginAdmin(AdminDTO adminDTO) throws Exception {
 		AdminDTO dbAdminDTO = adminDAO.selectOneLoginAdmin(adminDTO);
-		if(bCryptPasswordEncoder.matches(adminDTO.getPasswd(), dbAdminDTO.getPasswd())) {
-			if (dbAdminDTO.getPasswd() != null)
-			return dbAdminDTO;
+		if (dbAdminDTO != null) {
+			if(bCryptPasswordEncoder.matches(adminDTO.getPasswd(), dbAdminDTO.getPasswd())) 
+				return true;
 		}
-		return null;
+		return false;
 	}
 	
 	@Transactional
@@ -94,9 +94,8 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.selectListNoticeList();
 	}
 	
-	@Transactional
 	@Override
-	public int getMonthOrder() throws Exception {
+	public Integer getMonthOrder() throws Exception {
 		return adminDAO.selectOneMonthOrder();
 	}
 	

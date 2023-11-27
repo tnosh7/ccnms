@@ -31,39 +31,35 @@ public class AdminController {
 		mv.addObject("todaySale", adminService.getSaleCnt());
 		mv.addObject("userStaticList", adminService.getUserStaticList());
 		mv.addObject("noticeList", adminService.getNoticeList());
-		mv.addObject("monthOrder", adminService.getMonthOrder());
-		System.out.println("======================");
-		System.out.println(adminService.getMonthOrder());
-		System.out.println("======================");
+		if ( adminService.getMonthOrder()==null) {
+			mv.addObject("monthOrder", 0);
+		}
+		else {
+			mv.addObject("monthOrder", adminService.getMonthOrder());
+		}
 		mv.setViewName("/admin/main");
 		return mv;
 	}
 	
 	@GetMapping("/loginAdmin")
-	public ModelAndView loginAdmin() throws Exception{
+	public ModelAndView loginAdmin() throws Exception {
 		return new ModelAndView("/admin/loginAdmin");
 	}
 	
 	@PostMapping("/loginAdmin")
-	public @ResponseBody String loginAdmin(HttpServletRequest request, AdminDTO adminDTO) throws Exception { 
-		String jsScript="";
-		
-		if(adminService.loginAdmin(adminDTO) != null) {
+	public ModelAndView loginAdmin(HttpServletRequest request, AdminDTO adminDTO) throws Exception { 
+		ModelAndView mv = new ModelAndView();
+		if(adminService.loginAdmin(adminDTO) == true) {
 			HttpSession session = request.getSession();
 			session.setAttribute("adminId", adminDTO.getAdminId());
 			session.setAttribute("role", "admin");
-			jsScript = "<script>";
-		    jsScript +="alert('login');";
-		    jsScript +="location.href='" + request.getContextPath() + "/admin/main'";
-		    jsScript +="</script>";
+			mv.setViewName("/admin/main");
 		}
 		else {
-			jsScript = "<script>";
-		    jsScript +="history.go(-1);";
-		    jsScript +="</script>";
+			mv.setViewName("/admin/loginAdmin");
+			mv.addObject("menu", "miss");
 		}
-		
-		return jsScript;
+		return mv;
 	}
 	
 	@GetMapping("/logout") 

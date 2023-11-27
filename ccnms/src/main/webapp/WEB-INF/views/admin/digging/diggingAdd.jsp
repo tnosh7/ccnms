@@ -157,7 +157,7 @@
 					  						<option value="fashion">패션</option>
 		  								</select>
 		  								<div id="game" style="display: none">
-			  								<select name="dig">
+			  								<select name="game">
 			  									<option>LEAGUE_OF_LEGENDS</option>
 			  									<option>CALL_OF_CHAOS_ASSEMBLE</option>
 			  									<option>WOOPAROO_ODYSSEY</option>
@@ -165,7 +165,7 @@
 			  								</select>
 			  							</div>
 			  							<div id="kPop" style="display: none">	
-			  								<select name="dig">
+			  								<select name="kPop">
 			  									<option>BTS</option>
 			  									<option>IVE</option>
 			  									<option>NEWJEANS</option>
@@ -174,7 +174,7 @@
 			  								</select>
 		  								</div>
 		  								<div id="ott" style="display: none">
-			  								<select name="dig">
+			  								<select name="ott">
 			  									<option>마이_데몬</option>
 			  									<option>고려_거란_전쟁</option>
 			  									<option>무인도의_디바</option>
@@ -182,21 +182,21 @@
 			  								</select>
 		  								</div>
 		  								<div id="animal" style="display: none">
-			  								<select name="dig">
+			  								<select name="animal">
 			  									<option>PET</option>
 			  									<option>푸바오</option>
 			  									<option>etc</option>
 			  								</select>
 		  								</div>
 		  								<div id="business" style="display: none">
-			  								<select name="dig">
+			  								<select name="business">
 			  									<option>주식</option>
 			  									<option>부동산</option>
 			  									<option>etc</option>
 			  								</select>
 		  								</div>
 		  								<div id="sport" style="display: none">
-			  								<select name="dig">
+			  								<select name="sport">
 			  									<option>야구</option>
 			  									<option>축구</option>
 			  									<option>배구</option>
@@ -204,14 +204,14 @@
 			  								</select>
 		  								</div>
 		  								<div id="celeb" style="display: none">
-			  								<select name="dig">
+			  								<select name="celeb">
 			  									<option>Taylor_Swift</option>
 			  									<option>Sam_Smith</option>
 			  									<option>etc</option>
 			  								</select>
 		  								</div>
 		  								<div id="travel" style="display: none">
-			  								<select name="dig">
+			  								<select name="travel">
 			  									<option>다낭</option>
 			  									<option>타이베이</option>
 			  									<option>유럽</option>
@@ -219,7 +219,7 @@
 			  								</select>
 		  								</div>
 		  								<div id="fashion" style="display: none">
-			  								<select name="dig">
+			  								<select name="fashion">
 			  									<option>HEALTH</option>
 			  									<option>HOT_TREND</option>
 			  									<option>BEAUTY</option>
@@ -228,17 +228,6 @@
 		  								</div>
 		  								&emsp;<span id="topicWarn" style="color:red"></span>
                       				</th>
-                      			</tr>
-                      			<tr>
-                      				<td>
-		                      			<div id="game" style="display: none">
-	                      					<select>
-				  									<option>LEAGUE_OF_LEGENDS</option>
-				  									<option>CALL_OF_CHAOS_ASSEMBLE</option>
-				  									<option>WOOPAROO_ODYSSEY</option>
-			  								</select>
-		                      			</div>
-                      				</td>
                       			</tr>
                       			<tr>
                       				<th>작성자 : </th>

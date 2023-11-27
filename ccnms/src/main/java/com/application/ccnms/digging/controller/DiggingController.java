@@ -39,8 +39,8 @@ public class DiggingController {
 	@Autowired
 	private DiggingService diggingService;
 	
-	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-//	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@GetMapping("/main")
 	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic, 
@@ -88,9 +88,12 @@ public class DiggingController {
 		searchMap.put("startDiggingIdx", startDiggingIdx);
 		searchMap.put("sort", sort);
 		searchMap.put("diggingTopic", diggingTopic);
-		searchMap.put("dig", dig);
-		System.out.println("=================================");
-		System.out.println(searchMap);
+		if (dig != null) {
+			searchMap.put("dig", dig);
+		}
+		else {
+			searchMap.put("dig", "");
+		}
 		mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
 		mv.addObject("populerList", diggingService.getPopulerList(searchMap));
 		mv.addObject("diggingTopic", diggingTopic);
@@ -110,7 +113,7 @@ public class DiggingController {
 		Iterator<String> fileList = multipartRequest.getFileNames();
 		String fileName="";
 		while(fileList.hasNext()) {
-			MultipartFile uploadFile = multipartRequest.getFile(fileList.next()); // 하나의 <input type="file">를 반환한다.
+			MultipartFile uploadFile = multipartRequest.getFile(fileList.next()); 
 			if (!uploadFile.getOriginalFilename().isEmpty()) {
 				SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
 				fileName = fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();
@@ -121,7 +124,10 @@ public class DiggingController {
 		diggingDTO.setSubject(request.getParameter("subject"));
 		diggingDTO.setWriter(String.valueOf(session.getAttribute("userId")));
 		diggingDTO.setContent(request.getParameter("content"));
-		diggingDTO.setDig(request.getParameter("dig"));
+		System.out.println(request.getParameter("diggingTopic"));
+		
+		String dig= request.getParameter("diggingTopic");
+		diggingDTO.setDig(request.getParameter(dig));
 		String content = request.getParameter("content");
 		int idx=  content.indexOf("/embed/");
 		if (idx >= 0) {

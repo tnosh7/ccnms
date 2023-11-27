@@ -139,7 +139,6 @@ nav {
                         <th width=300>상품이름</th>
                         <th>가격</th>
                         <th>분류</th>
-                        <th>태그</th>
                         <th>조회수</th>
                         <th>등록일</th>
                       </tr>
@@ -148,7 +147,7 @@ nav {
                     <c:choose>
 	                    <c:when test="${empty shopList}">
 		                      <tr>
-		                      	<td colspan="12">유저가 없습니다.</td>
+		                      	<td colspan="7">유저가 없습니다.</td>
 		                      </tr>
 		                </c:when>
 	                <c:otherwise>

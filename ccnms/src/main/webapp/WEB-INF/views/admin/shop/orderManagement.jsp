@@ -146,7 +146,7 @@ nav {
                     <c:choose>
 	                    <c:when test="${empty orderList}">
 		                      <tr>
-		                      	<td colspan="12">주문내역이 없습니다.</td>
+		                      	<td colspan="7">주문내역이 없습니다.</td>
 		                      </tr>
 		                </c:when>
 	                <c:otherwise>

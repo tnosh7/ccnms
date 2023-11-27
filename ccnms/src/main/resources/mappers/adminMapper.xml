@@ -89,7 +89,7 @@
 		WHERE
 			DIGGING_TOPIC = 'notice'
 	</select>
-	<select id="selectOneMonthOrder" resultType="int">
+	<select id="selectOneMonthOrder" resultType="Integer">
 		SELECT 
 			SUM(PAYMENT_AMT) AS TOTAL
 		FROM 

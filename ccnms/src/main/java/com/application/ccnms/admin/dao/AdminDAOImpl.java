@@ -61,7 +61,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public int selectOneMonthOrder() throws Exception {
+	public Integer selectOneMonthOrder() throws Exception {
 		return sqlSession.selectOne("admin.selectOneMonthOrder");
 	}
 	
