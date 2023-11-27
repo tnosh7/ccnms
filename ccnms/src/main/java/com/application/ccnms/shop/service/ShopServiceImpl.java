@@ -23,6 +23,16 @@ public class ShopServiceImpl implements ShopService {
 	public List<ShopDTO> getProductList() throws Exception {
 		return shopDAO.selectListProductList() ;
 	}
+	@Override
+	public List<ShopDTO> getLatestList() throws Exception {
+		return shopDAO.selectListLatestList() ;
+	}
+
+	@Override
+	public List<ShopDTO> getSortLatestList(String sort) throws Exception {
+		return shopDAO.selectListSortLatestList(sort);
+	}
+
 	
 	@Override
 	public List<ShopDTO> sortList(String sort) throws Exception {
@@ -44,6 +54,7 @@ public class ShopServiceImpl implements ShopService {
 	public List<QnaDTO> getQnaList(long productCd) throws Exception {
 		return shopDAO.selectListQnaList(productCd);
 	}
+
 
 
 }

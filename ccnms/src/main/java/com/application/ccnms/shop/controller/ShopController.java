@@ -44,10 +44,11 @@ public class ShopController {
 		ModelAndView mv = new ModelAndView();
 		if (sort == null) {
 			mv.addObject("shopList", shopService.getProductList());
-			
+			mv.addObject("latestList", shopService.getLatestList());
 		}
 		else {
 			mv.addObject("shopList", shopService.sortList(sort));
+			mv.addObject("latestList", shopService.getSortLatestList(sort));
 		}
 		mv.setViewName("/shop/main");
 		return mv; 

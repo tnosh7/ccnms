@@ -23,7 +23,6 @@ public class UserDTO {
 	private Date joinDT;
 	private String profile;
 	private int likePoint;
-	private int point;
 	private String emailCheck;
 	private String emailAuthentication;
 	public String getUserId() {
@@ -116,12 +115,6 @@ public class UserDTO {
 	public void setLikePoint(int likePoint) {
 		this.likePoint = likePoint;
 	}
-	public int getPoint() {
-		return point;
-	}
-	public void setPoint(int point) {
-		this.point = point;
-	}
 	public String getEmailCheck() {
 		return emailCheck;
 	}
@@ -139,8 +132,8 @@ public class UserDTO {
 		return "UserDTO [userId=" + userId + ", userNm=" + userNm + ", birthDT=" + birthDT + ", passwd=" + passwd
 				+ ", zipcode=" + zipcode + ", roadAddress=" + roadAddress + ", jibunAddress=" + jibunAddress
 				+ ", namujiAddress=" + namujiAddress + ", sex=" + sex + ", hp=" + hp + ", email=" + email + ", emailYN="
-				+ emailYN + ", joinDT=" + joinDT + ", profile=" + profile + ", likePoint=" + likePoint + ", point="
-				+ point + ", emailCheck=" + emailCheck + ", emailAuthentication=" + emailAuthentication + "]";
+				+ emailYN + ", joinDT=" + joinDT + ", profile=" + profile + ", likePoint=" + likePoint + ", emailCheck="
+				+ emailCheck + ", emailAuthentication=" + emailAuthentication + "]";
 	}
 	
 	

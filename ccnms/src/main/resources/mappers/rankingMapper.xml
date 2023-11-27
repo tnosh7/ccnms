@@ -32,6 +32,8 @@
  			DIGGING
  		WHERE 
  			DIGGING_TOPIC NOT IN ('notice')
+ 			AND 
+ 			DIGGING_TOPIC NOT IN ('ad')
  		GROUP BY 
  			DIGGING_TOPIC
  		ORDER BY

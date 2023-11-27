@@ -31,8 +31,8 @@ public class CommonController {
 	@Autowired
 	private CommonService commonService;
 	
-//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+//	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	
 	@GetMapping("/")
@@ -101,15 +101,17 @@ public class CommonController {
 	@GetMapping("/thumbnails")
 	public void thumbnails(@RequestParam("file") String file, HttpServletResponse response) throws IOException {
 		OutputStream out = response.getOutputStream();
-		File image= new File(FILE_REPO_PATH + file);
-		if (image.exists()) {
-			Thumbnails.of(image).size(1000,1000).outputFormat("png").toOutputStream(out);
-		}
-		byte[] buffer = new byte[1024*8];
+		String filePath = FILE_REPO_PATH + file;
 		
+		File image = new File(filePath);
+		if (image.exists()) { 
+			Thumbnails.of(image).size(800,800).outputFormat("png").toOutputStream(out);
+		}
+		byte[] buffer = new byte[1024 * 8];
 		out.write(buffer);
 		out.close();
 	}
+	
 	
 	@GetMapping("/search")
 	public ModelAndView search (@RequestParam("search") String search) throws Exception {

@@ -116,14 +116,14 @@
                                 <h4>최신 상품</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
-                                    	<c:forEach var="shopDTO" items="${shopList}" begin="0" end="2">
-                                        <a href="#" class="latest-product__item">
+                                    	<c:forEach var="latestDTO" items="${latestList}" begin="0" end="2">
+                                        <a href="${contextPath }/shop/shopDetail?productCd=${latestDTO.productCd }" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="${contextPath}/thumbnails?file=${shopDTO.productFile}" alt="" >
+                                                <img src="${contextPath}/thumbnails?file=${latestDTO.productFile}" alt="" >
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6>${shopDTO.productNm }</h6>
-                                                <span>${shopDTO.price }</span>
+                                                <h6>${latestDTO.productNm }</h6>
+                                                <span>${latestDTO.price }</span>
                                             </div>
                                         </a>
                                     	</c:forEach>

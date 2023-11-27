@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date" />
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -131,10 +132,11 @@
                                     </c:choose>
                                     </div>
                                     <div class="digging__sidebar__populer__text">
-	                                        ${diggingDTO.writer}<span><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd"/></span>
-                                        <a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">
-	                                        <h5>${diggingDTO.subject }</h5>
-                                        </a>
+	                                       <i class="fa fa-calendar-o"></i><fmt:formatDate value="${diggingDTO.enrollDT }" pattern="MM-dd" />
+	                                       <span>&emsp;&emsp;${diggingDTO.writer}</span>
+	                                        <a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">
+		                                        <h5>${diggingDTO.subject }</h5>
+	                                        </a>
                                     </div>
                                 <hr>
                             	</c:forEach>

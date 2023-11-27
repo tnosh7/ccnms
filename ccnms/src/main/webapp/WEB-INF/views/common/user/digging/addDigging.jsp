@@ -232,7 +232,7 @@
                       				<th>제목 : </th>
                       				<th>
                       					<div class="form-group">
-										  <input class="form-control form-control-lg" type="text" id="subject" name="subject" maxlength="35" required="required">
+										  <input class="form-control form-control-lg" type="text" id="subject" name="subject" maxlength="70" required="required">
 										</div>
                       				</th>
                       			</tr>

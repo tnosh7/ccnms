@@ -38,8 +38,8 @@ import net.coobird.thumbnailator.Thumbnails;
 @RequestMapping("/myPage")
 public class MyPageController {
 	
-//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+//	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@Autowired
 	private MyPageService myPageService;
@@ -127,7 +127,6 @@ public class MyPageController {
 		userDTO.setNamujiAddress(multipartRequest.getParameter("namujiAddress"));
 		userDTO.setProfile(fileName);
 		myPageService.getModify(userDTO);
-		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		String jsScript ="<script>";

@@ -49,7 +49,7 @@
 	                                        <h5>&emsp;${i.count }.</h5>&emsp;&emsp;
 	                                      <c:choose>
 	                       					<c:when test="${rankingDTO.profile eq null}">
-	                       						<img src="${contextPath}/resources/admin/assets/img/avatars/2.png" width="40" height="40">
+	                       						<img src="${contextPath}/resources/bootstrap/img/icon/profile.jpg" width="40" height="40">
 	                       					</c:when>
 	                       					<c:otherwise>
 			                       				<img src="${contextPath }/thumbnails?file=${rankingDTO.profile}"  width="40" height="40">
