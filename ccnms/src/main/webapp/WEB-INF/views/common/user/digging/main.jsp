@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="now" class="java.util.Date" />
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="sessionId" value="${sessionScope.userId }"/>
 <!DOCTYPE html>
 <html>
 <head>

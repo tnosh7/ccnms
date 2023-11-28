@@ -70,9 +70,5 @@ public class DiggingServiceImpl implements DiggingService {
 	public void updateDigging(DiggingDTO diggingDTO) throws Exception {
 		diggingDAO.updateModifyDigging(diggingDTO);
 	}
-	@Override
-	public void removeDigging(long diggingId) throws Exception {
-		diggingDAO.deleteDigging(diggingId);
-	}
 
 }

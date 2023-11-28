@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,8 +41,8 @@ public class DiggingController {
 	@Autowired
 	private DiggingService diggingService;
 	
-	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-//	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@GetMapping("/main")
 	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic, 
@@ -94,9 +96,6 @@ public class DiggingController {
 		else {
 			searchMap.put("dig", "");
 		}
-		System.out.println("====================================");
-		System.out.println(diggingTopic);
-		System.out.println("====================================");
 		mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
 		mv.addObject("populerList", diggingService.getPopulerList(searchMap));
 		mv.addObject("diggingTopic", diggingTopic);
@@ -177,7 +176,7 @@ public class DiggingController {
 		return mv;
 	}
 	@PostMapping("/modifyDigging")
-	public @ResponseBody String modifyDigging (DiggingDTO diggingDTO, MultipartHttpServletRequest multipartRequest, HttpServletRequest request) throws Exception{
+	public ModelAndView modifyDigging (DiggingDTO diggingDTO, MultipartHttpServletRequest multipartRequest, HttpServletRequest request) throws Exception{
 		Iterator<String> fileList = multipartRequest.getFileNames();
 		String fileName="";
 		while(fileList.hasNext()) {
@@ -190,11 +189,13 @@ public class DiggingController {
 		}
 		diggingDTO.setFile(fileName);
 		diggingService.updateDigging(diggingDTO); 
-		String jsScript="<script>";
-			   jsScript+="history.go(-2)";
-			   jsScript+="</script>";
-		return jsScript;
+		diggingService.getDiggingDetail(diggingDTO.getDiggingId());
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/digging/diggingDetail");
+		mv.addObject("diggingDTO", diggingService.getDiggingDetail(diggingDTO.getDiggingId()));
+		mv.addObject("allReplyCnt", diggingService.getallReplyCnt(diggingDTO.getDiggingId()));
+		mv.addObject("replyList", diggingService.getReplyList(diggingDTO.getDiggingId()));
+		return mv;
 	}
-	
 	
 }		

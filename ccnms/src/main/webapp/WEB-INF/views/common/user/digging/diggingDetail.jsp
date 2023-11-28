@@ -67,24 +67,6 @@
 				  footer: '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
 				})
 		});
-		$("#delete").click(function(){
-			Swal.fire({
-				  title: '게시물을 삭제하시겠습니까?',
-				  showCancelButton: true,
-				  confirmButtonText: '삭제',
-				}).then((result) => {
-					if (result.isConfirmed) {
-						$.ajax({
-							type:"get",
-							url:"${contextPath}/digging/removeDigging?diggingId=${diggingDTO.diggingId}",
-							success:function(data) {
-						    	Swal.fire('삭제완료!', '', 'success')
-						    	history.go(-1)
-							}
-						})
-				  	} 
-				  })
-			})			
 	});
 	function updateThumb(diggingId) {
 		if ("${sessionId == null}" == "true") {
@@ -232,25 +214,20 @@
                                    </div>
                                </div>
                            </div>
-                           <c:choose>
-	                           	<c:when test="${diggingDTO.writer eq sessionId }">
-									<span>
-										<span id='modify'>
-											<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
-											<input type="button" id="delete" value="삭제" >
-										</span>
+                           	<c:if test="${diggingDTO.writer eq sessionId }">
+								<span>
+									<span id='modify'>
+										<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
 									</span>
-	                           	</c:when>
-	                           	<c:when test="${adminId != null}">
-	                        		<span>
-										<span id='modify'>
-											<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
-										</span>
+								</span>
+                           	</c:if>
+                           	<c:if test="${adminId != null}">
+                        		<span>
+									<span id='modify'>
+										<a href="${contextPath }/digging/modifyDigging?diggingId=${diggingDTO.diggingId}"><input type="button" value="수정"></a>
 									</span>
-	                           	</c:when>
-                           	<c:otherwise>
-                           	</c:otherwise>
-                           </c:choose>
+								</span>
+                           	</c:if>
 					 	<hr>
 						<div align="center" >
 								<div class="reply-body" style="background:whitesmoke">

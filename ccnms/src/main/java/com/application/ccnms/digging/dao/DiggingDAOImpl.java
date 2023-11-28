@@ -76,11 +76,6 @@ public class DiggingDAOImpl implements DiggingDAO  {
 		sqlSession.update("digging.updateModifyDigging", diggingDTO);
 	}
 
-	@Override
-	public void deleteDigging(long diggingId) throws Exception {
-		sqlSession.delete("digging.deleteDigging", diggingId);
-	}
-
 
 
 

@@ -20,6 +20,5 @@ public interface DiggingDAO {
 	public int selectOneAllReplyCnt(long diggingId)throws Exception ;
 	public List<ReplyDTO> selectListReplyList(long diggingId)throws Exception ;
 	public void updateModifyDigging(DiggingDTO diggingDTO) throws Exception ;
-	public void deleteDigging(long diggingId) throws Exception ;
 
 }

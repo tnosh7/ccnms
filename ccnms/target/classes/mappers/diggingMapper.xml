@@ -213,10 +213,4 @@
 		WHERE 
 			DIGGING_ID = #{diggingId}			
 	</update>
-	<delete id="deleteDigging" parameterType="long">
-		DELETE FROM 
-				DIGGING
-		WHERE
-			DIGGING_ID = #{diggingId}
-	</delete>
 </mapper>
