@@ -71,13 +71,13 @@ public class MyPageController {
 	public ModelAndView authenticationUser(HttpServletRequest request, @RequestParam("menu")String menu, @ModelAttribute UserDTO userDTO) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
-		if (myPageService.checkAuthenticationUser(userDTO)) {
+		if (myPageService.checkAuthenticationUser(userDTO)!= false) {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userDTO.getUserId());
 			session.setAttribute("role", "user");
 
 			if(menu.equals("update")) {
-				mv.setViewName("/myPage/modifyMyPage");
+				mv.setViewName("redirect:/myPage/modifyMyPage");
 			}
 			else if (menu.equals("delete")) {
 				myPageService.removeUser(userDTO);
@@ -86,7 +86,10 @@ public class MyPageController {
 			}
 		}
 		else {
-			mv.setViewName("/myPage/main");
+			mv.addObject("userid", userDTO.getUserId());
+			mv.addObject("menu", "update");
+			mv.addObject("result", "fail");
+			mv.setViewName("/myPage/authenticationUser");
 		}
 		return mv;
 	}
@@ -102,7 +105,7 @@ public class MyPageController {
 	}
 	
 	@PostMapping("modifyMyPage") 
-	public ResponseEntity<Object> modifyMyPage(HttpServletRequest request, MultipartHttpServletRequest multipartRequest ) throws Exception {
+	public ModelAndView modifyMyPage(HttpServletRequest request, MultipartHttpServletRequest multipartRequest ) throws Exception {
 		
 		Iterator<String> fileList = multipartRequest.getFileNames();
 		String fileName= "";
@@ -127,12 +130,7 @@ public class MyPageController {
 		userDTO.setNamujiAddress(multipartRequest.getParameter("namujiAddress"));
 		userDTO.setProfile(fileName);
 		myPageService.getModify(userDTO);
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		String jsScript ="<script>";
-			   jsScript +="location.href='" + request.getContextPath() + "/myPage/main'" ;
-			   jsScript +="</script>";
-		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
+		return new ModelAndView("redirect:/myPage/main");
 	}
 	
 	@GetMapping("/myLog") 

@@ -74,7 +74,7 @@
                         <div class="blog__sidebar__item">
                             <h4>고객센터</h4>
                              <ul>
-                                <li><a href="${contextPath }//myPage/myContact"> 문의메시지</a></li>
+                                <li><a href="${contextPath }/myPage/myContact"> 문의메시지</a></li>
                                   <li><a href="${contextPath }/myPage/authenticationUser?userId=${sessionId}&menu=delete"> 탈퇴</a></li>
                             </ul>
                         </div>

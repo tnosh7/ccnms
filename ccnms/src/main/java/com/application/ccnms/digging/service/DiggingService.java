@@ -18,7 +18,6 @@ public interface DiggingService {
 	public int upThumbsUp(long diggingId)throws Exception;	
 	public int getallReplyCnt(long diggingId)throws Exception;	 
 	public List<ReplyDTO> getReplyList(long diggingId)throws Exception;	 
-	public List<DiggingDTO> getRecentList(String diggingTopic) throws Exception;	 
 	public void updateDigging(DiggingDTO diggingDTO) throws Exception;	 
 	public void removeDigging(long diggingId)throws Exception;	
 }

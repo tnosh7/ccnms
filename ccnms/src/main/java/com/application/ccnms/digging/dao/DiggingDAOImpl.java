@@ -72,11 +72,6 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	}
 
 	@Override
-	public List<DiggingDTO> selectListRecentList(String diggingTopic) throws Exception {
-		return sqlSession.selectList("digging.selectListRecentList", diggingTopic);
-	}
-
-	@Override
 	public void updateModifyDigging(DiggingDTO diggingDTO) throws Exception {
 		sqlSession.update("digging.updateModifyDigging", diggingDTO);
 	}

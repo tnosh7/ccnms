@@ -10,6 +10,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	a:link {color:black}
+  	a:visited { color:black; }
+	a:hover { color:black; }   
+	a:active {color:purple;}
 	  table {
 	    width: 100%;
 	    height:100%;

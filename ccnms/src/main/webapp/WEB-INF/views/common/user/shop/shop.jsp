@@ -70,12 +70,10 @@
 			})
 		}
 	}
-	
 	function bestSort() {
 		var bestSort = $("[name='bestSort']").val();
 		location.href= "${contextPath}/shop/bestSort?bestSort="+bestSort ;
 	}
-
 </script>
 </head>
 <body>
@@ -95,22 +93,7 @@
 	                            <li><a href="${contextPath }/shop/?sort=exchange"><img alt="교환마켓에러" src="${contextPath }/resources/bootstrap/img/horizontal.png"><strong>&emsp;교환마켓</strong></a></li>
                             </ul>
                         </div>
-                        <div class="sidebar__item">
-                            <h4>가격</h4>
-                            <div class="price-range-wrap">
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="10" data-max="540">
-                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;"></span>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 58.4906%;"></span>
-                                <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 58.4906%;"></div></div>
-                                <div class="range-slider">
-                                    <div class="price-input">
-                                        <input type="text" id="minamount">
-                                        <input type="text" id="maxamount">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <hr>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
                                 <h4>최신 상품</h4>
@@ -118,12 +101,10 @@
                                     <div class="latest-prdouct__slider__item">
                                     	<c:forEach var="latestDTO" items="${latestList}" begin="0" end="2">
                                         <a href="${contextPath }/shop/shopDetail?productCd=${latestDTO.productCd }" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="${contextPath}/thumbnails?file=${latestDTO.productFile}" alt="" >
-                                            </div>
                                             <div class="latest-product__item__text">
-                                                <h6>${latestDTO.productNm }</h6>
-                                                <span>${latestDTO.price }</span>
+                                                <h6>[ ${latestDTO.writer} ] l${latestDTO.productNm }</h6>
+                                                <span style="text-decoration: line-through; color: red">${latestDTO.price }</span>
+                                                 <span><fmt:formatNumber value="${latestDTO.price - latestDTO.price * latestDTO.discountRate / 100}"/>원</span>	
                                             </div>
                                         </a>
                                     	</c:forEach>
@@ -150,12 +131,6 @@
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
                                     <h6><span></span> 베스트 상품</h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-3">
-                                <div class="filter__option">
-                                    <span class="icon_grid-2x2"></span>
-                                    <span class="icon_ul"></span>
                                 </div>
                             </div>
                         </div>

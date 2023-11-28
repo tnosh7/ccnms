@@ -22,31 +22,6 @@
 			}
 		})
 	});
-	function execDaumPostcode() {
-	    new daum.Postcode({
-	        oncomplete: function(data) {
-	
-	            var fullRoadAddr = data.roadAddress; 
-	            var extraRoadAddr = ''; 	
-	            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-	                extraRoadAddr += data.bname;
-	            }
-	            if (data.buildingName !== '' && data.apartment === 'Y'){
-	               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	            }
-	            if (extraRoadAddr !== ''){
-	                extraRoadAddr = ' (' + extraRoadAddr + ')';
-	            }
-	            if (fullRoadAddr !== ''){
-	                fullRoadAddr += extraRoadAddr;
-	            }
-	
-	            document.getElementById('zipcode').value = data.zonecode; 
-	            document.getElementById('roadAddress').value = fullRoadAddr;
-	            document.getElementById('jibunAddress').value = data.jibunAddress;
-	        }
-	    }).open();
-	}
 </script>
 </head>
 <body>
@@ -82,7 +57,7 @@
                         <div class="blog__sidebar__item">
                             <h4>고객센터</h4>
                              <ul>
-                                <li><a href="#"> 문의메시지</a></li>
+                                <li><a href="${contextPath }/myPage/myContact"> 문의메시지</a></li>
                                   <li><a href="${contextPath }/myPage/authenticationUser?userId=${userDTO.userId }&menu=delete"> 탈퇴</a></li>
                             </ul>
                         </div>
@@ -94,12 +69,12 @@
 	                   <h5 class="card-header">${userDTO.userNm } 님</h5>
 	                   <!-- Account -->
 	                   
-	                   <div class="card-body">
+	                <div class="card-body">
 	                     <div class="d-flex align-items-start align-items-sm-center gap-4">
 						   <c:choose>
 						   	<c:when test="${userDTO.profile eq null}">
 						   		<img
-		                         src="${contextPath}/resources/bootstrap/img/icon/profile.jpg"
+		                         src="${contextPath}/resources/admin/assets/img/avatars/2.png"
 		                         alt="user-avatar"
 		                         class="d-block rounded"
 		                         height="100"
@@ -110,7 +85,7 @@
 						   	</c:when>
 						   	<c:otherwise>
 						   		<img
-		                         src="${contextPath }/thumbnails?file=${userDTO.profile }"
+		                         src="${contextPath }/admin/management/thumbnails?fileName=${userDTO.profile }"
 		                         alt="user-avatar"
 		                         class="d-block rounded"
 		                         height="100"
@@ -150,7 +125,6 @@
 	                             class="form-control"
 	                             type="text"
 	                             id="userId"
-	                             name="userId"
 	                             value="${userDTO.userId }"
 	                             autofocus
 	                             disabled
@@ -224,6 +198,7 @@
 	                   		 	<div class="form-check form-switch">
 						      </div>
            					 <div align="center">
+           					 <input type="hidden" name="userId" value="${userDTO.userId }">
 	                         <button type="submit" class="btn btn-primary me-2" onclick="location.href='${contextPath }/myPage/modifyMyPage'">&emsp;수정&emsp;</button>
          				</div>
        				</div>

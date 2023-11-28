@@ -40,11 +40,6 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public void updateUserPoint(Map<String, Object> orderMap) throws Exception {
-		sqlSession.update("order.updateUserPoint", orderMap);
-	}
-
-	@Override
 	public void insertOrder(OrderDTO orderDTO) throws Exception {
 		sqlSession.insert("order.insertOrder", orderDTO);
 	}

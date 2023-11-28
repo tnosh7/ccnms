@@ -117,9 +117,9 @@
                     	<ul> 
 	                   		<li> 게시물 보기
 								<select id="onePageViewCnt" onchange="getDiggingList()" >
-									<option value="5">5</option>
-									<option value="7">7</option>
 									<option value="10">10</option>
+									<option value="7">7</option>
+									<option value="5">5</option>
 								</select>
 	                   		</li>
                     	</ul>
@@ -149,7 +149,7 @@
                        				<th align="right">${diggingDTO.enrollDT }</th>
                        			</tr>
                       		</thead>
-                            <tbody style="height:50">
+                            <tbody style="height:40">
                                 <tr>
                                 	<th align="left">
                                			<c:set var="startDiggingIdx" value="${startDiggingIdx = startDiggingIdx + 1 }"/>
@@ -161,7 +161,7 @@
 	                                   	</c:when>
 	                                   	<c:otherwise>
 		                                   <td class="shoping__cart__item">
-		                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}" width="250" height="200" alt="ㅇㅇㅇㅇ" >
+		                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}" width="200" height="150" alt="ㅇㅇㅇㅇ" >
 		                                   </td>
 	                                   	</c:otherwise>
 	                                   </c:choose>
@@ -270,7 +270,7 @@
                      		<tr>
                      			<td>
                      				${i.count }.&ensp;	
-                     				<img src="${contextPath }/thumbnails?file=${exchangeShopDTO.productFile}" alt=""  width="40" height="60">
+                     				<img src="${contextPath }/thumbnails?file=${exchangeShopDTO.productFile}" alt=""  width="30" height="60">
                    				</td>
                      			<td>
                      				<a href="${contextPath }/shop/shopDetail?productCd=${exchangeShopDTO.productCd }" class="latest-product__item">

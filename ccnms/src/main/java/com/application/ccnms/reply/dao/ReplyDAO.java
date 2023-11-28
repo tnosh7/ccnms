@@ -7,4 +7,5 @@ public interface ReplyDAO {
 	public void insertReply(ReplyDTO replyDTO)throws Exception;
 	public void updateReplyCnt(long diggingId) throws Exception;
 	public void deleteReply(long replyId) throws Exception;
+	public void deleteReplyCnt(long replyId) throws Exception;
 }

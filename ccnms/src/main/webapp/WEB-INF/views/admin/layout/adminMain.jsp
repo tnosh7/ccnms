@@ -159,7 +159,7 @@
 											</a>
 										</td>
 										<td>
-											<fmt:formatDate value="${diggingDTO.enrollDT}" pattern="yyyy-MM-dd"/>
+											<fmt:formatDate value="${diggingDTO.enrollDT}" pattern="MM-dd"/>
 										</td>
 									</tr>                        		
                         		</c:forEach>

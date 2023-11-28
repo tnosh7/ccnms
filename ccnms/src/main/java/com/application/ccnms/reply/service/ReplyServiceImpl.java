@@ -32,5 +32,6 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public void removeReply(long replyId) throws Exception {
 		replyDAO.deleteReply(replyId);
+		replyDAO.deleteReplyCnt(replyId);
 	}
 }

@@ -40,4 +40,19 @@
 		WHERE
 			REPLY_ID = #{replyId}
 	</delete>
+	<update id="deleteReplyCnt" parameterType="long">
+		UPDATE 
+			DIGGING
+		SET
+			REPLY_CNT = REPLY_CNT - 1 
+		WHERE
+			DIGGING_ID = (
+					SELECT
+						DIGGING_ID
+					FROM
+						REPLY
+					WHERE
+						REPLY_ID = #{replyId}
+			 )	
+	</update>
 </mapper>

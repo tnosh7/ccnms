@@ -31,5 +31,10 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public void deleteReply(long replyId) throws Exception {
 		sqlSession.delete("reply.deleteReply", replyId);
 	}
+
+	@Override
+	public void deleteReplyCnt(long replyId) {
+		sqlSession.update("reply.deleteReplyCnt", replyId);
+	}
 	
 }

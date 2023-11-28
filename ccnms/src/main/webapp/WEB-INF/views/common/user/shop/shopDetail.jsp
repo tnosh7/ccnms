@@ -21,9 +21,15 @@
 			$("#qnaForm").show();	
 		}
 	}
-	
 	function orderSheet() {
 		var orderQty = $("[name='orderQty']").val();
+		if (orderQty == 0) {
+			Swal.fire({
+				  icon: 'info',
+				  title: '주문 수량이 없습니다.',
+			})	  
+			return false;
+		}
 		var shopCd = $("[name='productCd']").val();
 		location.href="${contextPath }/order/orderSheet?shopCd=" + shopCd + "&orderQty=" + orderQty;
 	}

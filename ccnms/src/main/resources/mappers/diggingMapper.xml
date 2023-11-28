@@ -193,18 +193,6 @@
 			DIGGING_ID = #{diggingId}
 	</select>
 
-	<select id="selectListRecentList" parameterType="String" resultType="DiggingDTO">
-		SELECT 
-			*
-		FROM 
-			DIGGING
-		WHERE
-			DIGGING_TOPIC = #{diggingTopic}
-		ORDER BY
-		 	ENROLL_DT DESC
-		LIMIT 3
-	</select>
-	
 	<update id="updateModifyDigging" parameterType="DiggingDTO">
 		UPDATE 
 			DIGGING

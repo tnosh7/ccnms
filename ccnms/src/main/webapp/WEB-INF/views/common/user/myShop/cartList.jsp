@@ -96,7 +96,6 @@
 			var cartCd = $(this).val();
 			var productCd = $("#productCd" + cartCd).val();
 			var cartQty = $("#cartQty" + cartCd).val();
-						
 			cartCdList    += cartCd + ",";
 			productCdList += productCd + ",";
 			cartQtyList   += cartQty + ",";

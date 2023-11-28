@@ -13,31 +13,6 @@
 		$("#deliveryInfo").hide();
 		$("#newDelivery").show();
 	}
-	function execDaumPostcode() {
-	    new daum.Postcode({
-	        oncomplete: function(data) {
-	
-	            var fullRoadAddr = data.roadAddress; 
-	            var extraRoadAddr = ''; 	
-	            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-	                extraRoadAddr += data.bname;
-	            }
-	            if (data.buildingName !== '' && data.apartment === 'Y'){
-	               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	            }
-	            if (extraRoadAddr !== ''){
-	                extraRoadAddr = ' (' + extraRoadAddr + ')';
-	            }
-	            if (fullRoadAddr !== ''){
-	                fullRoadAddr += extraRoadAddr;
-	            }
-	
-	            document.getElementById('zipcode').value = data.zonecode; 
-	            document.getElementById('roadAddress').value = fullRoadAddr;
-	            document.getElementById('jibunAddress').value = data.jibunAddress;
-	        }
-	    }).open();
-	}
 	function setPayMethod(){
 		var method = $("[name='payMethod']").val();
 		if (method == 'card') {
@@ -181,22 +156,20 @@
 	                                    <div class="checkout__input">
 	                                       <p> 은행 <span>*</span></p>
 			                                <select name="accountCompanyNm">
-												<option value="삼성">삼성</option>
-												<option value="하나SK">하나SK</option>
-												<option value="현대">현대</option>
-												<option value="KB">KB</option>
+												<option value="하나">하나</option>
+												<option value="국민">국민</option>
+												<option value="우리">우리</option>
+												<option value="카카오">카카오</option>
 												<option value="신한">신한</option>
-												<option value="롯데">롯데</option>
-												<option value="BC">BC</option>
-												<option value="시티">시티</option>
-												<option value="NH농협">NH농협</option>
+												<option value="농협">농협</option>
+												<option value="기업">기업</option>
 										   </select>
 	                               		</div>
 	                                </div>
 	                                  <div id="account" class="col-lg-6 col-md-6 col-sm-6" style="display: none">
 		                                <div class="checkout__input">
 		                                     <p>계좌번호 <span>*</span></p>
-	                                    <input type="text" name="account" placeholder="계좌번호를 입력하세요.">
+	                                    <input type="text" name="account" placeholder="계좌번호를 입력하세요(숫자만 입력)">
 		                                </div>
 	                            	</div>
 	                              <div id="payOrdererHp" class="col-lg-6 col-md-6 col-sm-6" style="display: none">

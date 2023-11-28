@@ -65,10 +65,6 @@ public class DiggingServiceImpl implements DiggingService {
 	public List<ReplyDTO> getReplyList(long diggingId) throws Exception {
 		return diggingDAO.selectListReplyList(diggingId);
 	}
-	@Override
-	public List<DiggingDTO> getRecentList(String diggingTopic) throws Exception {
-		return diggingDAO.selectListRecentList(diggingTopic);
-	}
 	@Transactional
 	@Override
 	public void updateDigging(DiggingDTO diggingDTO) throws Exception {

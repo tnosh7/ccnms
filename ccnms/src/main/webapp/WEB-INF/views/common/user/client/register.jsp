@@ -99,33 +99,7 @@
 				}
 			})
 		});	
-			
 		
-	function execDaumPostcode() {
-	    new daum.Postcode({
-	        oncomplete: function(data) {
-	
-	            var fullRoadAddr = data.roadAddress; 
-	            var extraRoadAddr = ''; 	
-	            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-	                extraRoadAddr += data.bname;
-	            }
-	            if (data.buildingName !== '' && data.apartment === 'Y'){
-	               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	            }
-	            if (extraRoadAddr !== ''){
-	                extraRoadAddr = ' (' + extraRoadAddr + ')';
-	            }
-	            if (fullRoadAddr !== ''){
-	                fullRoadAddr += extraRoadAddr;
-	            }
-	
-	            document.getElementById('zipcode').value = data.zonecode; 
-	            document.getElementById('roadAddress').value = fullRoadAddr;
-	            document.getElementById('jibunAddress').value = data.jibunAddress;
-	        }
-	    }).open();
-	}
 	function birthDTWarn(){
 		var birth = $("#birthDT").val();
 		if(birth.charAt(2) > 1 || birth.charAt(4) > 3) {
@@ -171,14 +145,14 @@
 	                            <div class="row">
 	                                <div class="col-lg-6">
 	                                    <div class="checkout__input">
-	                                        <p>아이디<span>*</span></p>
+	                                        <p>아이디<span id="userIdCheckWarn"> * </span></p>
 	                                        <input type="text" id="userId" name="userId" placeholder="5~20자 이내로 적어주세요." required maxlength="20" />
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-4">
 	                                    <div class="checkout__input">
 	                                        <p><span>*</span></p>
-	                                        <input type="button" id="userIdCheck" name="userIdCheck" value="아이디중복체크"/>
+	                                        <button type="button" class="btn btn-primary btn-lg" id="userIdCheck" name="userIdCheck">아이디중복체크</button>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -189,7 +163,6 @@
 	                            <div class="checkout__input">
 	                                <p>비밀번호 확인<span>*</span></p>
 	                                <input type="password" id="passwdCheck" placeholder="비밀번호를 한번더 입력해주세요." required maxlength="16" />
-	                            	<p><span id="userIdCheckWarn"></span></p>
 	                            	<p><span id="passwdCheckWarn"></span></p>
 	                            </div>
 	                            <div class="checkout__input">
@@ -197,7 +170,7 @@
 	                                  <div class="col-lg-12 col-md-8">
 		                                <div class="checkout__form__input">
 		                                	<p><input type="text" id="zipcode" placeholder="우편번호" name="zipcode" value="${orderer.zipcode }" style="width: 40%;">
-	                                    		<input type="button" value="주소 검색" onclick="javascript:execDaumPostcode()" style="width: 30%; padding-left: 0"></p>
+	                                    		<button type="button" class="btn btn-primary btn-lg" onclick="javascript:execDaumPostcode()" style="width: 30%; padding-left: 0">주소 검색</button>
 		                                    <p><input type="text" id="roadAddress"   placeholder="도로명 주소" name="roadAddress"   value="${order.roadAddress }" ></p>
 		                                    <p><input type="text" id="jibunAddress"  placeholder="지번 주소"   name="jibunAddress"  value="${order.jibunAddress }" ></p>
 		                                    <p><input type="text" id="namujiAddress" placeholder="나머지 주소" name="namujiAddress" value="${order.namujiAddress }" ></p>

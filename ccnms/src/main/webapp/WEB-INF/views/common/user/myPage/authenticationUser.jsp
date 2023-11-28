@@ -49,6 +49,10 @@
                            <div align="center">
                            	   <input type="hidden" name="userId" value="${userDTO.userId }"/>
                            	   <input type="hidden" name="menu" value="${menu}"/>
+                           	   <c:if test="${result eq 'fail'}">
+                           	   	 	<h5 style="color:red">비밀번호를 잘못입력하셨습니다.</h5>
+                           	   </c:if>
+                           	   <br>
 	                           <button type="submit" class="site-btn" width="600">인증</button>
                            </div>
                            <br>

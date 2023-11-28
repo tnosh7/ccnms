@@ -41,7 +41,6 @@
 	var diggingTopic = "";
 	$().ready(function(){
 		diggingTopic  = ${diggingTopic};
-		
 		$("#onePageViewCnt").val("${onePageViewCnt}");
 	});
 	
@@ -76,6 +75,9 @@
 	}
 	function changeSort() {
 		var sort = $("#sort").val();
+		if (sort == '') {
+			return false;
+		}
 		var diggingTopic = $("#diggingTopic").val();
 		var url ="${contextPath}/digging/main"
 		 	url+="?sort=" + sort;
@@ -152,6 +154,7 @@
 				                <ul style="list-style:none;">
 				                	<li style="float: left;">
 					                    <select id="sort" onchange="changeSort()">
+					                    	<option value="">정 렬</option>
 					                    	<option value="readCnt">인기많은순</option>
 					                    	<option value="thumbsUp">추천순</option>
 					                    	<option value="recent">최신순</option>

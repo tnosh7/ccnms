@@ -41,8 +41,8 @@ import net.coobird.thumbnailator.Thumbnails;
 @RequestMapping("/admin/management")
 public class AdminUserController {
 	
-//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+//	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@Autowired
 	private AdminUserService adminUserService;
@@ -234,9 +234,6 @@ public class AdminUserController {
 		userDTO.setJibunAddress(multipartRequest.getParameter("jibunAddress"));
 		userDTO.setNamujiAddress(multipartRequest.getParameter("namujiAddress"));
 		userDTO.setProfile(fileName);
-		System.out.println("==================");
-		System.out.println(userDTO);
-		System.out.println("==================");
 		adminUserService.modifyUser(userDTO);
 		return new ModelAndView("redirect:/admin/management/");
 	}

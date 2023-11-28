@@ -71,7 +71,7 @@
 		                  	 	 <div class="form-group">
 		                  	 	 	<table>
 		                  	 	 		<tr>
-		                  	 	 			<th width="30%">상품 이름</th>
+		                  	 	 			<th width="35%">상품 이름</th>
 		                  	 	 			<th> <input class="form-control form-control-lg" type="text" id="productNm" name="productNm" maxlength="35" placeholder="상품 이름을 입력하세요." ></th>
 		                  	 	 		</tr>
 		                  	 	 		<tr>
@@ -92,8 +92,8 @@
 		                  	 	 			<th><input class="form-control form-control-lg" type="text" id="price" name="price" maxlength="20" placeholder="가격을 입력하세요(숫자만 입력)." ></th>
 		                  	 	 		</tr>
 		                  	 	 		<tr>
-		                  	 	 			<th>할인률</th>
-		                  	 	 			<th><input class="form-control form-control-lg" type="text" id="discountRate" name="discountRate" maxlength="35" placeholder="할인률을 입력하세요." ></th>
+		                  	 	 			<th>할인율</th>
+		                  	 	 			<th><input class="form-control form-control-lg" type="text" id="discountRate" name="discountRate" maxlength="35" placeholder="할인율을 입력하세요." ></th>
 		                  	 	 		</tr>
 		                  	 	 		<tr>
 		                  	 	 			<th>재고</th>
@@ -102,10 +102,11 @@
 		                  	 	 		<tr>
 		                  	 	 			<th>배송 방법</th>
 		                  	 	 			<th><select name="deliveryMethod">
-		                  	 	 				<option>일반배송</option>
-		                  	 	 				<option>편의점택배</option>
-		                  	 	 				<option>반등기우편</option>
-		                  	 	 			</select></th>
+			                  	 	 				<option>일반배송</option>
+			                  	 	 				<option>편의점택배</option>
+			                  	 	 				<option>반등기우편</option>
+		                  	 	 				</select>
+		                  	 	 			</th>
 		                  	 	 		</tr>
 		                  	 	 		<tr>
 		                  	 	 			<th>배송 가격</th>

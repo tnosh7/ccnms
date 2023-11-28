@@ -53,7 +53,7 @@ public class AdminController {
 			HttpSession session = request.getSession();
 			session.setAttribute("adminId", adminDTO.getAdminId());
 			session.setAttribute("role", "admin");
-			mv.setViewName("/admin/main");
+			mv.setViewName("redirect:/admin/main");
 		}
 		else {
 			mv.setViewName("/admin/loginAdmin");

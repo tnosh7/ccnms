@@ -98,10 +98,6 @@ public class AdminServiceImpl implements AdminService {
 	public Integer getMonthOrder() throws Exception {
 		return adminDAO.selectOneMonthOrder();
 	}
-	
-	public void loginAdminlog() throws Exception{
-		logger.info("관리자 로그인");
 		
-	}
 	
 }
