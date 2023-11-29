@@ -101,10 +101,6 @@ nav {
               <h5 class="card-header">
               <img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/id.png"/><strong> 고객문의 조회</strong></h5>
            <nav>
-			<ul class="nav nav-pills flex-md-row mb-3" >
-				<li><a href="${contextPath }/admin/management/adminExcelExport"><img alt="엑셀이미지" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a></li>
-				&emsp;
-			</ul>
 			</nav>               	
            </header>
            <hr>

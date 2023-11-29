@@ -14,10 +14,7 @@
     width: 100%;
     height: 500px;
   }
- 	a:link {color:black}
-  	a:visited { color:black; }
-	a:hover { color:black; }   
-	a:active {color:purple;}
+ 
 	ul{
    list-style:none;
    }

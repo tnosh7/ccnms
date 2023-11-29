@@ -57,6 +57,10 @@
 	<style>
 	    .menu a{cursor:pointer;}
 	    .menu .hide{display:none;}
+	    a:link {color:black}
+	  	a:visited { color:black; }
+		a:hover { color:black; }   
+		a:active {color:purple;}
 	</style>
 </head>
 <body>

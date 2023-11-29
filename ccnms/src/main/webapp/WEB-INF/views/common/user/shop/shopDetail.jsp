@@ -57,7 +57,7 @@
 					else {
 						Swal.fire({
 						 	text: '장바구니에 추가되었습니다.',
-						  	footer: '<a href="${contextPath }/myShop/myCart">장바구니로 이동하기</a>'
+						  	footer: '<a href="${contextPath }/myShop/cartList">장바구니로 이동하기</a>'
 						})
 					}
 				}

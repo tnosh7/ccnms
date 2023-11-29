@@ -215,6 +215,7 @@
                                 <input type="hidden" name="jibunAddress"   value="${userDTO.jibunAddress}">
                                 <input type="hidden" name="namujiAddress"  value="${userDTO.namujiAddress }">
                                 <input type="hidden" name="zipcode"        value="${userDTO.zipcode}">	
+                                <input type="hidden" name="orderQty"	   value="${orderQty }">
                                 <div align="center">
 	                                <button type="submit" class="site-btn"><span class="icon_check"></span>&emsp;주문</button>
                                 </div>
