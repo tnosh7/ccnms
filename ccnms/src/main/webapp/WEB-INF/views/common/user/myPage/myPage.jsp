@@ -68,7 +68,6 @@
 						   		<img
 		                         src="${contextPath}/resources/bootstrap/img/icon/profile.jpg"
 		                         alt="user-avatar"
-		                         class="d-block rounded"
 		                         height="100"
 		                         width="100"
 		                         id="profile"
@@ -77,9 +76,8 @@
 						   	</c:when>
 						   	<c:otherwise>
 						   		<img
-		                         src="${contextPath }/thumbnails?file=${userDTO.profile }"
+		                         src="${contextPath }/digging/thumbnails?file=${userDTO.profile }"
 		                         alt="user-avatar"
-		                         class="d-block rounded"
 		                         height="100"
 		                         width="100"
 		                         id="profile"
@@ -104,10 +102,6 @@
 	                           />
 	                           <input type="hidden" name="beforeFileName" value="${userDTO.profile }"/>
 	                         </label>
-	                         <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-	                           <i class="bx bx-reset d-block d-sm-none"></i>
-	                           <span class="d-none d-sm-block">삭제</span>
-	                         </button>
                            <span id="picWarn" style="color:red"></span>
 	                       </div>
 	                     </div>

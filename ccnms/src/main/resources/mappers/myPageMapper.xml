@@ -130,7 +130,6 @@
 		WHERE
 				USER_ID = #{userId}
 	</select>
-	
 	<delete id="deleteDigging" >
 		DELETE FROM
 		 		DIGGING

@@ -119,7 +119,6 @@
 	                   		<li> 게시물 보기
 								<select id="onePageViewCnt" onchange="getDiggingList()" >
 									<option value="10">10</option>
-									<option value="7">7</option>
 									<option value="5">5</option>
 								</select>
 	                   		</li>
@@ -139,7 +138,7 @@
 	                       						<a href="${contextPath }/ranking/otherUserInfo?userId=${diggingDTO.userId}"><img src="${contextPath}/resources/bootstrap/img/icon/profile.jpg" width="40" height="40">&emsp;${diggingDTO.userId }&emsp;${diggingDTO.likePoint }</a>
 	                       					</c:when>
 	                       					<c:otherwise>
-			                       				<img src="${contextPath }/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;
+			                       				<img src="${contextPath }/digging/thumbnails?file=${diggingDTO.profile}"  width="40" height="40">&emsp;
 			                       				<a href="${contextPath }/ranking/otherUserInfo?userId=${diggingDTO.userId }">
 			                       					${diggingDTO.userId }&emsp;${diggingDTO.likePoint }
 			                       				</a>
@@ -162,7 +161,7 @@
 	                                   	</c:when>
 	                                   	<c:otherwise>
 		                                   <td class="shoping__cart__item">
-		                                       <img src="${contextPath }/thumbnails?file=${diggingDTO.file}" width="200" height="150" alt="ㅇㅇㅇㅇ" >
+		                                       <img src="${contextPath }/digging/thumbnails?file=${diggingDTO.file}" width="200" height="150" alt="ㅇㅇㅇㅇ" >
 		                                   </td>
 	                                   	</c:otherwise>
 	                                   </c:choose>
@@ -188,13 +187,13 @@
    		<br>
     <div class="product__pagination blog__pagination" align="center">
         <c:if test="${startPage > 10 }">
-	        <a href="${contextPath }/?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i>이전</a>
+	        <a href="${contextPath }/?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}">이전</a>
         </c:if>
         <c:forEach var="i" begin="${startPage }" end="${endPage }">
        		<a href="${contextPath }/?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}">${i }</a>
         </c:forEach>
         <c:if test="${endPage != allPageCnt && endPage >= 10 }">
-        	<a href="${contextPath }/?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i>다음</a>
+        	<a href="${contextPath }/?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}">다음</a>
         </c:if>
      </div>
       <section class="latest-product spad">
@@ -217,7 +216,7 @@
 		                     		<tr>
 		                     			<td>
 		                     				${i.count }.&ensp;	
-		                     				<img src="${contextPath }/thumbnails?file=${recentShopDTO.productFile}" alt=""  width="40" height="60">
+		                     				<img src="${contextPath }/digging/thumbnails?file=${recentShopDTO.productFile}" alt=""  width="40" height="60">
 		                   				</td>
 		                     			<td>
 		                     				<a href="${contextPath }/shop/shopDetail?productCd=${recentShopDTO.productCd }"  class="latest-product__item">
@@ -244,7 +243,7 @@
                      		<tr>
                      			<td>
                      				${i.count }.&ensp;	
-                     				<img src="${contextPath }/thumbnails?file=${populerShopDTO.productFile}" alt=""  width="40" height="60">
+                     				<img src="${contextPath }/digging/thumbnails?file=${populerShopDTO.productFile}" alt=""  width="40" height="60">
                    				</td>
                      			<td>
                    				 	<a href="${contextPath }/shop/shopDetail?productCd=${populerShopDTO.productCd }">
@@ -271,7 +270,7 @@
                      		<tr>
                      			<td>
                      				${i.count }.&ensp;	
-                     				<img src="${contextPath }/thumbnails?file=${exchangeShopDTO.productFile}" alt=""  width="30" height="60">
+                     				<img src="${contextPath }/digging/thumbnails?file=${exchangeShopDTO.productFile}" alt=""  width="30" height="60">
                    				</td>
                      			<td>
                      				<a href="${contextPath }/shop/shopDetail?productCd=${exchangeShopDTO.productCd }" class="latest-product__item">

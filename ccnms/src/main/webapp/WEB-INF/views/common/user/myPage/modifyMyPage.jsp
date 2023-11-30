@@ -22,6 +22,7 @@
 			}
 		})
 	});
+	
 </script>
 </head>
 <body>
@@ -74,9 +75,8 @@
 						   <c:choose>
 						   	<c:when test="${userDTO.profile eq null}">
 						   		<img
-		                         src="${contextPath}/resources/admin/assets/img/avatars/2.png"
+		                         src="${contextPath}/resources/bootstrap/img/icon/profile.jpg"
 		                         alt="user-avatar"
-		                         class="d-block rounded"
 		                         height="100"
 		                         width="100"
 		                         id="profile"
@@ -85,9 +85,8 @@
 						   	</c:when>
 						   	<c:otherwise>
 						   		<img
-		                         src="${contextPath }/admin/management/thumbnails?fileName=${userDTO.profile }"
+		                         src="${contextPath }/digging/thumbnails?file=${userDTO.profile }"
 		                         alt="user-avatar"
-		                         class="d-block rounded"
 		                         height="100"
 		                         width="100"
 		                         id="profile"
@@ -104,10 +103,6 @@
 		                            <input type="file" id="upload" name="profile" class="account-file-input" hidden="" accept="image/png, image/jpeg">
 		                          </label>
 		                           <input type="hidden" name="beforeFileName" value="${userDTO.profile }"/>
-		                         <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-		                           <i class="bx bx-reset d-block d-sm-none"></i>
-		                           <span class="d-none d-sm-block">삭제</span>
-		                         </button>
 		                        </div>
 		                      </div>
 	                       </div>

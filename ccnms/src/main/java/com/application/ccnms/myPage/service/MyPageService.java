@@ -17,7 +17,6 @@ public interface MyPageService {
 	public List<DiggingDTO> getDiggingList(String userId)throws Exception;
 	public List<ReplyDTO>getReplyList(String userId)throws Exception;
 	public List<ContactDTO> getMyContactList(String userId)throws Exception;
-	
 	public void removeDigging(int[] delDiggingIdList) throws Exception;
 	public void removeReply(int[] delReplyIdList)throws Exception;
 

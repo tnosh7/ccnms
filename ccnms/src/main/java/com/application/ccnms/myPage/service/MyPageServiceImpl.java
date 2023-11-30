@@ -66,7 +66,7 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<ContactDTO> getMyContactList(String userId) throws Exception {
 		return myPageDAO.selectListContactList(userId);
 	}
-	
+
 	@Override
 	public void removeDigging(int[] delDiggingIdList) throws Exception {
 		myPageDAO.deleteDigging(delDiggingIdList);

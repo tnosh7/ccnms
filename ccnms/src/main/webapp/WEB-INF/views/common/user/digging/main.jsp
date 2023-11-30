@@ -14,8 +14,7 @@
     width: 100%;
     height: 500px;
   }
- 
-	ul{
+ 	ul{
    list-style:none;
    }
 .head-wrap {
@@ -163,9 +162,8 @@
 			                	<ul> 
 			                   		<li style="float: left;"> 
 										<select id="onePageViewCnt" onchange="getDiggingList()" >
-											<option>5</option>
-											<option>7</option>
 											<option>10</option>
+											<option>5</option>
 										</select>
 			                   		</li>
 		                    	</ul>
@@ -200,7 +198,11 @@
                            			 </c:choose>
 								  </div>
 								  <div class="card-body">
-								    <p class="card-text"><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.content }</a></p>
+								    <p class="card-text">
+								    	<a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">
+								    		${diggingDTO.content } <span style="color:blue">더보기</span>
+								    	</a>
+								    </p>
 								  </div>
 								  <div class="card-footer" style="background:white">
 								    &emsp;<a href="javascript:updateThumb(${diggingDTO.diggingId })" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/thumbs.PNG" width="40" height="40" id="thumbsUp"/>
@@ -212,23 +214,23 @@
 								  </div>
 								</div>
                       	 </c:forEach>
-						</div>		       
-						<br>
+						</div>		
+						</div>       
                         <div class="product__pagination blog__pagination" align="center">
 					        <c:if test="${startPage > 10 }">
-						        <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-left"></i>이전</a>
+						        <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}">이전</a>
 					        </c:if>
 					        <c:forEach var="i" begin="${startPage }" end="${endPage }">
-					       		<a href="${contextPath }/digging/main?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}">${i }</a>
+					       		<a href="${contextPath }/digging/main?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}">${i }</a>
 					        </c:forEach>
 					        <c:if test="${endPage != allPageCnt && endPage >= 10 }">
-					        	<a href="${contextPath }/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}"><i class="fa fa-long-arrow-right"></i>다음</a>
+					        	<a href="${contextPath }/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}">다음</a>
 					        </c:if>
-						</div>        
+					     </div>
+					     <br> <br>     
                     </div>
                 </div>
             </div>
-        </div>
     <!-- Blog Section End -->
 
 </body>

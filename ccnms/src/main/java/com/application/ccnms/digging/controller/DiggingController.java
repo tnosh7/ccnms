@@ -41,8 +41,8 @@ public class DiggingController {
 	@Autowired
 	private DiggingService diggingService;
 	
-//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+//	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@GetMapping("/main")
 	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic, 
@@ -197,5 +197,19 @@ public class DiggingController {
 		mv.addObject("replyList", diggingService.getReplyList(diggingDTO.getDiggingId()));
 		return mv;
 	}
+	@GetMapping("/thumbnails")
+	public void thumbnails(@RequestParam("file") String file, HttpServletResponse response) throws IOException {
+		OutputStream out = response.getOutputStream();
+		String filePath = FILE_REPO_PATH + file;
+		
+		File image = new File(filePath);
+		if (image.exists()) { 
+			Thumbnails.of(image).size(200,200).outputFormat("png").toOutputStream(out);
+		}
+		byte[] buffer = new byte[1024 * 8];
+		out.write(buffer);
+		out.close();
+	}
+	
 	
 }		
