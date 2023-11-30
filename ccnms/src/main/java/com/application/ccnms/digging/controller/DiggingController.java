@@ -63,7 +63,7 @@ public class DiggingController {
 
 		int allDiggingCnt = diggingService.getAllDiggingCnt(diggingTopic);
 		int allPageCnt = allDiggingCnt / onePageViewCnt + 1;
-		if (allDiggingCnt % allPageCnt == 0) {
+		if (allDiggingCnt % onePageViewCnt == 0) {
 			allPageCnt--;
 		}
 		
@@ -87,14 +87,15 @@ public class DiggingController {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("onePageViewCnt", onePageViewCnt);
 		searchMap.put("startDiggingIdx", startDiggingIdx);
-		searchMap.put("sort", sort);
 		searchMap.put("diggingTopic", diggingTopic);
+		if (sort != null) searchMap.put("sort", sort);
 		if (dig != null) {
 			searchMap.put("dig", dig);
 		}
 		else {
 			searchMap.put("dig", "");
 		}
+		mv.addObject("sort", sort);
 		mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
 		mv.addObject("populerList", diggingService.getPopulerList(searchMap));
 		mv.addObject("diggingTopic", diggingTopic);

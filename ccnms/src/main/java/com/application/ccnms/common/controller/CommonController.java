@@ -80,6 +80,7 @@ public class CommonController {
 		sortMap.put("startDiggingIdx", startDiggingIdx);
 		sortMap.put("sort", sort);
 		mv.addObject("diggingList", commonService.getDiggingList(sortMap));
+		mv.addObject("sort", sort);
 		
 		mv.addObject("headList", commonService.getHeadList());
 		mv.addObject("recentShopList", commonService.getRecentShopList());

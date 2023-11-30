@@ -32,6 +32,7 @@
 	$().ready(function(){
 		
 		$("#onePageViewCnt").val("${onePageViewCnt}");
+		$("#sort").val("${sort}");
 	});
 	
 	function getDiggingList() {
@@ -175,6 +176,7 @@
 								    &emsp;&emsp;<img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${diggingDTO.replyCnt}
 								    &emsp;&emsp;<img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }
 							   		<input type="hidden" value="${diggingDTO.diggingId }"/>
+							   		<input type="hidden" name="sort"/>
 							  		</td>
 							  	</tr>
 							</tfoot>     
@@ -186,15 +188,30 @@
             </div>
    		<br>
     <div class="product__pagination blog__pagination" align="center">
-        <c:if test="${startPage > 10 }">
-	        <a href="${contextPath }/?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}">이전</a>
-        </c:if>
-        <c:forEach var="i" begin="${startPage }" end="${endPage }">
-       		<a href="${contextPath }/?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}">${i }</a>
-        </c:forEach>
-        <c:if test="${endPage != allPageCnt && endPage >= 10 }">
-        	<a href="${contextPath }/?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}">다음</a>
-        </c:if>
+   	<c:choose>
+   		<c:when test="${sort eq null}">
+	        <c:if test="${startPage > 10 }">
+		        <a href="${contextPath }/?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}">이전</a>
+	        </c:if>
+	        <c:forEach var="i" begin="${startPage }" end="${endPage + 1 }">
+	       		<a href="${contextPath }/?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}">${i }</a>
+	        </c:forEach>
+	        <c:if test="${endPage != allPageCnt && endPage >= 10 }">
+	        	<a href="${contextPath }/?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}">다음</a>
+	        </c:if>
+   		</c:when>
+   		<c:otherwise>
+	        <c:if test="${startPage > 10 }">
+		        <a href="${contextPath }/?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&sort=${sort}">이전</a>
+	        </c:if>
+	        <c:forEach var="i" begin="${startPage }" end="${endPage + 1 }">
+	       		<a href="${contextPath }/?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&sort=${sort}">${i }</a>
+	        </c:forEach>
+	        <c:if test="${endPage != allPageCnt && endPage >= 10 }">
+	        	<a href="${contextPath }/?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}&sort=${sort}">다음</a>
+	        </c:if>
+   		</c:otherwise>
+   	</c:choose>	
      </div>
       <section class="latest-product spad">
         <div class="container">

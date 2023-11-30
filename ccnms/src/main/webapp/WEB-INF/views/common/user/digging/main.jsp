@@ -39,13 +39,16 @@
 	$().ready(function(){
 		diggingTopic  = ${diggingTopic};
 		$("#onePageViewCnt").val("${onePageViewCnt}");
+		$("#diggingTopic").val("${diggingTopic}");
 	});
 	
 	function getDiggingList() {
-		
+		var sort = $("[name='sort']").val();
 		var url = "${contextPath }/digging/main"
 		    url += "?onePageViewCnt=" + $("#onePageViewCnt").val();
 		  	url += "&diggingTopic=" + $("#diggingTopic").val();
+		  	if (sort != "")
+		  	url += "&sort=" + sort;
 		location.href = url;
 	} 
 	
@@ -84,7 +87,6 @@
 </script>
 </head>
 <body>
-    <!-- Breadcrumb Section Begin -->
    <section align="center">
 	   <div class="head-wrap" >
             <div class="head-img">
@@ -95,7 +97,6 @@
 	  		 </div>
 	   </div>
    </section>
-    <!-- Blog Section Begin -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-5">
@@ -150,8 +151,8 @@
 							  <div class="card-header" style="background:white">
 				                <ul style="list-style:none;">
 				                	<li style="float: left;">
-					                    <select id="sort" onchange="changeSort()">
-					                    	<option value="">정 렬</option>
+					                    <select id="sort"  onchange="changeSort()">
+					                    	<option value="readCnt">정 렬</option>
 					                    	<option value="readCnt">인기많은순</option>
 					                    	<option value="thumbsUp">추천순</option>
 					                    	<option value="recent">최신순</option>
@@ -210,28 +211,43 @@
 								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/comment.png"/> ${diggingDTO.replyCnt }</a>
 								    &emsp;&emsp;<a href="#" class="card-link"><img alt="" src="${contextPath }/resources/bootstrap/img/show.png"/> ${diggingDTO.readCnt }</a>
 								   <input type="hidden" value="${diggingDTO.diggingId }"/>
-								   <input type="hidden" id="diggingTopic" value="${diggingDTO.diggingTopic }"/>
+								   <input type="hidden" id="diggingTopic" value="${diggingTopic}"/>
 								  </div>
 								</div>
                       	 </c:forEach>
+					   <input type="hidden" name="sort" value="${sort }" />
 						</div>		
 						</div>       
                         <div class="product__pagination blog__pagination" align="center">
-					        <c:if test="${startPage > 10 }">
-						        <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}">이전</a>
-					        </c:if>
-					        <c:forEach var="i" begin="${startPage }" end="${endPage }">
-					       		<a href="${contextPath }/digging/main?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}">${i }</a>
-					        </c:forEach>
-					        <c:if test="${endPage != allPageCnt && endPage >= 10 }">
-					        	<a href="${contextPath }/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}">다음</a>
-					        </c:if>
+                        	<c:choose>
+                        		<c:when test="${sort == null }">
+							        <c:if test="${startPage > 10 }">
+								        <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}">이전</a>
+							        </c:if>
+							        <c:forEach var="i" begin="${startPage }" end="${endPage }">
+							       		<a href="${contextPath }/digging/main?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}">${i }</a>
+							        </c:forEach>
+							        <c:if test="${endPage != allPageCnt && endPage >= 10 }">
+							        	<a href="${contextPath }/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}">다음</a>
+							        </c:if>
+                        		</c:when>
+                        		<c:otherwise>
+							        <c:if test="${startPage > 10 }">
+								        <a href="${contextPath }/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}&sort=${sort}">이전</a>
+							        </c:if>
+							        <c:forEach var="i" begin="${startPage }" end="${endPage }">
+							       		<a href="${contextPath }/digging/main?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}&sort=${sort}">${i }</a>
+							        </c:forEach>
+							        <c:if test="${endPage != allPageCnt && endPage >= 10 }">
+							        	<a href="${contextPath }/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}&diggingTopic=${diggingTopic}&sort=${sort}">다음</a>
+							        </c:if>
+                        		</c:otherwise>
+                        	</c:choose>
 					     </div>
 					     <br> <br>     
                     </div>
                 </div>
             </div>
-    <!-- Blog Section End -->
 
 </body>
 </html>
