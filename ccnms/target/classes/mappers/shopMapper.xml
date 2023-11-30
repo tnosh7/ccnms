@@ -67,6 +67,23 @@
 		 	SHOP
 		WHERE
 			SORT = #{sort}
+		<choose>
+			<when test='bestSort != null and bestSort !=""'>
+				ORDER BY
+					<if test='bestSort == "popular"'  >
+						READ_CNT DESC
+					</if>			
+					<if test='bestSort == "recent"' >
+						ENROLL_DT DESC
+					</if>			
+					<if test='bestSort == "cheap"' >
+						PRICE 
+					</if>			
+					<if test='bestSort == "high"' >
+						PRICE DESC
+					</if>			
+			</when>
+		</choose>	
 	</select>
 	<select id="selectOneProductDetai" parameterType="long" resultType="ShopDTO">
 		SELECT 

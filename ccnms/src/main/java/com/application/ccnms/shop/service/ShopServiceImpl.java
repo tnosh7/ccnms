@@ -1,6 +1,7 @@
 package com.application.ccnms.shop.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,14 +30,14 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public List<ShopDTO> getSortLatestList(String sort) throws Exception {
-		return shopDAO.selectListSortLatestList(sort);
+	public List<ShopDTO> getSortLatestList(Map<String,String>sortMap) throws Exception {
+		return shopDAO.selectListSortLatestList(sortMap);
 	}
 
 	
 	@Override
-	public List<ShopDTO> sortList(String sort) throws Exception {
-		return shopDAO.selectListSortList(sort);
+	public List<ShopDTO> sortList(Map<String,String>sortMap) throws Exception {
+		return shopDAO.selectListSortList(sortMap);
 	}
 
 	@Override

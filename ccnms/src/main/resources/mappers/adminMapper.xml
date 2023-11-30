@@ -87,7 +87,7 @@
 		GROUP BY
 			JOIN_USER
 		ORDER BY
-			JOIN_USER
+			JOIN_USER DESC
 	</select>
 	<select id="selectListNoticeList" resultType="DiggingDTO">
 		SELECT 

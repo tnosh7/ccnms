@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,15 +42,23 @@ public class ShopController {
 	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@GetMapping("/")
-	public ModelAndView shop(@RequestParam(required =false, value="sort") String sort, HttpServletRequest request) throws Exception {
+	public ModelAndView shop(@RequestParam(required =false, value="sort") String sort, HttpServletRequest request, 
+							 @RequestParam(required = false, value="bestSort") String bestSort) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
+		
 		if (sort == null) {
 			mv.addObject("shopList", shopService.getProductList());
 			mv.addObject("latestList", shopService.getLatestList());
 		}
 		else {
-			mv.addObject("shopList", shopService.sortList(sort));
-			mv.addObject("latestList", shopService.getSortLatestList(sort));
+			Map<String,String> sortMap = new HashMap<String,String>();
+			sortMap.put("sort", sort);
+			if (bestSort != null) {
+				sortMap.put("bestSort", bestSort);
+			}
+			mv.addObject("shopList", shopService.sortList(sortMap));
+			mv.addObject("latestList", shopService.getSortLatestList(sortMap));
 		}
 		mv.setViewName("/shop/main");
 		return mv; 
@@ -101,11 +111,4 @@ public class ShopController {
 		return mv;
 	}
 	
-	@GetMapping("/bestSort")
-	public ModelAndView bestSort(@RequestParam("bestSort") String bestSort) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("shopList", shopService.bestSortList(bestSort));
-		mv.setViewName("/shop/main");
-		return mv;
-	}
 }

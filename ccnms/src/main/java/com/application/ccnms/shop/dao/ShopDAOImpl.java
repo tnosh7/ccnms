@@ -1,6 +1,7 @@
 package com.application.ccnms.shop.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,12 @@ public class ShopDAOImpl implements ShopDAO {
 		return sqlSession.selectList("shop.selectListLatestList");
 	}
 	@Override
-	public List<ShopDTO> selectListSortLatestList(String sort) throws Exception {
-		return sqlSession.selectList("shop.selectListSortLatestList", sort);
+	public List<ShopDTO> selectListSortLatestList(Map<String,String>sortMap) throws Exception {
+		return sqlSession.selectList("shop.selectListSortLatestList", sortMap);
 	}
 	@Override
-	public List<ShopDTO> selectListSortList(String sort) throws Exception {
-		return sqlSession.selectList("shop.selectListSortList", sort);
+	public List<ShopDTO> selectListSortList(Map<String,String>sortMap) throws Exception {
+		return sqlSession.selectList("shop.selectListSortList", sortMap);
 	}
 	@Override
 	public ShopDTO selectOneProductDetail(long productCd) throws Exception {

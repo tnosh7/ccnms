@@ -72,7 +72,7 @@
 	}
 	function bestSort() {
 		var bestSort = $("[name='bestSort']").val();
-		location.href= "${contextPath}/shop/bestSort?bestSort="+bestSort ;
+		location.href= "${contextPath}/shop/?bestSort="+bestSort + "&sort=" + $("#sort").val();
 	}
 </script>
 </head>
@@ -171,6 +171,7 @@
 	                            </div>
 	                        </div>
 	                        <input type="hidden" value="${shopDTO.productNm}">
+	                        <input type="hidden" id="sort" value="${shopDTO.sort}">
 	                      	</c:forEach>
 	                  	</c:otherwise>
                     </c:choose>
