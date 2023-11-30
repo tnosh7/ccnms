@@ -36,10 +36,11 @@
 				if (passwd != null) {
 				   if (passwd != passwdCheck) {
 					   $("#passwdCheckWarn").html(" * 비밀번호가 다릅니다. 다시 입력해주세요.");
+					   $("#passwdCheckWarn").css("color", "red");
 				  	   return;
 				   }
 				   else {
-					   $("#passwdCheckWarn").html("비밀번호 확인이 완료되었습니다.");
+					   $("#passwdCheckWarn").html(" * 비밀번호 확인이 완료되었습니다.");
 					   $("#passwdCheckWarn").css("color", "green");
 					   
 				   }
@@ -58,12 +59,13 @@
 					data : {"userId" : userId},
 					success : function(duplicateUserId) {
 						if(duplicateUserId == "N") {
-							$("#userIdCheckWarn").html("사용가능한 아이디입니다.");
+							$("#userIdCheckWarn").html(" * 사용가능한 아이디입니다.");
 							$("#userIdCheckWarn").css("color", "green");
 							validateId = true;
 						}								
 						else {
 							$("#userIdCheckWarn").html(" * 다른 아이디를 입력해주세요.");
+							$("#userIdCheckWarn").css("color", "red");
 							validateId = false;
 						}
 					}
@@ -84,6 +86,7 @@
 				}
 				if(passwd.length<8) {
 					 $("#passwdCheckWarn").html(" * 비밀번호는 8글자 이상이어야 합니다.");
+				     $("#passwdCheckWarn").css("color", "red");
 					 return false;
 				}
 				var birth = $("#birthDT").val();
