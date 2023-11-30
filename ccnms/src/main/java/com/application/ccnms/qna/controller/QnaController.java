@@ -1,9 +1,5 @@
 package com.application.ccnms.qna.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,8 +30,14 @@ public class QnaController {
 	public ModelAndView qnaList(HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
-		mv.addObject("myQnaList", qnaService.getMyQnaList((String)session.getAttribute("userId")));
-		mv.addObject("qnaList", qnaService.getQnaList((String)session.getAttribute("userId")));
+		if (session.getAttribute("admin")!= "") {
+			mv.addObject("myQnaList", qnaService.getMyQnaList("ModuDigging"));
+			mv.addObject("qnaList", qnaService.getQnaList("ModuDigging"));
+		}
+		else {
+			mv.addObject("myQnaList", qnaService.getMyQnaList((String)session.getAttribute("userId")));
+			mv.addObject("qnaList", qnaService.getQnaList((String)session.getAttribute("userId")));
+		}
 		mv.setViewName("/qna/qnaList");
 		return mv;
 	}

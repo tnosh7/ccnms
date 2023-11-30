@@ -106,6 +106,10 @@ nav {
                           <button type="button" class="btn btn-outline-primary" onclick="location.href='${contextPath }/admin/shop/productAdd'">상품 등록</button>
                         </li>
 						&emsp;
+					  	<li>
+                          <button type="button" class="btn btn-outline-primary" onclick="location.href='${contextPath }/qna/qnaList'">Q&A</button>
+                        </li>
+						&emsp;
 						<li><a href="${contextPath }/admin/shop/shopExcelExport"><img alt="아이디카드" src="${contextPath }/resources/bootstrap/img/excel.jpeg" width="50"/></a></li>
 						&emsp;
 					</ul>
