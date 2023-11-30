@@ -41,8 +41,8 @@ public class DiggingController {
 	@Autowired
 	private DiggingService diggingService;
 	
-private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-//	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
+//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@GetMapping("/main")
 	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic, 
@@ -62,7 +62,6 @@ private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 		int currentPageNumber = Integer.parseInt(temp);
 
 		int allDiggingCnt = diggingService.getAllDiggingCnt(diggingTopic);
-		
 		int allPageCnt = allDiggingCnt / onePageViewCnt + 1;
 		if (allDiggingCnt % allPageCnt == 0) {
 			allPageCnt--;
@@ -180,7 +179,7 @@ private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 		Iterator<String> fileList = multipartRequest.getFileNames();
 		String fileName="";
 		while(fileList.hasNext()) {
-			MultipartFile uploadFile = multipartRequest.getFile(fileList.next()); // 하나의 <input type="file">를 반환한다.
+			MultipartFile uploadFile = multipartRequest.getFile(fileList.next()); 
 			if (!uploadFile.getOriginalFilename().isEmpty()) {
 				SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
 				fileName = fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();

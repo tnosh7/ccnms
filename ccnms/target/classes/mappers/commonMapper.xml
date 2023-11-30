@@ -7,6 +7,8 @@
 			COUNT(*)
 		FROM 
 			DIGGING
+		WHERE
+			DIGGING_TOPIC NOT IN ('notice','ad')
 	</select>
 	
 	<resultMap type="hashmap" id="diggingUserListMap">

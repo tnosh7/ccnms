@@ -85,6 +85,8 @@
 			DIGGING
 		WHERE 
 			DIGGING_TOPIC = #{diggingTopic} 
+			AND 
+			DIGGING_TOPIC NOT IN ('notice','ad')
 	</select>
 	
 	<select id="selectListUser" parameterType="String"  resultType="DiggingDTO">
