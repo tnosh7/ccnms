@@ -22,17 +22,20 @@
 
 </style>
 <script>
+
 	$().ready(function(){
 		$("form").submit(function(){
-			var content= $("#content").html();
-			if (content =="") {
+			var content= $("[name='content']").val();
+			if (content.length == 0) {
 				$("#contentWarn").html("[주의] 상품 소개는 필수 항목입니다. 상품 내용을 입력하세요.");
+				return false;
+			}
+			if (content.length > 3000){
+				$("#contentWarn").html("[주의] 내용은 3000자까지 입력 가능합니다.");
 				return false;
 			}
 		})
 	});
-
-
 </script>
 </head>
 <body>

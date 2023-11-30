@@ -1,5 +1,10 @@
 package com.application.ccnms.qna.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -42,12 +47,17 @@ public class QnaController {
 		qnaDTO.setWriter((String)session.getAttribute("userId"));
 		qnaDTO.setContent(qna);
 		qnaDTO.setProductCd(Long.parseLong(productCd));
-		
-		qnaService.addQna(qnaDTO);
-		qnaService.setQnaCnt(Long.parseLong(productCd));
 		ModelAndView mv = new ModelAndView();
+		if (!qnaService.authenticationQna((String)session.getAttribute("userId"))) {
+			qnaService.addQna(qnaDTO);
+			qnaService.setQnaCnt(Long.parseLong(productCd));
+		}
+		else {
+			mv.addObject("authenticationQna", "true");
+		}
 		mv.addObject("shopDTO", shopService.getProductDetail(Long.parseLong(productCd)));
 		mv.addObject("qnaList", shopService.getQnaList(Long.parseLong(productCd)));
+		mv.addObject("productCd", productCd);
 		mv.setViewName("/shop/shopDetail");
 		return mv;
 	}
@@ -63,14 +73,20 @@ public class QnaController {
 	}
 	
 	@GetMapping("/removeQna")
-	public ModelAndView removeQna(@RequestParam("removeQnaList") String removeQnaList) throws Exception {
-		String[] temp = removeQnaList.split(",");
-		int[] removeQna = new int[temp.length];
-		for (int i = 0; i < temp.length; i++) {
-			removeQna[i] = Integer.parseInt(temp[i]);
+	public ModelAndView removeQna(@RequestParam("removeQnaList") String removeQnaList, 
+								  @RequestParam("updateQnaCntList") String updateQnaCntList) throws Exception {
+		String[] temp1 = removeQnaList.split(",");
+		int[] removeQna = new int[temp1.length];
+		for (int i = 0; i < temp1.length; i++) {
+			removeQna[i] = Integer.parseInt(temp1[i]);
 		}
+		String[] temp2 = updateQnaCntList.split(",");
+		int[] productCd = new int[temp2.length];
+		for (int i = 0; i < temp2.length; i++) {
+			productCd[i] = Integer.parseInt(temp2[i]);
+		}
+		qnaService.reduceQnaCnt(productCd);
 		qnaService.removeQnaList(removeQna);
-		qnaService.removeQnaCnt(removeQna);
 		return new ModelAndView("redirect:/qna/qnaList");
 	}
 }

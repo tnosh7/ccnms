@@ -8,6 +8,7 @@ import com.application.ccnms.digging.dto.DiggingDTO;
 
 public interface AdminDAO {
 	public AdminDTO selectOneLoginAdmin(AdminDTO adminDTO)throws Exception;
+	public AdminDTO selectOneAuthenticationAdmin(String adminId)throws Exception;
 	public void insertRegisterAdmin(AdminDTO adminDTO)throws Exception;
 	public int selectOneTodayReplyCnt(String today)throws Exception;
 	public int selectOneTodayDiggingCnt(String today)throws Exception;

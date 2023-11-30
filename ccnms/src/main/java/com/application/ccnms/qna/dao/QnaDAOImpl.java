@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.application.ccnms.qna.dto.QnaDTO;
+import com.application.ccnms.shop.dto.ShopDTO;
 
 @Repository
 public class QnaDAOImpl implements QnaDAO {
@@ -20,9 +21,14 @@ public class QnaDAOImpl implements QnaDAO {
 		return sqlSession.selectList("qna.selectListQnaList", userId);
 	}
 	@Override
-	public List<QnaDTO> selectListMyQnaList(String userId) throws Exception {
+	public List<Map<String,Object>> selectListMyQnaList(String userId) throws Exception {
 		return sqlSession.selectList("qna.selectListMyQnaList", userId);
 	}
+	@Override
+	public QnaDTO selectOneAuthenticationQna(String userId) throws Exception {
+		return sqlSession.selectOne("qna.selectOneAuthenticationQna", userId);
+	}
+
 	@Override
 	public void insertQna(QnaDTO qnaDTO) throws Exception {
 		sqlSession.insert("qna.insertQna", qnaDTO);
@@ -40,8 +46,8 @@ public class QnaDAOImpl implements QnaDAO {
 		sqlSession.delete("qna.deleteQnaList", removeQna);
 	}
 	@Override
-	public void updateQnaListCnt(int[] removeQna) throws Exception {
-		sqlSession.update("qna.updateQnaListCnt", removeQna);
+	public void updateReduceQnaCnt(int[] productCd) throws Exception {
+		sqlSession.update("qna.updateReduceQnaCnt", productCd);
 	}
 
 }

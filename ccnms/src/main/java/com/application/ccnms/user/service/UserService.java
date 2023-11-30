@@ -18,4 +18,5 @@ public interface UserService {
 	public String getFindPw(String userId, String email) throws Exception;
 	public void modifyPw(UserDTO userDTO) throws Exception;
 	public void addLikePoint(String writer)throws Exception;
+	public void userLogout(String userId)throws Exception;
 }

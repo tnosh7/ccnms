@@ -39,6 +39,14 @@
 		WHERE
 			WRITER = #{userId}
 	</select>
+	<select id="selectOneAuthenticationQna" parameterType="String" resultType="QnaDTO">
+		SELECT 
+			*
+		FROM 	
+			QNA
+		WHERE
+			WRITER = #{userId}
+	</select>
 	<insert id="insertQna" parameterType="QnaDTO">
 		INSERT INTO QNA (
 			WRITER,
@@ -76,21 +84,20 @@
 		DELETE FROM
 			QNA
 		WHERE
-			PRODUCT_CD IN 
+			QNA_CD IN 
 			<foreach collection="array" separator="," item="qnaCd" open="(" close=")">
 				#{qnaCd}
 			</foreach>
 	</delete>
-	<update id="updateQnaListCnt">
+	<update id="updateReduceQnaCnt">
 		UPDATE 
 			SHOP
-		SET 
+		SET
 			QNA_CNT = QNA_CNT - 1 
 		WHERE
 			PRODUCT_CD IN 
-			<foreach collection="array" separator="," item="qnaCd" open="(" close=")">
-				#{qnaCd}
+			<foreach collection="array" separator="," item="productCd" open="(" close=")">
+				#{productCd}
 			</foreach>
 	</update>
-	
 </mapper>

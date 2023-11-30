@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script>
 	$().ready(function(){
+		
 		$("form").submit(function(){
 			var passwd = $("[name='passwd']").val();
 			var passwdCheck = $("#passwdCheck").val();

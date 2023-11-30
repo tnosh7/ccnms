@@ -80,18 +80,21 @@ public class AdminController {
 	}
 	
 	@PostMapping("/registerAdmin")
-	public @ResponseBody String registerAdmin(HttpServletRequest request, AdminDTO adminDTO) throws Exception {
-		System.out.println(adminDTO);
-		adminService.addRegisterAdmin(adminDTO);
-		HttpSession session = request.getSession();
-		session.setAttribute("adminId", adminDTO.getAdminId());
-		session.setAttribute("role", "admin");
+	public ModelAndView registerAdmin(HttpServletRequest request, AdminDTO adminDTO) throws Exception {
 		
-		String jsScript = "<script>";
-			   jsScript +="location.href='" + request.getContextPath() + "/admin/main'";
-			   jsScript +="</script>";
-	    
-		return jsScript;
+		ModelAndView mv = new ModelAndView();
+		
+		if (adminService.authenticationAdmin(adminDTO.getAdminId())) {
+			mv.setViewName("/admin/registerAdmin");
+		}
+		else {
+			adminService.addRegisterAdmin(adminDTO);
+			HttpSession session = request.getSession();
+			session.setAttribute("adminId", adminDTO.getAdminId());
+			session.setAttribute("role", "admin");
+			mv.setViewName("/admin/loginAdmin");
+		}
+		return mv;
 	}
 	
 	

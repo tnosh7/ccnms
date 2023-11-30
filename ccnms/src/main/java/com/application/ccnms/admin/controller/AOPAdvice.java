@@ -27,12 +27,12 @@ public class AOPAdvice {
 		logger.info("유저 로그인 :" +  temp[1]);
 		
 	}
-	@AfterReturning("execution(* com.application.ccnms.user.controller.UserController.logout(..))")
+	@AfterReturning("execution(* com.application.ccnms.user.service.UserServiceImpl.userLogout(..))")
 	public void getLogoutInfo(JoinPoint jp) {
-		
+		Object[]temp =  jp.getArgs();
 		long millis = System.currentTimeMillis();
 		String time = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(millis);
 		logger.info("현재시간 : " + time);
-		logger.info("유저 로그아웃");
+		logger.info("유저 로그아웃 : " + temp[0]);
 	}
 }

@@ -25,8 +25,12 @@
 		
 		$("form").submit(function(){
 			var diggingTopic= $("[name='diggingTopic']").val();
-			
+			var content = $("[name='content']").val();
 			if (diggingTopic == "null") {
+				return false;
+			}
+			if (content.length > 3000){
+				$("#contentWarn").html("[주의] 내용은 3000자까지 입력 가능합니다.");
 				return false;
 			}
 		})
@@ -265,6 +269,11 @@
                       					</div>
                       				</td>
                       			</tr>
+                      			<tr align="center">
+                 	 	 			<th colspan="2">
+                 	 	 			 	<span id="contentWarn" style="color:red"></span>
+                 	 	 			</th>
+                  	 	 		</tr>
                       			<tr>
                       				<td colspan="2">
 	                      				<div class="demo-inline-spacing" align="center">

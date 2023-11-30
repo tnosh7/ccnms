@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.application.ccnms.qna.dao.QnaDAO;
 import com.application.ccnms.qna.dto.QnaDTO;
+import com.application.ccnms.shop.dto.ShopDTO;
 
 @Service
 public class QnaServiceImpl implements QnaService {
@@ -17,14 +18,19 @@ public class QnaServiceImpl implements QnaService {
 	private QnaDAO qnaDAO;
 
 	@Override
-	public List<QnaDTO> getMyQnaList(String userId) throws Exception {
+	public List<Map<String,Object>> getMyQnaList(String userId) throws Exception {
 		return qnaDAO.selectListMyQnaList(userId);
 	}
 	@Override
 	public List<Map<String,Object>> getQnaList(String userId) throws Exception {
 		return qnaDAO.selectListQnaList(userId);
 	}
-	@Transactional
+	@Override
+	public boolean authenticationQna(String userId) throws Exception {
+		if (qnaDAO.selectOneAuthenticationQna(userId) != null) return true;
+		else	return false;
+	}
+
 	@Override
 	public void addQna(QnaDTO qnaDTO) throws Exception {
 		 qnaDAO.insertQna(qnaDTO);
@@ -43,9 +49,8 @@ public class QnaServiceImpl implements QnaService {
 		qnaDAO.deleteQnaList(removeQna);
 	}
 	@Override
-	public void removeQnaCnt(int[] removeQna) throws Exception {
-		qnaDAO.updateQnaListCnt(removeQna);
-		
+	public void reduceQnaCnt(int[] productCd) throws Exception {
+		qnaDAO.updateReduceQnaCnt(productCd);
 	}
 
 }

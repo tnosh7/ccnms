@@ -2,7 +2,6 @@ package com.application.ccnms.admin.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.application.ccnms.admin.dao.AdminDAO;
 import com.application.ccnms.admin.dto.AdminDTO;
 import com.application.ccnms.digging.dto.DiggingDTO;
-import com.application.ccnms.digging.service.DiggingServiceImpl;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -44,7 +42,13 @@ public class AdminServiceImpl implements AdminService {
 		return false;
 	}
 	
-	@Transactional
+	@Override
+	public boolean authenticationAdmin(String adminId) throws Exception {
+		if (adminDAO.selectOneAuthenticationAdmin(adminId) != null) return true;
+		else return false;
+	}
+
+	
 	@Override
 	public void addRegisterAdmin(AdminDTO adminDTO) throws Exception {
 		adminDTO.setPasswd(bCryptPasswordEncoder.encode(adminDTO.getPasswd()));;
@@ -98,6 +102,7 @@ public class AdminServiceImpl implements AdminService {
 	public Integer getMonthOrder() throws Exception {
 		return adminDAO.selectOneMonthOrder();
 	}
-		
+
+
 	
 }

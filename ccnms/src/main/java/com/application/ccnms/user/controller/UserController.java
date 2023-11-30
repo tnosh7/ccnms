@@ -95,6 +95,7 @@ public class UserController {
 	@GetMapping("/logout")
 	public @ResponseBody String logout(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
+		userService.userLogout((String)session.getAttribute("userId"));
 		session.invalidate();
 		String jsScript = "<script>";
 			   jsScript +="location.href='" + request.getContextPath() + "/'";

@@ -19,17 +19,28 @@
 
 	function removeQna(){
 		var removeQnaList= "";
+		var updateQnaCntList = "";
 		if($("input[name='qnaCd']:checked")) {
 			$("input[name='qnaCd']:checked").each(function(){
-				removeQnaList += $(this).val() + ",";
-				location.href="${contextPath}/qna/removeQna?removeQnaList=" + removeQnaList;
+				var qnaCd = $(this).val();
+				var productCd = $("#productCd" +qnaCd).val();
+				removeQnaList 		+= $(this).val() + ",";
+				updateQnaCntList 	+= productCd + ",";
 			});
+			
+			var url = "${contextPath}/qna/removeQna";
+				url += "?removeQnaList=" 	+ removeQnaList;
+				url += "&updateQnaCntList=" + updateQnaCntList;
+				
+			location.href=url;
 		}
 		else return;
 	}
 </script>
 </head>
 <body>
+ <fieldset>
+
 	 <div class="breadcrumb-option">
 	        <div class="container">
 	            <div class="row">
@@ -87,7 +98,8 @@
 			                         	<c:otherwise>
 			                         		<tr>
                							        <td>
-               							       	 <input type="checkbox" name="qnaCd" value="${myQna.productCd}">
+               							       	 <input type="checkbox" name="qnaCd" value="${myQna.qnaCd}">
+               							       	 <input type="hidden" id="productCd${myQna.qnaCd }" value="${myQna.productCd }">
                							       </td>
 			                         			<td>
 			                         				<c:if test="${myQna.qnaYn eq 'F'}">
@@ -188,5 +200,6 @@
               </div>
               </div>
 	    </section>
+	    </fieldset> 
 </body>
 </html>

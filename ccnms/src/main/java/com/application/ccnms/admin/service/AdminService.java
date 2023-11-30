@@ -9,6 +9,7 @@ import com.application.ccnms.digging.dto.DiggingDTO;
 
 public interface AdminService {
 	public boolean loginAdmin(AdminDTO adminDTO) throws Exception ;
+	public boolean authenticationAdmin(String adminId) throws Exception ;
 	public void addRegisterAdmin(AdminDTO adminDTO) throws Exception ;
 	public void todayCnt() throws Exception;
 	public int getDiggingCnt() throws Exception; 
@@ -17,5 +18,5 @@ public interface AdminService {
 	public int getSaleCnt() throws Exception; 
 	public List<Map<String,Object>>getUserStaticList()throws Exception; 
 	public List<DiggingDTO> getNoticeList()throws Exception; 
-	public Integer getMonthOrder()throws Exception; 
+	public Integer getMonthOrder()throws Exception;
 }

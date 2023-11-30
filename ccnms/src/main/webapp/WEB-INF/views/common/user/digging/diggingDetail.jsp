@@ -149,7 +149,7 @@
 		                            		<c:choose>
 		                            			<c:when test="${diggingDTO.profile eq null }">
 		                            				<th><img src="${contextPath}/resources/bootstrap/img/icon/profile.jpg"  width="40" height="40"> ${diggingDTO.writer }
-			                            				&emsp;<button type="button" class="btn btn-primary btn-sm" id="writer" onclick="updateLike()">LIKE</button>
+			                            				&emsp;<button type="button" class="btn btn-primary btn-sm" id="writer" onclick="updateLike()">LIKE </button>
 							                            <input type="hidden" name=" writer" value="${diggingDTO.writer }">
 		                            				</th>
 		                            			</c:when>

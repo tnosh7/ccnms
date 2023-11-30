@@ -19,7 +19,11 @@ public class AdminDAOImpl implements AdminDAO {
 	public AdminDTO selectOneLoginAdmin(AdminDTO adminDTO) {
 		return sqlSession.selectOne("admin.selectOneLoginAdmin", adminDTO);
 	}
-
+	@Override
+	public AdminDTO selectOneAuthenticationAdmin(String adminId) throws Exception {
+		return sqlSession.selectOne("admin.selectOneAuthenticationAdmin", adminId);
+	}
+	
 	@Override
 	public void insertRegisterAdmin(AdminDTO adminDTO) {
 		sqlSession.insert("admin.insertRegisterAdmin", adminDTO);
@@ -64,5 +68,5 @@ public class AdminDAOImpl implements AdminDAO {
 	public Integer selectOneMonthOrder() throws Exception {
 		return sqlSession.selectOne("admin.selectOneMonthOrder");
 	}
-	
+
 }

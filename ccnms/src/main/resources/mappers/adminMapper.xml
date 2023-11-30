@@ -4,11 +4,19 @@
 <mapper namespace="admin">
 	<select id="selectOneLoginAdmin" parameterType="AdminDTO" resultType="AdminDTO">
 		SELECT 
-				*
+			*
 		FROM
-				ADMIN
+			ADMIN
 		WHERE 
-				ADMIN_ID = #{adminId}
+			ADMIN_ID = #{adminId}
+	</select>
+	<select id="selectOneAuthenticationAdmin" parameterType="String" resultType="AdminDTO">
+		SELECT 
+			*
+		FROM 
+			ADMIN
+		WHERE 
+			ADMIN_ID = #{adminId}
 	</select>
 	<insert id="insertRegisterAdmin" parameterType="AdminDTO">
 		INSERT INTO 

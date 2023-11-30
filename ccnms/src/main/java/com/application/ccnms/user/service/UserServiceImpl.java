@@ -160,6 +160,10 @@ public class UserServiceImpl implements UserService {
 		userDAO.updateLikePoint(writer);
 	}
 
+	@Override
+	public void userLogout(String userId) throws Exception {
+	}
+
 
 
 

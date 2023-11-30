@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+
 	function setQna() {
 		if("${sessionId==null}"=="true") {
 			Swal.fire({
@@ -164,9 +165,18 @@
                                 <div class="product__details__tab__desc">
                                     <h6>Q&A<span>(${shopDTO.qnaCnt })</span></h6>
                                     <p>구매하시는 상품에 대해 궁금한 점이 있으신 경우 문의해주세요.</p>
-                                    <div align="right">
-                                    	<input type="button" value="Q&A 작성" onclick="setQna();" >
-                                    </div>
+                                    <c:choose>
+                                    	<c:when test="${authenticationQna eq true}">
+                                    		<script>
+                                    			Swal.fire("이미 작성한 Q&A가 있습니다.");
+                                    		</script>
+                                    	</c:when>
+                                    	<c:otherwise>
+		                                    <div align="right">
+		                                    	<input type="button" value="Q&A 작성" onclick="setQna();" >
+		                                    </div>
+                                    	</c:otherwise>
+                                    </c:choose>
                                     <div id="qnaForm" style="display:none">
 	                                    <form action="${contextPath}/qna/addQna" method="get">
 					                        <span class="input-group-text">
