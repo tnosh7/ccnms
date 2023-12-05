@@ -157,8 +157,8 @@
                             <span style="color:black">디깅 토픽</span>
                         </div>
                         <ul style="background:ghostwhite">
-                            <li><a href="${contextPath }/digging/main?diggingTopic=game"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/icon/game.png"><strong>&emsp;게임</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=kPop"><img alt="케이팝에러" src="${contextPath }/resources/bootstrap/img/icon/kPop.png"><strong>&emsp;K-POP</strong></a></li>
+                            <li><a href="${contextPath }/digging/main?diggingTopic=game"><img alt="게임에러" src="${contextPath }/resources/bootstrap/img/icon/game.png"><strong>&emsp;게임</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=ott"><img alt="오티티에러" src="${contextPath }/resources/bootstrap/img/icon/ott.png"><strong>&emsp;OTT</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=animal"><img alt="펫에러" src="${contextPath }/resources/bootstrap/img/icon/animal.png"><strong>&emsp;동물 & 애완동물</strong></a></li>
                             <li><a href="${contextPath }/digging/main?diggingTopic=business"><img alt="비즈니스에러" src="${contextPath }/resources/bootstrap/img/icon/business.png"><strong>&emsp;비즈니스</strong></a></li>

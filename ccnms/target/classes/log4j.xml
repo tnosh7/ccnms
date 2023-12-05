@@ -9,7 +9,14 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	
+	<appender name="dailyFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- <param name="File" value="C://ccnms_logs//ccnms.log" />  -->		
+		<param name="File" value="/var/lib/tomcat9/logs/ccnms_log" /> 
+		<layout class="org.apache.log4j.PatternLayout">
+		  <param name="DatePattern"   value="'.'yyyy-MM-dd"/>  
+		  <param name="ConversionPattern"   value="[%d{HH:mm:ss}][%-5p](%F:%L)-%m%n"/>
+		</layout>
+	</appender>
 	<!-- Application Loggers -->
 	<logger name="com.application.ccnms">
 		<level value="info" />
@@ -17,19 +24,19 @@
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
-		<level value="info" />
+		<level value="warn" />
 	</logger>
 	
 	<logger name="org.springframework.beans">
-		<level value="info" />
+		<level value="warn" />
 	</logger>
 	
 	<logger name="org.springframework.context">
-		<level value="info" />
+		<level value="warn" />
 	</logger>
 
 	<logger name="org.springframework.web">
-		<level value="info" />
+		<level value="warn" />
 	</logger>
 
 	<!-- Root Logger -->
@@ -40,6 +47,7 @@
 	<logger name="jdbc.sqltiming" additivity="false">
 		<level value="info" />
 		<appender-ref ref="console"/> 
+		<appender-ref ref="dailyFileAppender"/> 		
 	</logger>
 	
 	<logger name="jdbc.sqlonly" additivity="false"> 

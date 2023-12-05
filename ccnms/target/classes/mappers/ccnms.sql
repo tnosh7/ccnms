@@ -1,4 +1,4 @@
-CREATE TABLE `ADMIN` (
+REATE TABLE `ADMIN` (
   `ADMIN_ID` varchar(30) NOT NULL,
   `ADMIN_NM` varchar(30) NOT NULL,
   `PASSWD` varchar(200) NOT NULL,
