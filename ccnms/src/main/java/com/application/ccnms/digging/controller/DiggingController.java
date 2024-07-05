@@ -45,62 +45,62 @@ public class DiggingController {
 	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	@GetMapping("/main")
-	public ModelAndView main(HttpServletRequest request,@RequestParam("diggingTopic") String diggingTopic, 
-							@RequestParam(required =false, value="sort") String sort, 
-							@RequestParam(required=false,value="dig") String dig) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/digging/main");
-		int onePageViewCnt = 10;
-		if (request.getParameter("onePageViewCnt") != null) {
-			onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
-		}
+	public ModelAndView main(HttpServletRequest request, @RequestParam("diggingTopic") String diggingTopic,
+	                         @RequestParam(required = false, value = "sort") String sort,
+	                         @RequestParam(required = false, value = "dig") String dig) throws Exception {
+	    ModelAndView mv = new ModelAndView();
+	    mv.setViewName("/digging/main");
 
-		String temp = request.getParameter("currentPageNumber");
-		if (temp == null) {
-			temp="1";
-		}
-		int currentPageNumber = Integer.parseInt(temp);
+	    int onePageViewCnt = 10;
+	    if (request.getParameter("onePageViewCnt") != null) {
+	        onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
+	    }
 
-		int allDiggingCnt = diggingService.getAllDiggingCnt(diggingTopic);
-		int allPageCnt = allDiggingCnt / onePageViewCnt + 1;
-		if (allDiggingCnt % onePageViewCnt == 0) {
-			allPageCnt--;
-		}
-		
-		int startPage = (currentPageNumber - 1) / 10 * 10 + 1;
-		if (startPage == 0) {
-			startPage = 1;
-		}
-		int endPage = startPage + 9;
-		if (endPage > allPageCnt) endPage = allPageCnt;
-		
-		int startDiggingIdx = (currentPageNumber -1) * onePageViewCnt;
+	    String temp = request.getParameter("currentPageNumber");
+	    if (temp == null) {
+	        temp = "1";
+	    }
+	    int currentPageNumber = Integer.parseInt(temp);
 
-		mv.addObject("startPage", startPage);
-		mv.addObject("endPage", endPage);
-		mv.addObject("allDiggingCnt", allDiggingCnt);
-		mv.addObject("allPageCnt", allPageCnt);
-		mv.addObject("onePageViewCnt", onePageViewCnt);
-		mv.addObject("currentPageNumber", currentPageNumber);
-		mv.addObject("startDiggingIdx",startDiggingIdx);
-		
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("onePageViewCnt", onePageViewCnt);
-		searchMap.put("startDiggingIdx", startDiggingIdx);
-		searchMap.put("diggingTopic", diggingTopic);
-		if (sort != null) searchMap.put("sort", sort);
-		if (dig != null) {
-			searchMap.put("dig", dig);
-		}
-		else {
-			searchMap.put("dig", "");
-		}
-		mv.addObject("sort", sort);
-		mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
-		mv.addObject("populerList", diggingService.getPopulerList(searchMap));
-		mv.addObject("diggingTopic", diggingTopic);
-		mv.addObject("digList",diggingService.getDigList(diggingTopic));
-		return mv;
+	    int allDiggingCnt = diggingService.getAllDiggingCnt(diggingTopic);
+
+	    // 전체 페이지 수 계산 수정
+	    int allPageCnt = (int) Math.ceil((double) allDiggingCnt / onePageViewCnt);
+
+	    int startPage = (currentPageNumber - 1) / 10 * 10 + 1;
+	    if (startPage == 0) {
+	        startPage = 1;
+	    }
+	    int endPage = startPage + 9;
+	    if (endPage > allPageCnt) endPage = allPageCnt;
+
+	    int startDiggingIdx = (currentPageNumber - 1) * onePageViewCnt;
+
+	    mv.addObject("startPage", startPage);
+	    mv.addObject("endPage", endPage);
+	    mv.addObject("allDiggingCnt", allDiggingCnt);
+	    mv.addObject("allPageCnt", allPageCnt);
+	    mv.addObject("onePageViewCnt", onePageViewCnt);
+	    mv.addObject("currentPageNumber", currentPageNumber);
+	    mv.addObject("startDiggingIdx", startDiggingIdx);
+
+	    Map<String, Object> searchMap = new HashMap<>();
+	    searchMap.put("onePageViewCnt", onePageViewCnt);
+	    searchMap.put("startDiggingIdx", startDiggingIdx);
+	    searchMap.put("diggingTopic", diggingTopic);
+	    if (sort != null) searchMap.put("sort", sort);
+	    if (dig != null) {
+	        searchMap.put("dig", dig);
+	    } else {
+	        searchMap.put("dig", "");
+	    }
+
+	    mv.addObject("sort", sort);
+	    mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
+	    mv.addObject("populerList", diggingService.getPopulerList(searchMap));
+	    mv.addObject("diggingTopic", diggingTopic);
+	    mv.addObject("digList", diggingService.getDigList(diggingTopic));
+	    return mv;
 	}
 	
 	@GetMapping("/addDigging")
