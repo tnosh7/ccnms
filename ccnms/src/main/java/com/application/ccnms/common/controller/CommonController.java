@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.common.service.CommonService;
 import com.application.ccnms.digging.dto.DiggingDTO;
+import com.application.ccnms.shop.dto.ShopDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
 import net.coobird.thumbnailator.Thumbnails;
@@ -36,59 +37,26 @@ public class CommonController {
 	
 	
 	@GetMapping("/")
-	public ModelAndView home(@RequestParam(required =false, value="sort") String sort, HttpServletRequest request) throws Exception {
-	
-		ModelAndView mv = new ModelAndView();
-		int onePageViewCnt = 10;
-		if (request.getParameter("onePageViewCnt") != null) {
-			onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
-		}
+	public ModelAndView home(@RequestParam(required = false, value = "sort") String sort) throws Exception {
 
-		String temp = request.getParameter("currentPageNumber");
-		if (temp == null) {
-			temp="1";
-		}
-		int currentPageNumber = Integer.parseInt(temp);
+	    ModelAndView mv = new ModelAndView();
 
-		int allDiggingCnt = commonService.getAllDiggingCnt();
-		
-		int allPageCnt = allDiggingCnt / onePageViewCnt + 1;
-		if (allDiggingCnt % allPageCnt == 0) {
-			allPageCnt--;
-		}
-		
-		int startPage = (currentPageNumber - 1) / 10 * 10 + 1;
-		if (startPage == 0) {
-			startPage = 1;
-		}
-		int endPage = startPage + 9;
-		if (endPage > allPageCnt) endPage = allPageCnt;
-		
-		int startDiggingIdx = (currentPageNumber -1) * onePageViewCnt;
-		
+	    // 필터링을 위한 파라미터 설정
+	    Map<String, Object> sortMap = new HashMap<>();
+	    sortMap.put("sort", sort);
 
-		mv.addObject("startPage", startPage);
-		mv.addObject("endPage", endPage);
-		mv.addObject("allDiggingCnt", allDiggingCnt);
-		mv.addObject("allPageCnt", allPageCnt);
-		mv.addObject("onePageViewCnt", onePageViewCnt);
-		mv.addObject("currentPageNumber", currentPageNumber);
-		mv.addObject("startDiggingIdx",startDiggingIdx);
-		
-		Map<String, Object> sortMap = new HashMap<String, Object>();
-		sortMap.put("onePageViewCnt", onePageViewCnt);
-		sortMap.put("startDiggingIdx", startDiggingIdx);
-		sortMap.put("sort", sort);
-		mv.addObject("diggingList", commonService.getDiggingList(sortMap));
-		mv.addObject("sort", sort);
-		
-		mv.addObject("headList", commonService.getHeadList());
-		mv.addObject("recentShopList", commonService.getRecentShopList());
-		mv.addObject("populerShopList", commonService.getPopulerShopList());
-		mv.addObject("exchangeShopList", commonService.getExchangeShopList());
-		
-		mv.setViewName("/common/main");
-		return mv;
+	    // 서비스로부터 데이터를 가져오기
+	    mv.addObject("diggingList", commonService.getDiggingList(sortMap));
+	    mv.addObject("sort", sort);
+
+	    // 추가 정보 가져오기
+	    mv.addObject("headList", commonService.getHeadList());
+	    List<ShopDTO> populerShopList = commonService.getPopulerShopList();
+	    mv.addObject("populerShopList", populerShopList);
+	 
+	    // 뷰 설정
+	    mv.setViewName("/common/main");
+	    return mv;
 	}
 
 	@GetMapping("/updateThumbsUp")

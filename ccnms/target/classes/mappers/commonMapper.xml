@@ -3,152 +3,157 @@
 
 <mapper namespace="common">
 	<select id="selectOneAllDiggingCnt" resultType="int">
-		SELECT 
-			COUNT(*)
-		FROM 
-			DIGGING
+		SELECT
+		COUNT(*)
+		FROM
+		DIGGING
 		WHERE
-			DIGGING_TOPIC NOT IN ('notice','ad')
+		DIGGING_TOPIC NOT IN ('notice','ad')
 	</select>
-	
+
 	<resultMap type="hashmap" id="diggingUserListMap">
-		<result column="DIGGING_ID" property="diggingId"/>
-		<result column="USER_ID" property="userId"/>
-		<result column="SUBJECT" property="subject"/>
-		<result column="CONTENT" property="content"/>
-		<result column="READ_CNT" property="readCnt"/>
-		<result column="DIGGING_TOPIC" property="diggingTopic"/>
-		<result column="ENROLL_DT" property="enrollDT"/>
-		<result column="REPLY_CNT" property="replyCnt"/>
-		<result column="THUMBS_UP" property="thumbsUp"/>
-		<result column="FILE" property="file"/>
-		<result column="PROFILE" property="profile"/>
-		<result column="LIKE_POINT" property="likePoint"/>
+		<result column="DIGGING_ID" property="diggingId" />
+		<result column="USER_ID" property="userId" />
+		<result column="SUBJECT" property="subject" />
+		<result column="CONTENT" property="content" />
+		<result column="READ_CNT" property="readCnt" />
+		<result column="DIGGING_TOPIC" property="diggingTopic" />
+		<result column="ENROLL_DT" property="enrollDT" />
+		<result column="REPLY_CNT" property="replyCnt" />
+		<result column="THUMBS_UP" property="thumbsUp" />
+		<result column="FILE" property="file" />
+		<result column="PROFILE" property="profile" />
+		<result column="LIKE_POINT" property="likePoint" />
 	</resultMap>
-	<select id="selectListDiggingList" parameterType="hashmap"  resultMap="diggingUserListMap">
-		SELECT 
-				D.DIGGING_ID	AS DIGGING_ID,
-				D.WRITER		AS USER_ID, 
-				D.SUBJECT		AS SUBJECT,
-				D.CONTENT		AS CONTENT,
-				D.READ_CNT		AS READ_CNT,
-				D.DIGGING_TOPIC	AS DIGGING_TOPIC,
-				D.ENROLL_DT		AS ENROLL_DT,
-				D.REPLY_CNT		AS REPLY_CNT,
-				D.THUMBS_UP		AS THUMBS_UP,
-				D.FILE			AS FILE,
-				U.PROFILE		AS PROFILE
-		FROM 
-				DIGGING AS D
-			JOIN USER	 AS U
-				 ON		D.WRITER = U.USER_ID
-		WHERE 
-			D.DIGGING_TOPIC NOT IN ("NOTICE", "AD")
-		ORDER BY 
+
+	<select id="selectListDiggingList" parameterType="hashmap"
+		resultMap="diggingUserListMap">
+		SELECT
+		D.DIGGING_ID AS DIGGING_ID,
+		D.WRITER AS USER_ID,
+		D.SUBJECT AS SUBJECT,
+		D.CONTENT AS CONTENT,
+		D.READ_CNT AS READ_CNT,
+		D.DIGGING_TOPIC AS DIGGING_TOPIC,
+		D.ENROLL_DT AS ENROLL_DT,
+		D.REPLY_CNT AS REPLY_CNT,
+		D.THUMBS_UP AS THUMBS_UP,
+		D.FILE AS FILE,
+		U.PROFILE AS PROFILE
+		FROM
+		DIGGING AS D
+		JOIN USER AS U
+		ON D.WRITER = U.USER_ID
+		WHERE
+		D.DIGGING_TOPIC NOT IN ("NOTICE", "AD")
+		ORDER BY
 		<if test='sort == "readCnt"'>
-			D.READ_CNT DESC	
-		</if> 
-		<if test='sort== "thumbsUp"'>
-			D.THUMBS_UP DESC	
-		</if> 
+			D.READ_CNT DESC
+		</if>
+		<if test='sort == "thumbsUp"'>
+			D.THUMBS_UP DESC
+		</if>
 		<if test='sort == "recent"'>
-			D.DIGGING_ID DESC	
+			D.DIGGING_ID DESC
 		</if>
 		<if test='sort == null'>
-			D.DIGGING_ID DESC	
+			D.DIGGING_ID DESC
 		</if>
-		LIMIT 
-			#{startDiggingIdx}, #{onePageViewCnt}		
 	</select>
-	
-	<select id="selectListHeadList" resultType="DiggingDTO">
-		SELECT 
-			*
-		FROM 
-			DIGGING
-		WHERE
-			DIGGING_TOPIC = "ad" 
-	</select>
-	
-	<update id="updateThumbsUp" parameterType="long">
-		UPDATE 
-			DIGGING
-		SET
-			THUMBS_UP = THUMBS_UP + 1
-		WHERE 
-			DIGGING_ID = #{diggingId}
-	</update>
-	<select id="selectThumbsUp" parameterType="long" resultType="int"> 
-		SELECT
-			THUMBS_UP
-		FROM
-			DIGGING
-		WHERE 
-			DIGGING_ID = #{diggingId}
-	</select>
-	
-	<select id="selectListRecentShopList" resultType="ShopDTO">
-		SELECT 
-			*
-		FROM 
-			SHOP
-		WHERE
-			SORT NOT IN ('exchange')		
-		ORDER BY 
-			ENROLL_DT DESC
-		LIMIT 
-			3 
-	</select>
-	<select id="selectListPopulerShopList" resultType="ShopDTO">
-		SELECT 
-			*
-		FROM 
-			SHOP
-		WHERE
-			SORT NOT IN ('exchange')	
-		ORDER BY 
-			READ_CNT DESC
-		LIMIT
-			3
-	</select>
-	<select id="selectListgetExchangeShopList" resultType="ShopDTO">
-		SELECT 
-			*
-		FROM
-			SHOP
-		WHERE 
-			SORT = "exchange"
-		ORDER BY 
-			READ_CNT DESC
-		LIMIT
-			3
-	</select>
-	<select id="selectListDiggingSearch" parameterType="String" resultType="DiggingDTO">
-		SELECT 
-				*
-		FROM 
-				DIGGING
-		WHERE
-				SUBJECT LIKE CONCAT('%',#{search},'%') OR
-				CONTENT LIKE CONCAT('%',#{search},'%') OR
-				WRITER	LIKE CONCAT('%',#{search},'%')
-		ORDER BY 
-				READ_CNT DESC
-	</select>	
-	<select id="selectListShopSearch" parameterType="String" resultType="ShopDTO">
-		SELECT 
-				*
-		FROM 
-				SHOP
-		WHERE
-				PRODUCT_NM LIKE CONCAT('%',#{search},'%') OR
-				WRITER LIKE CONCAT('%',#{search},'%') OR
-				CONTENT LIKE CONCAT('%',#{search},'%') 
-		ORDER BY 
-				READ_CNT DESC		
-	</select>	
-	
 
+	<select id="selectListHeadList" resultType="DiggingDTO">
+		SELECT
+		*
+		FROM
+		DIGGING
+		WHERE
+		DIGGING_TOPIC = "ad"
+	</select>
+
+	<update id="updateThumbsUp" parameterType="long">
+		UPDATE
+		DIGGING
+		SET
+		THUMBS_UP = THUMBS_UP + 1
+		WHERE
+		DIGGING_ID = #{diggingId}
+	</update>
+	<select id="selectThumbsUp" parameterType="long"
+		resultType="int">
+		SELECT
+		THUMBS_UP
+		FROM
+		DIGGING
+		WHERE
+		DIGGING_ID = #{diggingId}
+	</select>
 	
-	
+	   <resultMap id="shopResultMap" type="ShopDTO">
+        <result property="productCd" column="PRODUCT_CD"/>
+        <result property="productNm" column="PRODUCT_NM"/>
+        <result property="writer" column="WRITER"/>
+        <result property="price" column="PRICE"/>
+        <result property="discountRate" column="DISCOUNT_RATE"/>
+        <result property="stock" column="STOCK"/>
+        <result property="sort" column="SORT"/>
+        <result property="deliveryMethod" column="DELIVERY_METHOD"/>
+        <result property="deliveryPrice" column="DELIVERY_PRICE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="productFile" column="PRODUCT_FILE"/>
+        <result property="qnaCnt" column="QNA_CNT"/>
+        <result property="enrollDt" column="ENROLL_DT"/>
+        <result property="readCnt" column="READ_CNT"/>
+    </resultMap>
+
+    <!-- 각각의 쿼리를 하나로 합치기 -->
+    <select id="selectListPopulerShopList" resultMap="shopResultMap">
+        SELECT 
+            *, 
+            'ModuDigging' AS SORT_TYPE 
+        FROM 
+            (SELECT * FROM SHOP WHERE SORT = 'ModuDigging' ORDER BY ENROLL_DT DESC LIMIT 3) AS recent
+        UNION ALL
+        SELECT 
+            *, 
+            'sale' AS SORT_TYPE 
+        FROM 
+            (SELECT * FROM SHOP WHERE SORT = 'sale' ORDER BY READ_CNT DESC LIMIT 3) AS populer
+        UNION ALL
+        SELECT 
+            *, 
+            'exchange' AS SORT_TYPE 
+        FROM 
+            (SELECT * FROM SHOP WHERE SORT = 'exchange' ORDER BY READ_CNT DESC LIMIT 3) AS exchange
+    </select>
+
+	<select id="selectListDiggingSearch" parameterType="String"
+		resultType="DiggingDTO">
+		SELECT
+		*
+		FROM
+		DIGGING
+		WHERE
+		SUBJECT LIKE CONCAT('%',#{search},'%') OR
+		CONTENT LIKE CONCAT('%',#{search},'%') OR
+		WRITER LIKE CONCAT('%',#{search},'%')
+		ORDER BY
+		READ_CNT DESC
+	</select>
+	<select id="selectListShopSearch" parameterType="String"
+		resultType="ShopDTO">
+		SELECT
+		*
+		FROM
+		SHOP
+		WHERE
+		PRODUCT_NM LIKE CONCAT('%',#{search},'%') OR
+		WRITER LIKE CONCAT('%',#{search},'%') OR
+		CONTENT LIKE CONCAT('%',#{search},'%')
+		ORDER BY
+		READ_CNT DESC
+	</select>
+
+
+
+
 </mapper>

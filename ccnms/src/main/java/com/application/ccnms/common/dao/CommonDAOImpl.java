@@ -42,18 +42,8 @@ public class CommonDAOImpl implements CommonDAO {
 	}
 
 	@Override
-	public List<ShopDTO> selectListRecentShopList() throws Exception {
-		return sqlSession.selectList("common.selectListRecentShopList");
-	}
-
-	@Override
 	public List<ShopDTO> selectListPopulerShopList() throws Exception {
 		return sqlSession.selectList("common.selectListPopulerShopList");
-	}
-
-	@Override
-	public List<ShopDTO> selectListgetExchangeShopList() throws Exception {
-		return sqlSession.selectList("common.selectListgetExchangeShopList");
 	}
 
 	@Override
