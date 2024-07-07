@@ -12,8 +12,12 @@ import com.application.ccnms.user.dto.UserDTO;
 @Component
 public class AdminUserDAOImpl implements AdminUserDAO {
 
-	@Autowired
 	private SqlSession sqlSession;
+
+	@Autowired
+	public AdminUserDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
 	@Override
 	public List<UserDTO> selectListUser() throws Exception {

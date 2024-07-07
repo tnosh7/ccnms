@@ -12,9 +12,13 @@ import com.application.ccnms.contact.dto.ContactDTO;
 @Service
 public class AdminContactServiceImpl implements AdminContactService {
 
-	@Autowired
+	
 	private AdminContactDAO adminContactDAO;
-
+	
+	@Autowired
+	public AdminContactServiceImpl(AdminContactDAO adminContactDAO) {
+		this.adminContactDAO = adminContactDAO;
+	}
 	@Override
 	public List<ContactDTO> getContactList() throws Exception {
 		return adminContactDAO.selectListContactList();

@@ -14,10 +14,13 @@ import com.application.ccnms.shop.dto.ShopDTO;
 
 public class AdminShopServiceImpl implements AdminShopService {
 	
-	@Autowired
+	
 	private AdminShopDAO adminShopDAO;
 
-
+	@Autowired
+	public AdminShopServiceImpl(AdminShopDAO adminShopDAO) {
+		this.adminShopDAO = adminShopDAO;
+	}
 	@Override
 	public List<ShopDTO> getShopList() throws Exception {
 		return adminShopDAO.selectListShop();

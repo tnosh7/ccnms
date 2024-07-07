@@ -177,7 +177,7 @@
                                 aria-expanded="false"
                                 disabled="disabled"
                               >
-                                2023
+                                2024
                               </button>
                             </div>
                           </div>
@@ -191,7 +191,7 @@
                               <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
                             </div>
                             <div class="d-flex flex-column">
-                              <small>11월</small>
+                              <small>7월</small>
                               <h6 class="mb-0"><fmt:formatNumber value="${monthOrder }"/>원</h6>
                             </div>
                           </div>
@@ -274,7 +274,7 @@
                             <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                               <div class="card-title">
                                 <h5 class="text-nowrap mb-2"><strong>* 유저 가입률</strong></h5>
-                                <span class="badge bg-label-warning rounded-pill">Year 2023</span>
+                                <span class="badge bg-label-warning rounded-pill">Year 2024</span>
                               </div>
                               <div class="mt-sm-auto">
                               	<c:forEach var="userStatic" items="${userStaticList}">

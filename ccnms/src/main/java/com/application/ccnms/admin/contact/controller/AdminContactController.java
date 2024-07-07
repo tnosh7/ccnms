@@ -22,8 +22,14 @@ import com.application.ccnms.contact.service.ContactService;
 @RequestMapping("/admin/contact")
 public class AdminContactController {
 
-	@Autowired
+	
 	private AdminContactService adminContactService;
+
+	
+	@Autowired
+	public AdminContactController(AdminContactService adminContactService) {
+		this.adminContactService = adminContactService;
+	}
 
 	@GetMapping("/contactList") 
 	public ModelAndView contactList(@RequestParam(required =false, value="searchWord")String searchWord, @RequestParam(required =false, value="searchKey")String searchKey) throws Exception {

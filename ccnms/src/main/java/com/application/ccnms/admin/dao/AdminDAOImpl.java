@@ -12,9 +12,14 @@ import com.application.ccnms.digging.dto.DiggingDTO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
-	@Autowired
+	
 	private SqlSession sqlSession;
-
+	
+	
+	@Autowired
+	public AdminDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 	@Override
 	public AdminDTO selectOneLoginAdmin(AdminDTO adminDTO) {
 		return sqlSession.selectOne("admin.selectOneLoginAdmin", adminDTO);

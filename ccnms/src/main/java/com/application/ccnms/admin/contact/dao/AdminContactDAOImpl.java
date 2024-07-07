@@ -12,9 +12,13 @@ import com.application.ccnms.contact.dto.ContactDTO;
 @Repository
 public class AdminContactDAOImpl implements AdminContactDAO {
 
-	@Autowired
+	
 	private SqlSession sqlSession;
-
+	
+	@Autowired
+	public AdminContactDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 	@Override
 	public List<ContactDTO> selectListContactList() throws Exception {
 		return sqlSession.selectList("adminContact.selectListContactList");

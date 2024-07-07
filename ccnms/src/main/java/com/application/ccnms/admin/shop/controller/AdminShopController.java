@@ -40,12 +40,20 @@ import com.application.ccnms.shop.dto.ShopDTO;
 @RequestMapping("/admin/shop")
 public class AdminShopController {
 
-	@Autowired
+	
 	private AdminShopService adminShopService;
 	
-//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	//private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
+	
+	
+	@Autowired
+	public AdminShopController(AdminShopService adminShopService) {
+		super();
+		this.adminShopService = adminShopService;
+	}
+
 	@GetMapping("/shopList")
 	public ModelAndView shopManagement(@RequestParam(required =false, value="searchWord")String searchWord, @RequestParam(required =false, value="searchKey")String searchKey) throws Exception{
 		ModelAndView mv = new ModelAndView();

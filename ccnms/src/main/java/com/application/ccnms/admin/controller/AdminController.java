@@ -19,9 +19,15 @@ import com.application.ccnms.admin.service.AdminService;
 @RequestMapping("/admin")
 public class AdminController {
 
-	@Autowired
+	
 	private AdminService adminService;
 	
+	
+	@Autowired
+	public AdminController(AdminService adminService) {
+		this.adminService = adminService;
+	}
+
 	@GetMapping("/main") 
 	public ModelAndView main () throws Exception{
 		ModelAndView mv = new ModelAndView();

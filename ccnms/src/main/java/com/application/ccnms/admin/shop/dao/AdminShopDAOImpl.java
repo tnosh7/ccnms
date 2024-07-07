@@ -13,9 +13,14 @@ import com.application.ccnms.shop.dto.ShopDTO;
 @Repository
 public class AdminShopDAOImpl implements AdminShopDAO {
 
-	@Autowired
+	
 	private SqlSession sqlSession;
-
+	
+	@Autowired
+	public AdminShopDAOImpl(SqlSession sqlSession) {
+		super();
+		this.sqlSession = sqlSession;
+	}
 	@Override
 	public List<ShopDTO> selectListShop() throws Exception {
 		return sqlSession.selectList("adminShop.selectListShop");

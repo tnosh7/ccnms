@@ -19,18 +19,19 @@ import com.application.ccnms.digging.dto.DiggingDTO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-	
-	@Autowired
+
 	private AdminDAO adminDAO;
-
-	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	@Autowired
 	private static Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	String today = sdf.format(new Date());
+	
+	@Autowired
+	public AdminServiceImpl(AdminDAO adminDAO, BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.adminDAO = adminDAO;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
 
 	@Override
 	public boolean loginAdmin(AdminDTO adminDTO) throws Exception {

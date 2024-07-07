@@ -35,7 +35,7 @@
 		FROM
 			REPLY
 		WHERE
-			LEFT(ENROLL_DT, 10) = #{today}
+			ENROLL_DT >= DATE_SUB(NOW(),INTERVAL 30 DAY)
 	
 	</select>
 	<select id="selectOneTodayDiggingCnt" parameterType="String" resultType="int">
@@ -44,7 +44,7 @@
 		FROM
 			DIGGING
 		WHERE
-			LEFT(ENROLL_DT, 10) = #{today}
+			ENROLL_DT >= DATE_SUB(NOW(),INTERVAL 30 DAY)
 
 	</select>
 	<select id="selectOneTodayUserCnt" parameterType="String" resultType="int">
@@ -53,7 +53,7 @@
 		FROM
 			USER
 		WHERE
-			LEFT(JOIN_DT, 10) = #{today}
+			JOIN_DT >= DATE_SUB(NOW(),INTERVAL 30 DAY)
 	
 	</select>
 	<select id="selectOneTodayShopCnt" parameterType="String" resultType="int">
@@ -62,7 +62,7 @@
 		FROM
 			SHOP
 		WHERE
-			LEFT(ENROLL_DT, 10) = #{today}
+			ENROLL_DT >= DATE_SUB(NOW(),INTERVAL 30 DAY)
 	
 	</select>
 	<select id="selectOneTodaySaleCnt" parameterType="String" resultType="int">
@@ -71,7 +71,7 @@
 		FROM
 			ORDERED
 		WHERE
-			LEFT(PAY_ORDER_TIME, 10) = #{today}
+			PAY_ORDER_TIME >= DATE_SUB(NOW(),INTERVAL 30 DAY)
 	</select>
 	
 	<resultMap type="hashmap" id="userStaticMap">

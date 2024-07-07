@@ -13,8 +13,13 @@ import com.application.ccnms.user.dto.UserDTO;
 @Service
 public class AdminUserServiceImpl implements AdminUserService {
 
-	@Autowired
+	
 	private AdminUserDAO adminUserDAO;
+
+	@Autowired
+	public AdminUserServiceImpl(AdminUserDAO adminUserDAO) {
+		this.adminUserDAO = adminUserDAO;
+	}
 
 	@Override
 	public List<UserDTO> getUserList() throws Exception {

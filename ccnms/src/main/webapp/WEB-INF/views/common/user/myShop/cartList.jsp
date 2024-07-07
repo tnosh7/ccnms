@@ -8,11 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	a {color:black}
-  	a:visited { color:black; }
-	a:hover { color:purple; }   
-</style>
+<link href="${contextPath}/resources/css/shop.css" rel="stylesheet">
+<script src="${contextPath}/resources/js/shop.js"></script>
 <script>
 	$().ready(function(){
 		getTotalPrice();
