@@ -9,8 +9,15 @@ import com.application.ccnms.contact.dto.ContactDTO;
 @Repository
 public class ContactDAOImpl implements ContactDAO {
 
-	@Autowired
+	
 	private SqlSession sqlSession;
+	
+	
+	
+	@Autowired
+	public ContactDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
 	@Override
 	public void insertContact(ContactDTO contactDTO) throws Exception {

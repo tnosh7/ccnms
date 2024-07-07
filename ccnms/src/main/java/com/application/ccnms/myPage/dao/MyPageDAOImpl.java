@@ -14,8 +14,13 @@ import com.application.ccnms.user.dto.UserDTO;
 @Repository
 public class MyPageDAOImpl implements MyPageDAO {
 
-	@Autowired
+	
 	private SqlSession sqlSession;
+
+	@Autowired
+	public MyPageDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
 	@Override
 	public void insertProfile(UserDTO userDTO) throws Exception {

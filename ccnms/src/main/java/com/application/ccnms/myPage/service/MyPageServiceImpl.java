@@ -17,12 +17,16 @@ import com.application.ccnms.user.dto.UserDTO;
 
 public class MyPageServiceImpl implements MyPageService {
 	
-	@Autowired
+
 	private MyPageDAO myPageDAO;
-	
-	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	
+	@Autowired
+	public MyPageServiceImpl(MyPageDAO myPageDAO, BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.myPageDAO = myPageDAO;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
 	@Transactional
 	@Override
 	public void addProfile(UserDTO userDTO) throws Exception {

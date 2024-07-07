@@ -14,8 +14,14 @@ import com.application.ccnms.shop.dto.ShopDTO;
 @Repository
 public class MyShopDAOImpl implements MyShopDAO {
 
-	@Autowired
+	
 	private SqlSession sqlSession;
+
+	
+	@Autowired
+	public MyShopDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
 	@Override
 	public ShopDTO selectOneShopDTO(long productCd) throws Exception {

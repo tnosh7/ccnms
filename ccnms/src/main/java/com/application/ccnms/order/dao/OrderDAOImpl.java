@@ -16,8 +16,14 @@ import com.application.ccnms.user.dto.UserDTO;
 @Repository
 public class OrderDAOImpl implements OrderDAO {
 
-	@Autowired
+	
 	private SqlSession sqlSession;
+
+	
+	@Autowired
+	public OrderDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
 	@Override
 	public ShopDTO selectOneShopDTO(long productCd) throws Exception {

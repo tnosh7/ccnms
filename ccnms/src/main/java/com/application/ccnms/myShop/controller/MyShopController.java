@@ -38,12 +38,16 @@ import com.application.ccnms.user.service.UserService;
 @RequestMapping("/myShop")
 public class MyShopController {
 	
-	@Autowired
 	private MyShopService myShopService;
-	
-	@Autowired
 	private UserService userService;
 	
+	
+	@Autowired
+	public MyShopController(MyShopService myShopService, UserService userService) {
+		this.myShopService = myShopService;
+		this.userService = userService;
+	}
+
 	@GetMapping("/myCart")
 	public ModelAndView myCart(@RequestParam("productCd") long productCd) throws Exception{
 		ModelAndView mv = new ModelAndView("/myShop/myCart");

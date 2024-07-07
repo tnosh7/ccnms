@@ -20,12 +20,15 @@ import com.application.ccnms.shop.service.ShopService;
 @RequestMapping("/qna")
 public class QnaController {
 
-	@Autowired
 	private QnaService qnaService; 
-	
-	@Autowired
 	private ShopService shopService;
 	
+	@Autowired
+	public QnaController(QnaService qnaService, ShopService shopService) {
+		this.qnaService = qnaService;
+		this.shopService = shopService;
+	}
+
 	@GetMapping("/qnaList")
 	public ModelAndView qnaList(HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();

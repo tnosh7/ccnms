@@ -10,9 +10,17 @@ import com.application.ccnms.contact.dto.ContactDTO;
 @Service
 public class ContactServiceImpl implements ContactService {
 
-	@Autowired
+	
 	private ContactDAO contactDAO;
 	
+	
+	@Autowired
+	public ContactServiceImpl(ContactDAO contactDAO) {
+		this.contactDAO = contactDAO;
+	}
+
+
+
 	@Transactional
 	@Override
 	public void addContact(ContactDTO contactDTO) throws Exception{

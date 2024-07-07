@@ -26,13 +26,15 @@ import com.application.ccnms.user.service.UserService;
 @RequestMapping("/order")
 public class OrderController {
 	
-	@Autowired 
 	private OrderService orderService;
-	
-	@Autowired
 	private UserService userService;
 	
-	
+	@Autowired
+	public OrderController(OrderService orderService, UserService userService) {
+		this.orderService = orderService;
+		this.userService = userService;
+	}
+
 	@GetMapping("/cartOrderSheet")
 	public ModelAndView orderCart (@RequestParam("cartCdList") String cartCdList , 
 								   @RequestParam("productCdList") String productCdList , 

@@ -19,9 +19,14 @@ import com.application.ccnms.user.dto.UserDTO;
 @Service
 public class OrderServiceImpl implements OrderService {
 	
-	@Autowired
+	
 	private OrderDAO orderDAO;
 	
+	@Autowired
+	public OrderServiceImpl(OrderDAO orderDAO) {
+		this.orderDAO = orderDAO;
+	}
+
 	@Override
 	public ShopDTO getShopDTO(long productCd) throws Exception {
 		return orderDAO.selectOneShopDTO(productCd);

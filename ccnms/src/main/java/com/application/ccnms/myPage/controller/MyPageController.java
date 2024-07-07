@@ -41,10 +41,15 @@ public class MyPageController {
 //	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
-	@Autowired
+	
 	private MyPageService myPageService;
 	
-	
+	@Autowired
+	public MyPageController(MyPageService myPageService) {
+		this.myPageService = myPageService;
+	}
+
+
 	@GetMapping("/main")
 	public ModelAndView myPage(HttpServletRequest request) throws Exception {
 

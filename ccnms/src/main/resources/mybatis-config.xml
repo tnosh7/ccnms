@@ -7,16 +7,19 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias type="com.application.ccnms.user.dto.UserDTO" 		alias="UserDTO"/>
-		<typeAlias type="com.application.ccnms.admin.dto.AdminDTO" 		alias="AdminDTO"/>
-		<typeAlias type="com.application.ccnms.digging.dto.DiggingDTO"  alias="DiggingDTO"/>
-		<typeAlias type="com.application.ccnms.reply.dto.ReplyDTO" 		alias="ReplyDTO"/>
-		<typeAlias type="com.application.ccnms.shop.dto.ShopDTO" 		alias="ShopDTO"/>
-		<typeAlias type="com.application.ccnms.myShop.dto.CartDTO" 		alias="CartDTO"/>
-		<typeAlias type="com.application.ccnms.myShop.dto.KeepDTO" 		alias="KeepDTO"/>
-		<typeAlias type="com.application.ccnms.contact.dto.ContactDTO"	alias="ContactDTO"/>
-		<typeAlias type="com.application.ccnms.order.dto.OrderDTO"		alias="OrderDTO"/>
-		<typeAlias type="com.application.ccnms.qna.dto.QnaDTO"			alias="QnaDTO"/>
+		<typeAlias type="com.application.ccnms.user.dto.UserDTO" 		 	alias="UserDTO"/>
+		<typeAlias type="com.application.ccnms.admin.dto.AdminDTO" 		 	alias="AdminDTO"/>
+		<typeAlias type="com.application.ccnms.digging.dto.DiggingDTO"   	alias="DiggingDTO"/>
+		<typeAlias type="com.application.ccnms.digging.dto.MainTitleDTO" 	alias="MainTitleDTO"/>
+		<typeAlias type="com.application.ccnms.digging.dto.SubTitleDTO"	 	alias="SubTitleDTO"/>
+		<typeAlias type="com.application.ccnms.digging.dto.JoinTitleDTO"	alias="JoinTitleDTO"/>
+		<typeAlias type="com.application.ccnms.reply.dto.ReplyDTO" 		 	alias="ReplyDTO"/>
+		<typeAlias type="com.application.ccnms.shop.dto.ShopDTO" 			alias="ShopDTO"/>
+		<typeAlias type="com.application.ccnms.myShop.dto.CartDTO" 		 	alias="CartDTO"/>
+		<typeAlias type="com.application.ccnms.myShop.dto.KeepDTO" 			alias="KeepDTO"/>
+		<typeAlias type="com.application.ccnms.contact.dto.ContactDTO"	 	alias="ContactDTO"/>
+		<typeAlias type="com.application.ccnms.order.dto.OrderDTO"			alias="OrderDTO"/>
+		<typeAlias type="com.application.ccnms.qna.dto.QnaDTO"				alias="QnaDTO"/>
 	</typeAliases>
 
 
