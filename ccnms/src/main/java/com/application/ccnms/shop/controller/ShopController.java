@@ -35,12 +35,17 @@ import net.coobird.thumbnailator.Thumbnails;
 @RequestMapping("/shop")
 public class ShopController {
 
-	@Autowired
+	
 	private ShopService shopService;
 	
 //	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
+	@Autowired
+	public ShopController(ShopService shopService) {
+	this.shopService = shopService;
+}
+
 	@GetMapping("/")
 	public ModelAndView shop(@RequestParam(required =false, value="sort") String sort, HttpServletRequest request, 
 							 @RequestParam(required = false, value="bestSort") String bestSort) throws Exception {

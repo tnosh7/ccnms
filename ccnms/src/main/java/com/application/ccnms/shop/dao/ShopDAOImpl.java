@@ -13,9 +13,12 @@ import com.application.ccnms.shop.dto.ShopDTO;
 @Repository
 public class ShopDAOImpl implements ShopDAO {
 
-	@Autowired
 	private SqlSession sqlSession;
 
+	@Autowired
+	public ShopDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 	@Override
 	public void insertProduct(ShopDTO shopDTO) {
 		sqlSession.insert("shop.insertProduct", shopDTO);

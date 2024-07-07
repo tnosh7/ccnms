@@ -102,7 +102,7 @@
                                     	<c:forEach var="latestDTO" items="${latestList}" begin="0" end="2">
                                         <a href="${contextPath }/shop/shopDetail?productCd=${latestDTO.productCd }" class="latest-product__item">
                                             <div class="latest-product__item__text">
-                                                <h6>[ ${latestDTO.writer} ] l${latestDTO.productNm }</h6>
+                                                <h6>${latestDTO.productNm }</h6>
                                                 <span style="text-decoration: line-through; color: red">${latestDTO.price }</span>
                                                  <span><fmt:formatNumber value="${latestDTO.price - latestDTO.price * latestDTO.discountRate / 100}"/>원</span>	
                                             </div>

@@ -12,8 +12,13 @@ import com.application.ccnms.shop.dto.ShopDTO;
 
 @Service
 public class ShopServiceImpl implements ShopService {
-	@Autowired
+	
 	private ShopDAO shopDAO;
+	
+	@Autowired
+	public ShopServiceImpl(ShopDAO shopDAO) {
+		this.shopDAO = shopDAO;
+	}
 
 	@Override
 	public void addProduct(ShopDTO shopDTO) throws Exception {

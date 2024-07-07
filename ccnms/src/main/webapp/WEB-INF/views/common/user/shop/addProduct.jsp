@@ -7,20 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	 li{
-		 list-style-type: none;
-	 }
-  .ck-editor__editable[role="textbox"] {
-    min-height: 300px;
-  }
-
-  .ck-content .image {
-    max-width: 80%;
-    margin: 20px auto;
-  }
-
-</style>
+<link href="${contextPath}/resources/css/shop.css" rel="stylesheet">
+<script src="${contextPath}/resources/js/shop.js"></script>
 <script>
 
 	$().ready(function(){
