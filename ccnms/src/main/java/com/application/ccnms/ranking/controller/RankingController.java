@@ -16,9 +16,14 @@ import com.application.ccnms.ranking.service.RankingService;
 @RequestMapping("/ranking")
 public class RankingController {
 	
-	@Autowired
+	
 	private RankingService rankingService;
 	
+	@Autowired
+	public RankingController(RankingService rankingService) {
+		this.rankingService = rankingService;
+	}
+
 	@GetMapping("/ranking")
 	public ModelAndView ranking()throws Exception {
 		ModelAndView mv = new ModelAndView();
