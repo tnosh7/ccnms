@@ -13,27 +13,35 @@ import com.application.ccnms.user.dto.UserDTO;
 
 @Repository
 public class CommonDAOImpl implements CommonDAO {
-	@Autowired
+	
 	private SqlSession sqlSession;
 
+	
+	@Autowired
+	public CommonDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 	@Override
 	public List<DiggingDTO> selectListDiggingList(Map<String, Object> sortMap) throws Exception {
 		return sqlSession.selectList("common.selectListDiggingList", sortMap);
 	}
-
+	@Override
+	public List<DiggingDTO> selectListMainTitle() {
+		return sqlSession.selectList("common.selectListMainTitle");
+	}
 	@Override
 	public int selectOneAllDiggingCnt() throws Exception {
 		return sqlSession.selectOne("common.selectOneAllDiggingCnt");
 	}
 
 	@Override
-	public void updateThumbsUp(long diggingId) throws Exception {
-		 sqlSession.update("common.updateThumbsUp", diggingId);
+	public void updateThumbsUp(long digId) throws Exception {
+		 sqlSession.update("common.updateThumbsUp", digId);
 	}
 	
 	@Override
-	public int selectThumbsUp(long diggingId) throws Exception {
-		return sqlSession.selectOne("common.selectThumbsUp",diggingId);
+	public int selectThumbsUp(long digId) throws Exception {
+		return sqlSession.selectOne("common.selectThumbsUp",digId);
 	}
 	
 	@Override
@@ -55,6 +63,12 @@ public class CommonDAOImpl implements CommonDAO {
 	public List<ShopDTO> selectListShopSearch(String search) throws Exception {
 		return sqlSession.selectList("common.selectListShopSearch", search);
 	}
+	@Override
+	public void updateLikePoint(long digId) throws Exception {
+		sqlSession.update("common.updateLikePoint", digId);
+	}
+
+	
 
 
 

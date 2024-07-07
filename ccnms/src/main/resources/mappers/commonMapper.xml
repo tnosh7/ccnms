@@ -4,24 +4,32 @@
 <mapper namespace="common">
 	<select id="selectOneAllDiggingCnt" resultType="int">
 		SELECT
-		COUNT(*)
+			COUNT(*)
 		FROM
-		DIGGING
-		WHERE
-		DIGGING_TOPIC NOT IN ('notice','ad')
+			DIGGING
 	</select>
-
+	
+	<select id="selectListMainTitle" resultType="mainTitleDTO">
+		SELECT 
+			*
+		FROM 
+			MAIN_TITLE
+		WHERE 
+			MAIN_ID NOT IN (1)
+	</select>
+	
 	<resultMap type="hashmap" id="diggingUserListMap">
 		<result column="DIGGING_ID" property="diggingId" />
 		<result column="USER_ID" property="userId" />
 		<result column="SUBJECT" property="subject" />
 		<result column="CONTENT" property="content" />
 		<result column="READ_CNT" property="readCnt" />
-		<result column="DIGGING_TOPIC" property="diggingTopic" />
 		<result column="ENROLL_DT" property="enrollDT" />
 		<result column="REPLY_CNT" property="replyCnt" />
 		<result column="THUMBS_UP" property="thumbsUp" />
 		<result column="FILE" property="file" />
+		<result column="MAIN_TITLE_ID" property="mainId" />
+		<result column="SUB_TITLE_ID" property="subId" />
 		<result column="PROFILE" property="profile" />
 		<result column="LIKE_POINT" property="likePoint" />
 	</resultMap>
@@ -29,23 +37,24 @@
 	<select id="selectListDiggingList" parameterType="hashmap"
 		resultMap="diggingUserListMap">
 		SELECT
-		D.DIGGING_ID AS DIGGING_ID,
-		D.WRITER AS USER_ID,
-		D.SUBJECT AS SUBJECT,
-		D.CONTENT AS CONTENT,
-		D.READ_CNT AS READ_CNT,
-		D.DIGGING_TOPIC AS DIGGING_TOPIC,
-		D.ENROLL_DT AS ENROLL_DT,
-		D.REPLY_CNT AS REPLY_CNT,
-		D.THUMBS_UP AS THUMBS_UP,
-		D.FILE AS FILE,
-		U.PROFILE AS PROFILE
+			D.DIGGING_ID AS DIGGING_ID,
+			D.WRITER AS USER_ID,
+			D.SUBJECT AS SUBJECT,
+			D.CONTENT AS CONTENT,
+			D.READ_CNT AS READ_CNT,
+			D.ENROLL_DT AS ENROLL_DT,
+			D.REPLY_CNT AS REPLY_CNT,
+			D.THUMBS_UP AS THUMBS_UP,
+			D.FILE AS FILE,
+			D.MAIN_TITLE_ID AS MAIN_TITLE_ID,
+			D.SUB_TITLE_ID AS SUB_TITLE_ID,
+			U.PROFILE AS PROFILE
 		FROM
-		DIGGING AS D
+			DIGGING AS D
 		JOIN USER AS U
-		ON D.WRITER = U.USER_ID
+			ON D.WRITER = U.USER_ID
 		WHERE
-		D.DIGGING_TOPIC NOT IN ("NOTICE", "AD")
+			D.MAIN_TITLE_ID NOT IN (1)
 		ORDER BY
 		<if test='sort == "readCnt"'>
 			D.READ_CNT DESC
@@ -63,29 +72,29 @@
 
 	<select id="selectListHeadList" resultType="DiggingDTO">
 		SELECT
-		*
+			*
 		FROM
-		DIGGING
+			DIGGING
 		WHERE
-		DIGGING_TOPIC = "ad"
+			SUB_TITLE_ID = 1
 	</select>
 
 	<update id="updateThumbsUp" parameterType="long">
 		UPDATE
-		DIGGING
+			DIGGING
 		SET
-		THUMBS_UP = THUMBS_UP + 1
+			THUMBS_UP = THUMBS_UP + 1
 		WHERE
-		DIGGING_ID = #{diggingId}
+			DIGGING_ID = #{digId}
 	</update>
 	<select id="selectThumbsUp" parameterType="long"
 		resultType="int">
 		SELECT
-		THUMBS_UP
+			THUMBS_UP
 		FROM
-		DIGGING
+			DIGGING
 		WHERE
-		DIGGING_ID = #{diggingId}
+			DIGGING_ID = #{digId}
 	</select>
 	
 	   <resultMap id="shopResultMap" type="ShopDTO">
@@ -129,31 +138,36 @@
 	<select id="selectListDiggingSearch" parameterType="String"
 		resultType="DiggingDTO">
 		SELECT
-		*
+			*
 		FROM
-		DIGGING
+			DIGGING
 		WHERE
-		SUBJECT LIKE CONCAT('%',#{search},'%') OR
-		CONTENT LIKE CONCAT('%',#{search},'%') OR
-		WRITER LIKE CONCAT('%',#{search},'%')
+			SUBJECT LIKE CONCAT('%',#{search},'%') OR
+			CONTENT LIKE CONCAT('%',#{search},'%') OR
+			WRITER LIKE CONCAT('%',#{search},'%')
 		ORDER BY
-		READ_CNT DESC
+			READ_CNT DESC
 	</select>
 	<select id="selectListShopSearch" parameterType="String"
 		resultType="ShopDTO">
 		SELECT
-		*
+			*
 		FROM
-		SHOP
+			SHOP
 		WHERE
-		PRODUCT_NM LIKE CONCAT('%',#{search},'%') OR
-		WRITER LIKE CONCAT('%',#{search},'%') OR
-		CONTENT LIKE CONCAT('%',#{search},'%')
+			PRODUCT_NM LIKE CONCAT('%',#{search},'%') OR
+			WRITER LIKE CONCAT('%',#{search},'%') OR
+			CONTENT LIKE CONCAT('%',#{search},'%')
 		ORDER BY
-		READ_CNT DESC
+			READ_CNT DESC
 	</select>
-
-
-
-
+	
+	<update id="updateLikePoint" parameterType="long">
+		UPDATE
+    		USER
+		SET
+		    LIKE_POINT = LIKE_POINT + 1
+		WHERE
+  		    USER_ID = (SELECT WRITER FROM DIGGING WHERE DIGGING_ID = #{digId})
+	</update>
 </mapper>

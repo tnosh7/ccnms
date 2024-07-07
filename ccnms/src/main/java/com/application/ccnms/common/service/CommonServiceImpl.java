@@ -13,12 +13,21 @@ import com.application.ccnms.user.dto.UserDTO;
 
 @Service
 public class CommonServiceImpl implements CommonService {
-	@Autowired
+	
 	private CommonDAO commonDAO;
 	
+	@Autowired
+	public CommonServiceImpl(CommonDAO commonDAO) {
+		this.commonDAO = commonDAO;
+	}
 	@Override
 	public List<DiggingDTO> getDiggingList(Map<String, Object> sortMap) throws Exception {
 		return commonDAO.selectListDiggingList(sortMap) ;
+	}
+	@Override
+	public List<DiggingDTO> getMainTitle() throws Exception {
+	
+		return commonDAO.selectListMainTitle();
 	}
 
 	@Override
@@ -26,13 +35,14 @@ public class CommonServiceImpl implements CommonService {
 		return commonDAO.selectOneAllDiggingCnt();
 	}
 	@Override
-	public void upThumbsUp(long diggingId) throws Exception {
-		commonDAO.updateThumbsUp(diggingId);
+	public void upThumbsUp(long digId) throws Exception {
+		commonDAO.updateThumbsUp(digId);
+		commonDAO.updateLikePoint(digId);
 	}
 	
 	@Override
-	public int countThumbsUp(long diggingId) throws Exception {
-		return commonDAO.selectThumbsUp(diggingId);
+	public int countThumbsUp(long digId) throws Exception {
+		return commonDAO.selectThumbsUp(digId);
 	}
 	@Override
 	public List<DiggingDTO> getHeadList() throws Exception {
@@ -55,6 +65,7 @@ public class CommonServiceImpl implements CommonService {
 		return commonDAO.selectListShopSearch(search);
 	}
 
+	
 	
 
 	

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,15 +30,20 @@ import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 public class CommonController {
-	@Autowired
+	
 	private CommonService commonService;
 	
-//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	// private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
 	
+	@Autowired
+	public CommonController(CommonService commonService) {
+		this.commonService = commonService;
+	}
+
 	@GetMapping("/")
-	public ModelAndView home(@RequestParam(required = false, value = "sort") String sort) throws Exception {
+	public ModelAndView home(@RequestParam(required = false, value = "sort") String sort, HttpSession session) throws Exception {
 
 	    ModelAndView mv = new ModelAndView();
 
@@ -45,24 +51,37 @@ public class CommonController {
 	    Map<String, Object> sortMap = new HashMap<>();
 	    sortMap.put("sort", sort);
 
-	    // 서비스로부터 데이터를 가져오기
+	    mv.addObject("mainTitleDTO",commonService.getMainTitle());
 	    mv.addObject("diggingList", commonService.getDiggingList(sortMap));
 	    mv.addObject("sort", sort);
-
-	    // 추가 정보 가져오기
+	    session.setAttribute("mainTitleDTO", commonService.getMainTitle());	
 	    mv.addObject("headList", commonService.getHeadList());
 	    List<ShopDTO> populerShopList = commonService.getPopulerShopList();
 	    mv.addObject("populerShopList", populerShopList);
 	 
-	    // 뷰 설정
 	    mv.setViewName("/common/main");
 	    return mv;
 	}
 
 	@GetMapping("/updateThumbsUp")
-	public @ResponseBody String updateThumbsUp(@RequestParam("diggingId") String diggingId) throws Exception {
-		commonService.upThumbsUp(Long.parseLong(diggingId));
-		String data = Integer.toString(commonService.countThumbsUp(Long.parseLong(diggingId)));
+	public @ResponseBody String updateThumbsUp(@RequestParam("diggingId") String diggingId,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Long digId = Long.parseLong(diggingId);
+		
+		Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("liked_" + diggingId)) {
+	                return "Already liked";
+	            }
+	        }
+	    }
+	    // 쿠키 설정
+	    Cookie likeCookie = new Cookie("liked_" + diggingId, "true");
+	    likeCookie.setMaxAge(60 * 60 * 24 * 365); // 1년 동안 유지
+	    likeCookie.setPath("/");
+	    response.addCookie(likeCookie);
+		commonService.upThumbsUp(digId);
+		String data = Integer.toString(commonService.countThumbsUp(digId));
 		return data;
 	}
 	
