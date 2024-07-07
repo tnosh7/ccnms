@@ -52,16 +52,14 @@ public class DiggingController {
 	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 
 	@GetMapping("/main")
-	public ModelAndView main(HttpServletRequest request, @RequestParam("mainTitle") int mainTitle,
+	public ModelAndView main(HttpServletRequest request, 
+							@RequestParam("mainTitle") int mainTitle,
 							@RequestParam(required =false, value="sort") 		String sort, 
-							@RequestParam(required=false,  value="dig") 		String dig, 
+							@RequestParam(required=false,  value="subTitle") 	Integer  subTitle, 
 							@RequestParam(required =false, value="diggingCnt")  String diggingCnt) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		List<JoinTitleDTO> joinedTitleList = diggingService.getJoinTitleList();
 	    mv.addObject("joinedTitleList", joinedTitleList);
-		mv.addObject("DiggingList", diggingService.getDiggingList(mainTitle));
-		
-		mv.addObject("populerList", diggingService.getPopulerList(mainTitle));
 		mv.addObject("currentMainId", mainTitle);
 		mv.setViewName("/digging/main");
 		
@@ -90,7 +88,7 @@ public class DiggingController {
 		    currentPageNumber = 1;
 		}
 		// diggingTopic에 해당하는 전체 항목 수를 가져옴
-		int allDiggingCnt = Integer.parseInt(diggingCnt);
+		int allDiggingCnt = diggingService.getAllDiggingCnt(mainTitle);
 
 		// 전체 페이지 수를 계산
 		int allPageCnt = (int) Math.ceil((double) allDiggingCnt / onePageViewCnt);
@@ -125,14 +123,15 @@ public class DiggingController {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("onePageViewCnt", onePageViewCnt);
 		searchMap.put("startDiggingIdx", startDiggingIdx);
-		searchMap.put("diggingTopic", diggingTopic);
+		String mainTitle1 = String.valueOf(mainTitle);
+		searchMap.put("mainTitle", mainTitle1);
 		// 정렬 조건이 있는 경우 맵에 추가
 		if (sort != null) searchMap.put("sort", sort);
 		// dig 조건이 있는 경우 맵에 추가, 없는 경우 빈 문자열로 설정
-		if (dig != null) {
-		    searchMap.put("dig", dig);
+		if (subTitle != null) {
+		    searchMap.put("subTitle", subTitle);
 		} else {
-		    searchMap.put("dig", "");
+		    searchMap.put("subTitle", null);
 		}
 
 		// ModelAndView 객체에 검색 조건과 결과 추가
@@ -140,52 +139,8 @@ public class DiggingController {
 		mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
 		mv.addObject("populerList", diggingService.getPopulerList(searchMap));
 		mv.addObject("mainTitle", mainTitle);
-		mv.addObject("digList", diggingService.getDigList(mainTitle));
+		mv.addObject("subTitleList", diggingService.getSubTitleList(searchMap));
 
-		// ModelAndView 객체 반환
-		return mv;
-
-		
-		
-		/*
-		 * int onePageViewCnt = 10; if (request.getParameter("onePageViewCnt") != null)
-		 * { onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
-		 * }
-		 * 
-		 * String temp = request.getParameter("currentPageNumber"); if (temp == null) {
-		 * temp = "1"; } int currentPageNumber = Integer.parseInt(temp);
-		 * 
-		 * int allDiggingCnt = diggingService.getAllDiggingCnt(diggingTopic);
-		 * 
-		 * // 전체 페이지 수 계산 수정 int allPageCnt = (int) Math.ceil((double) allDiggingCnt /
-		 * onePageViewCnt);
-		 * 
-		 * int startPage = (currentPageNumber - 1) / 10 * 10 + 1; if (startPage == 0) {
-		 * startPage = 1; } int endPage = startPage + 9; if (endPage > allPageCnt)
-		 * endPage = allPageCnt;
-		 * 
-		 * int startDiggingIdx = (currentPageNumber - 1) * onePageViewCnt;
-		 * 
-		 * mv.addObject("startPage", startPage); mv.addObject("endPage", endPage);
-		 * mv.addObject("allDiggingCnt", allDiggingCnt); mv.addObject("allPageCnt",
-		 * allPageCnt); mv.addObject("onePageViewCnt", onePageViewCnt);
-		 * mv.addObject("currentPageNumber", currentPageNumber);
-		 * mv.addObject("startDiggingIdx", startDiggingIdx);
-		 * 
-		 * Map<String, Object> searchMap = new HashMap<>();
-		 * searchMap.put("onePageViewCnt", onePageViewCnt);
-		 * searchMap.put("startDiggingIdx", startDiggingIdx);
-		 * searchMap.put("diggingTopic", diggingTopic); if (sort != null)
-		 * searchMap.put("sort", sort); if (dig != null) { searchMap.put("dig", dig); }
-		 * else { searchMap.put("dig", ""); }
-		 * 
-		 * mv.addObject("sort", sort); mv.addObject("diggingList",
-		 * diggingService.getDiggingList(searchMap)); mv.addObject("populerList",
-		 * diggingService.getPopulerList(searchMap));
-		 * 
-		 * mv.addObject("diggingTopic", diggingTopic); mv.addObject("digList",
-		 * diggingService.getDigList(diggingTopic));
-		 */
 		return mv;
 	}
 

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:useBean id="now" class="java.util.Date" />
@@ -157,7 +156,7 @@ ul {
 		var sort = $("[name='sort']").val();
 		var url = "${contextPath }/digging/main"
 		url += "?onePageViewCnt=" + $("#onePageViewCnt").val();
-		url += "&mainTitle=" + $("#mainTitle").val();
+		url += "&mainTitle=" + ${mainTitle};
 		if (sort != "")
 			url += "&sort=" + sort;
 			location.href = url;
@@ -168,7 +167,7 @@ ul {
 		if (sort == '') {
 			return false;
 		}
-		var mainTitle = $("#mainTitle").val();
+		var mainTitle = ${mainTitle};
 		var url = "${contextPath}/digging/main"
 		url += "?sort=" + sort;
 		url += "&mainTitle=" + mainTitle
@@ -275,13 +274,13 @@ ul {
 			                    </div>
 			                </div>
 						<c:choose>
-							<c:when test="${empty DiggingList }">
+							<c:when test="${empty diggingList }">
 								<div class="no-posts"  align="center">
 									<p>등록된 게시글이 없습니다.</p>
 								</div>
 							</c:when>
 						</c:choose>
-						<c:forEach var="diggingDTO" items="${DiggingList }">
+						<c:forEach var="diggingDTO" items="${diggingList }">
 							<c:set var="startDiggingIdx"
 								value="${startDiggingIdx = startDiggingIdx + 1}" />
 							<div class="card mb-3" style="background: whitesmoke">
@@ -314,7 +313,7 @@ ul {
 									<p class="card-text">
 										<a
 											href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">
-											${diggingDTO.content } <span style="color: blue">더보기</span>
+											${diggingDTO.content } <span style="color:navy">더보기</span>
 										</a>
 									</p>
 								</div>
@@ -335,6 +334,7 @@ ul {
 		                                <img alt="" src="${contextPath}/resources/bootstrap/img/show.png" />
 		                                ${diggingDTO.readCnt}
 		                            </a>
+		                             <input type="hidden" id="mainTitle" value="${mainTitle}"/>
 		                             <!-- 현재 정렬 방식을 저장하는 히든 필드 -->
 		                            <input type="hidden" value="${diggingDTO.diggingId}" />
 		                        </div>
@@ -346,32 +346,24 @@ ul {
 				<div class="product__pagination blog__pagination" align="center">
 			    <!-- 현재 정렬 옵션이 없는 경우와 있는 경우를 구분하여 처리 -->
 			    <c:choose>
-			        <!-- 정렬 옵션이 없는 경우 -->
 			        <c:when test="${sort == null }">
-			            <!-- 이전 페이지 링크를 표시 -->
 			            <c:if test="${startPage > 10 }">
 			                <a href="${contextPath}/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&mainTitle=${mainTitle}">이전</a>
 			            </c:if>
-			            <!-- 페이지 번호를 반복하여 링크로 표시 -->
 			            <c:forEach var="i" begin="${startPage}" end="${endPage}">
 			                <a href="${contextPath}/digging/main?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&mainTitle=${mainTitle}">${i}</a>
 			            </c:forEach>
-			            <!-- 다음 페이지 링크를 표시 -->
 			            <c:if test="${endPage != allPageCnt && endPage >= 10 }">
 			                <a href="${contextPath}/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}&mainTitle=${mainTitle}">다음</a>
 			            </c:if>
 			        </c:when>
-			        <!-- 정렬 옵션이 있는 경우 -->
 			        <c:otherwise>
-			            <!-- 이전 페이지 링크를 표시 -->
 			            <c:if test="${startPage > 10 }">
 			                <a href="${contextPath}/digging/main?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt}&mainTitle=${mainTitle}&sort=${sort}">이전</a>
 			            </c:if>
-			            <!-- 페이지 번호를 반복하여 링크로 표시 -->
 			            <c:forEach var="i" begin="${startPage}" end="${endPage}">
 			                <a href="${contextPath}/digging/main?currentPageNumber=${i}&onePageViewCnt=${onePageViewCnt}&mainTitle=${mainTitle}&sort=${sort}">${i}</a>
 			            </c:forEach>
-			            <!-- 다음 페이지 링크를 표시 -->
 			            <c:if test="${endPage != allPageCnt && endPage >= 10 }">
 			                <a href="${contextPath}/digging/main?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt}&mainTitle=${mainTitle}&sort=${sort}">다음</a>
 			            </c:if>

@@ -25,7 +25,7 @@ public class DiggingServiceImpl implements DiggingService {
 	public DiggingServiceImpl(DiggingDAO diggingDAO) {
 		this.diggingDAO = diggingDAO;
 	}
-	
+	//토픽 분류
 	@Override
 	public List<JoinTitleDTO> getJoinTitleList() throws Exception {
 		return diggingDAO.selectListJoinTitleList();
@@ -41,14 +41,24 @@ public class DiggingServiceImpl implements DiggingService {
 		return diggingDAO.selectListSubTitle();
 	}
 	
+	//정렬, 페이징
 	@Override
-	public List<DiggingDTO> getDiggingList(int mainTitle) throws Exception {
-		return diggingDAO.selectListDigging(mainTitle);
+	public List<DiggingDTO> getPopulerList(Map<String, Object> searchMap) throws Exception {
+		return diggingDAO.selectListPopulerList(searchMap);
 	}
-	
+
 	@Override
-	public List<DiggingDTO> getPopulerList(int mainTitle) throws Exception {
-		return diggingDAO.selectListPopulerList(mainTitle);
+	public List<DiggingDTO> getDiggingList(Map<String, Object> searchMap) throws Exception {
+		return diggingDAO.selectListDiggingList(searchMap);
+	}
+
+	@Override
+	public List<DiggingDTO> getSubTitleList(Map<String, Object> searchMap) throws Exception {
+		return diggingDAO.selectListSubTitleList(searchMap);
+	}
+	@Override
+	public int getAllDiggingCnt(int mainTitle) throws Exception {
+		return diggingDAO.selectListAllDiggingCnt(mainTitle);
 	}
 	
 	@Override
@@ -56,10 +66,7 @@ public class DiggingServiceImpl implements DiggingService {
 		return diggingDAO.selectListUser(writer);
 	}
 	
-	@Override
-	public List<DiggingDTO> getDigList(String diggingTopic) throws Exception {
-		return diggingDAO.selectListDigList(diggingTopic);
-	}
+
 	@Override
 	@Transactional
 	public void addDigging(DiggingDTO diggingDTO) throws Exception {
@@ -90,6 +97,8 @@ public class DiggingServiceImpl implements DiggingService {
 	public void updateDigging(DiggingDTO diggingDTO) throws Exception {
 		diggingDAO.updateModifyDigging(diggingDTO);
 	}
+	
+
 
 
 }

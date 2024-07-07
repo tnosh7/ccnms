@@ -24,7 +24,7 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	public DiggingDAOImpl(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-
+	//토픽 분류
 	@Override
 	public List<JoinTitleDTO> selectListJoinTitleList() throws Exception {
 		return sqlSession.selectList("digging.selectListJoinTitleList");
@@ -37,25 +37,28 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	public List<SubTitleDTO> selectListSubTitle() throws Exception {
 		return sqlSession.selectList("digging.selectListSubTitle");
 	}
+////정렬, 페이징
 	@Override
-	public List<DiggingDTO> selectListDigging(int mainTitle) throws Exception {
-		return sqlSession.selectList("digging.selectListDigging", mainTitle);
-	}
-
-	@Override
-	public List<DiggingDTO> selectListPopulerList(int mainTitle) throws Exception {
-		return sqlSession.selectList("digging.selectListPopulerList", mainTitle);
+	public List<DiggingDTO> selectListDiggingList(Map<String, Object> searchMap) throws Exception {
+		return sqlSession.selectList("digging.selectListDiggingList", searchMap);
 	}
 	
+	@Override
+	public List<DiggingDTO> selectListPopulerList(Map<String, Object> searchMap) throws Exception {
+		return sqlSession.selectList("digging.selectListPopulerList", searchMap);
+	}
+	@Override
+	public List<DiggingDTO> selectListSubTitleList(Map<String, Object> searchMap) throws Exception {
+		return sqlSession.selectList("digging.selectListDigList", searchMap);
+	}
+	@Override
+	public int selectListAllDiggingCnt(int mainTitle) throws Exception {
+		return sqlSession.selectOne("digging.selectListAllDiggingCnt", mainTitle);
+	}
 	@Override
 	public List<UserDTO> selectListUser(String writer) throws Exception {
 		return sqlSession.selectList("digging.selectListUser", writer);
 	}
-	@Override
-	public List<DiggingDTO> selectListDigList(String diggingTopic) throws Exception {
-		return sqlSession.selectList("digging.selectListDigList", diggingTopic);
-	}
-
 	@Override
 	public void insertDigging(DiggingDTO diggingDTO) throws Exception {
 		sqlSession.insert("digging.insertDigging", diggingDTO);	
@@ -89,6 +92,7 @@ public class DiggingDAOImpl implements DiggingDAO  {
 	public void updateModifyDigging(DiggingDTO diggingDTO) throws Exception {
 		sqlSession.update("digging.updateModifyDigging", diggingDTO);
 	}
+	
 
 
 
