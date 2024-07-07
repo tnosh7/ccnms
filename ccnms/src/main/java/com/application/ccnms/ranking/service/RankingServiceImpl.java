@@ -11,8 +11,13 @@ import com.application.ccnms.user.dto.UserDTO;
 
 @Service
 public class RankingServiceImpl implements RankingService {
-	@Autowired
+	
 	private RankingDAO rankingDAO;
+	
+	@Autowired
+	public RankingServiceImpl(RankingDAO rankingDAO) {
+		this.rankingDAO = rankingDAO;
+	}
 
 	@Override
 	public List<UserDTO> getRankingList() throws Exception {

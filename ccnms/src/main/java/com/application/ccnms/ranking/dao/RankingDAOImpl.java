@@ -11,8 +11,13 @@ import com.application.ccnms.user.dto.UserDTO;
 
 @Repository
 public class RankingDAOImpl implements RankingDAO {
-	@Autowired
+	
 	private SqlSession sqlSession;
+
+	@Autowired
+	public RankingDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
 	@Override
 	public List<UserDTO> selectListRankingList() throws Exception {

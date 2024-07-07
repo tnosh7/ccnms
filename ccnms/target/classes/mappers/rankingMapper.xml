@@ -25,17 +25,15 @@
  	
  	<select id="selectListDiggingRank" resultType="DiggingDTO">
  		SELECT 
- 			DIGGING_TOPIC, 
+ 			MAIN_TITLE_ID, 
  			COUNT(READ_CNT) AS READ_CNT, 
  			COUNT(REPLY_CNT)AS REPLY_CNT 
  		FROM
  			DIGGING
  		WHERE 
- 			DIGGING_TOPIC NOT IN ('notice')
- 			AND 
- 			DIGGING_TOPIC NOT IN ('ad')
- 		GROUP BY 
- 			DIGGING_TOPIC
+ 			MAIN_TITLE_ID NOT IN (1)
+ 		GROUP BY
+ 		 	MAIN_TITLE_ID
  		ORDER BY
  			READ_CNT DESC,
  			REPLY_CNT DESC
