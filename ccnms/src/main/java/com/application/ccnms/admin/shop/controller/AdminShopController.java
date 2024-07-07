@@ -50,7 +50,6 @@ public class AdminShopController {
 	
 	@Autowired
 	public AdminShopController(AdminShopService adminShopService) {
-		super();
 		this.adminShopService = adminShopService;
 	}
 

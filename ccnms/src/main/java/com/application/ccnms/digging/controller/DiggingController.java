@@ -49,7 +49,7 @@ public class DiggingController {
 	}
 
 	//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo";
+	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 
 	@GetMapping("/main")
 	public ModelAndView main(HttpServletRequest request, 
@@ -174,11 +174,6 @@ public class DiggingController {
 		int subId = Integer.parseInt(request.getParameter(("subId")));
 		diggingDTO.setSubTitleId(subId);
 		diggingDTO.setMainTitleId(mainId);
-		System.out.println("-============================");
-		System.out.println("subId : " + Integer.parseInt(request.getParameter(("subId"))));
-		System.out.println("mainId : " + mainId);
-		System.out.println("-============================");
-		
 
 		String content = request.getParameter("content");
 		int idx = content.indexOf("/embed/");

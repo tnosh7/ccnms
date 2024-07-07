@@ -36,7 +36,7 @@ public class AdminDiggingController {
 	private DiggingService diggingService;
 	
 	//private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
-	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo";
+	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 
 	@Autowired
 	public AdminDiggingController(AdminDiggingService adminDiggingService, DiggingService diggingService) {
@@ -69,7 +69,7 @@ public class AdminDiggingController {
 		Iterator<String> fileList = multipartRequest.getFileNames();
 		String fileName="";
 		while(fileList.hasNext()) {
-			MultipartFile uploadFile = multipartRequest.getFile(fileList.next()); 
+			MultipartFile uploadFile = multipartRequest.getFile(fileList.next());
 			if (!uploadFile.getOriginalFilename().isEmpty()) {
 				SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
 				fileName = fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();
@@ -82,12 +82,7 @@ public class AdminDiggingController {
 		String content = request.getParameter("content");
 		int subId = Integer.parseInt(request.getParameter(("subId")));
 		diggingDTO.setSubTitleId(subId);
-	//	int mainId = Integer.parseInt(request.getParameter(("mainId")));
 		diggingDTO.setMainTitleId(mainId);
-		System.out.println("-============================");
-		System.out.println("subId : " + Integer.parseInt(request.getParameter(("subId"))));
-		System.out.println("mainId : " + mainId);
-		System.out.println("-============================");
 		
 		
 		// 미디어 url 추출
