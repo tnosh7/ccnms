@@ -12,14 +12,13 @@
 </style>
 </head>
 <body>
-<section class="breadcrumb-section set-bg" data-setbg="${contextPath}/resources/bootstrap/img/banner/promopic.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="${contextPath}/resources/bootstrap/img/banner/rank.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>랭킹</h2>
+                        <h1>랭킹</h1>
                         <div class="breadcrumb__option">
-                            <a href="${contextPath }/digging/main?diggingTopic=kPop">BTS 10주년을 KPOP디깅에서 함께 축하해주세요!</a>
                             <span></span>
                         </div>
                     </div>
@@ -78,7 +77,7 @@
                                 <tr>
                                     <td class="shoping__cart__item">
                                         <h5>&emsp;${i.count }.</h5>&emsp;&emsp;
-                                        <h5><a href="${contextPath }/digging/main?diggingTopic=${diggingRank.diggingTopic}">${diggingRank.diggingTopic}</a></h5>
+                                        <h5><a href="${contextPath }/digging/main?mainTitle=${diggingRankList.mainTitleId}">sss</a></h5>
                                     </td>
                                 </tr>
                             	</c:forEach>
