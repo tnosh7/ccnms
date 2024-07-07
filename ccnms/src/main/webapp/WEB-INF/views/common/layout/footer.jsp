@@ -14,7 +14,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="${contextPath }/"><img src="${contextPath}/resources/bootstrap/img/logo.png" alt=""></a>
+                            <a href="${contextPath }/"><img src="${contextPath}/resources/bootstrap/img/logo.png" alt="로고" ></a>
                         </div>
                     </div>
                 </div>

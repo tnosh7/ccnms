@@ -11,6 +11,46 @@
 <title>Insert title here</title>
 <link href="${contextPath}/resources/css/main.css" rel="stylesheet">
  <script src="${contextPath}/resources/js/main.js"></script>
+ <script type="text/javascript">
+	$().ready(function() {
+		$("#sort").val("${sort}");
+	});
+
+	function getDiggingList() {
+		var url = "${contextPath }/"
+		url += "?onePageViewCnt=" + $("#onePageViewCnt").val();
+		location.href = url;
+	}
+
+	function updateThumb(diggingId) {
+		if ("${sessionId == null}" == "true") {
+			Swal
+					.fire({
+						icon : 'info',
+						title : '로그인 후에 이용가능합니다.',
+						footer : '<a href="${contextPath }/user/loginUser">로그인 페이지로 이동하기</a>'
+					})
+		} else {
+
+			$.ajax({
+				url : "${contextPath}/updateThumbsUp",
+				type : "get",
+				data : {
+					"diggingId" : diggingId
+				},
+				success : function(data) {
+					$("#updateThumbs" + diggingId).html(data);
+				}
+			})
+		}
+	}
+	function show() {
+		$("[name='dropdown-menu']").show();
+	}
+	function hide() {
+		$("[name='dropdown-menu']").hide();
+	}
+ </script>
 </head>
 <body>
 	<section class="categories">
@@ -29,10 +69,11 @@
 										data-setbg="${contextPath }/thumbnails?file=${headDiggingDTO.file}">
 								</c:otherwise>
 							</c:choose>						
-							<span class="headDigging"> <a
-								href="${contextPath }/digging/diggingDetail?diggingId=${headDiggingDTO.diggingId}">
-									${headDiggingDTO.subject }</a></span> <input type="hidden"
-								value="${headDiggingDTO.diggingId }">
+							<span class="headDigging"> 
+								<a href="${contextPath }/digging/diggingDetail?diggingId=${headDiggingDTO.diggingId}">
+									${headDiggingDTO.subject}</a>
+							</span> 
+							<input type="hidden" value="${headDiggingDTO.diggingId }">
 						</div>
 				</div>
 				</c:forEach>
@@ -87,10 +128,10 @@
 																href="${contextPath }/ranking/otherUserInfo?userId=${diggingDTO.userId }">
 																${diggingDTO.userId }&emsp;${diggingDTO.likePoint } </a>
 														</c:otherwise>
-													</c:choose> <input type="hidden" id="writer"
-													value="${diggingDTO.userId }" /></th>
-												<th align="right"><fmt:formatDate
-														value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd" /></th>
+													</c:choose> 
+													<input type="hidden" id="writer" value="${diggingDTO.userId }" /></th>
+												<th align="right">
+												<fmt:formatDate value="${diggingDTO.enrollDT }" pattern="yyyy-MM-dd" /></th>
 											</tr>
 										</thead>
 										<tbody style="height: 40">
@@ -117,17 +158,20 @@
 											<tr>
 												<td colspan="4" align="left">&emsp;<a
 													href="javascript:updateThumb(${diggingDTO.diggingId })"
-													class="card-link"> <img alt=""
+													class="card-link"> 
+													<img alt="추천"
 														src="${contextPath }/resources/bootstrap/img/thumbs.PNG"
-														width="40" height="40" id="thumbsUp" /> <span
+														width="40" height="40" id="thumbsUp" /> 
+													<span
 														id="updateThumbs${diggingDTO.diggingId }">${diggingDTO.thumbsUp }</span></a>
-													&emsp;&emsp;<img alt=""
-													src="${contextPath }/resources/bootstrap/img/comment.png" />
-													${diggingDTO.replyCnt} &emsp;&emsp;<img alt=""
-													src="${contextPath }/resources/bootstrap/img/show.png" />
-													${diggingDTO.readCnt } <input type="hidden"
-													value="${diggingDTO.diggingId }" /> <input type="hidden"
-													name="sort" />
+													&emsp;&emsp;
+													<img alt=""
+														src="${contextPath }/resources/bootstrap/img/comment.png" />
+													${diggingDTO.replyCnt} &emsp;&emsp;
+													<img alt="" src="${contextPath }/resources/bootstrap/img/show.png" />
+													${diggingDTO.readCnt } 
+													<input type="hidden" value="${diggingDTO.diggingId }" /> 
+													<input type="hidden" name="sort" />
 												</td>
 											</tr>
 										</tfoot>
@@ -178,14 +222,15 @@
 											style="display: block;">
 											<div class="featured__item">
 												<div class="featured__item__pic set-bg"
-													data-setbg="${shopDto.productFile}"
+													data-setbg="${contextPath }/thumbnails?file=${shopDto.productFile}"
 													style="background-image: url('${shopDto.productFile}');">
 												</div>
 												<div class="featured__item__text">
 													<h6>
 														<a href="${contextPath }/shop/shopDetail?productCd=${shopDto.productCd }">${shopDto.productNm}</a>
 													</h6>
-													<h5>${shopDto.price}원</h5>
+													<h5><span style="text-decoration: line-through; color: red">${shopDto.price }</span>
+                                                 <span><fmt:formatNumber value="${shopDto.price - shopDto.price * shopDto.discountRate / 100}"/>원</span></h5>
 												</div>
 											</div>
 										</div>
