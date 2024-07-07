@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -10,114 +9,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	a:link {color:black}
-  	a:visited { color:black; }
-	a:hover { color:black; }   
-	a:active {color:purple;}
-	table {
-	    width: 100%;
-	    height:100%;
-	}
-	#modify {
-		display: none;
-	}
-	.video-container { 
-	    margin: 10;
-	    padding-bottom: 100%; 
-	    max-width: 100%; 
-	    height:100%;  
-	    position: relative;
-	    overflow: hidden;
-	} 
-	.video-container iframe, 
-	.video-container object,
-	.video-container embed {
-	    margin: 0;
-	    padding: 0;  
-	    width: 100%; 
-	    height: 100%;
-	    position: absolute; 
-	    top: 0; 
-	    left: 0; 
-	}
-	.head-wrap {
-		position: relative;
-	}
-	.head-text {
-		padding: 5px 10px;
-		text-align: center;
-		position: absolute;
-		color:white;
-		top: 50%;
-		left: 50%;
-		transform: translate( -50%, -50% );
-	}
-</style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-	$(document).ready(function(){
-		$("#modifyBtn").click(function(){
-			$("#modify").show();
+<link href="${contextPath}/resources/css/digging.css" rel="stylesheet">
+<script src="${contextPath}/resources/js/digging.js"></script>
+<script type="text/javascript">
+function removeReply(){
+	var replyId = $("#replyId").val();
+	var diggingId = $("#diggingId").val();
+	location.href = "${contextPath}/reply/removeReply?replyId=" + replyId + "&diggingId=" + diggingId;
+}
+function updateThumb(diggingId) {
+	if ("${sessionId}" === "" && "${adminId}" === "") {
+		Swal.fire({
+			icon: 'info',
+			title: '로그인 후에 이용가능합니다.',
+			footer: '<a href="${contextPath}/user/loginUser">로그인 페이지로 이동하기</a>'
 		});
-		
-		$("#addBtn").click(function(){
-			Swal.fire({
-				icon: 'info',
-				title: '로그인 후에 이용가능합니다.',
-				footer: '<a href="${contextPath}/user/loginUser">로그인 페이지로 이동하기</a>'
-			})
+	} else {
+		$.ajax({
+			url: "${contextPath}/updateThumbsUp",
+			type: "get",
+			data: { "diggingId": diggingId },
+			success: function(data){
+				$("#updateThumbs").html(data);
+			}
 		});
-	});
-
-	function updateThumb(diggingId) {
-		if ("${sessionId}" === "") {
-			Swal.fire({
-				icon: 'info',
-				title: '로그인 후에 이용가능합니다.',
-				footer: '<a href="${contextPath}/user/loginUser">로그인 페이지로 이동하기</a>'
-			});
-		} else {
-			$.ajax({
-				url: "${contextPath}/updateThumbsUp",
-				type: "get",
-				data: { "diggingId": diggingId },
-				success: function(data){
-					$("#updateThumbs").html(data);
-				}
-			});
-		}
 	}
+}
 
-	function updateLike(writer){
-		var diggingId = $("#diggingId").val();
-		if ("${sessionId}" === "") {
-			Swal.fire({
-				icon: 'info',
-				title: '로그인 후에 이용가능합니다.',
-				footer: '<a href="${contextPath}/user/loginUser">로그인 페이지로 이동하기</a>'
-			});
-		} else {
-			$.ajax({
-				url: "${contextPath}/user/updateLike",
-				type: "get",
-				data: {
-					"writer": writer,
-					"diggingId": diggingId
-				},
-				success: function(result){
-					Swal.fire({ text: 'LIKE!' });
-				}
-			});
-		}
-	}
-
-	function removeReply(){
-		var replyId = $("#replyId").val();
-		var diggingId = $("#diggingId").val();
-		location.href = "${contextPath}/reply/removeReply?replyId=" + replyId + "&diggingId=" + diggingId;
-	}
 </script>
 </head>
 <body>
@@ -127,26 +47,29 @@
 			<div class="blog__details__text">
 				<div>
 					<div class="head-wrap">
-						<div class="head-img">
-							<img alt="" src="${contextPath}/resources/bootstrap/img/header/${diggingDTO.diggingTopic}.jpg" height="150" width="100%">
-							<div class="col-lg-12 head-text">
-								<a href="${contextPath}/digging/main?diggingTopic=${diggingDTO.diggingTopic}">
-									<h1 style="color:white">${diggingDTO.diggingTopic}</h1>
-								</a>
-							</div>
+						<div class="row-subTitle">
+							<c:set var="previousMainId" value="" />
+							<c:forEach var="joinedTitleList" items="${joinedTitleList}">
+							    <c:if test="${joinedTitleList.mainId == diggingDTO.mainTitleId}">
+							            <c:set var="previousMainId" value="${joinedTitleList.mainId}" /><span onclick="location.href='${contextPath}/digging/main?mainTitle=${joinedTitleList.mainId}'">| 전체 | &ensp;</span>
+							        <ul class="inline-list">
+							            <li>
+							                <a href="${contextPath}/digging/main?mainTitle=${joinedTitleList.mainId}&subTitle=${joinedTitleList.subId}"><span class="subTitle-menu">| ${joinedTitleList.subTitle} |</span></a>
+							            </li>
+							        </ul>
+							    </c:if>
+							</c:forEach>
 						</div>
-					</div>
 					<div class="col-lg-12">
 						<div class="blog__details__author">
 							<div class="blog__details__author__text">
-								<table>
+								<table class="diggingDetail-table">
 									<thead>
 										<tr height="30">
 											<c:choose>
 												<c:when test="${diggingDTO.profile eq null}">
 													<th>
 														<img src="${contextPath}/resources/bootstrap/img/icon/profile.jpg" width="40" height="40"> ${diggingDTO.writer}
-														&emsp;<button type="button" class="btn btn-primary btn-sm" id="writer" onclick="updateLike('${diggingDTO.writer}')">LIKE </button>
 														<input type="hidden" name="writer" value="${diggingDTO.writer}">
 													</th>
 												</c:when>
@@ -154,7 +77,6 @@
 													<th align="left">
 														<img src="${contextPath}/thumbnails?file=${diggingDTO.profile}" alt="프로필이미지" width="40" height="40">
 														<strong>&emsp;${diggingDTO.writer}</strong>
-														&emsp;<button type="button" class="btn btn-primary btn-sm" id="writer" onclick="updateLike('${diggingDTO.writer}')">LIKE</button>
 														<input type="hidden" name="writer" value="${diggingDTO.writer}">
 													</th>
 												</c:otherwise>
@@ -288,6 +210,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

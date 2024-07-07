@@ -116,7 +116,6 @@ nav {
                 	<li>
 	                <select class="form-select" id="searchKey" name="searchKey" aria-label="Default select example">
                           <option value="null">검색어 선택</option>
-                          <option value="topic">디깅 토픽</option>
                           <option value="subject">제목</option>
                           <option value="writer">글쓴이</option>
                           <option value="content">내용</option>
@@ -135,7 +134,6 @@ nav {
                     <thead class="table-light" align="center">
                       <tr>
                       	<th width="30"><input type="checkbox" id="allDigging" onchange="selectAllDigging()"></th>
-                        <th>토픽</th>
                         <th>글쓴이</th>
                         <th>제목</th>
                         <th>조회수</th>
@@ -154,7 +152,7 @@ nav {
 	                	<c:forEach var="diggingDTO"  items="${diggingList}">
 	                		<tr>
 		                      	<td><input type="checkbox" id="diggingId" name="diggingId" value="${diggingDTO.diggingId }"></td>
-		                        <td><a href="${contextPath }/digging/main?diggingTopic=${diggingDTO.diggingTopic }">${diggingDTO.diggingTopic }</a></td>
+		                        <%-- <td><a href="${contextPath }/digging/main?diggingTopic=${diggingDTO.diggingTopic }">${diggingDTO.diggingTopic }</a></td> --%>
 		                        <td><a href="${contextPath }/ranking/otherUserInfo?userId=${diggingDTO.writer }">${diggingDTO.writer }</a></td>
 		                        <td><a href="${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}">${diggingDTO.subject}</a></td>
 		                        <td>${diggingDTO.readCnt}</td>

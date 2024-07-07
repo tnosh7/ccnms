@@ -8,29 +8,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.application.ccnms.digging.dto.DiggingDTO;
+import com.application.ccnms.digging.dto.JoinTitleDTO;
+import com.application.ccnms.digging.dto.MainTitleDTO;
+import com.application.ccnms.digging.dto.SubTitleDTO;
 import com.application.ccnms.reply.dto.ReplyDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
 @Repository
 public class DiggingDAOImpl implements DiggingDAO  {
 
-	@Autowired
+
 	private SqlSession sqlSession;
 
+	@Autowired
+	public DiggingDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
 	@Override
-	public List<DiggingDTO> selectListDiggingList(Map<String, Object> searchMap) throws Exception {
-		return sqlSession.selectList("digging.selectListDiggingList", searchMap);
-	}
-	
+	public List<JoinTitleDTO> selectListJoinTitleList() throws Exception {
+		return sqlSession.selectList("digging.selectListJoinTitleList");
+	}	
 	@Override
-	public List<DiggingDTO> selectListPopulerList(Map<String, Object> searchMap) throws Exception {
-		return sqlSession.selectList("digging.selectListPopulerList", searchMap);
+	public List<MainTitleDTO> selectListMainTitle() throws Exception {
+		return sqlSession.selectList("digging.selectListMainTitle");
 	}
-	
 	@Override
-	public int selectOneDiggingCnt(String diggingTopic) throws Exception {
-		return sqlSession.selectOne("digging.selectOneDiggingCnt", diggingTopic);
+	public List<SubTitleDTO> selectListSubTitle() throws Exception {
+		return sqlSession.selectList("digging.selectListSubTitle");
+	}
+	@Override
+	public List<DiggingDTO> selectListDigging(int mainTitle) throws Exception {
+		return sqlSession.selectList("digging.selectListDigging", mainTitle);
+	}
+
+	@Override
+	public List<DiggingDTO> selectListPopulerList(int mainTitle) throws Exception {
+		return sqlSession.selectList("digging.selectListPopulerList", mainTitle);
 	}
 	
 	@Override
@@ -76,6 +90,9 @@ public class DiggingDAOImpl implements DiggingDAO  {
 		sqlSession.update("digging.updateModifyDigging", diggingDTO);
 	}
 
+
+
+	
 
 
 

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,6 +32,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.digging.dto.DiggingDTO;
+import com.application.ccnms.digging.dto.JoinTitleDTO;
 import com.application.ccnms.digging.service.DiggingService;
 
 import net.coobird.thumbnailator.Thumbnails;
@@ -38,178 +40,269 @@ import net.coobird.thumbnailator.Thumbnails;
 @Controller
 @RequestMapping("/digging")
 public class DiggingController {
-	@Autowired
+	
 	private DiggingService diggingService;
 	
-//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
+	@Autowired	
+	public DiggingController(DiggingService diggingService) {
+		this.diggingService = diggingService;
+	}
+
+	//	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
-	
+
 	@GetMapping("/main")
-	public ModelAndView main(HttpServletRequest request, @RequestParam("diggingTopic") String diggingTopic,
-	                         @RequestParam(required = false, value = "sort") String sort,
-	                         @RequestParam(required = false, value = "dig") String dig) throws Exception {
-	    ModelAndView mv = new ModelAndView();
-	    mv.setViewName("/digging/main");
+	public ModelAndView main(HttpServletRequest request, @RequestParam("mainTitle") int mainTitle,
+							@RequestParam(required =false, value="sort") 		String sort, 
+							@RequestParam(required=false,  value="dig") 		String dig, 
+							@RequestParam(required =false, value="diggingCnt")  String diggingCnt) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<JoinTitleDTO> joinedTitleList = diggingService.getJoinTitleList();
+	    mv.addObject("joinedTitleList", joinedTitleList);
+		mv.addObject("DiggingList", diggingService.getDiggingList(mainTitle));
+		
+		mv.addObject("populerList", diggingService.getPopulerList(mainTitle));
+		mv.addObject("currentMainId", mainTitle);
+		mv.setViewName("/digging/main");
+		
+		
+		// 페이징 처리
+		// 한 페이지에 표시할 항목 수를 기본값 10으로 설정
+		int onePageViewCnt = 10;
 
-	    int onePageViewCnt = 10;
-	    if (request.getParameter("onePageViewCnt") != null) {
-	        onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
-	    }
+		// request 파라미터로부터 onePageViewCnt 값을 가져와서 설정 (null이 아닌 경우)
+		if (request.getParameter("onePageViewCnt") != null) {
+		    try {
+		        onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
+		    } catch (NumberFormatException e) {
+		        onePageViewCnt = 10;
+		    }
+		}
+		// request 파라미터로부터 현재 페이지 번호를 가져옴 (null인 경우 1로 설정)
+		String temp = request.getParameter("currentPageNumber");
+		if (temp == null) {
+		    temp = "1";
+		}
+		int currentPageNumber;
+		try {
+		    currentPageNumber = Integer.parseInt(temp);
+		} catch (NumberFormatException e) {
+		    currentPageNumber = 1;
+		}
+		// diggingTopic에 해당하는 전체 항목 수를 가져옴
+		int allDiggingCnt = Integer.parseInt(diggingCnt);
 
-	    String temp = request.getParameter("currentPageNumber");
-	    if (temp == null) {
-	        temp = "1";
-	    }
-	    int currentPageNumber = Integer.parseInt(temp);
+		// 전체 페이지 수를 계산
+		int allPageCnt = (int) Math.ceil((double) allDiggingCnt / onePageViewCnt);
 
-	    int allDiggingCnt = diggingService.getAllDiggingCnt(diggingTopic);
+		// 페이지 네비게이션의 시작 페이지 번호를 계산
+		int startPage = ((currentPageNumber - 1) / 10) * 10 + 1;
+		// 시작 페이지 번호가 0일 경우 1로 설정
+		if (startPage <= 0) {
+		    startPage = 1;
+		}
 
-	    // 전체 페이지 수 계산 수정
-	    int allPageCnt = (int) Math.ceil((double) allDiggingCnt / onePageViewCnt);
+		// 페이지 네비게이션의 끝 페이지 번호를 계산
+		int endPage = startPage + 9;
+		// 끝 페이지 번호가 전체 페이지 수를 초과할 경우 조정
+		if (endPage > allPageCnt) {
+		    endPage = allPageCnt;
+		}
 
-	    int startPage = (currentPageNumber - 1) / 10 * 10 + 1;
-	    if (startPage == 0) {
-	        startPage = 1;
-	    }
-	    int endPage = startPage + 9;
-	    if (endPage > allPageCnt) endPage = allPageCnt;
+		// 현재 페이지에서 시작하는 항목의 인덱스를 계산
+		int startDiggingIdx = (currentPageNumber - 1) * onePageViewCnt;
 
-	    int startDiggingIdx = (currentPageNumber - 1) * onePageViewCnt;
+		// ModelAndView 객체에 계산된 페이지 정보 추가
+		mv.addObject("startPage", startPage);
+		mv.addObject("endPage", endPage);
+		mv.addObject("allDiggingCnt", allDiggingCnt);
+		mv.addObject("allPageCnt", allPageCnt);
+		mv.addObject("onePageViewCnt", onePageViewCnt);
+		mv.addObject("currentPageNumber", currentPageNumber);
+		mv.addObject("startDiggingIdx", startDiggingIdx);
 
-	    mv.addObject("startPage", startPage);
-	    mv.addObject("endPage", endPage);
-	    mv.addObject("allDiggingCnt", allDiggingCnt);
-	    mv.addObject("allPageCnt", allPageCnt);
-	    mv.addObject("onePageViewCnt", onePageViewCnt);
-	    mv.addObject("currentPageNumber", currentPageNumber);
-	    mv.addObject("startDiggingIdx", startDiggingIdx);
+		// 검색 조건을 담을 맵 객체 생성
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("onePageViewCnt", onePageViewCnt);
+		searchMap.put("startDiggingIdx", startDiggingIdx);
+		searchMap.put("diggingTopic", diggingTopic);
+		// 정렬 조건이 있는 경우 맵에 추가
+		if (sort != null) searchMap.put("sort", sort);
+		// dig 조건이 있는 경우 맵에 추가, 없는 경우 빈 문자열로 설정
+		if (dig != null) {
+		    searchMap.put("dig", dig);
+		} else {
+		    searchMap.put("dig", "");
+		}
 
-	    Map<String, Object> searchMap = new HashMap<>();
-	    searchMap.put("onePageViewCnt", onePageViewCnt);
-	    searchMap.put("startDiggingIdx", startDiggingIdx);
-	    searchMap.put("diggingTopic", diggingTopic);
-	    if (sort != null) searchMap.put("sort", sort);
-	    if (dig != null) {
-	        searchMap.put("dig", dig);
-	    } else {
-	        searchMap.put("dig", "");
-	    }
+		// ModelAndView 객체에 검색 조건과 결과 추가
+		mv.addObject("sort", sort);
+		mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
+		mv.addObject("populerList", diggingService.getPopulerList(searchMap));
+		mv.addObject("mainTitle", mainTitle);
+		mv.addObject("digList", diggingService.getDigList(mainTitle));
 
-	    mv.addObject("sort", sort);
-	    mv.addObject("diggingList", diggingService.getDiggingList(searchMap));
-	    mv.addObject("populerList", diggingService.getPopulerList(searchMap));
-	    mv.addObject("diggingTopic", diggingTopic);
-	    mv.addObject("digList", diggingService.getDigList(diggingTopic));
-	    return mv;
+		// ModelAndView 객체 반환
+		return mv;
+
+		
+		
+		/*
+		 * int onePageViewCnt = 10; if (request.getParameter("onePageViewCnt") != null)
+		 * { onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
+		 * }
+		 * 
+		 * String temp = request.getParameter("currentPageNumber"); if (temp == null) {
+		 * temp = "1"; } int currentPageNumber = Integer.parseInt(temp);
+		 * 
+		 * int allDiggingCnt = diggingService.getAllDiggingCnt(diggingTopic);
+		 * 
+		 * // 전체 페이지 수 계산 수정 int allPageCnt = (int) Math.ceil((double) allDiggingCnt /
+		 * onePageViewCnt);
+		 * 
+		 * int startPage = (currentPageNumber - 1) / 10 * 10 + 1; if (startPage == 0) {
+		 * startPage = 1; } int endPage = startPage + 9; if (endPage > allPageCnt)
+		 * endPage = allPageCnt;
+		 * 
+		 * int startDiggingIdx = (currentPageNumber - 1) * onePageViewCnt;
+		 * 
+		 * mv.addObject("startPage", startPage); mv.addObject("endPage", endPage);
+		 * mv.addObject("allDiggingCnt", allDiggingCnt); mv.addObject("allPageCnt",
+		 * allPageCnt); mv.addObject("onePageViewCnt", onePageViewCnt);
+		 * mv.addObject("currentPageNumber", currentPageNumber);
+		 * mv.addObject("startDiggingIdx", startDiggingIdx);
+		 * 
+		 * Map<String, Object> searchMap = new HashMap<>();
+		 * searchMap.put("onePageViewCnt", onePageViewCnt);
+		 * searchMap.put("startDiggingIdx", startDiggingIdx);
+		 * searchMap.put("diggingTopic", diggingTopic); if (sort != null)
+		 * searchMap.put("sort", sort); if (dig != null) { searchMap.put("dig", dig); }
+		 * else { searchMap.put("dig", ""); }
+		 * 
+		 * mv.addObject("sort", sort); mv.addObject("diggingList",
+		 * diggingService.getDiggingList(searchMap)); mv.addObject("populerList",
+		 * diggingService.getPopulerList(searchMap));
+		 * 
+		 * mv.addObject("diggingTopic", diggingTopic); mv.addObject("digList",
+		 * diggingService.getDigList(diggingTopic));
+		 */
+		return mv;
 	}
-	
+
 	@GetMapping("/addDigging")
-	public ModelAndView addDigging()throws Exception {
-		return new ModelAndView("/digging/addDigging");
+	public ModelAndView addDigging() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("mainTitleDTO", diggingService.getMainTitle());
+		mv.addObject("subTitleDTO", diggingService.getSubTitle());
+		mv.setViewName("/digging/addDigging");
+		return mv;
 	}
-	
+
 	@PostMapping("/addDigging")
-	public @ResponseBody String addDigging(HttpServletRequest request, MultipartHttpServletRequest multipartRequest) throws Exception{
+	public @ResponseBody String addDigging(HttpServletRequest request, MultipartHttpServletRequest multipartRequest,@RequestParam int mainId)
+			throws Exception {
 		DiggingDTO diggingDTO = new DiggingDTO();
 		HttpSession session = request.getSession();
 		Iterator<String> fileList = multipartRequest.getFileNames();
-		String fileName="";
-		while(fileList.hasNext()) {
-			MultipartFile uploadFile = multipartRequest.getFile(fileList.next()); 
+		String fileName = "";
+		while (fileList.hasNext()) {
+			MultipartFile uploadFile = multipartRequest.getFile(fileList.next());
 			if (!uploadFile.getOriginalFilename().isEmpty()) {
 				SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
 				fileName = fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();
-				uploadFile.transferTo(new File(FILE_REPO_PATH + fileName)); 
+				uploadFile.transferTo(new File(FILE_REPO_PATH + fileName));
 			}
 		}
-		diggingDTO.setDiggingTopic(request.getParameter("diggingTopic"));
 		diggingDTO.setSubject(request.getParameter("subject"));
 		diggingDTO.setWriter(String.valueOf(session.getAttribute("userId")));
 		diggingDTO.setContent(request.getParameter("content"));
-		System.out.println(request.getParameter("diggingTopic"));
+		int subId = Integer.parseInt(request.getParameter(("subId")));
+		diggingDTO.setSubTitleId(subId);
+		diggingDTO.setMainTitleId(mainId);
+		System.out.println("-============================");
+		System.out.println("subId : " + Integer.parseInt(request.getParameter(("subId"))));
+		System.out.println("mainId : " + mainId);
+		System.out.println("-============================");
 		
-		String dig= request.getParameter("diggingTopic");
-		diggingDTO.setDig(request.getParameter(dig));
+
 		String content = request.getParameter("content");
-		int idx=  content.indexOf("/embed/");
+		int idx = content.indexOf("/embed/");
 		if (idx >= 0) {
 			int idx2 = content.indexOf("></oembed>");
-			String url = content.substring(idx+7, idx2-1);	
+			String url = content.substring(idx + 7, idx2 - 1);
 			diggingDTO.setVideoYn("Y");
 			diggingDTO.setVideoId(url);
-		}
-		else {
+		} else {
 			diggingDTO.setVideoYn("N");
 			diggingDTO.setVideoId("");
 		}
 		diggingDTO.setFile(fileName);
 		diggingService.addDigging(diggingDTO);
-		
-		String jsScript ="<script>";
-			   jsScript +="location.href='" + request.getContextPath() + "/'";
-			   jsScript +="</script>";
+
+		String jsScript = "<script>";
+		jsScript += "location.href='" + request.getContextPath() + "/'";
+		jsScript += "</script>";
 		return jsScript;
 	}
-	@GetMapping("diggingDetail") 
+
+	@GetMapping("diggingDetail")
 	public ModelAndView diggingDetail(@RequestParam("diggingId") long diggingId) throws Exception {
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/digging/diggingDetail");
-		System.out.println(diggingId);
 		mv.addObject("diggingDTO", diggingService.getDiggingDetail(diggingId));
+		List<JoinTitleDTO> joinedTitleList = diggingService.getJoinTitleList();
+	    mv.addObject("joinedTitleList", joinedTitleList);
 		mv.addObject("allReplyCnt", diggingService.getallReplyCnt(diggingId));
 		mv.addObject("replyList", diggingService.getReplyList(diggingId));
 		return mv;
 	}
-	@PostMapping("/thumbsUp")
-	public int thumbsUp(@RequestParam("diggingId") long diggingId) throws Exception {
-		return diggingService.upThumbsUp(diggingId);
-		
-	}
-	
+
 	@GetMapping("/modifyDigging")
-	public ModelAndView modify(@RequestParam("diggingId")long diggingId)throws Exception{
+	public ModelAndView modify(@RequestParam("diggingId") long diggingId) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("diggingDTO", diggingService.getDiggingDetail(diggingId));
 		mv.setViewName("/digging/modifyDigging");
-		
 		return mv;
 	}
+
 	@PostMapping("/modifyDigging")
-	public ModelAndView modifyDigging (DiggingDTO diggingDTO, MultipartHttpServletRequest multipartRequest, HttpServletRequest request) throws Exception{
+	public ModelAndView modifyDigging(DiggingDTO diggingDTO, MultipartHttpServletRequest multipartRequest,
+			HttpServletRequest request) throws Exception {
 		Iterator<String> fileList = multipartRequest.getFileNames();
-		String fileName="";
-		while(fileList.hasNext()) {
-			MultipartFile uploadFile = multipartRequest.getFile(fileList.next()); 
+		String fileName = "";
+		while (fileList.hasNext()) {
+			MultipartFile uploadFile = multipartRequest.getFile(fileList.next());
 			if (!uploadFile.getOriginalFilename().isEmpty()) {
 				SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
 				fileName = fmt.format(new Date()) + "_" + UUID.randomUUID() + "_" + uploadFile.getOriginalFilename();
-				uploadFile.transferTo(new File(FILE_REPO_PATH + fileName)); 
+				uploadFile.transferTo(new File(FILE_REPO_PATH + fileName));
 			}
 		}
 		diggingDTO.setFile(fileName);
-		diggingService.updateDigging(diggingDTO); 
+		diggingService.updateDigging(diggingDTO);
 		diggingService.getDiggingDetail(diggingDTO.getDiggingId());
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/digging/diggingDetail");
+		long diggingId = diggingDTO.getDiggingId();
+		mv.setViewName("redirect:/digging/diggingDetail?diggingId=" + diggingId);
 		mv.addObject("diggingDTO", diggingService.getDiggingDetail(diggingDTO.getDiggingId()));
 		mv.addObject("allReplyCnt", diggingService.getallReplyCnt(diggingDTO.getDiggingId()));
 		mv.addObject("replyList", diggingService.getReplyList(diggingDTO.getDiggingId()));
 		return mv;
 	}
+
 	@GetMapping("/thumbnails")
 	public void thumbnails(@RequestParam("file") String file, HttpServletResponse response) throws IOException {
 		OutputStream out = response.getOutputStream();
 		String filePath = FILE_REPO_PATH + file;
-		
+
 		File image = new File(filePath);
-		if (image.exists()) { 
-			Thumbnails.of(image).size(200,200).outputFormat("png").toOutputStream(out);
+		if (image.exists()) {
+			Thumbnails.of(image).size(200, 200).outputFormat("png").toOutputStream(out);
 		}
 		byte[] buffer = new byte[1024 * 8];
 		out.write(buffer);
 		out.close();
 	}
-	
-	
-}		
+
+}

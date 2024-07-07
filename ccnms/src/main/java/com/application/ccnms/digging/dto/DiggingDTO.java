@@ -12,14 +12,14 @@ public class DiggingDTO {
 	private String subject;
 	private String content;
 	private int readCnt;
-	private String diggingTopic;
-	private String dig;
 	private String videoYn;
 	private String videoId;
 	private String file;
 	private int replyCnt;
 	private int thumbsUp;
 	private Date enrollDT;
+	private int mainTitleId;
+	private int subTitleId;
 	public long getDiggingId() {
 		return diggingId;
 	}
@@ -49,18 +49,6 @@ public class DiggingDTO {
 	}
 	public void setReadCnt(int readCnt) {
 		this.readCnt = readCnt;
-	}
-	public String getDiggingTopic() {
-		return diggingTopic;
-	}
-	public void setDiggingTopic(String diggingTopic) {
-		this.diggingTopic = diggingTopic;
-	}
-	public String getDig() {
-		return dig;
-	}
-	public void setDig(String dig) {
-		this.dig = dig;
 	}
 	public String getVideoYn() {
 		return videoYn;
@@ -98,12 +86,25 @@ public class DiggingDTO {
 	public void setEnrollDT(Date enrollDT) {
 		this.enrollDT = enrollDT;
 	}
+	public int getMainTitleId() {
+		return mainTitleId;
+	}
+	public void setMainTitleId(int mainTitleId) {
+		this.mainTitleId = mainTitleId;
+	}
+	public int getSubTitleId() {
+		return subTitleId;
+	}
+	public void setSubTitleId(int subTitleId) {
+		this.subTitleId = subTitleId;
+	}
 	@Override
 	public String toString() {
 		return "DiggingDTO [diggingId=" + diggingId + ", writer=" + writer + ", subject=" + subject + ", content="
-				+ content + ", readCnt=" + readCnt + ", diggingTopic=" + diggingTopic + ", dig=" + dig + ", videoYn="
-				+ videoYn + ", videoId=" + videoId + ", file=" + file + ", replyCnt=" + replyCnt + ", thumbsUp="
-				+ thumbsUp + ", enrollDT=" + enrollDT + "]";
+				+ content + ", readCnt=" + readCnt + ", videoYn=" + videoYn + ", videoId=" + videoId + ", file=" + file
+				+ ", replyCnt=" + replyCnt + ", thumbsUp=" + thumbsUp + ", enrollDT=" + enrollDT + ", mainTitleId="
+				+ mainTitleId + ", subTitleId=" + subTitleId + "]";
 	}
+	
 	
 }

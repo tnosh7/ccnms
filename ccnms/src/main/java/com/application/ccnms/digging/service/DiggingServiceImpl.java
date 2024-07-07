@@ -9,26 +9,46 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.application.ccnms.digging.dao.DiggingDAO;
 import com.application.ccnms.digging.dto.DiggingDTO;
+import com.application.ccnms.digging.dto.JoinTitleDTO;
+import com.application.ccnms.digging.dto.MainTitleDTO;
+import com.application.ccnms.digging.dto.SubTitleDTO;
 import com.application.ccnms.reply.dto.ReplyDTO;
 import com.application.ccnms.user.dto.UserDTO;
 
 @Service
 public class DiggingServiceImpl implements DiggingService {
 	
-	@Autowired
+
 	private DiggingDAO diggingDAO;
 	
-	@Override
-	public List<DiggingDTO> getDiggingList(Map<String, Object> searchMap) throws Exception {
-		return diggingDAO.selectListDiggingList(searchMap);
+	@Autowired
+	public DiggingServiceImpl(DiggingDAO diggingDAO) {
+		this.diggingDAO = diggingDAO;
 	}
+	
 	@Override
-	public List<DiggingDTO> getPopulerList(Map<String, Object> searchMap) throws Exception {
-		return diggingDAO.selectListPopulerList(searchMap);
+	public List<JoinTitleDTO> getJoinTitleList() throws Exception {
+		return diggingDAO.selectListJoinTitleList();
 	}
+	
 	@Override
-	public int getAllDiggingCnt(String diggingTopic) throws Exception{
-		return diggingDAO.selectOneDiggingCnt(diggingTopic);
+	public List<MainTitleDTO> getMainTitle() throws Exception {
+		return diggingDAO.selectListMainTitle();
+	}
+	
+	@Override
+	public List<SubTitleDTO> getSubTitle() throws Exception {
+		return diggingDAO.selectListSubTitle();
+	}
+	
+	@Override
+	public List<DiggingDTO> getDiggingList(int mainTitle) throws Exception {
+		return diggingDAO.selectListDigging(mainTitle);
+	}
+	
+	@Override
+	public List<DiggingDTO> getPopulerList(int mainTitle) throws Exception {
+		return diggingDAO.selectListPopulerList(mainTitle);
 	}
 	
 	@Override
@@ -70,5 +90,6 @@ public class DiggingServiceImpl implements DiggingService {
 	public void updateDigging(DiggingDTO diggingDTO) throws Exception {
 		diggingDAO.updateModifyDigging(diggingDTO);
 	}
+
 
 }

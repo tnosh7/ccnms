@@ -2,37 +2,98 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="digging">
+	 <select id="selectListJoinTitleList" resultType="JoinTitleDTO">
+        SELECT 
+            main.MAIN_ID,
+            main.MAIN_TITLE,
+            sub.SUB_ID,
+            sub.SUB_TITLE
+        FROM 
+            MAIN_TITLE main
+        JOIN 
+            SUB_TITLE sub
+        ON 
+            main.MAIN_ID = sub.MAIN_ID
+         	
+    </select>
+    <select id="selectListMainTitle" resultType="mainTitleDTO">
+		SELECT 
+			*
+		FROM 
+			MAIN_TITLE
+		WHERE 
+			MAIN_ID NOT IN (1)
+	</select>
+	<select id="selectListSubTitle" resultType="subTitleDTO">
+		SELECT 
+			*
+		FROM 
+			SUB_TITLE
+		WHERE 
+			MAIN_ID NOT IN (1)
+	</select>
 	<resultMap type="hashmap" id="diggingDetailMap">
 		<result column="DIGGING_ID"	 	property="diggingId"/>
 		<result column="WRITER" 		property="writer"/>
 		<result column="SUBJECT" 		property="subject"/>
 		<result column="CONTENT" 		property="content"/>
 		<result column="READ_CNT" 		property="readCnt"/>
-		<result column="DIGGING_TOPIC" 	property="diggingTopic"/>
 		<result column="ENROLL_DT" 		property="enrollDT"/>
 		<result column="REPLY_CNT" 		property="replyCnt"/>
 		<result column="THUMBS_UP" 		property="thumbsUp"/>
 		<result column="FILE" 			property="file"/>
+		<result column="MAIN_TITLE_ID"  property="mainId" />
+		<result column="SUB_TITLE_ID"   property="subId" />
 		<result column="VIDEO_YN" 		property="videoYn"/>
 		<result column="VIDEO_ID" 		property="videoId"/>
-		<result column="DIG" 			property="dig"/>
 		<result column="PROFILE" 		property="profile"/>
+		<result column="DIGGING_CNT" 	property="diggingCnt"/>
 	</resultMap>
-	<select id="selectListDiggingList" parameterType="hashmap"  resultMap="diggingDetailMap">
+	<select id="selectListDigging" parameterType="int" resultMap="diggingDetailMap">
 		SELECT 
 				D.DIGGING_ID				AS DIGGING_ID,
 				D.WRITER					AS WRITER, 
 				D.SUBJECT					AS SUBJECT,
 				SUBSTRING(D.CONTENT,1,300)	AS CONTENT,
 				D.READ_CNT					AS READ_CNT,
-				D.DIGGING_TOPIC				AS DIGGING_TOPIC,
 				D.ENROLL_DT					AS ENROLL_DT,
 				D.REPLY_CNT					AS REPLY_CNT,
 				D.THUMBS_UP					AS THUMBS_UP,
 				D.FILE						AS FILE,
 				D.VIDEO_YN					AS VIDEO_YN,
 				D.VIDEO_ID					AS VIDEO_ID,
-				D.DIG 						AS DIG,
+				D.MAIN_TITLE_ID AS MAIN_TITLE_ID,
+				D.SUB_TITLE_ID AS SUB_TITLE_ID,
+				U.PROFILE					AS PROFILE,
+				COUNT(D.DIGGING_ID)			AS DIGGING_CNT
+		FROM 
+			DIGGING D
+			JOIN USER U
+			ON D.WRITER = U.USER_ID
+		WHERE 
+			MAIN_TITLE_ID NOT IN (1)
+		AND 
+			MAIN_TITLE_ID = #{mainId}
+		GROUP BY 
+			DIGGING_ID
+	</select>
+	
+	
+	<!-- <select id="selectListDiggingList" parameterType="hashmap"  resultMap="diggingDetailMap">
+		SELECT 
+				D.DIGGING_ID				AS DIGGING_ID,
+				D.WRITER					AS WRITER, 
+				D.SUBJECT					AS SUBJECT,
+				SUBSTRING(D.CONTENT,1,300)	AS CONTENT,
+				D.READ_CNT					AS READ_CNT,
+				D.ENROLL_DT					AS ENROLL_DT,
+				D.REPLY_CNT					AS REPLY_CNT,
+				D.THUMBS_UP					AS THUMBS_UP,
+				D.FILE						AS FILE,
+				D.VIDEO_YN					AS VIDEO_YN,
+				D.VIDEO_ID					AS VIDEO_ID,
+				D.MAIN_TITLE_ID AS MAIN_TITLE_ID,
+				D.SUB_TITLE_ID AS SUB_TITLE_ID,
 				U.PROFILE					AS PROFILE
 		FROM 
 			DIGGING D
@@ -62,32 +123,22 @@
 		</if>	
 		LIMIT 
 			#{startDiggingIdx}, #{onePageViewCnt}	
-	</select>
+	</select> -->
 
-	<select id="selectListPopulerList" parameterType="hashmap"  resultType="DiggingDTO">
+	<select id="selectListPopulerList" parameterType="int" resultType="DiggingDTO">
 		SELECT 
 				*
 		FROM 
 			DIGGING
 		WHERE 
-			DIGGING_TOPIC = #{diggingTopic} 
-			AND
-			ENROLL_DT >= DATE_SUB(NOW(),INTERVAL 7 DAY)
+			MAIN_TITLE_ID = #{mainId} 
+		AND
+			ENROLL_DT >= DATE_SUB(NOW(),INTERVAL 30 DAY)
 		ORDER BY 
 			READ_CNT DESC
 		LIMIT 3
 	</select>
 	
-	<select id="selectOneDiggingCnt" parameterType="String" resultType="int">
-		SELECT 
-			COUNT(*)
-		FROM 
-			DIGGING
-		WHERE 
-			DIGGING_TOPIC = #{diggingTopic} 
-			AND 
-			DIGGING_TOPIC NOT IN ('notice','ad')
-	</select>
 	
 	<select id="selectListUser" parameterType="String"  resultType="DiggingDTO">
 		SELECT 
@@ -112,22 +163,22 @@
 			WRITER,
 			SUBJECT,
 			CONTENT,
-			DIGGING_TOPIC,
 			FILE,
 			VIDEO_YN,
 			VIDEO_ID,
-			DIG,
+			MAIN_TITLE_ID,
+			SUB_TITLE_ID,
 			ENROLL_DT
 		)
 		VALUES (
 			#{writer},
 			#{subject},
 			#{content},
-			#{diggingTopic},
 			#{file},
 			#{videoYn},
 			#{videoId},
-			#{dig},
+			#{mainTitleId},
+			#{subTitleId},
 			NOW()
 		)	
 	</insert>
@@ -207,9 +258,6 @@
 			</if>
 			<if test='file != null and file != ""'>
 				file = #{file},
-			</if>
-			<if test='diggingTopic != null and diggingTopic != ""'>
-				DIGGING_TOPIC = #{diggingTopic}
 			</if>
 		</set>
 		WHERE 
