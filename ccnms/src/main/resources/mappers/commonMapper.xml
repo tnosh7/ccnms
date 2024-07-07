@@ -76,7 +76,7 @@
 		FROM
 			DIGGING
 		WHERE
-			SUB_TITLE_ID = 1
+			SUB_TITLE_ID = 2
 	</select>
 
 	<update id="updateThumbsUp" parameterType="long">
