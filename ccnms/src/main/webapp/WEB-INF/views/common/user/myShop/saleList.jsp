@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="${contextPath}/resources/css/shop.css" rel="stylesheet">
+<script src="${contextPath}/resources/js/shop.js"></script>
 <script>
 	function changeDeliveryStatus(){
 		var deliveryList="";

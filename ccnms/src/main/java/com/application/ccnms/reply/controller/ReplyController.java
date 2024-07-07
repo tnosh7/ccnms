@@ -14,9 +14,15 @@ import com.application.ccnms.reply.service.ReplyService;
 @RequestMapping("/reply")
 public class ReplyController {
 	
-	@Autowired
+	
 	private ReplyService replyService;
 	
+	
+	@Autowired
+	public ReplyController(ReplyService replyService) {
+		this.replyService = replyService;
+	}
+
 	@GetMapping("/addReply")
 	public ModelAndView addReply (@RequestParam("writer") String writer,@RequestParam("diggingId")long diggingId, @RequestParam("content")String content) throws Exception {
 		ReplyDTO replyDTO = new ReplyDTO();
@@ -27,7 +33,7 @@ public class ReplyController {
 		replyService.updateReplyCnt(diggingId);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("diggingId", diggingId);
-		mv.setViewName("redirect:/digging/diggingDetail");
+		mv.setViewName("redirect:/digging/diggingDetail?diggingId=" + diggingId);
 		
 		return mv;
 		
@@ -38,7 +44,7 @@ public class ReplyController {
 		replyService.removeReply(Long.parseLong(replyId));
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("diggingId", diggingId);
-		mv.setViewName("redirect:/digging/diggingDetail");
+		mv.setViewName("redirect:/digging/diggingDetail?diggingId=" + diggingId);
 		return mv;
 	}
 	

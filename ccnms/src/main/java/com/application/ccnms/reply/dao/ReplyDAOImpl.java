@@ -9,8 +9,13 @@ import com.application.ccnms.reply.dto.ReplyDTO;
 @Repository
 public class ReplyDAOImpl implements ReplyDAO {
 
-	@Autowired
+	
 	private SqlSession sqlSession;
+
+	@Autowired
+	public ReplyDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
 	@Override
 	public int selectOneAllReplyCnt(long diggingId) throws Exception {

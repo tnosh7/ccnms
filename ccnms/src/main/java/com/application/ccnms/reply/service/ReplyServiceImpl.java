@@ -11,9 +11,13 @@ import com.application.ccnms.reply.dto.ReplyDTO;
 @Service
 public class ReplyServiceImpl implements ReplyService {
 
-	@Autowired
+	
 	private ReplyDAO replyDAO;
 
+	@Autowired
+	public ReplyServiceImpl(ReplyDAO replyDAO) {
+		this.replyDAO = replyDAO;
+	}
 	@Override
 	public int getAllReplyCnt(long diggingId) throws Exception {
 		return replyDAO.selectOneAllReplyCnt(diggingId);
