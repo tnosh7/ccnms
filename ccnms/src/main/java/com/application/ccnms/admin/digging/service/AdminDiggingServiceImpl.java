@@ -9,12 +9,31 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.application.ccnms.admin.digging.dao.AdminDiggingDAO;
 import com.application.ccnms.digging.dto.DiggingDTO;
+import com.application.ccnms.digging.dto.MainTitleDTO;
+import com.application.ccnms.digging.dto.SubTitleDTO;
 
 @Service
 public class AdminDiggingServiceImpl implements AdminDiggingService {
-	@Autowired
+	
 	private AdminDiggingDAO adminDiggingDAO;
+	
+	
+	
+	@Autowired
+	public AdminDiggingServiceImpl(AdminDiggingDAO adminDiggingDAO) {
+		this.adminDiggingDAO = adminDiggingDAO;
+	}
 
+	@Override
+	public List<MainTitleDTO> getMainTitle() throws Exception {
+		return adminDiggingDAO.selectListMainTitle();
+	}
+	
+	@Override
+	public List<SubTitleDTO> getSubTitle() throws Exception {
+		return adminDiggingDAO.selectListSubTitle();
+	}
+	
 	@Transactional
 	@Override
 	public void addDigging(DiggingDTO diggingDTO) throws Exception {
@@ -36,5 +55,13 @@ public class AdminDiggingServiceImpl implements AdminDiggingService {
 		return adminDiggingDAO.selectListSearchDigging(searchMap);
 	}
 
+	@Override
+	public List<SubTitleDTO> getSubTitle(int mainId) throws Exception {
+		return adminDiggingDAO.selectListSubTitle(mainId);
+	}
+
+	
+
+	
 	
 }

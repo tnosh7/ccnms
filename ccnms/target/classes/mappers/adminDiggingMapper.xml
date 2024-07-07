@@ -2,28 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="adminDigging">
-
+	<select id="selectListMainTitle" resultType="mainTitleDTO">
+		SELECT 
+			*
+		FROM 
+			MAIN_TITLE
+	</select>
+	<select id="selectListSubTitle" resultType="subTitleDTO">
+		SELECT 
+			*
+		FROM 
+			SUB_TITLE
+	</select>
+	
 	<insert id="insertDigging">
 		INSERT INTO DIGGING(
 			WRITER,
 			SUBJECT,
 			CONTENT,
-			DIGGING_TOPIC,
 			FILE,
 			VIDEO_YN,
 			VIDEO_ID,
-			DIG,
+			MAIN_TITLE_ID,
+			SUB_TITLE_ID,
 			ENROLL_DT
 		)
 		VALUES (
 			#{writer},
 			#{subject},
 			#{content},
-			#{diggingTopic},
 			#{file},
 			#{videoYn},
 			#{videoId},
-			#{dig},
+			#{mainTitleId},
+			#{subTitleId},
 			NOW()
 		)	
 	</insert>
@@ -34,7 +46,6 @@
 			*
 		FROM 
 			DIGGING
-	
 	</select>
 	
 	<delete id="selectListdeleteDigging">
@@ -53,9 +64,6 @@
 		FROM
 			DIGGING
 		WHERE
-			<if test='searchKey.equals("topic")'>
-				DIGGING_TOPIC LIKE CONCAT('%',#{searchWord},'%')
-			</if>
 			<if test='searchKey.equals("subject")'>
 				SUBJECT LIKE CONCAT('%',#{searchWord},'%')
 			</if>
@@ -66,5 +74,12 @@
 				CONTENT LIKE CONCAT('%',#{searchWord},'%')
 			</if>
 	</select>
-	
+	<select id="selectListSubTitleDTO" parameterType="int" resultType="subTitleDTO">
+		SELECT 
+			*
+		FROM
+			SUB_TITLE
+		WHERE 
+			MAIN_ID = #{mainId} 
+	</select>
 </mapper>
