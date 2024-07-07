@@ -17,14 +17,13 @@ import com.application.ccnms.user.email.MailHandler;
 @Service
 public class UserServiceImpl implements UserService {
 	
-	@Autowired
+	
 	private UserDAO userDAO;
-	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	@Autowired
 	private JavaMailSender mailSender; 
 	
 	private int emailAuthentication; 
+	
 	
 	public void ranNumber() {
 		Random ran = new Random();
@@ -32,6 +31,15 @@ public class UserServiceImpl implements UserService {
 		emailAuthentication = temp;
 	}
 	
+	 
+	@Autowired
+	public UserServiceImpl(UserDAO userDAO, BCryptPasswordEncoder bCryptPasswordEncoder, JavaMailSender mailSender) {
+		this.userDAO = userDAO;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+		this.mailSender = mailSender;
+	}
+
+
 	@Override
 	@Transactional
 	public boolean addUser(UserDTO userDTO) throws Exception{

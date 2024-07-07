@@ -12,8 +12,13 @@ import com.application.ccnms.user.dto.UserDTO;
 @Repository
 public class UserDAOImpl implements UserDAO {
 	
-	@Autowired
+	
 	private SqlSession sqlSession;
+	
+	@Autowired
+	public UserDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
 	@Override
 	public boolean insertUser(UserDTO userDTO) throws Exception {

@@ -22,9 +22,14 @@ import com.application.ccnms.user.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	
-	@Autowired
+	
 	private UserService userService;
 	
+	@Autowired
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
+
 	@GetMapping("/register")
 	public ModelAndView registerUser() throws Exception {
 		return new ModelAndView("/user/register");
