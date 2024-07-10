@@ -20,7 +20,7 @@
 
 ## 2. ERD
 
-![스크린샷 2024-07-10 130405](https://github.com/tnosh7/ccnms/assets/132877490/2418e464-9767-4a4c-86ff-73faf09e2408)
+![스크린샷 2024-07-10 130611](https://github.com/tnosh7/ccnms/assets/132877490/789e52f4-524e-47ee-ae97-8b85f0ac1a15)
 ---
 
 ## 3. 기능 소개
