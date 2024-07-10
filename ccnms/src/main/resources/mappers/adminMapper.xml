@@ -95,7 +95,7 @@
 		FROM 
 			DIGGING
 		WHERE
-			DIGGING_TOPIC = 'notice'
+			SUB_TITLE_ID = 1
 	</select>
 	<select id="selectOneMonthOrder" resultType="Integer">
 		SELECT 

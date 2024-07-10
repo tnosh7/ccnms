@@ -219,13 +219,6 @@ ul {
 		<br>
 	<c:forEach var="diggingDTO" varStatus="i" items="${populerList }">
     <div class="digging__sidebar__populer__item">
-        <div class="digging__sidebar__populer__file">
-            <c:choose>
-                <c:when test="${diggingDTO.file != ''}">
-                    <img src="${contextPath}/thumbnails?file=${diggingDTO.file}" alt="" width="50" height="50">
-                </c:when>
-            </c:choose>
-        </div>
         <div class="digging__sidebar__populer__text">
             <div class="digging__sidebar__populer__index">
                 ${i.index + 1}. &ensp;

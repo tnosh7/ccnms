@@ -73,11 +73,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            	<c:forEach var="diggingRank" items="${diggingRankList }" varStatus="i">
+                            	<c:forEach var="diggingRankList" items="${diggingRankList }" varStatus="i">
                                 <tr>
                                     <td class="shoping__cart__item">
                                         <h5>&emsp;${i.count }.</h5>&emsp;&emsp;
-                                        <h5><a href="${contextPath }/digging/main?mainTitle=${diggingRankList.mainTitleId}">sss</a></h5>
+                                        <h5><a href="${contextPath }/digging/main?mainTitle=${diggingRankList.mainTitleId}"></a></h5>
                                     </td>
                                 </tr>
                             	</c:forEach>

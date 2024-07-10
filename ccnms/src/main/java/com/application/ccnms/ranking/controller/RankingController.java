@@ -1,6 +1,8 @@
 package com.application.ccnms.ranking.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.application.ccnms.digging.dto.DiggingDTO;
+import com.application.ccnms.digging.dto.JoinTitleDTO;
 import com.application.ccnms.myPage.service.MyPageService;
 import com.application.ccnms.ranking.service.RankingService;
 
@@ -29,6 +33,11 @@ public class RankingController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("rankingList", rankingService.getRankingList());
 		mv.addObject("diggingRankList", rankingService.getDiggingRankList());
+	
+		
+		System.out.println("============================");
+		System.out.println("diggingRankList : " + rankingService.getDiggingRankList());
+		System.out.println("============================");
 		mv.setViewName("/ranking/ranking");
 		return mv;
 	

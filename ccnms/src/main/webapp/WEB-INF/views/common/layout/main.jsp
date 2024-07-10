@@ -16,12 +16,7 @@
 		$("#sort").val("${sort}");
 	});
 
-	function getDiggingList() {
-		var url = "${contextPath }/"
-		url += "?onePageViewCnt=" + $("#onePageViewCnt").val();
-		location.href = url;
-	}
-
+	
 	function updateThumb(diggingId) {
 		if ("${sessionId == null}" == "true") {
 			Swal
