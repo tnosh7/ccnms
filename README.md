@@ -15,6 +15,7 @@
 - **백엔드**: Java jdk 1.11 , Jsp / Servlet 4.0
 - **프론트 엔드**: HTML5, CSS3 , JavaScript, jQuery
 - **데이터베이스** :  MySQL 8.0.32
+- **빌드** : maven
 - **배포** :  AWS EC2
 
 ---
