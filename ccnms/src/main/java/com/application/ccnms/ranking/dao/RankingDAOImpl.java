@@ -1,6 +1,7 @@
 package com.application.ccnms.ranking.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class RankingDAOImpl implements RankingDAO {
 	}
 
 	@Override
-	public List<UserDTO> selectListRankingList() throws Exception {
+	public List<Map<String, Object>> selectListRankingList() throws Exception {
 		return sqlSession.selectList("ranking.selectListRankingList");
 	}
 
@@ -30,7 +31,7 @@ public class RankingDAOImpl implements RankingDAO {
 	}
 
 	@Override
-	public List<DiggingDTO> selectListDiggingRank() throws Exception {
+	public List<Map<String, Object>> selectListDiggingRank() throws Exception {
 		return sqlSession.selectList("ranking.selectListDiggingRank");
 	}
 	

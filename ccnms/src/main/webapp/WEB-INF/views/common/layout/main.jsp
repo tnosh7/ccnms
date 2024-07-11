@@ -130,7 +130,7 @@
 											</tr>
 										</thead>
 										<tbody style="height: 40">
-											<tr>
+											<tr onclick="window.location.href='${contextPath }/digging/diggingDetail?diggingId=${diggingDTO.diggingId}'">
 												<th align="left"><c:set var="startDiggingIdx"
 														value="${startDiggingIdx = startDiggingIdx + 1 }" /> <span>${startDiggingIdx }.
 												</span></th>
@@ -180,16 +180,10 @@
 					<div class="banner">
 						<div class="container">
 							<div class="row">
-								<div class="col-lg-6 col-md-6 col-sm-6">
+								<div class="col-lg-12 col-md-12 col-sm-12">
 									<div class="banner__pic">
 										<img alt=""
-											src="${contextPath }/resources/bootstrap/img/banner/weekendOffer.jpg">
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-6 col-sm-6">
-									<div class="banner__pic">
-										<img alt=""
-											src="${contextPath }/resources/bootstrap/img/banner/weekendOffer.jpg">
+											src="${contextPath }/resources/bootstrap/img/banner/saleMain.gif" width="100%" height="330;">
 									</div>
 								</div>
 							</div>

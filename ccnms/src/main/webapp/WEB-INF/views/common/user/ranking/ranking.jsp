@@ -9,6 +9,14 @@
 <style>
 	a:visited { color:black; }
 	a:hover { color:purple; }   
+	tbody tr {
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+    }
+
+    tbody tr:hover {
+        background-color: #EBFBFF; 
+    }
 </style>
 </head>
 <body>
@@ -34,50 +42,65 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product" colspan="2">
-                                    	<h3>유저랭킹</h3>
+                                    <th class="userRanking" >
+                                    	유저랭킹
                                     </th>
-                                    <th width="25" align="left">
-                                    </th>
+                                    <th>조회수</th>
+                                    <th>댓글수</th>
+                                    <th>LIKE</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            	<c:forEach var="rankingDTO" items="${rankingList }" varStatus="i">
-                                <tr>
+                            	<c:forEach var="rankingMap" items="${rankingMap }" varStatus="i">
+                                <tr onclick="window.location.href='${contextPath}/ranking/otherUserInfo?userId=${rankingMap.userId}'">
                                     <td class="shoping__cart__item">
 	                                        <h5>&emsp;${i.count }.</h5>&emsp;&emsp;
 	                                      <c:choose>
-	                       					<c:when test="${rankingDTO.profile eq null}">
+	                       					<c:when test="${rankingMap.profile eq null}">
 	                       						<img src="${contextPath}/resources/bootstrap/img/icon/profile.jpg" width="40" height="40">
 	                       					</c:when>
 	                       					<c:otherwise>
-			                       				<img src="${contextPath }/thumbnails?file=${rankingDTO.profile}"  width="40" height="40">
+			                       				<img src="${contextPath }/thumbnails?file=${rankingMap.profile}"  width="40" height="40">
 	                       					</c:otherwise>
 	                       				  </c:choose>
-                                        <h5><a href="${contextPath }/ranking/otherUserInfo?userId=${rankingDTO.userId }">${rankingDTO.userId }</a></h5>
-                                        <h5>LIKE : ${rankingDTO.likePoint }</h5>
+                                        <h5><a href="${contextPath }/ranking/otherUserInfo?userId=${rankingMap.userId }">${rankingMap.userId }</a></h5>
+                                    </td>
+                                    <td>
+                                    	${rankingMap.totalReadCnt }
+                                    </td>
+                                    <td>
+                                    	${rankingMap.totalReplyCnt }
+                                    </td>
+                                    <td>    
+                                        <h5> ${rankingMap.likePoint }</h5>
                                     </td>
                                 </tr>
                             	</c:forEach>
                             </tbody>
                         </table>
-                        <br>
+                        <br> <br>
                             <table>
-                            <thead>
+                            <thead style="font-color: grey;">
                                 <tr>
-                                    <th class="shoping__product" colspan="2">
-                                    	<h3>디깅랭킹</h3>
+                                    <th class="diggingRanking" align="left">
+                                    	디깅랭킹
                                     </th>
-                                    <th width="25" align="left">
-                                    </th>
+                                    <th>조회수</th>
+                                    <th>댓글수</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            	<c:forEach var="diggingRankList" items="${diggingRankList }" varStatus="i">
-                                <tr>
+                            	<c:forEach var="diggingRankMap" items="${diggingRankMap }" varStatus="i">
+                                <tr onclick="window.location.href='${contextPath }/digging/main?mainTitle=${diggingRankMap.mainTitleId}'">
                                     <td class="shoping__cart__item">
                                         <h5>&emsp;${i.count }.</h5>&emsp;&emsp;
-                                        <h5><a href="${contextPath }/digging/main?mainTitle=${diggingRankList.mainTitleId}"></a></h5>
+                                        <h5><a href="${contextPath }/digging/main?mainTitle=${diggingRankMap.mainTitleId}">${diggingRankMap.mainTitle}</a></h5>
+                                    </td>
+                                    <td>
+                                    	${diggingRankMap.totalReadCnt }
+                                    </td>
+                                    <td>
+                                    	${diggingRankMap.totalReplyCnt }
                                     </td>
                                 </tr>
                             	</c:forEach>

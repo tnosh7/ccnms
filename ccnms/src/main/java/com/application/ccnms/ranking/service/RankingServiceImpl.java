@@ -1,6 +1,7 @@
 package com.application.ccnms.ranking.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class RankingServiceImpl implements RankingService {
 	}
 
 	@Override
-	public List<UserDTO> getRankingList() throws Exception {
+	public List<Map<String, Object>> getRankingList() throws Exception {
 		return rankingDAO.selectListRankingList();
 	}
 
@@ -30,7 +31,7 @@ public class RankingServiceImpl implements RankingService {
 	}
 
 	@Override
-	public List<DiggingDTO> getDiggingRankList() throws Exception {
+	public List<Map<String, Object>> getDiggingRankList() throws Exception {
 		return rankingDAO.selectListDiggingRank();
 	}
 }

@@ -2,16 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ranking">
-	<select id="selectListRankingList" resultType="UserDTO">
-		SELECT 
-			*
-		FROM 
-			USER
-		ORDER BY 
-			LIKE_POINT DESC
-		LIMIT 5
-	</select>
- 
+
+ <resultMap type="hashmap" id="UserWithDiggingStatsMap">
+    <result column="USER_ID" property="userId"/>
+    <result column="LIKE_POINT" property="likePoint"/>
+    <result column="PROFILE" property="likePoint"/>
+    <result column="LIKE_POINT" property="likePoint"/>    
+    <result column="TOTAL_READ_CNT" property="totalReadCnt"/>
+    <result column="TOTAL_REPLY_CNT" property="totalReplyCnt"/>
+</resultMap>
+<select id="selectListRankingList" resultMap="UserWithDiggingStatsMap">
+    SELECT 
+        U.*, 
+        IFNULL(SUM(D.READ_CNT), 0) AS TOTAL_READ_CNT, 
+        IFNULL(SUM(D.REPLY_CNT), 0) AS TOTAL_REPLY_CNT
+    FROM 
+        USER U
+    LEFT JOIN 
+        DIGGING D ON U.USER_ID = D.WRITER
+    WHERE 
+        D.MAIN_TITLE_ID NOT IN (1)
+    AND 
+        D.SUB_TITLE_ID NOT IN (2)
+    GROUP BY 
+        U.USER_ID
+    ORDER BY 
+        U.LIKE_POINT DESC
+    LIMIT 5
+</select>
  	<select id="selectListDiggingList" parameterType="String" resultType="DiggingDTO">
  		SELECT
  			*
@@ -22,21 +40,31 @@
  		ORDER BY 
  			ENROLL_DT DESC
  	</select>
- 	
- 	<select id="selectListDiggingRank" resultType="DiggingDTO">
+ 	<resultMap type="hashmap" id="DiggingRankMap">
+ 		<result column="MAIN_TITLE_ID"  property="mainTitleId"/>
+ 		<result column="MAIN_TITLE"  			property="mainTitle"/>
+ 		<result column="TOTAL_READ_CNT" 		property="totalReadCnt"/>
+ 		<result column="TOTAL_REPLY_CNT" 		property="totalReplyCnt"/> 		
+ 	</resultMap>
+ 	<select id="selectListDiggingRank" resultMap="DiggingRankMap">
  		SELECT 
- 			MAIN_TITLE_ID, 
- 			COUNT(READ_CNT) AS READ_CNT, 
- 			COUNT(REPLY_CNT)AS REPLY_CNT
+ 			D.MAIN_TITLE_ID, 
+ 			M.MAIN_TITLE,
+ 			SUM(READ_CNT) AS TOTAL_READ_CNT, 
+ 			SUM(REPLY_CNT)AS TOTAL_REPLY_CNT
  		FROM
- 			DIGGING
+ 			DIGGING D
+	    LEFT JOIN 
+        	MAIN_TITLE M ON M.MAIN_ID = D.MAIN_TITLE_ID
  		WHERE 
- 			MAIN_TITLE_ID NOT IN (1)
+ 			D.MAIN_TITLE_ID NOT IN (1)
  		AND 	
- 			WRITER NOT IN ("ModuDigging")
+ 			D.SUB_TITLE_ID NOT IN (2) 
+	    GROUP BY
+        	D.MAIN_TITLE_ID
  		ORDER BY
- 			READ_CNT DESC,
- 			REPLY_CNT DESC
+ 			D.READ_CNT DESC,
+ 			D.REPLY_CNT DESC
  		LIMIT 5
  	</select>
 </mapper>

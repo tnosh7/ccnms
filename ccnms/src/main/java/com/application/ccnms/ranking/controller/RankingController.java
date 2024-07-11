@@ -31,13 +31,8 @@ public class RankingController {
 	@GetMapping("/ranking")
 	public ModelAndView ranking()throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("rankingList", rankingService.getRankingList());
-		mv.addObject("diggingRankList", rankingService.getDiggingRankList());
-	
-		
-		System.out.println("============================");
-		System.out.println("diggingRankList : " + rankingService.getDiggingRankList());
-		System.out.println("============================");
+		mv.addObject("rankingMap", rankingService.getRankingList());
+		mv.addObject("diggingRankMap", rankingService.getDiggingRankList());
 		mv.setViewName("/ranking/ranking");
 		return mv;
 	
