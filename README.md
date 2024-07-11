@@ -1,7 +1,5 @@
 # 취미 커뮤니티 사이트
 
-생성일: 2024년 7월 7일 오후 8:43
-
 
 **접속 도메인:  [www.modudigging.com](http://www.modudigging.com/)** 
 
