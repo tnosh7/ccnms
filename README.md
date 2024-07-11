@@ -12,7 +12,7 @@
 
 ## 1. 개발 환경
 
-- **언어 및 프레임워크** :  java11, Spring Legary Project, JavaScript
+- **언어 및 프레임워크** :  java11, Spring, JavaScript
 - **데이터베이스** :  MySQL
 - **배포** :  AWS EC2
 
