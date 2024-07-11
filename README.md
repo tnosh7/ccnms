@@ -11,9 +11,10 @@
 
 
 ## 1. 개발 환경
-
-- **언어 및 프레임워크** :  java11, Spring, JavaScript
-- **데이터베이스** :  MySQL
+- **개발 프레임워크** : Spring framework 5.0.2, mybatis
+- **백엔드**: Java jdk 1.11 , Jsp / Servlet 4.0
+- **프론트 엔드**: HTML5, CSS3 , JavaScript, jQuery
+- **데이터베이스** :  MySQL 8.0.32
 - **배포** :  AWS EC2
 
 ---
