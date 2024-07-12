@@ -1,4 +1,4 @@
-# 취미 커뮤니티 사이트 모두디깅
+# 취미 커뮤니티 사이트 - 모두디깅
 
 
 **접속 도메인:  [www.modudigging.com](http://www.modudigging.com/)** 
