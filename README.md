@@ -1,4 +1,4 @@
-# 취미 커뮤니티 사이트
+# 취미 커뮤니티 사이트 모두디깅
 
 
 **접속 도메인:  [www.modudigging.com](http://www.modudigging.com/)** 
@@ -75,4 +75,4 @@
 
 ## 5. 관련 문서
 
--**https://drive.google.com/drive/folders/1YegGMkc8nlxcllLdhAISLWX23C-xX5JV?usp=drive_link
+-https://drive.google.com/drive/folders/1YegGMkc8nlxcllLdhAISLWX23C-xX5JV?usp=drive_link
