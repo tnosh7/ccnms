@@ -12,14 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.application.ccnms.digging.dto.DiggingDTO;
 import com.application.ccnms.digging.dto.JoinTitleDTO;
-import com.application.ccnms.myPage.service.MyPageService;
+import com.application.ccnms.mypage.service.MyPageService;
 import com.application.ccnms.ranking.service.RankingService;
 
 
 @Controller
 @RequestMapping("/ranking")
 public class RankingController {
-	
 	
 	private RankingService rankingService;
 	

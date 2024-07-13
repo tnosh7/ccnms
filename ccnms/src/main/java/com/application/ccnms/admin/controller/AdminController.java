@@ -19,9 +19,7 @@ import com.application.ccnms.admin.service.AdminService;
 @RequestMapping("/admin")
 public class AdminController {
 
-	
 	private AdminService adminService;
-	
 	
 	@Autowired
 	public AdminController(AdminService adminService) {

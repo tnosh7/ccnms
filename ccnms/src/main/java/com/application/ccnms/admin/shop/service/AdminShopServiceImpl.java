@@ -14,7 +14,6 @@ import com.application.ccnms.shop.dto.ShopDTO;
 
 public class AdminShopServiceImpl implements AdminShopService {
 	
-	
 	private AdminShopDAO adminShopDAO;
 
 	@Autowired

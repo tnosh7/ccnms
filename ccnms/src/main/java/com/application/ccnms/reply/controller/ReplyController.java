@@ -14,9 +14,7 @@ import com.application.ccnms.reply.service.ReplyService;
 @RequestMapping("/reply")
 public class ReplyController {
 	
-	
 	private ReplyService replyService;
-	
 	
 	@Autowired
 	public ReplyController(ReplyService replyService) {

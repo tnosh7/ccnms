@@ -12,7 +12,6 @@ import com.application.ccnms.user.dto.UserDTO;
 
 @Service
 public class AdminUserServiceImpl implements AdminUserService {
-
 	
 	private AdminUserDAO adminUserDAO;
 

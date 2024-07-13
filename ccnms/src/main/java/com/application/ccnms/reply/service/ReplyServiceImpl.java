@@ -11,7 +11,6 @@ import com.application.ccnms.reply.dto.ReplyDTO;
 @Service
 public class ReplyServiceImpl implements ReplyService {
 
-	
 	private ReplyDAO replyDAO;
 
 	@Autowired

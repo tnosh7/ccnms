@@ -15,8 +15,8 @@
 		<typeAlias type="com.application.ccnms.digging.dto.JoinTitleDTO"	alias="JoinTitleDTO"/>
 		<typeAlias type="com.application.ccnms.reply.dto.ReplyDTO" 		 	alias="ReplyDTO"/>
 		<typeAlias type="com.application.ccnms.shop.dto.ShopDTO" 			alias="ShopDTO"/>
-		<typeAlias type="com.application.ccnms.myShop.dto.CartDTO" 		 	alias="CartDTO"/>
-		<typeAlias type="com.application.ccnms.myShop.dto.KeepDTO" 			alias="KeepDTO"/>
+		<typeAlias type="com.application.ccnms.myshop.dto.CartDTO" 		 	alias="CartDTO"/>
+		<typeAlias type="com.application.ccnms.myshop.dto.KeepDTO" 			alias="KeepDTO"/>
 		<typeAlias type="com.application.ccnms.contact.dto.ContactDTO"	 	alias="ContactDTO"/>
 		<typeAlias type="com.application.ccnms.order.dto.OrderDTO"			alias="OrderDTO"/>
 		<typeAlias type="com.application.ccnms.qna.dto.QnaDTO"				alias="QnaDTO"/>

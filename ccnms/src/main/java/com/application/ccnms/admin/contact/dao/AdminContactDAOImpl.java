@@ -11,7 +11,6 @@ import com.application.ccnms.contact.dto.ContactDTO;
 
 @Repository
 public class AdminContactDAOImpl implements AdminContactDAO {
-
 	
 	private SqlSession sqlSession;
 	

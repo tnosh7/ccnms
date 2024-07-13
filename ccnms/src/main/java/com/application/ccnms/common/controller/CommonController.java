@@ -36,7 +36,6 @@ public class CommonController {
 	// private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
-	
 	@Autowired
 	public CommonController(CommonService commonService) {
 		this.commonService = commonService;

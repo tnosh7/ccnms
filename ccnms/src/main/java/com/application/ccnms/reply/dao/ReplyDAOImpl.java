@@ -9,7 +9,6 @@ import com.application.ccnms.reply.dto.ReplyDTO;
 @Repository
 public class ReplyDAOImpl implements ReplyDAO {
 
-	
 	private SqlSession sqlSession;
 
 	@Autowired

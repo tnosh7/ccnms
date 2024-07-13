@@ -13,7 +13,6 @@ import com.application.ccnms.shop.dto.ShopDTO;
 @Repository
 public class AdminShopDAOImpl implements AdminShopDAO {
 
-	
 	private SqlSession sqlSession;
 	
 	@Autowired

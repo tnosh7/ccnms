@@ -14,8 +14,7 @@ import com.application.ccnms.digging.dto.DiggingDTO;
 public class AdminDAOImpl implements AdminDAO {
 	
 	private SqlSession sqlSession;
-	
-	
+		
 	@Autowired
 	public AdminDAOImpl(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;

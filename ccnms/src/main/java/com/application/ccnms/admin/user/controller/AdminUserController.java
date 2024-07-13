@@ -44,7 +44,6 @@ public class AdminUserController {
 //	private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
 	
-	
 	private AdminUserService adminUserService;
 	
 	@Autowired
@@ -52,7 +51,6 @@ public class AdminUserController {
 		super();
 		this.adminUserService = adminUserService;
 	}
-
 
 	@GetMapping("/")
 	public ModelAndView user(@RequestParam(required =false, value="searchWord")String searchWord, @RequestParam(required =false, value="searchKey")String searchKey) throws Exception {

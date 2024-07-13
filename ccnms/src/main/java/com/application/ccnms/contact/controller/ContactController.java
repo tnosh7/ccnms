@@ -19,9 +19,7 @@ import com.application.ccnms.contact.service.ContactService;
 @RequestMapping("/contact")
 public class ContactController {
 
-
 	private ContactService contactService;
-	
 	
 	@Autowired
 	public ContactController(ContactService contactService) {

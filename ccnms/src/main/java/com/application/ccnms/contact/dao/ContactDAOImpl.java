@@ -9,10 +9,7 @@ import com.application.ccnms.contact.dto.ContactDTO;
 @Repository
 public class ContactDAOImpl implements ContactDAO {
 
-	
 	private SqlSession sqlSession;
-	
-	
 	
 	@Autowired
 	public ContactDAOImpl(SqlSession sqlSession) {

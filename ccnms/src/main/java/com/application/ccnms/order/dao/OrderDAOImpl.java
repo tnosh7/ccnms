@@ -7,8 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.application.ccnms.myShop.dto.CartDTO;
-import com.application.ccnms.myShop.dto.KeepDTO;
+import com.application.ccnms.myshop.dto.CartDTO;
+import com.application.ccnms.myshop.dto.KeepDTO;
 import com.application.ccnms.order.dto.OrderDTO;
 import com.application.ccnms.shop.dto.ShopDTO;
 import com.application.ccnms.user.dto.UserDTO;
@@ -16,9 +16,7 @@ import com.application.ccnms.user.dto.UserDTO;
 @Repository
 public class OrderDAOImpl implements OrderDAO {
 
-	
 	private SqlSession sqlSession;
-
 	
 	@Autowired
 	public OrderDAOImpl(SqlSession sqlSession) {

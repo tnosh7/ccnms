@@ -16,7 +16,6 @@ public class CommonDAOImpl implements CommonDAO {
 	
 	private SqlSession sqlSession;
 
-	
 	@Autowired
 	public CommonDAOImpl(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;

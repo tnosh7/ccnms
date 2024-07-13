@@ -8,6 +8,7 @@ import com.application.ccnms.digging.dto.MainTitleDTO;
 import com.application.ccnms.digging.dto.SubTitleDTO;
 
 public interface AdminDiggingDAO {
+	
 	public List<MainTitleDTO> selectListMainTitle() throws Exception ;
 	public List<SubTitleDTO> selectListSubTitle()throws Exception ;
 	public void insertDigging(DiggingDTO diggingDTO) throws Exception ;

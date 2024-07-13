@@ -17,8 +17,6 @@ public class AdminDiggingServiceImpl implements AdminDiggingService {
 	
 	private AdminDiggingDAO adminDiggingDAO;
 	
-	
-	
 	@Autowired
 	public AdminDiggingServiceImpl(AdminDiggingDAO adminDiggingDAO) {
 		this.adminDiggingDAO = adminDiggingDAO;

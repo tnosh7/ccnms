@@ -22,7 +22,6 @@ import com.application.ccnms.user.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	
-	
 	private UserService userService;
 	
 	@Autowired

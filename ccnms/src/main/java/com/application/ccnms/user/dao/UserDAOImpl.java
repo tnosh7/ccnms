@@ -12,7 +12,6 @@ import com.application.ccnms.user.dto.UserDTO;
 @Repository
 public class UserDAOImpl implements UserDAO {
 	
-	
 	private SqlSession sqlSession;
 	
 	@Autowired

@@ -17,7 +17,6 @@ import com.application.ccnms.user.dto.UserDTO;
 @Repository
 public class DiggingDAOImpl implements DiggingDAO  {
 
-
 	private SqlSession sqlSession;
 
 	@Autowired

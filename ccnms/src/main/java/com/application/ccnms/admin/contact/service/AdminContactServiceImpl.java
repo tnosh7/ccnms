@@ -11,7 +11,6 @@ import com.application.ccnms.contact.dto.ContactDTO;
 
 @Service
 public class AdminContactServiceImpl implements AdminContactService {
-
 	
 	private AdminContactDAO adminContactDAO;
 	

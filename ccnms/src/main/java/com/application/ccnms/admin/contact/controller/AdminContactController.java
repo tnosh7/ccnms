@@ -21,10 +21,8 @@ import com.application.ccnms.contact.service.ContactService;
 @Controller
 @RequestMapping("/admin/contact")
 public class AdminContactController {
-
 	
 	private AdminContactService adminContactService;
-
 	
 	@Autowired
 	public AdminContactController(AdminContactService adminContactService) {

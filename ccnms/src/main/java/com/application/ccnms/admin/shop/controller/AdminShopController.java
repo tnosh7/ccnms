@@ -39,14 +39,11 @@ import com.application.ccnms.shop.dto.ShopDTO;
 @Controller
 @RequestMapping("/admin/shop")
 public class AdminShopController {
-
 	
 	private AdminShopService adminShopService;
 	
 	//private final String FILE_REPO_PATH = "C:\\ccnms_file_repo\\";
 	private final String FILE_REPO_PATH = "/var/lib/tomcat9/file_repo/";
-	
-	
 	
 	@Autowired
 	public AdminShopController(AdminShopService adminShopService) {

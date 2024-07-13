@@ -18,7 +18,6 @@ import com.application.ccnms.user.dto.UserDTO;
 @Service
 public class DiggingServiceImpl implements DiggingService {
 	
-
 	private DiggingDAO diggingDAO;
 	
 	@Autowired
